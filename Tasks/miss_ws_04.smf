@@ -1,0 +1,143 @@
+//-
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss104");
+//append(out_campaign+"MissTest");
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Burst Wave");
+
+//Speach for Briefing and Task
+
+#if(_DEBUG)
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wst_0400.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+#endif
+
+// text description of the mission
+initsar(40, 10);
+//-- task  
+/*000*/setsar("@Sector SS 117. South Atlantic.@To the leader of the reconnoiter group of the 7th Reconnoiter squadron.@Top secret.");
+/*001*/setsar("@ The materials we have got allow us to advance the research of new types of engines and may be of great importance for continuing the development of high-power compressor generators, which are needed for mobility of structures.");
+/*002*/setsar("@ You have been promoted to the Commander of the Special Squadron. Congratulations! Now you are in direct charge of the 6th Striking Wing and you will be transferred to Sector TR33 in the Central Atlantic that attracts our special attention.");
+/*003*/setsar("@ We have information that the Black Octopi is developing new super-strong materials to use as submarine armor. Our group of system engineers have developed a device that allows access to the informational system of the enemy through the system of the satellite connection network. But to get this system functioning we have to gain access to the mother terminal, which is present at any laboratory or an InfoCenter. Purely theoretically we can gain access using our terminals but it may warn the enemies about our hacking within a few minutes. The only solution is to use an enemy terminal.");
+/*004*/setsar("@ Your next mission is to capture the CentComp situated in the central part of Sector TR33 and gain access to the enemy computer network. You will be given a Marauder submarine with all the necessary equipment.@ @ Within minutes after you capture the object we will send you RepSubs through a teleportation channel in which you will load the samples of new Black Octopi submarines, which are at the experimental station in the northern part of the Sector.@ @ You have to deliver the RepSubs to the southwestern part of the Sector.");
+/*005*/setsar("");
+/*006*/setsar("");
+/*007*/setsar("");
+/*008*/setsar("");
+/*009*/setsar("");
+//-- objectives	(10-19)
+/*010*/setsar("Capture the CentComp in the central part of the Sector with the Marauder \"Tiger Shark\".");
+/*011*/setsar("Defend the CentComp for 15 minutes before 2 RepSubs arrive to upload the experimental subs BO \"Baby 1\" and \"Baby 2\".");
+/*012*/setsar("Find the experimental subs in the northern part of the Sector. Upload them onto the RepSubs and deliver them to the western part of the sector to the starting mission point.");
+/*013*/setsar("");
+/*014*/setsar("");
+/*015*/setsar("");
+/*016*/setsar("");
+/*017*/setsar("");
+/*018*/setsar(" With your help we have claimed another piece of the world for the White Sharks.  Well done commander!");
+/*019*/setsar(" Mission Failed.");
+//-- messages	(20-29)
+/*020*/setsar(" You have lost the \"Tiger Shark\".");
+/*021*/setsar(" The CentComp has been destroyed.");
+/*022*/setsar(" Defend the CentComp until the RepSubs arrive.");
+/*023*/setsar(" Two RepSubs have arrived. Pick up \"Baby1\" and \"Baby2\". ");
+/*024*/setsar(" One of the experimental subs (\"Baby1\" or \"Baby2\") has been destroyed, you have lost the mission.");
+/*025*/setsar(" Mission accomplished.");
+/*026*/setsar(" The RepSubs have been destroyed, you have lost the mission.");
+/*027*/setsar(" Mission accomplished.");
+/*028*/setsar("");
+/*029*/setsar("");
+//-- names	(30-39)
+/*030*/setsar("Tiger Shark");
+/*031*/setsar("CentComp");
+/*032*/setsar("Baby1");
+/*033*/setsar("Baby2");
+/*034*/setsar("RepSub");
+/*035*/setsar("");
+/*036*/setsar("");
+/*037*/setsar("");
+/*038*/setsar("");
+/*039*/setsar("");
+
+//setsar("");
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+/*001*/setsar("Capture the CentComp in the central part of the Sector with the Marauder \"Tiger Shark\".");
+/*002*/setsar("Defend the CentComp for 15 minutes before 2 RepSubs arrive to upload the experimental subs BO \"Baby 1\" and \"Baby 2\".");
+/*003*/setsar("Find the experimental subs in the northern part of the Sector. Upload them onto the RepSubs and deliver them to the western part of the sector to the starting mission point.");
+name("OBJECTIVES"); putsar();    
+
+// script for play
+name("TASKPLAY");
+inittask("DEFAULT_WS_ANIMATED", "DEFAULT_WS"); 
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_MENU, 20, 450, 145, 40);
+ ShowBut(TBTYPE_BACK, 50, 500, 145, 40);
+ ShowBut(TBTYPE_SKIP, 605, 500, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(220, 570, 340, 570, 460, 570);
+
+ SetColor(0, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 200,  20, 580, 100, 0, 0, 1, 15, 10, 1);
+
+//-
+ SetColor(1, 1, 0, 0);
+ SetLevel(10);
+ Time(150);
+ StartWave("DEFAULT_BIP"); StartWave("TaskSpeach");
+ ShowATask(1, 110, 135, 580, 295, 0, 1, 1, 15, 90, 1); 
+ Time(460); 
+ HideATask(1); 
+
+ Time(465); StartWave("DEFAULT_BIP");
+ ShowATask(1, 110, 135, 580, 295, 0, 2, 1, 15, 90, 1); 
+ Time(840); 
+ HideATask(1); 
+
+ Time(844); StartWave("DEFAULT_BIP");
+ ShowATask(1, 110, 135, 580, 295, 0, 3, 1, 15, 30, 1); 
+ Time(1760); 
+ HideATask(1);
+ 
+ Time(1765); StartWave("DEFAULT_BIP");
+ SetLevel(10);
+ ShowATask(1, 110, 135, 580, 295, 0, 4, 1, 15, 15, 1); 
+ 
+ Time(2600);
+ HideATask(1); StartWave("DEFAULT_BIP");
+ Time(2620);
+ HideATask(0); StartWave("DEFAULT_BIP");
+
+ Time(2640);
+
+ SetColor(1, 1, 0, 1); StartWave("DEFAULT_BIP");
+ ShowObjectives(105, 230, 590, 210); 
+ HideBut(TBTYPE_SKIP);
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 635, 450, 145, 40);
+ ShowBut(TBTYPE_START,  605, 500, 145, 40);
+
+puttask(); 
+
+// script for play
+name("BRIEF_1");
+initbriefing(); 
+ Time(0); 
+ BriefingText(18, 1, 1, 1);
+	Time(1*25);
+	BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(11*25);
+	BriefingAni(0, 0, "");		// спрятать говорящего   
+	Time(15*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();

@@ -1,0 +1,230 @@
+/////////////////////////////////////////////////////////////////////////////
+//
+// Container:    Arbiter
+// Campaign:     BO Campaign
+// Mission:      01 "Discovery"
+// Copyright:    2000, Ellipse Studios
+//
+//////////////////////////////////////////////////////////////////////////////
+// Players   Civ    Color     Control      Ally         Enemy
+//----------------------------------------------------------------------------
+//   0       BO     Blue      Human        -            6
+//   6       SI     Red       Computer     6            0
+//////////////////////////////////////////////////////////////////////////////
+
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+OpenArbiter("BO Campaign Mission 01");
+  
+ // Events 
+ OpenEvents();
+
+  // Initialize mission
+  Event(TRUE, 0)
+  { // Variables for human assistant
+    _GL0 := 0; _GL1 := 1;
+    // Store mission difficulty
+    _RT0 := GetMissDifficulty();
+    // Resources - gold level on the map
+    ActInitDisGold(LEVEL_LOW);
+    // Set initial resources to Human 
+    // (this is the first mission, so we don't set resources depends on difficulty)
+    _actSetPlRC(TOBJ_METAL,  0, 15000);
+    _actSetPlRC(TOBJ_CORIUM, 0, 1000);
+    _actSetPlRC(TOBJ_GOLD,   0, 100);
+    // Set initial resources to opponent (depends on mission difficulty)
+    if(_RT0==DIFF_WEAK)      //-- WEAK
+    { ActSetPlRC(PLAYER_6,AIREL_MYSELF, TOBJ_SILICON, 0, 10000);
+      ActSetPlRC(PLAYER_6,AIREL_MYSELF, TOBJ_CORIUM,  0, 2500);
+      ActSetPlRC(PLAYER_6,AIREL_MYSELF, TOBJ_ENERGY,  0, 2500);
+    }
+    else
+    { if(_RT0==DIFF_MEDIUM)  //-- MEDIUM
+      { ActSetPlRC(PLAYER_6,AIREL_MYSELF, TOBJ_SILICON, 0, 12000);
+        ActSetPlRC(PLAYER_6,AIREL_MYSELF, TOBJ_CORIUM,  0, 3000);
+        ActSetPlRC(PLAYER_6,AIREL_MYSELF, TOBJ_ENERGY,  0, 3000);
+      }
+      else                 //-- STRONG
+      { ActSetPlRC(PLAYER_6,AIREL_MYSELF, TOBJ_SILICON, 0, 15000);
+        ActSetPlRC(PLAYER_6,AIREL_MYSELF, TOBJ_CORIUM,  0, 4000);
+        ActSetPlRC(PLAYER_6,AIREL_MYSELF, TOBJ_ENERGY,  0, 4000);
+      }
+    }
+    // Tehcnologies
+    // initialize all technology tree for human
+    _actInitTech(LEVEL_LOW, LEVEL_HIGH);
+    // set limits to human
+    _actTechDevEnableAll();
+
+ 			  //2
+			  _actTechDevDisable(TTECH_BO_RAIDER_EQUIPMENT,TTECH_LEV1);	           
+			  _actTechDevDisable(TTECH_BO_ENGINE_UPGRADE,TTECH_LEV1);              
+			  _actTechDevDisable(TTECH_BO_UPGRADE_LIGHT_LASER_RANGE,TTECH_LEV1);   
+			  _actTechDevDisable(TTECH_BO_TORPEDO_UPGRADE,TTECH_LEV1);             
+			  _actTechDevDisable(TTECH_BO_MOBILE_REPAIR_PLATFORM,TTECH_LEV1);      
+			  _actTechDevDisable(TTECH_BO_RUBY_LASER_TECHNOLOGY,TTECH_LEV1);	      
+       //3
+			  _actTechDevDisable(TTECH_BO_ARMOR_UPGRADE,TTECH_LEV1);	              
+			  _actTechDevDisable(TTECH_BO_LASER_SNARE_TECHNOLOGY,TTECH_LEV1);      
+			  _actTechDevDisable(TTECH_BO_UPGRADE_HACK_ABILITY,TTECH_LEV1);	       
+			  _actTechDevDisable(TTECH_BO_DISPERSER_SCREEN_TECHNOLOGY,TTECH_LEV1); 
+			  _actTechDevDisable(TTECH_BO_GAS_LASER_TECHNOLOGY,TTECH_LEV1);	       
+			  _actTechDevDisable(TTECH_BO_UPGRADE_TO_MOBILITY,TTECH_LEV1);	        
+       //4
+			  _actTechDevDisable(TTECH_BO_TORPEDO_UPGRADE ,TTECH_LEV2);		          
+			  _actTechDevDisable(TTECH_BO_RESEARCH_ENERGY_SUPPLY,TTECH_LEV1);      
+			  _actTechDevDisable(TTECH_BO_TELEPORTATION_TECHNOLOGY,TTECH_LEV1);    
+			  _actTechDevDisable(TTECH_BO_RADIO_CLUTTER_TECHNOLOGY,TTECH_LEV1);    
+			  _actTechDevDisable(TTECH_BO_STEALTH_SCOUT_TECHNOLOGY,TTECH_LEV1);    
+			  _actTechDevDisable(TTECH_BO_CASSETTE_SHELL_TECHNOLOGY,TTECH_LEV1);   
+			  _actTechDevDisable(TTECH_BO_UPGRADE_HEAVY_LASER_RANGE,TTECH_LEV1);   
+      //5
+			  _actTechDevDisable(TTECH_BO_ARMOR_UPGRADE,TTECH_LEV2);		          
+			  _actTechDevDisable(TTECH_BO_MAGNETIC_MINE_TECHNOLOGY,TTECH_LEV1);      
+			  _actTechDevDisable(TTECH_BO_ENGINE_UPGRADE,TTECH_LEV2);    
+			  _actTechDevDisable(TTECH_BO_TORPEDO_UPGRADE,TTECH_LEV3);    
+			  _actTechDevDisable(TTECH_BO_UPGRADE_LIGHT_LASER_RATE,TTECH_LEV1);    
+			  _actTechDevDisable(TTECH_BO_DETECT_TELEPORTATION,TTECH_LEV1);   
+			  _actTechDevDisable(TTECH_BO_DEPTH_ACOUSTIC_MINE_DETECTION,TTECH_LEV1);   
+			  _actTechDevDisable(TTECH_BO_LASER_SNARE_DETECTION,TTECH_LEV1);   
+	      //6
+			  _actTechDevDisable(TTECH_BO_ELECTRO_MAGNETIC_TORPEDOES,TTECH_LEV1); 
+			  _actTechDevDisable(TTECH_BO_CYBER_TECHNOLOGY,TTECH_LEV1);           
+			  _actTechDevDisable(TTECH_BO_UPGRADE_ENERGY_SUPPLY,TTECH_LEV1);      
+			  _actTechDevDisable(TTECH_BO_TORPEDO_UPGRADE,TTECH_LEV4);            
+			  _actTechDevDisable(TTECH_BO_ARMOR_UPGRADE,TTECH_LEV3);	             
+			  _actTechDevDisable(TTECH_BO_TORPEDO_SPEED_UPGRADE,TTECH_LEV1);      
+			  _actTechDevDisable(TTECH_BO_SPLINTER_TORPEDO_UPGRADE,TTECH_LEV1);   
+			  _actTechDevDisable(TTECH_BO_MUNITIONS_FACTORY_UPGRADE,TTECH_LEV1);  
+					  //7
+			  _actTechDevDisable(TTECH_BO_PHANTOM_EQUIPMENT,TTECH_LEV1);            
+			  _actTechDevDisable(TTECH_BO_UPGRADE_SUBS_LASER_RATE,TTECH_LEV1);      
+			  _actTechDevDisable(TTECH_BO_PROTECTIVE_SCREEN_TECHNOLOGY,TTECH_LEV1); 
+			  _actTechDevDisable(TTECH_BO_UPGRADE_HEAVY_LASER_RATE,TTECH_LEV1);     
+			  _actTechDevDisable(TTECH_BO_RAIDER_EQUIPMENT_UPGRADE,TTECH_LEV1);     
+			  _actTechDevDisable(TTECH_BO_INCREASE_INFORMATION_SECURITY,TTECH_LEV1);
+			  _actTechDevDisable(TTECH_BO_PARALYZING_RAYS_TECHNOLOGY,TTECH_LEV1);   
+			  _actTechDevDisable(TTECH_BO_ASDIC_UPGRADE,TTECH_LEV1);                
+				  //8
+			  _actTechDevDisable(TTECH_BO_UPGRADE_MINE_PRODUCTIVITY,TTECH_LEV1);    
+			  _actTechDevDisable(TTECH_BO_ENGINE_UPGRADE,TTECH_LEV3);               
+			  _actTechDevDisable(TTECH_BO_EM_TORPEDO_UPGRADE,TTECH_LEV1);	          
+			  _actTechDevDisable(TTECH_BO_ANTI_ULTRASONIC_SCREEN,TTECH_LEV1);	      
+			  _actTechDevDisable(TTECH_BO_ENERGY_SHIELD,TTECH_LEV1);                
+			  _actTechDevDisable(TTECH_BO_INCREASE_TELEPORTER_RECHARGE,TTECH_LEV1); 
+				  //9
+			  _actTechDevDisable(TTECH_BO_PHANTOM_RECHARGE_UPGRADE,TTECH_LEV1);	        
+			  _actTechDevDisable(TTECH_BO_IMPROVE_REPAIR_TECHNOLOGY,TTECH_LEV1);        
+			  _actTechDevDisable(TTECH_BO_ANTI_MASS_WEAPONS_DEFENSE_SYSTEM,TTECH_LEV1); 
+			  _actTechDevDisable(TTECH_BO_LASER_BOMB_TECHNOLOGY,TTECH_LEV1);	           
+
+
+    // set technologies to opponent
+    ActInitTech(PLAYER_6, AIREL_MYSELF, LEVEL_LOW, LEVEL_HIGH);
+    ActTechSet(PLAYER_6, AIREL_MYSELF, TTECH_SI_BIOSONAR_TECHNOLOGY);  
+    ActTechSet(PLAYER_6, AIREL_MYSELF, TTECH_SI_POLARIZED_PLASMA_PULSAR);  
+    ActTechSet(PLAYER_6, AIREL_MYSELF, TTECH_SI_ION_CASSETTE_SHELLS);  
+    ActTechSet(PLAYER_6, AIREL_MYSELF, TTECH_SI_HUMAN_CIPHER_KEY);  
+    // Objects on start
+    // human cannot buid market
+    if(_RT0!=DIFF_WEAK) {_actBldObj(TOBJ_MARKET, FALSE);}
+    // initial set of objects on the map
+    _actCreatePlObj(TOBJ_ASSEMBLER, 37,2,3, LOGO_DEFAULT,"",-1, 100, 0, 0);
+    _actCreatePlObj(TOBJ_FIGHTER,   36,2,2, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_FIGHTER,   37,3,2, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_DESTROYER, 37,1,4, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_DESTROYER, 38,2,4, LOGO_DEFAULT,"",-1, 100);
+
+    // Switch off specific events
+    actOffEvent(100); actOffEvent(101);
+    actOffEvent(2);   actOffEvent(11);
+  }
+
+  // Run first briefing after 10 seconds of game time
+  Event(GetTime() == 10)
+  { _actPlayBriefing("BRIEF_1");
+  }
+  // When first briefing ends, enable timer and specific event
+  EventBriefing(_PS0 == "BRIEF_1")
+  { _actOnTimer(40*60); actOnEvent(11);
+  }
+  // Second briefing - human player has lost object for the first time
+  EventPlObjKilled(TRUE)
+  { _actPlayBriefing("BRIEF_2");
+  }
+  // Human player has reached opponent base
+  Event(_getPlObjM(AITRG_ALL, LOGO_UNDEF, 7,34,0, 20,6,5))
+  { _actPlayBriefing("BRIEF_4");
+  }
+
+  // Condition for the first objective
+  // to switch it off
+  Event(_getPlObjT(TOBJ_SILO|AITAKE_NOEMBRYO) >= 4 && 
+        _getPlObjT(TOBJ_ASDIC|AITAKE_NOEMBRYO) >= 1 && 
+        _getPlObjT(TOBJ_O2_SUBLIMATOR|AITAKE_NOEMBRYO) >= 1, 1) 
+  { _actDelObjective(0); actOnEvent(2);
+  }
+  // to switch it on
+  Event(_getPlObjT(TOBJ_SILO|AITAKE_NOEMBRYO) < 4 || 
+        _getPlObjT(TOBJ_ASDIC|AITAKE_NOEMBRYO) < 1 || 
+        _getPlObjT(TOBJ_O2_SUBLIMATOR|AITAKE_NOEMBRYO) < 1, 2) 
+  { _actAddObjective(0, GetStrRes(0)); 
+    actOnEvent(1);
+  }
+
+  // Condition for the second objective
+  Event(GetPlObjT(PLAYER_6, AIREL_MYSELF, TOBJ_UNDEFINED) == 0 && GetTime() >= 30, 3)
+  { _actDelObjective(1);
+  }
+
+  // Player completed his mission (both objectives were done)
+  Event(_getPlObjT(TOBJ_SILO|AITAKE_NOEMBRYO) >= 4 && 
+        _getPlObjT(TOBJ_ASDIC|AITAKE_NOEMBRYO) >= 1 && 
+        _getPlObjT(TOBJ_O2_SUBLIMATOR|AITAKE_NOEMBRYO) >= 1 && 
+        GetPlObjT(PLAYER_6, AIREL_MYSELF, TOBJ_UNDEFINED) == 0, 10) 
+  { _actStringInfo(10, ISTR_BLUE, GetStrRes(5)); _actOutString(20, GetStrRes(5));
+    // run victory stage
+    //_actOutText(7,18,18);
+    ActSaveMission();
+    _actPlayBriefing("BRIEF_5");
+    actOnEvent(101); _actOnTimer(10); actOffEvent(11);
+  }
+
+  // Player was defeated on mission
+  Event(_getPlObjT(TOBJ_UNDEFINED) == 0 || 
+        ((_getPlObjT(TOBJ_ASDIC|AITAKE_NOEMBRYO) < 1 || 
+          _getPlObjT(TOBJ_O2_SUBLIMATOR|AITAKE_NOEMBRYO) < 1 ||
+          _getPlObjT(TOBJ_SILO|AITAKE_NOEMBRYO) < 4
+         ) && 
+         ((_getPlObjT(TOBJ_ASSEMBLER) == 0 && _getPlObjT(TOBJ_DOCKYARD|AITAKE_NOEMBRYO) == 0) ||
+          (_getPlRes(TOBJ_METAL) == 0 && _getPlRes(TOBJ_CORIUM) == 0 &&
+            GetRes(TOBJ_CORIUM) == 0  &&  GetRes(TOBJ_METAL) == 0
+          )
+         )
+        ) ||
+        _getTimerTime()==0
+        , 11) 
+  { _actStringInfo(10, ISTR_RED, GetStrRes(6)); _actOutString(20, GetStrRes(6));
+    // run defeat stage
+    _actOutText(7,19,19);
+    actOnEvent(100); _actOnTimer(8);
+  }
+
+  // Exit with defeat
+  Event(_getTimerTime()==0, 100) 
+  { _actTotalStatistics(10); _actEndMiss(ENDMISS_FAILED);
+  }
+
+  // Exit with victory
+  Event(_getTimerTime()==0, 101)
+  { _actTotalStatistics(10);
+   	_actVideo(5, "BO_01.avi",MODE_RECT,MODE_640x480,MODE_24BIT,0,94,640,292,MODE_WHOLE);
+    _actEndMiss(ENDMISS_ACCOMPL);
+    _actNextMiss("miss202");
+  } 
+
+ CloseEvents();
+
+CloseArbiter();
+

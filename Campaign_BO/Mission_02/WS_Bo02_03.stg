@@ -1,0 +1,200 @@
+/////////////////////////////////////////////////////////////////////////////
+//
+// Container:    Strategist  "WS Red"
+// Campaign:     BO Campaign
+// Mission:      03 (Demo 00) "Layover"
+// Copyright:    1999, Ellipse Studios
+//
+//////////////////////////////////////////////////////////////////////////////
+// Players   Civ    Color     Control      Ally         Enemy
+//----------------------------------------------------------------------------
+//   0       BO     Blue      Human        -            3,4
+//  *3       WS     Red       Computer     3            0
+//   4       WS     Violet    Computer     4            0
+//////////////////////////////////////////////////////////////////////////////
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#import
+  // Names
+  tactic  = "WS Red Tactic";
+  fbase   = "WS Red Base ";
+  fbuild  = "WS Red Builder";
+  fmetal  = "WS Red Metal Transport";
+  fcorium = "WS Red Corium Transport";
+  fraid0  = "WS Red Raid 00";
+  fraid1  = "WS Red Raid 01";
+#endimport
+
+OpenStrateg("WS Red", CIV_WS);
+ // parameters
+ MainEnemy(AICAN_NOT, PLAYER_CURR);
+
+ // Tactics
+ OpenTactic(tactic, CIV_WS, 10);
+  // Parameters
+  // -- Fleets --- 
+  OpenFleet(fbase, CIV_WS, AIF_BASE, 15);
+   // Staff
+   PutInStaff(TOBJ_AIR_EXTRACTOR        , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 45);
+   PutInStaff(TOBJ_SUBCENTER            , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 41);
+   PutInStaff(TOBJ_DEPOT                , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 40);
+   PutInStaff(TOBJ_METAL_EXTRACTOR      , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 40);
+   PutInStaff(TOBJ_CORIUM_EXTRACTOR     , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 40);
+   PutInStaff(TOBJ_ARMCENTER            , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 40);
+   PutInStaff(TOBJ_GOLD_EXTRACTOR       , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 35);
+   PutInStaff(TOBJ_GOLD_EXTRACTOR       , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 35);
+   PutInStaff(TOBJ_TECHCENTER           , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 35);
+   PutInStaff(TOBJ_REPCENTER            , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 25);
+   PutInStaff(TOBJ_GOLD_EXTRACTOR       , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 10);
+   PutInStaff(TOBJ_ULTRASONIC_GENERATOR , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 10);
+   PutInStaff(TOBJ_ULTRASONIC_GENERATOR , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 10);
+   PutInStaff(TOBJ_ULTRASONIC_GENERATOR , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 10);
+   PutInStaff(TOBJ_STOLP                , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 10);
+   // Param
+   RepairStaff(AICAN_MYSELF, 50, 0, AISF_ALL, AITRG_ALL);
+   CanChangeStaff(AICAN_MYSELF);
+  CloseFleet();
+
+  OpenFleet(fbuild, CIV_WS, AIF_BUILD, 12);
+   // Staff
+   PutInStaff(TOBJ_CONSTRUCTOR, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+   PutInStaff(TOBJ_CRUISER    , TOBJ_HUNTER   , TOBJ_HUNTER   , 5);
+  CloseFleet();
+
+  OpenFleet(fmetal, CIV_WS, AIF_RES, 10);
+   // Staff
+   PutInStaff(TOBJ_TRANSUB   , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 45);
+   PutInStaff(TOBJ_TRANSUB   , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 30);
+   // Param
+   GatherRC(AICAN_MYSELF,TOBJ_METAL,0);
+  CloseFleet();
+
+  OpenFleet(fcorium, CIV_WS, AIF_RES, 10);
+    // Staff
+    PutInStaff(TOBJ_TRANSUB  , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 45);
+    PutInStaff(TOBJ_TRANSUB  , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 30);
+    // Param
+    GatherRC(AICAN_MYSELF,TOBJ_CORIUM,0);
+  CloseFleet();
+
+  OpenFleet(fraid0, CIV_WS, AIF_MILITARY, 5);
+    // Staff
+    PutInStaff(TOBJ_HUNTER    , TOBJ_SENTINEL , TOBJ_UNDEFINED, 35);
+    PutInStaff(TOBJ_HUNTER    , TOBJ_HUNTER   , TOBJ_SENTINEL , 35);
+    PutInStaff(TOBJ_MINE_LAYER, TOBJ_HUNTER   , TOBJ_SENTINEL , 35);
+    PutInStaff(TOBJ_CRUISER   , TOBJ_CRUISER  , TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_CRUISER   , TOBJ_CRUISER  , TOBJ_UNDEFINED, 10);
+    // Param
+    Patrol(AICAN_MYSELF, 0, 60);
+    GuardZones(AICAN_MYSELF, AITRG_ALL, 1, 0, 180);
+    Raid(AICAN_MYSELF, AITRG_TLOHIGHTECH, 5, 1, AIATTACK_HUNT, 300, 120);
+    RepairStaff(AICAN_MYSELF, 90, 0, AISF_ALL, AITRG_ALL);
+  CloseFleet();
+
+  OpenFleet(fraid1, CIV_WS, AIF_MILITARY, 7);
+    // Staff
+    PutInStaff(TOBJ_SENTINEL, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_SENTINEL, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_SENTINEL, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_CRUISER , TOBJ_HUNTER   , TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_CRUISER , TOBJ_HUNTER   , TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_CRUISER , TOBJ_CRUISER  , TOBJ_HUNTER   , 10);
+    // Param   
+    Patrol(AICAN_MYSELF, 0, 60);
+    GuardZones(AICAN_MYSELF, AITRG_ALL, 1, 0, 180);
+    Raid(AICAN_MYSELF, AITRG_TLOHIGHTECH, 7, 2, AIATTACK_HUNT, 300, 60);
+  CloseFleet();
+ CloseTactic();
+
+ //--- Events ---
+ OpenEvents();
+  //- Init Event - get difficulty
+  Event(TRUE)
+  { _RT0 := GetMissDifficulty();
+		
+			actCreatePlObj(TOBJ_HF_CANNON, 33,65,2, LOGO_DEFAULT, "", -1, 100);
+			actCreatePlObj(TOBJ_HF_CANNON, 31,59,2, LOGO_DEFAULT, "", -1, 100);
+			actCreatePlObj(TOBJ_HF_CANNON, 36,65,3, LOGO_DEFAULT, "", -1, 100);
+
+  }
+  //- Human on half way - start appearing  
+  Event(_GL20) 
+  { //- create enemy fleets
+    actCreateFleet("Attack Base", CIV_WS, AIF_MILITARY); _RT10 := getFleetNum("Attack Base");
+    actCreatePlObj(TOBJ_SENTINEL, 59,2,1, LOGO_DEFAULT, "", _RT10, 100);
+    actCreatePlObj(TOBJ_SENTINEL, 60,2,1, LOGO_DEFAULT, "", _RT10, 100);
+    actCreatePlObj(TOBJ_SENTINEL, 61,2,1, LOGO_DEFAULT, "", _RT10, 100);
+    actCreatePlObj(TOBJ_SENTINEL, 59,2,2, LOGO_DEFAULT, "", _RT10, 100);
+    actCreatePlObj(TOBJ_SENTINEL, 60,2,2, LOGO_DEFAULT, "", _RT10, 100);
+    actCreatePlObj(TOBJ_SENTINEL, 61,2,2, LOGO_DEFAULT, "", _RT10, 100);
+    actCreatePlObj(TOBJ_SENTINEL, 59,2,3, LOGO_DEFAULT, "", _RT10, 100);
+    actCreatePlObj(TOBJ_SENTINEL, 60,2,3, LOGO_DEFAULT, "", _RT10, 100);
+    actCreatePlObj(TOBJ_SENTINEL, 61,2,3, LOGO_DEFAULT, "", _RT10, 100);
+    // adjust fleet contents
+    if(_RT0 > DIFF_WEAK)
+    { actCreatePlObj(TOBJ_SENTINEL, 59,2,0, LOGO_DEFAULT, "", _RT10, 100);
+      actCreatePlObj(TOBJ_SENTINEL, 60,2,0, LOGO_DEFAULT, "", _RT10, 100);
+    }
+    if(_RT0 > DIFF_MEDIUM)
+    { actCreatePlObj(TOBJ_SENTINEL, 59,2,4, LOGO_DEFAULT, "", _RT10, 100);
+      actCreatePlObj(TOBJ_SENTINEL, 60,2,4, LOGO_DEFAULT, "", _RT10, 100);
+      actCreatePlObj(TOBJ_HUNTER  , 59,2,4, LOGO_DEFAULT, "", _RT11, 100);
+      actCreatePlObj(TOBJ_HUNTER  , 60,2,4, LOGO_DEFAULT, "", _RT11, 100);
+    }
+    if(GetRnd(0, 1))
+    { actCreatePlObj(TOBJ_SENTINEL, 59,3,2, LOGO_DEFAULT, "", _RT10, 100);
+      actCreatePlObj(TOBJ_SENTINEL, 60,3,2, LOGO_DEFAULT, "", _RT10, 100);
+    }
+    // set attack
+    if(GetRnd(0, 5)>1){ actFCmdAttackZ(_RT10, 55,18,0, 13,17,5, 0, AIATTACK_GLADE, 0);}
+    else              { actFCmdAttackZ(_RT10, 61,47,0, 7,12,5, 0, AIATTACK_GLADE, 0); }
+
+    //-
+    actCreateFleet("Attack Silos", CIV_WS, AIF_MILITARY); _RT11 := getFleetNum("Attack Silos");
+    actCreatePlObj(TOBJ_HUNTER, 54,6,2, LOGO_DEFAULT, "", _RT11, 100);
+    actCreatePlObj(TOBJ_HUNTER, 55,6,2, LOGO_DEFAULT, "", _RT11, 100);
+    actCreatePlObj(TOBJ_HUNTER, 56,6,2, LOGO_DEFAULT, "", _RT11, 100);
+    actCreatePlObj(TOBJ_HUNTER, 57,6,2, LOGO_DEFAULT, "", _RT11, 100);
+    actCreatePlObj(TOBJ_HUNTER, 58,6,2, LOGO_DEFAULT, "", _RT11, 100);
+    // adjust fleet contents
+    if(!GetRnd(0, 2))
+    { if(_RT0 > DIFF_WEAK)
+      { actCreatePlObj(TOBJ_HUNTER, 56,6,3, LOGO_DEFAULT, "", _RT11, 100);
+        actCreatePlObj(TOBJ_HUNTER, 58,6,3, LOGO_DEFAULT, "", _RT11, 100);
+        actCreatePlObj(TOBJ_HUNTER, 56,6,3, LOGO_DEFAULT, "", _RT11, 100);
+        actCreatePlObj(TOBJ_HUNTER, 58,6,3, LOGO_DEFAULT, "", _RT11, 100);
+      }
+      if(_RT0 > DIFF_MEDIUM)
+      { actCreatePlObj(TOBJ_HUNTER, 56,6,1, LOGO_DEFAULT, "", _RT11, 100);
+        actCreatePlObj(TOBJ_HUNTER, 57,6,1, LOGO_DEFAULT, "", _RT11, 100);
+        actCreatePlObj(TOBJ_HUNTER, 56,6,1, LOGO_DEFAULT, "", _RT11, 100);
+        actCreatePlObj(TOBJ_HUNTER, 57,6,1, LOGO_DEFAULT, "", _RT11, 100);
+      }
+    }
+    // set attack
+    if(GetRnd(0, 5)>1){ actFCmdAttackZ(_RT11, 61,47,0, 7,12,5, 0, AIATTACK_GLADE, 0); }
+    else              { actFCmdAttackZ(_RT10, 55,18,0, 13,17,5, 0, AIATTACK_GLADE, 0);}
+  }
+  //- Human on half way - run tactic
+  Event(_GL20 && GetTime()-_GL30 > 20 && _RT0 > DIFF_MEDIUM) 
+  { if(_RT0 > DIFF_WEAK)
+    { actCreatePlObj(TOBJ_CONSTRUCTOR, 0,67,1, LOGO_DEFAULT, "", 0, 100);
+      actCreatePlObj(TOBJ_CRUISER    , 0,67,3, LOGO_DEFAULT, "", 0, 100);
+      actCreatePlObj(TOBJ_CRUISER    , 0,67,2, LOGO_DEFAULT, "", 0, 100);
+      actCreatePlObj(TOBJ_CRUISER    , 0,67,4, LOGO_DEFAULT, "", 0, 100);
+      actExecTactic(tactic, 4, 63, 0);
+      // store fleets numbers
+      _RT20 := getFleetNum(fbase);
+      _RT21 := getFleetNum(fbuild);
+      _RT22 := getFleetNum(fmetal);
+      _RT23 := getFleetNum(fcorium);
+      _RT24 := getFleetNum(fraid0);
+      _RT25 := getFleetNum(fraid1);
+    }
+  }
+ CloseEvents();
+
+CloseStrateg();
+
+

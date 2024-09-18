@@ -1,0 +1,137 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss206");
+//append(out_campaign+"MissTest");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\bo\\";
+source(in_br+"bot_0600.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+//source(in_br+"bob_0601.wav"); name("BriefSpeach"); putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("REVELATIONS");
+
+// text description of the mission
+initsar(40, 10);
+//- objectives  0-9
+setsar("Build an ASDIC within 20 minutes at the southeastern part of the sector.");
+setsar("Protect it until the Silicon Convoy is located when it is approaching the White sharks base.");
+setsar("Capture the Silicon artifact with the X-box from the White Shark base.");
+setsar("Transport the Silicon artifact to the CentComp at your northern base.");
+setsar("Protect the area and the Silicon artifact until our Raider \"Retribution\" arrives.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- reports    10-19
+setsar("Mission accomplished");
+setsar("Mission failed. You have lost all of your objects.");
+setsar("Mission failed. You have lost the CENTCOMP.");
+setsar("Mission failed. You have lost the ARTIFACT.");
+setsar("Mission failed. You have not built an ASDIC.");
+setsar("");
+setsar("");
+setsar("");
+setsar(" Not even our simulations predicted such an exceptional success.  Good show commander!");
+setsar(" Mission Failed");
+//- briefings 20-29
+setsar(" Major, you've confirmed the link and are in the right place to take action.@ The Silicon convoy delivered an X-Box to the White Sharks. You are to capture and return it to our CentComp. We are sending a Raider \"Retribution\" to take the artifact from there to one of our northern bases. The Raider \"Retribution\" will arrive in a few minutes after the delivery of the Silicon Artifact to the CentComp (which you have to build in the north if necessary).@ Move fast, a Shark squadron has been dispatched to take the Silicon artifact with the X-Box to their central base.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("@Sector ESW27. Central Pacific.@To the leader of the 6th Strike Wing of the 17th Special Squadron.@Top secret.");
+setsar(" Captain, you have now become a Major. Congratulations!@ @ Our studies of the captured materials that refer to the \"Teleshield Generator\" technology indicate the White Sharks are receiving expert help. We suspect this technology was supplied by the Silicons.");
+setsar(" Return to the Southwest sector where the Silicons are most active. Our ASDICs have been tracking a large Silicon convoy that may intend to rendezvous with the Sharks. Follow and observe but don't attack without proof.");
+setsar("");
+setsar("");
+//-names		35 Names-
+setsar("CENTCOMP TH31");					//	
+setsar("X-Box");			   		//
+setsar("Retribution");          	        	//
+setsar("");				        	//
+setsar("");		           //
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Build an ASDIC within 20 minutes at the southeastern part of the sector.");
+setsar("Protect it until the Silicon Convoy is located when it is approaching the White sharks base.");
+name("OBJECTIVES"); putsar();    
+
+name("TASKPLAY");
+inittask("DEFAULT_BO_ANIMATED", "DEFAULT_BO"); // инициализировать таблицу
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(1, 1, 1, 1);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+ //-- heading
+ SetColor(1, 1, 1, 0);
+ SetLevel(10);
+ ShowATask(0, 50,  20, 700,  80, 1, 30, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 31, 1, 10, 40, 1); 
+ Time(670);                
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(680);
+ ShowATask(2, 100, 120, 600, 210, 1, 32, 1, 10, 50, 1); 
+ Time(1150);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(1170);
+ HideATask(2); StartWave("DEFAULT_BIP");
+ 
+ Time(1190);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 180, 550, 170); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+// script for play
+name("BRIEF_1");
+initbriefing(); 
+ Time(0);
+ BriefingAni(53, 1, "BOFACE1");
+ BriefingText(20, 1, 1, 1);
+ BriefingWave(0, "BriefSpeach");
+ Time(45*25);
+ BriefingStop();
+putbriefing();
+
+// script for play
+name("BRIEF_2");
+initbriefing(); 
+ Time(0); 
+ BriefingText(18, 1, 1, 1);
+	Time(1*25);
+	BriefingAni(0, 0, "BOFACE2");	// показать говорящего 
+ Time(8*25);
+	BriefingAni(0, 0, "");		// спрятать говорящего   
+	Time(11*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();

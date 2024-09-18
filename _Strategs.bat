@@ -1,0 +1,1 @@
+..\STAiMake.exe .\Strategs\Strategs.aim "/IC:\GOG Games\Submarine Titans\editor" "/GC:\GOG Games\Submarine Titans" "/MC:\GOG Games\Submarine Titans\custom"

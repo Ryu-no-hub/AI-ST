@@ -1,0 +1,244 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Container:	Strategist "BO GREEN"
+// Campaign:	SI Campaign
+// Mission:	Scenario 5 : Betrayal
+// Copyright: 	2000,Strategy First Inc.
+//
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Players	Civ	Color	Ally	Enemy		Note
+//-------------------------------------------------------------------------------------------------
+//     0		 SI	Blue	   4	   3			
+//     3               BO       Red        - 	  0-4
+//     4 	            WS     Violet       0           3
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+include<_inc_path]\AiScript.dfn>;
+include<_inc_path]\AiScript.mcr>;
+
+OpenStrateg("BO GREEN", CIV_BO);
+
+	MainEnemy(AICAN_MYSELF, PLAYER_4);
+
+	OpenTactic("BO Green",CIV_BO, 10);
+
+		// sets The BO Base
+		OpenFleet("BO Base", CIV_BO, AIF_BASE, 17);
+			
+			PutInStaff(TOBJ_DOCKYARD, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_O2_SUBLIMATOR, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_O2_SUBLIMATOR,TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_O2_SUBLIMATOR, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_MUNITIONS_FACTORY, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_POWER_STATION);
+			PutInStaff(TOBJ_POWER_STATION);
+			PutInStaff(TOBJ_ASDIC);
+			PutInStaff(TOBJ_CORIUM_MINE, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_METAL_MINE, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_GOLD_SUBLIMATOR, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_SILO, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_SILO, TOBJ_UNDEFINED);
+			
+			Build(AICAN_MYSELF);
+			RepairStaff(AICAN_MYSELF, 75, 0, AISF_ALL, AITRG_ALL);
+			CanChangeStaff(AICAN_NOT);
+	
+		CloseFleet();
+
+		// Sets The Assembler fleet to build the base
+		OpenFleet("BO Assembler", CIV_BO, AIF_BUILD, 19);
+
+			PutInStaff(TOBJ_ASSEMBLER, TOBJ_UNDEFINED);
+			Build(AICAN_MYSELF);
+			RepairStaff(AICAN_MYSELF, 75, 0, AISF_ALL, AITRG_ALL);
+			CanChangeStaff(AICAN_MYSELF);
+
+		CloseFleet();
+
+		// Sets the Cargo Subs for Metal Extraction
+		OpenFleet("BO Metal", CIV_BO, AIF_RES, 19);
+
+			PutInStaff(TOBJ_CARGO_SUB, TOBJ_UNDEFINED, 45);
+			PutInStaff(TOBJ_CARGO_SUB, TOBJ_UNDEFINED, 45);
+
+			GatherRC(AICAN_MYSELF, TOBJ_METAL, 0);
+			RepairStaff(AICAN_MYSELF, 50, 0, AISF_ALL, AITRG_ALL);
+
+		CloseFleet();
+
+		// Sets the Cargo Subs for Corium Extraction
+		OpenFleet("BO Corium", CIV_BO, AIF_RES, 10);
+
+			PutInStaff(TOBJ_CARGO_SUB, TOBJ_UNDEFINED, 45);
+			PutInStaff(TOBJ_CARGO_SUB, TOBJ_UNDEFINED, 45);
+
+			GatherRC(AICAN_MYSELF, TOBJ_CORIUM, 0);
+			RepairStaff(AICAN_MYSELF, 50, 0, AISF_ALL, AITRG_ALL);
+
+		CloseFleet();
+
+		OpenFleet("BO Patrol #1", CIV_BO, AIF_MILITARY);
+
+			PutInStaff(TOBJ_FIGHTER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_FIGHTER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_FIGHTER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_FIGHTER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_FIGHTER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_FIGHTER, TOBJ_UNDEFINED);
+
+			PutInStaff(TOBJ_DESTROYER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_DESTROYER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_DESTROYER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_DESTROYER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_DESTROYER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_DESTROYER, TOBJ_UNDEFINED);
+
+			PutInStaff(TOBJ_HEAVY_CRUISER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_HEAVY_CRUISER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_HEAVY_CRUISER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_HEAVY_CRUISER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_HEAVY_CRUISER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_HEAVY_CRUISER, TOBJ_UNDEFINED);
+
+			PutInStaff(TOBJ_INVADER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_INVADER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_INVADER, TOBJ_UNDEFINED);
+
+			PutInStaff(TOBJ_RAIDER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_RAIDER, TOBJ_UNDEFINED);
+			PutInStaff(TOBJ_RAIDER, TOBJ_UNDEFINED);
+			
+			Build(AICAN_MYSELF);
+
+			Patrol(AICAN_BYORDER, 20, 180);
+			SetPatrolPoint(46,15,2, FORMATION_WALL, 0, 0);
+			SetPatrolPoint(26,37,2, FORMATION_CIRCLE, 0, 0);
+
+		CloseFleet();
+
+
+	CloseTactic();
+
+
+
+	OpenEvents();
+
+		// start all tacticians to assign patrols 
+		Event(getOwnTime()>0)
+		{			
+
+			actObjSelectT(TOBJ_UNDEFINED);
+			actExecTactic("BO Green"); 
+
+			actCreateFleet("LABS", CIV_BO, AIF_BASE);
+
+			actCreatePlObj(TOBJ_RESEARCH_LABORATORY, 13,12,00, LOGO_UNDEF, "", -1, 100);
+			actFParPutInStaff(getFleetNum("LABS"), TOBJ_RESEARCH_LABORATORY, TOBJ_UNDEFINED);
+
+			actCreatePlObj(TOBJ_RESEARCH_LABORATORY, 13,9,00, LOGO_UNDEF, "", -1, 100);
+			actFParPutInStaff(getFleetNum("LABS"), TOBJ_RESEARCH_LABORATORY, TOBJ_UNDEFINED);
+
+			actCreatePlObj(TOBJ_RESEARCH_LABORATORY, 13,7,00, LOGO_UNDEF, "", -1, 100);
+			actFParPutInStaff(getFleetNum("LABS"), TOBJ_RESEARCH_LABORATORY, TOBJ_UNDEFINED);
+
+			actLockFleet(getFleetNum("LABS"), LOCKOBJ_TARGET);
+			actLinkFleet(getFleetNum("LABS"), "BO Green");
+
+
+			ActTScenDevRun( PLAYER_1, AIREL_MYSELF, TECH_SCENARIO_DEFENCE );
+		
+			_RT7 := GetMissDifficulty();
+	
+			actFParPutInStaff(getFleetNum("BO Base"), TOBJ_ANTI_SONAR_SHIELD, TOBJ_UNDEFINED);
+			actFParPutInStaff(getFleetNum("BO Base"), TOBJ_REPAIR_DOCK, TOBJ_UNDEFINED);
+			actFParPutInStaff(getFleetNum("BO Base"), TOBJ_TELEPORTER, TOBJ_UNDEFINED);
+			actFParPutInStaff(getFleetNum("BO Base"), TOBJ_CENTCOMP, TOBJ_UNDEFINED);
+			actFParPutInStaff(getFleetNum("BO Base"), TOBJ_MARKET, TOBJ_UNDEFINED);
+			actFParPutInStaff(getFleetNum("BO Base"), TOBJ_ANTI_SONAR_SHIELD, TOBJ_UNDEFINED);
+
+			actCreateFleet("BODEV Fleet", CIV_BO, AIF_MILITARY, 10 );
+			actFParPutInStaff(getFleetNum("BODEV Fleet"), TOBJ_DESTROYER, TOBJ_UNDEFINED);
+			actFParPutInStaff(getFleetNum("BODEV Fleet"), TOBJ_DESTROYER, TOBJ_UNDEFINED);
+			actLinkFleet(getFleetNum("BODEV Fleet"), "BO Green" );
+
+			actOnTimer( 240 );
+
+			if ( _RT7 > DIFF_WEAK )
+			{
+				actOffTimer();
+				actOnTimer( 180 );
+			}
+
+			if ( _RT7 > DIFF_MEDIUM )
+			{
+				actOffTimer();
+				actOnTimer( 120 );			
+			}
+	
+		}
+
+		Event( getOwnTime() > 1 )
+		{
+			if ( GetRnd(0,1) )
+			{
+				actFParPutInStaff(getFleetNum("BO Base"), TOBJ_LIGHT_LASER, TOBJ_UNDEFINED);
+				actFParPutInStaff(getFleetNum("BO Base"), TOBJ_MAGNETIC_MINE_LAUNCHER, TOBJ_UNDEFINED);
+				actFParPutInStaff(getFleetNum("BODEV Fleet"), TOBJ_HEAVY_CRUISER, TOBJ_UNDEFINED);
+				actFParPutInStaff(getFleetNum("BODEV Fleet"), TOBJ_INVADER, TOBJ_UNDEFINED);
+
+				if ( GetRnd( 0,1 ) )
+				{
+					actFParPutInStaff(getFleetNum("BO Base"), TOBJ_HEAVY_LASER, TOBJ_UNDEFINED);
+					actFParPutInStaff(getFleetNum("BODEV Fleet"), TOBJ_RAIDER, TOBJ_UNDEFINED);
+				}
+			}
+
+			actOffTimer();
+			actOnTimer( 240 );
+
+			if ( _RT7 > DIFF_WEAK )
+			{
+				actOffTimer();
+				actOnTimer( 180 );
+			}
+
+			if ( _RT7 > DIFF_MEDIUM )
+			{
+				actOffTimer();
+				actOnTimer( 120 );			
+			}
+
+			actLockEvent();	
+		}
+
+		Event( _getPlObjT( TOBJ_USURPER, LOGO_UNDEF, 0,0,0,30,44,5 )>=1 ||
+ 		           _getPlObjT( TOBJ_USURPER, LOGO_UNDEF, 31,0,0,22,22,5 )>=1 ||
+		           _getPlObjT( TOBJ_USURPER, LOGO_UNDEF, 31,23,0,13,15,5 )>=1 )
+		{
+			actFCmdAttackT( getFleetNum("BO Patrol #1"), PLAYER_4, AITRG_ALL, TOBJ_USURPER, LOGO_UNDEF);
+			actLockEvent();
+		}
+
+		Event(  _getPlObjT( TOBJ_GATE, LOGO_UNDEF, 0,0,0,30,44,5 )>=1 ||
+ 		            _getPlObjT( TOBJ_GATE, LOGO_UNDEF, 31,0,0,22,22,5 )>=1 ||
+		            _getPlObjT( TOBJ_GATE, LOGO_UNDEF, 31,23,0,13,15,5 )>=1 )
+		{
+			actFCmdAttackT( getFleetNum("BO Patrol #1"), PLAYER_4, AITRG_ALL, TOBJ_GATE, LOGO_UNDEF);
+			actLockEvent();
+		}
+
+		Event(  _getPlObjT( TOBJ_UNDEFINED, LOGO_UNDEF, 0,0,0,30,44,5 )>=1 ||
+ 		            _getPlObjT( TOBJ_UNDEFINED, LOGO_UNDEF, 31,0,0,22,22,5 )>=1 ||
+		            _getPlObjT( TOBJ_UNDEFINED, LOGO_UNDEF, 31,23,0,13,15,5 )>=1 )
+		{
+			actFCmdAttackT( getFleetNum("BO Patrol #1"), PLAYER_4, AITRG_ALL, TOBJ_UNDEFINED, LOGO_UNDEF);
+			actFCmdAttackT( getFleetNum("BODEV Fleet"), PLAYER_4, AITRG_ALL, TOBJ_UNDEFINED, LOGO_UNDEF);
+
+			actLockEvent();
+		}
+
+	CloseEvents();
+
+CloseStrateg();
+

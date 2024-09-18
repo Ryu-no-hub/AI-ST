@@ -1,0 +1,10 @@
+
+OpenTactic("BO Resource Base", CIV_BO, 10);
+  // Parameters
+
+  // Fleets
+  include<[_curr_path]\BO_BaseRc.flt>; 
+  include<[_curr_path]\BO_Builder.flt>; 
+  include<[_curr_path]\BO_Transport_Metal.flt>;
+  include<[_curr_path]\BO_Transport_Corium.flt>; 
+CloseTactic();

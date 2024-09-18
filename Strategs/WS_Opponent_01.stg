@@ -1,0 +1,34 @@
+//====================================================================
+//      ST AiScript: WS Computer Opponent Level 01
+//====================================================================
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#if(_env_var1==0)
+ _full_name = "WS Opponent Level 01";_short_name = "AI MEDIUM";
+#endif
+
+OpenStrateg(_full_name, CIV_WS, _short_name, 0x00000003);
+
+ // Parameters
+ MainEnemy(AICAN_MYSELF, PLAYER_ALL);
+
+ // Tactics
+ include<[_curr_path]\WS_MainBase.tct>;
+
+ // Events
+ OpenEvents();
+  // Execute Tactician  & Technologies
+  Event(getOwnTime()>1) 
+  { actObjSelectM(AITRG_ALL);
+    actExecTactic("WS Main Base");
+    actTScenDevRun(TECH_SCENARIO_OPTIMAL);
+  }
+///////////////
+  Event(TRUE)
+  { _RT10+=1;
+  }
+
+ CloseEvents();
+
+CloseStrateg();

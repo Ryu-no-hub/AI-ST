@@ -1,0 +1,131 @@
+/////////////////////////////////////////////////////////////////////////////
+//
+// Container:    Strategist  "BO Magenta"
+// Campaign:     WS Campaign
+// Mission:      04 (Demo 01) "BURST WAVE"
+// Copyright:    1999, Ellipse Studios
+//
+//////////////////////////////////////////////////////////////////////////////
+// Players   Civ    Color     Control      Ally         Enemy      Note
+//----------------------------------------------------------------------------
+//   0       WS     Blue      Human        -            3,4,7
+//   1       BO     Green     Computer     All           -       Just for Baby1 and Baby2
+//   3       BO     Red       Computer     3,7           0
+//  *4       BO     Violet    Computer     4,7           0
+//   7       BO     Beige     Computer     3,4           0
+//////////////////////////////////////////////////////////////////////////////
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#import
+  // Names
+  tactic  = "BO Main Base";
+  fbase   = "BO Base ";
+  fbuild  = "BO Builder";
+  fguard0 = "BO Guard 00";
+#endimport
+
+OpenStrateg("BO Violet", CIV_BO);
+ 
+ // Parameters
+ MainEnemy(AICAN_NOT, PLAYER_CURR);
+ // Tactics
+ OpenTactic(tactic, CIV_BO, 10);
+
+  // -- Fleets --- 
+  OpenFleet(fbase, CIV_BO, AIF_BASE, 15);
+    // Staff
+    PutInStaff(TOBJ_O2_SUBLIMATOR              , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 45);
+    PutInStaff(TOBJ_O2_SUBLIMATOR              , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 45);
+    PutInStaff(TOBJ_DOCKYARD                   , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 41);
+    PutInStaff(TOBJ_MUNITIONS_FACTORY          , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 40);
+    PutInStaff(TOBJ_LIGHT_LASER                , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 30);
+    PutInStaff(TOBJ_LIGHT_LASER                , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 30);
+    PutInStaff(TOBJ_LIGHT_LASER                , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 30);
+    PutInStaff(TOBJ_LIGHT_LASER                , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 30);
+    PutInStaff(TOBJ_POWER_STATION              , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 15);
+    PutInStaff(TOBJ_ASDIC                      , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 10);
+
+    // Param
+    Build(AICAN_MYSELF);
+    RepairStaff(AICAN_MYSELF, 50, 0, AISF_ALL, AITRG_ALL);
+    CanChangeStaff(AICAN_MYSELF);
+  CloseFleet();
+
+  OpenFleet(fbuild, CIV_BO, AIF_BUILD, 12);
+   // Staff
+   PutInStaff(TOBJ_ASSEMBLER  , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+   // Param
+   Build(AICAN_MYSELF);
+  CloseFleet();
+
+  OpenFleet(fguard0, CIV_BO, AIF_MILITARY, 5);
+    // Staff
+    PutInStaff(TOBJ_DESTROYER, TOBJ_FIGHTER     , TOBJ_UNDEFINED, 15);
+    PutInStaff(TOBJ_DESTROYER, TOBJ_FIGHTER     , TOBJ_UNDEFINED, 15);
+    PutInStaff(TOBJ_DESTROYER, TOBJ_FIGHTER     , TOBJ_UNDEFINED, 15);
+    PutInStaff(TOBJ_DESTROYER, TOBJ_FIGHTER     , TOBJ_UNDEFINED, 15);
+    PutInStaff(TOBJ_FIGHTER  , TOBJ_UNDEFINED   , TOBJ_UNDEFINED, 15);
+    PutInStaff(TOBJ_FIGHTER  , TOBJ_UNDEFINED   , TOBJ_UNDEFINED, 15);
+    PutInStaff(TOBJ_FIGHTER  , TOBJ_UNDEFINED   , TOBJ_UNDEFINED, 15);
+    // Param
+    Patrol(AICAN_MYSELF, 0, 180);
+    GuardZones(AICAN_MYSELF, AITRG_ALL, 1, 0, 180);
+    // 
+  CloseFleet();
+ CloseTactic();
+
+ //--- Events ---
+ OpenEvents();
+
+  Event(TRUE)
+  { _RT0:=GetMissDifficulty();
+    //
+    actTechSet(TTECH_BO_RUBY_LASER_TECHNOLOGY, 1);
+    actTechSet(TTECH_BO_SPLINTER_TORPEDO_UPGRADE, 1);
+  }
+
+  // Execute Tactician
+  Event(getOwnTime()>0) 
+  { actObjSelectM(AITRG_ALL);
+    actExecTactic(tactic);
+    //actTScenDevRun(TECH_SCENARIO_OPTIMAL);
+    // Store fleets numbers
+    _RT20:=getFleetNum(fbase) ;
+    _RT21:=getFleetNum(fbuild);
+    _RT24:=getFleetNum(fguard0);
+    // Adjust fleets paramets for difficult
+    if(_RT0>DIFF_WEAK)
+    { // _RT24
+      actFParPutInStaff(_RT24, TOBJ_HEAVY_CRUISER , TOBJ_FIGHTER, TOBJ_UNDEFINED, 10);
+      actFParPutInStaff(_RT24, TOBJ_HEAVY_CRUISER , TOBJ_FIGHTER, TOBJ_UNDEFINED, 10);
+      // _RT20
+      actFParPutInStaff(_RT20, TOBJ_HEAVY_LASER           , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+      actFParPutInStaff(_RT20, TOBJ_MAGNETIC_MINE_LAUNCHER, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+      actCreatePlObj(TOBJ_HEAVY_LASER            , 23, 32, 0, LOGO_DEFAULT, "", _RT20);
+      actCreatePlObj(TOBJ_MAGNETIC_MINE_LAUNCHER , 36, 26, 0, LOGO_DEFAULT, "", _RT20);
+    }
+     if(_RT0>DIFF_MEDIUM)
+    { // _RT24
+      actFParPutInStaff(_RT24, TOBJ_HEAVY_CRUISER , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+      actFParPutInStaff(_RT24, TOBJ_HEAVY_CRUISER , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+      // _RT20
+      actFParPutInStaff(_RT20, TOBJ_HEAVY_LASER           , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+      actFParPutInStaff(_RT20, TOBJ_MAGNETIC_MINE_LAUNCHER, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+      actCreatePlObj(TOBJ_HEAVY_LASER            , 37, 29, 0, LOGO_DEFAULT, "", _RT20);
+      actCreatePlObj(TOBJ_MAGNETIC_MINE_LAUNCHER , 24, 35, 0, LOGO_DEFAULT, "", _RT20);
+    }
+
+  }
+
+  // Lock CentComp
+  Event(getOwnTime()>2) 
+  { actObjSelectN("CentComp"); actCreateFleet("Spec", CIV_WS, AIF_BASE); _RT11:=getFleetNum("Spec");
+    actLockFleet(_RT11, LOCKOBJ_TARGET);
+  }
+
+ CloseEvents();
+
+CloseStrateg();
+
+

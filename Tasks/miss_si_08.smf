@@ -1,0 +1,241 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss308");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\si\\";
+source(in_br+"sit_0800.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Fairway");
+
+// text description of the mission
+initsar(40, 10);
+/* 00000 */ setsar("456 JK@1372 FGR 12.23.456.745 @Urgent message. 45:23:12");
+/* 00001 */ setsar("Our leaders have determined that now is the proper time to attempt an alliance with the Black Octopi, who's situation is desperate. @ @A demonstration of our good faith is necessary first, so we will provide them with a \"gift\".");
+/* 00002 */ setsar("Recently we have determined that a White Shark courrier will be passing through sector GFD 2112.  The courier is transporting a high ranking White Shark official transporting sensitive military plans.  If we capture and deliver the courier to the Black Octopi, they will be convinced to join us.");
+/* 00003 */ setsar("We must intercept the White Shark attack plans in order to maintain our dominance in this sector.  Capture the White Shark Tran Center located in the South-Eastern portion of this sector before their courier sub arrives..");
+/* 00004 */ setsar("We have successfully intercepted the White Shark attack plans.  Use suppliers to convoy the intercepted courier and plans North.");
+/* 00005 */ setsar("Build a Command Hub in the Northern-most portion of this sector and protect it until Black Octopi reinforcements arrive.");
+/* 00006 */ setsar("Defend the captured Tran Center until the White Courier arrives.");
+/* 00007 */ setsar("We must now defend the Northern portion of this sector and the captured plans until Black Octopi forces arrive. Unload the Courier Sub near the new Command Hub and prepare to defend.");
+/* 00008 */ setsar("The Northern Command Hub has been destroyed, without it, the Black Octopi have no means of homing in on our coordinates ... we have failed.");
+/* 00009 */ setsar("The attack plans have been destroyed, without them our alliance will shatter ... the White Sharks have defeated us.");
+/* 00010 */ setsar("The captured courier sub has been destroyed.  Without the pilot's information to support our knowledge of the attack plans ... our efforts are useless.");
+/* 00011 */ setsar("Black Octopi reinforcement fleet has arrived ... Victory is ours.");
+/* 00012 */ setsar("Our main Command Hub has been destroyed.  Without it we cannot coordinate our transmission to the Black Octopi reinforcement fleet ... Failure.");
+/* 00013 */ setsar("The White Shark Tran Center has been destroyed.  Our mission to intercept their attack plan information has failed miserably.");
+/* 00014 */ setsar("We have sustained too many losses in order to obtain our objective ... we have failed our brethren.");
+/* 00015 */ setsar("Protect our main Command Hub.");
+/* 00016 */ setsar("Capture the White Shark Tran Center in the South-East.");
+/* 00017 */ setsar("Protect the Command Hub during the mission.");
+/* 00018 */ setsar("Capture White Shark TranCenter in the southeast and protect it until a White Shark courier sub and attack plans appear near it.");
+/* 00019 */ setsar("Load the courier sub and plans on Suppliers and convoy them to the north.");
+/* 00020 */ setsar("Build a new Command Hub in the north and protect it until reinforced by allied Black Octopi subs.");
+//- briefings 21-29
+/* 00021 */ setsar("Build a new Command Hub in the North and convoy the courier there.");
+/* 00022 */ setsar("Unload the Courier Sub near the new Command Hub.");
+/* 00023 */ setsar("Defend the Command Hub and attack plans until Black Octopi forces arrive.");
+//- briefings 24-29
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("8752 GFR 32.51.00.00@136 JH@Urgent message. 00:14:21");
+setsar(" Our leaders have determined that now is the proper time to attempt an alliance with the Black Octopi, who's situation is desperate.@ @ A demonstration of our good faith is necessary first, so we will provide them with a \"gift\".");
+setsar(" Recently we have determined that a White Shark courier will be passing through sector GFD 2112.@  The courier is transporting a high ranking White Shark official transporting sensitive military plans.@  If we capture and deliver the courier to the Black Octopi, they will be convinced to join us.");
+setsar("");
+setsar("");
+//-names		35 Names-
+setsar("");					//	
+setsar("");			   		//
+setsar("");    	        	//
+setsar("");				        	//
+setsar("");		           //
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Protect the Command Hub during the mission.");
+setsar("Capture White Shark TranCenter in the southeast and protect it until a White Shark courier sub and attack plans appear near it.");
+//setsar("Load the courier sub and plans on Suppliers and convoy them to the north.");
+//setsar("Build a new Command Hub in the north and protect it until reinforced by allied Black Octopi subs.");
+name("OBJECTIVES"); putsar();    
+
+name("TASKPLAY");
+inittask("DEFAULT_SI_ANIMATED", "DEFAULT_SI"); // инициализировать таблицу
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+ //-- heading
+ SetColor(1, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 170,  20, 600,  80, 1, 30, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 31, 1, 10, 40, 1); 
+ Time(760);
+ HideATask(1); StartWave("DEFAULT_BIP");
+ 
+ Time(770);
+ ShowATask(2, 100, 120, 600, 210, 1, 32, 1, 10, 40, 1); 
+
+ Time(1600);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(1620);
+ HideATask(2); StartWave("DEFAULT_BIP");
+ 
+ Time(1640);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 150, 550, 200); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+name("Victory");
+initbriefing();
+Time( 0 );
+BriefingText(11, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 01");
+initbriefing();
+Time( 0 );
+BriefingText(8, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 02");
+initbriefing();
+Time( 0 );
+BriefingText(9, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 03");
+initbriefing();
+Time( 0 );
+BriefingText(10, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 04");
+initbriefing();
+Time( 0 );
+BriefingText(12, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 05");
+initbriefing();
+Time( 0 );
+BriefingText(13, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 06");
+initbriefing();
+Time( 0 );
+BriefingText(14, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 01");
+initbriefing();
+Time( 0 );
+BriefingText(3, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 650 );
+BriefingAni(0, 0, "");
+Time( 700 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 02");
+initbriefing();
+Time( 0 );
+BriefingText(4, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingText(5, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 03");
+initbriefing();
+Time( 0 );
+BriefingText(6, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 04");
+initbriefing();
+Time( 0 );
+BriefingText(7, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+

@@ -1,0 +1,157 @@
+//-
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss201");
+//append(out_campaign+"MissTest");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\bo\\";
+source(in_br+"bot_0100.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Discovery");
+
+//Sound for Briefing and 
+//in_br=in_briefing+"\\bo\\";
+//source(in_br+"bot_0100.wav"); name("TaskBrf");  putwav(1, _MF_PCM);
+
+// text description of the mission
+initsar(10, 10);
+//- objectives                 0-4
+setsar("Build an outpost including an O2 Sublimator, four Silos and an ASDIC.");
+setsar("Investigate reports of an enemy presence and erase all enemies in the sector.");
+setsar("");
+setsar("");
+setsar("");
+//- victory and defeat reports 5-9
+setsar("Great job, Lieutenant!");
+setsar("You have been defeated!");
+setsar("");
+setsar("");
+setsar("");
+//- briefs                    10-19
+setsar("@We need you to proceed to the next mission. You only have 40 minutes to complete the mission.");
+setsar("@There is something here! We are under attack from undefined creatures!");
+setsar("@It was an ambush!");
+setsar("@We found their base!");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("You have performed your job admirably, well done!");
+setsar("Mission Failed");
+//- tasks                      20-
+setsar("Sector GH 156. Central Atlantic, neutral zone.@To the leader of the 7th reconnoitring group.@Top secret.");
+setsar(" Welcome aboard Lieutenant, your record from the Academy is quite exceptional and High Command has instructed me to give you a fitting first assignment.@ @ As you know, our military is small but recent civilian sub losses in our northern and western sectors have forced us to expand our forces. This has drained our resources, particularly Corium, and it has become essential to locate new deposits.");
+setsar(" Two days ago an exploratory team investigated a large crater southwest of our border.Their instruments confirmed it contains significant Corium reserves.@ @ However shortly after sending us this information the team was wiped out by an unknown force.");
+setsar(" Your mission is to take a small taskforce into the crater areas and establish a listening outpost in preparation for further expansion.@ @ Finally, without putting your mission at risk, learn more about the disposition and intent of the group that wiped out our team.");
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Build an outpost including an O2 Sublimator, four Silos and an ASDIC.");
+setsar("Investigate reports of an enemy presence and erase all enemies in the sector.");
+name("OBJECTIVES"); putsar();    
+
+// script for play
+name("TASKPLAY");
+//inittask("DEFAULT_BO_ANIMATED", "DEFAULT_BO");
+inittask("DEFAULT_BO_ANIMATED", "DEFAULT_BO");
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(1, 1, 1, 1);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+  //-- heading
+ SetColor(1, 1, 1, 0);
+ SetLevel(10);
+ ShowATask(0, 170,  20, 600,  80, 1, 20, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+	StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 21, 1, 10, 20, 1); 
+ Time(860);                
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(870);
+ ShowATask(2, 100, 120, 600, 210, 1, 22, 1, 10, 20, 1); 
+ Time(1370);                
+ HideATask(2); StartWave("DEFAULT_BIP");
+
+ Time(1380);
+ ShowATask(3, 100, 120, 600, 210, 1, 23, 1, 10, 20, 1); 
+ Time(1890);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(1910);
+ HideATask(3); StartWave("DEFAULT_BIP");
+ 
+ Time(1930);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 180, 550, 160); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();
+
+// script for play
+name("BRIEF_1");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "BOFACE1");
+ BriefingText(10, 1, 1, 1);   
+ Time(15*25);
+ BriefingStop();
+putbriefing();
+
+name("BRIEF_2");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "BOFACE2");
+ BriefingText(11, 1, 1, 1);   
+ Time(10*25);
+ BriefingStop();
+putbriefing();
+
+name("BRIEF_3");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "BOFACE2");
+ BriefingText(12, 1, 1, 1);   
+ Time(8*25);
+ BriefingStop();
+putbriefing();
+
+name("BRIEF_4");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "BOFACE2");
+ BriefingText(13, 1, 1, 1);   
+ Time(15*25);
+ BriefingStop();
+putbriefing();
+
+// script for play
+name("BRIEF_5");
+initbriefing(); 
+ Time(0); 
+ BriefingText(18, 1, 1, 1);
+	Time(1*25);
+	BriefingAni(0, 0, "BOFACE2");	// показать говорящего 
+ Time(6*25);
+	BriefingAni(0, 0, "");		// спрятать говорящего   
+	Time(9*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();

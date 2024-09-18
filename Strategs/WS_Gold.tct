@@ -1,0 +1,9 @@
+
+OpenTactic("WS Resource Base", CIV_WS, 10);
+  // Parameters
+
+  // Fleets
+  include<[_curr_path]\WS_Gold.flt>; 
+CloseTactic();
+
+

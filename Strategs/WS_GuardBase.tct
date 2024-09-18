@@ -1,0 +1,12 @@
+
+OpenTactic("WS Guard Base", CIV_WS, 10);
+  // Parameters
+
+  // Fleets
+  include<[_curr_path]\WS_BaseGuard.flt>; 
+  include<[_curr_path]\WS_Builder.flt>; 
+  include<[_curr_path]\WS_Transport_Metal.flt>;
+  include<[_curr_path]\WS_Transport_Corium.flt>; 
+  include<[_curr_path]\WS_Guard_00.flt>; 
+  include<[_curr_path]\WS_Guard_01.flt>; 
+CloseTactic();

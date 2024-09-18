@@ -1,0 +1,172 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss207");
+//append(out_campaign+"MissTest");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\bo\\";
+source(in_br+"bot_0700.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("DEEP STRIKE");
+
+// text description of the mission
+initsar(40, 10);
+//- objectives  0-9
+setsar("Capture the R&&D Lab and guard it.");
+setsar("Research the 'Plasma Generator' technology.");
+setsar("Build a 'Terminator', load it on the Repair Platform 'Storm' and bring it to the Northern part of the sector.");
+setsar("R&&D Lab must be preserved");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- reports    10-24
+setsar(" You have lost the R&&D Lab!");
+setsar(" You have guarded the R&D Lab successfully.");
+setsar(" You have lost access to the 'Plasma Generator' technology.");
+setsar(" You have lost the 'Storm' Repair Platform.");
+setsar(" You don't have the 'Terminator' and the ability to build it.");
+setsar(" The 'Storm' has reached the Northern part of the sector.");
+setsar(" The 'Storm' has left the Northern part of the sector.");
+setsar(" The 'Terminator' has loaded to the 'Storm'.");
+setsar(" The 'Terminator' has unloaded from the 'Storm'.");
+setsar(" Well done! You have accomplished your mission!");
+setsar("");
+setsar("");
+setsar("");
+setsar(" Keep up the good work and you may find yourself giving me the orders someday.");
+setsar(" Mission Failed.");
+
+	//- briefings 25-29
+setsar(" You have captured the R&&D Lab!@ @Guard it and research the 'Plasma Generator' technology.");
+setsar(" You have researched the 'Plasma Generator' technology.");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("Sector ESS 24. South Pacific.@To the leader of the 6th Strike Wing of the 17th Special Squadron.@Top secret.");
+setsar(" Major, we have re-established communication with the High Command and they have officially commended your actions in the last mission.@ The White Shark advance has been halted by our defenses, but we are in no state to counterattack. To buy us more time the High Command wants a deep strike force sent to cripple their war machine. You've drawn the short straw.");
+setsar(" The Sharks have been prototyping a new military 'Terminator' Sub. It uses a plasma generator, which didn't come from their under-funded R&&D labs. We need to know more.@ As we have confirmed this is the only prototype, capturing both it and the plans will ensure our control of the technology.");
+setsar(" You will lead a force behind enemy lines.@ @ Capture the TechCenter established by the Sharks in the East and research the 'Plasma Generator' technology at any Research Laboratory. Build a 'Terminator' using that technology, load it on the Repair Platform and convoy it to the special point in the North.");
+setsar(" Our forces are stretched thin, so we can't provide you with any extra units for the mission. However the area contains sufficient resources for you to build-up your force.@ This is also the site of one of our R&&D facilities so there is already a Computer Center (CentComp) available for your use.");
+//-names		35-
+setsar("R&&D Lab");					//
+setsar("Storm");   					//
+setsar("");					//
+setsar("");					//
+setsar("");		//
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Capture the R&&D Lab and guard it.");
+setsar("Research the 'Plasma Generator' technology.");
+setsar("Build a 'Terminator', load it on the Repair Platform 'Storm' and bring it to the Northern part of the sector.");
+name("OBJECTIVES"); putsar();    
+
+/*
+// text description of the mission
+initsar(10, 10);
+setsar("Sector ESS 24. South Pacific.@To the leader of the 6th Strike Wing of the 17th Special Squadron.@Top secret.");
+setsar(" Major, we have re-established communication with the High Command and they have officially commended your actions in the last mission.@ The White Shark advance has been halted by our defenses, but we are in no state to counterattack. To buy us more time the High Command wants a deep strike force sent to cripple their war machine. You've drawn the short straw.");
+setsar(" The Sharks have been prototyping a new military 'Terminator' Sub. It uses a plasma generator, which didn't come from their under-funded R&&D labs. We need to know more.@ As we have confirmed this is the only prototype, capturing both it and the plans will ensure our control of the technology.");
+setsar(" Your will lead a force behind enemy lines.@ @ Capture the TechCenter established by the Sharks in the East and research the 'Plasma Generator' technology at any Research Laboratory. Build a 'Terminator' using that technology, load it on the Repair Platform and convoy it to the special point in the North.");
+setsar(" Our forces are stretched thin, so we can't provide you with any extra units for the mission. However the area contains sufficient resources for you to build-up your force.@ This is also the site of one of our R&&D facilities so there is already a Computer Center (CentComp) available for your use.");
+//-5
+setsar(" You have captured the R&D Lab!@ @Guard it for 15 minutes and research the 'Plasma Generator' technology.");
+setsar(" You have researched the 'Plasma Generator' technology.");
+name("DESCRIPTION"); putsar();    
+*/
+
+// script for play
+name("TASKPLAY");
+inittask("DEFAULT_BO_ANIMATED", "DEFAULT_BO");
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(1, 1, 1, 1);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+ //-- heading
+ SetColor(1, 1, 1, 0);
+ SetLevel(10);
+ ShowATask(0, 50,  20, 700,  80, 1, 30, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 31, 1, 10, 30, 1); 
+ Time(800);                
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(810);
+ ShowATask(2, 100, 120, 600, 210, 1, 32, 1, 10, 30, 1); 
+ Time(1370);                
+ HideATask(2); StartWave("DEFAULT_BIP");
+
+ Time(1380);
+ ShowATask(3, 100, 120, 600, 210, 1, 33, 1, 10, 30, 1); 
+ Time(1910);                
+ HideATask(3); StartWave("DEFAULT_BIP");
+
+ Time(1920);
+ ShowATask(4, 100, 120, 600, 210, 1, 34, 1, 10, 30, 1); 
+ Time(2520);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(2540);
+ HideATask(4); StartWave("DEFAULT_BIP");
+ 
+ Time(2560);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 180, 550, 170); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();
+
+// script for play
+name("BRIEF1");
+initbriefing(); 
+ Time(0);
+ BriefingAni(53, 1, "");
+ BriefingText(25, 1, 1, 1);   
+ Time(15*25);
+ BriefingStop();
+putbriefing();
+
+name("BRIEF2");
+initbriefing(); 
+ Time(0);
+ BriefingAni(53, 1, "");
+ BriefingText(26, 1, 1, 1);   
+ Time(10*25);
+ BriefingStop();
+putbriefing();
+
+// script for play
+name("BRIEF3");
+initbriefing(); 
+ Time(0); 
+ BriefingText(23, 1, 1, 1);
+	Time(1*25);
+	BriefingAni(0, 0, "BOFACE2");	// показать говорящего 
+ Time(8*25);
+	BriefingAni(0, 0, "");		// спрятать говорящего   
+	Time(11*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+

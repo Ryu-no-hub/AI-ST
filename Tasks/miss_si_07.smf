@@ -1,0 +1,197 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss307");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\si\\";
+source(in_br+"sit_0700.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Lifeline");
+
+// text description of the mission
+initsar(40, 10);
+/* 00000 */ setsar("9865 FRD 87.58.987.45 @766 MN @Urgent Message. 24:25:97");
+/* 00001 */ setsar("White Shark forces are enjoying unprecedented success in their battles against the Black Octopi.  This has enabled them to deploy a significant part of their forces to cut off our vital corium supply line to the Northern Crater. @ @ It seems we have underestimated their strength, but soon you will restore the corium supply and our plans will resume.");
+/* 00002 */ setsar("Contact with our beacon site has been lost.  Their Corium supply has been cut off by the White Sharks in this sector.");
+/* 00003 */ setsar("The remnants of our outpost are isolated by a natural ridge in the South-East.  According to their last transmission, teleportation gates around the ridge might still be active.");
+/* 00004 */ setsar("Find a working teleportation gate to gain entrance to the isolated ridge in the South-East.");
+/* 00005 */ setsar("... the last transmission we received from the outpost also cautioned us to beware of explosive devices that seem to float in the depths but remain undetected ... the message was cut short and its meaning is still unclear ... proceed carefully.");
+/* 00006 */ setsar("We have found the isolated base.  We must now collect sufficient resources to eliminate the White Shark forces responsible for this involuntary exile.");
+/* 00007 */ setsar("According to our forces here, there are two White Shark bases in this sector.  One to the North and another to the East.  We must eliminate them quickly.  This entire area is heavily mined ... proceed carefully.");
+/* 00008 */ setsar("The supply line is located in the southern part of the sector GFD 4563.  The location is isolated, and you will need to find and use Teleportation Gates that may not have been destroyed yet to penetrate the area.  @ @Transportation units loaded with corium have been provided to support your efforts.  @ @Once you teleport into the southern area, create a Silicon force large enough to destroy the White Shark forces and secure it permanently.");
+/* 00009 */ setsar("A significant portion of our Corium supply has been destroyed ... the remaining resources are insufficient to accomplish our mission ... we have failed.");
+/* 00010 */ setsar("Our forces have been overwhelmed ... humiliation ...");
+/* 00011 */ setsar("We have vanquished the enemy forces in this sector ... Victory is ours.");
+/* 00012 */ setsar("Escort transports to Southern base and unload them.");
+/* 00013 */ setsar("Escort Transports to southern base and unload them.");
+/* 00014 */ setsar("Clear White Sharks presence from this sector.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- briefings 20-29
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("9865 FRD 87.58.987.45@766 MN@Urgent message. 24:25:97");
+setsar(" White Shark forces are enjoying unprecedented success in their battles against the Black Octopi.  This has enabled them to deploy a significant part of their forces to cut off our vital corium supply line to the Northern Crater.@  It seems we have underestimated their strength, but soon you will restore the corium supply and our plans will resume.");
+setsar(" The supply line is located in the southern part of the sector GFD 4563.  The location is isolated, and you will need to find and use Teleportation Gates that may not have been destroyed yet to penetrate the area.  Transportation units loaded with corium have been provided to support your efforts.@  Once you teleport into the southern area, create a Silicon force large enough to destroy the White Shark forces and secure it permanently.");
+setsar("");
+setsar("");
+//-names		35 Names-
+setsar("");					//	
+setsar("");			   		//
+setsar("");    	        	//
+setsar("");				        	//
+setsar("");		           //
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Escort Transports to southern base and unload them.");
+name("OBJECTIVES"); putsar();    
+
+name("TASKPLAY");
+inittask("DEFAULT_SI_ANIMATED", "DEFAULT_SI"); // инициализировать таблицу
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+ //-- heading
+ SetColor(1, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 170,  20, 600,  80, 1, 30, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 31, 1, 10, 30, 1); 
+ Time(955);
+ HideATask(1); StartWave("DEFAULT_BIP");
+ 
+ Time(965);
+ ShowATask(2, 100, 120, 600, 210, 1, 32, 1, 10, 10, 1); 
+
+ Time(2050);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(2070);
+ HideATask(2); StartWave("DEFAULT_BIP");
+ 
+ Time(2090);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 180, 550, 170); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+name("Victory");
+initbriefing();
+Time( 0 );
+BriefingText(11, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 01");
+initbriefing();
+Time( 0 );
+BriefingText(9, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 02");
+initbriefing();
+Time( 0 );
+BriefingText(10, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 01");
+initbriefing();
+Time( 0 );
+BriefingText(2, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingText(3, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingText(4, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 1450 );
+BriefingAni(0, 0, "");
+Time( 1500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 02");
+initbriefing();
+Time( 0 );
+BriefingText(5, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 550 );
+BriefingAni(0, 0, "");
+Time( 600 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 03");
+initbriefing();
+Time( 0 );
+BriefingText(6, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 04");
+initbriefing();
+Time( 0 );
+BriefingText(7, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+

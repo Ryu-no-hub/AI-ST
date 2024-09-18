@@ -1,0 +1,208 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss301");
+
+//Speach for Briefing and Task
+
+#if(_DEBUG)
+in_br=in_briefing+"\\si\\";
+source(in_br+"sit_0100.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Overlap");
+
+// text description of the mission
+initsar(40, 10);
+/* 00000 */ setsar("1372 FGR 12.23.456.745 @456 JK @Urgent Message. 45:23:12");
+/* 00001 */ setsar("In order to reach the Northern Crater and escape earth we require vast quantities of corium 296.  Your orders are to establish a corium collection facility and protect it from human forces in the area.");
+/* 00002 */ setsar("You are permitted to build a Protoplasm Generator for life creation, a Silicon Extractor for exoshell compound and Corium Collectors for energy.  Once you have collected enough corium you will be reassigned.");
+/* 00003 */ setsar("Destroy all humans encountered ... they must not delay our plans.");
+/* 00004 */ setsar("Build two Corium Collectors and at least one Corium Silo");
+/* 00005 */ setsar("Collect 6000 Corium.");
+/* 00006 */ setsar("Destroy any human Subs encountered.");
+/* 00007 */ setsar("");
+/* 00008 */ setsar("");
+/* 00009 */ setsar("Extraction of Corium in this sector will initiate our expansion into the Northern Crater.");
+/* 00010 */ setsar("This deposit is insufficient to satisfy our needs.  Search the area for further deposits.  Build at least Two Corium Collectors and One Corium Silo ... destroy human primates at first contact.");
+/* 00011 */ setsar("We have sensed the presence of an enemy force in the Southern portion of this sector.  We must eliminate them completely before leaving this area.");
+/* 00012 */ setsar("Destroy enemy Green Base.");
+/* 00013 */ setsar("Now that we have grown two Corium Collectors and a Silo, we can collect sufficient resources to establish our presence in the Northern Crater.");
+/* 00014 */ setsar("We must hurry ... primitive humans abound in these waters.");
+/* 00015 */ setsar("This sector has been cleansed of all vile humans, we must now hasten our efforts to collect sufficient Corium for the task ahead.");
+/* 00016 */ setsar("We are being attacked!! ... destroy any humans encountered, but remain focused on the task of Corium collection at all costs.");
+/* 00017 */ setsar("... death ... w ... w ... we have ... f .. failed ... our brethren ... ");
+/* 00018 */ setsar("We have collected sufficient Corium to establish our presence in the Northern Crater.  This success is only the beginning of numerous victories to come.");
+/* 00019 */ setsar("We have lost our last Protoplasm Generator and all of our Gene Prototype Pods.  Without any way to spawn new life, we are doomed ... Failure.");
+/* 00020 */ setsar("");
+/* 00021 */ setsar("Build two Corium Collectors and at least one Corium Silo.");
+/* 00022 */ setsar("Build two Corium Collectors and at least one Corium Silo.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("1372 FGR 12.23.456.745@456 JK@Urgent message. 45:23:12");
+setsar(" In order to reach the Northern Crater and escape earth we require vast quantities of corium 296. @ @ Your orders are to establish a corium collection facility and protect it from human forces in the area.");
+setsar(" You are permitted to build a Protoplasm Generator for life creation, a Silicon Extractor for exoshell compound and Corium Collectors for energy.@ Once you have collected enough corium you will be reassigned.@ @ Destroy all humans encountered ... they must not delay our plans.");
+setsar("");
+setsar("");
+//-names		35 Names-
+setsar("");					//	
+setsar("");			   		//
+setsar("");    	        	//
+setsar("");				        	//
+setsar("");		           //
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Build two Corium Collectors and at least one Corium Silo.");
+//setsar("Collect 6000 Corium.");
+//setsar("Destroy any human subs encountered.");
+name("OBJECTIVES"); putsar();    
+
+name("TASKPLAY");
+inittask("DEFAULT_SI_ANIMATED", "DEFAULT_SI"); // инициализировать таблицу
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+ //-- heading
+ SetColor(1, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 170,  20, 600,  80, 1, 30, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 31, 1, 10, 40, 1); 
+ Time(670);                
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(680);
+ ShowATask(2, 100, 120, 600, 210, 1, 32, 1, 10, 20, 1); 
+ Time(1400);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(1420);
+ HideATask(2); StartWave("DEFAULT_BIP");
+ 
+ Time(1440);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 180, 550, 170); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+name("Victory");
+initbriefing();
+Time( 0 );
+BriefingText(18, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 500 );
+BriefingAni(0, 0, "");
+BriefingStop();
+putbriefing();
+
+name("Failure 01");
+initbriefing();
+Time( 0 );
+BriefingText(17, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 02");
+initbriefing();
+Time( 0 );
+BriefingText(19, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 01");
+initbriefing();
+Time( 0 );
+BriefingText(9, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time(250);
+BriefingAni(0, 0, "");
+Time( 300 );
+BriefingAni(0, 0, "SIFACE1");
+BriefingText(10, 1, 1, 0);
+Time( 850 );
+BriefingAni(0, 0, "");
+Time( 900 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 02");
+initbriefing();
+Time( 0 );
+BriefingText(11, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingAni(0, 0, "SIFACE1");
+BriefingText(12, 1, 1, 0);
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 03");
+initbriefing();
+Time( 0 );
+BriefingText(13, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingAni(0, 0, "SIFACE1");
+BriefingText(14, 1, 1, 0);
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 04");
+initbriefing();
+Time( 0 );
+BriefingText(15, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 05");
+initbriefing();
+Time( 0 );
+BriefingText(16, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 )
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();

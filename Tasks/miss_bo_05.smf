@@ -1,0 +1,144 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss205");
+//append(out_campaign+"MissTest");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\bo\\";
+source(in_br+"bot_0500.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+//source(in_br+"bob_0501.wav"); name("BriefSpeach"); putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Allies");
+
+// text description of the mission
+initsar(40, 10);
+//- objectives  0-9
+setsar("Build a Teleporter in the southern part of the sector.");
+setsar("Capture the Silicon prisoners (6 immobile Silicon Subs) at the White Sharks base in the west. Load them on Repair Platforms, deliver them to the Teleporter and unload them there.");
+setsar("Hold off the White Sharks until reinforcements arrive.");
+setsar("Clear the area of White Shark forces.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- reports    10-19
+setsar("Mission Accomplished");
+setsar("Mission Failed. You have lost all of your objects");
+setsar("Mission Failed. You have lost one of the prisoners");
+setsar("The Silicons convoy has arrived");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar(" You should find that your year-end bonus reflects your remarkable performance.  Excellent work sir!");
+setsar(" Mission Failed");
+//- briefings 20-29
+setsar("Well done Captain, you have clearance to destroy all White Shark bases in the area.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("Sector NSS 145. North Atlantic, neutral zone.@To the leader of the 6th Strike Wing of the 17th Special Squadron.@Top secret.");
+setsar(" Captain, our offensive against the White Sharks will be launched shortly.@ @ Events of great importance have happened to us recently:@The White Sharks captured a few of the Silicon subs to use them as samples for their new technologies.");
+setsar(" Due to the capture of their subs the Silicons haven't been feeling too friendly towards the White Sharks and have approached us to negotiate peace.@ @ You have been assigned to rescue several Silicons from a White Shark base where they are, let us say, less than welcome guests.");
+setsar(" @ The base is to your west. @ @ Hold off the Sharks until a Silicon force reaches your position. If you fail to protect the Silicons you will jeopardize the peace deal, look after our new friends.");
+setsar("");
+//-names		35 Names-
+setsar("Prisoner SY23");				//
+setsar("Prisoner SY15");
+setsar("Prisoner SY35");
+setsar("Prisoner SY28");
+setsar("Prisoner SY07");
+setsar("Prisoner SY57");
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Build a Teleporter in the southern part of the sector.");
+setsar("Capture the Silicon prisoners (6 immobile Silicon Subs) at the White Sharks base in the west. Load them on Repair Platforms, deliver them to the Teleporter and unload them there.");
+setsar("Hold off the White Sharks until reinforcements arrive.");
+name("OBJECTIVES"); putsar();    
+
+name("TASKPLAY");
+inittask("DEFAULT_BO_ANIMATED", "DEFAULT_BO");
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(1, 1, 1, 1);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+ //-- heading
+ SetColor(1, 1, 1, 0);
+ SetLevel(10);
+ ShowATask(0, 50,  20, 700,  80, 1, 30, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 31, 1, 10, 30, 1); 
+ Time(580);                
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(590);
+ ShowATask(2, 100, 120, 600, 210, 1, 32, 1, 10, 30, 1); 
+ Time(1050);                
+ HideATask(2); StartWave("DEFAULT_BIP");
+
+ Time(1060);
+ ShowATask(3, 100, 120, 600, 210, 1, 33, 1, 10, 30, 1); 
+ Time(1500);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(1520);
+ HideATask(3); StartWave("DEFAULT_BIP");
+ 
+ Time(1540);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 180, 550, 170); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();
+
+// script for play
+name("BRIEF_1");
+initbriefing(); 
+ Time(0);
+ BriefingAni(53, 1, "BOFACE1");
+ BriefingText(20, 1, 1, 1);
+ BriefingWave(0, "BriefSpeach");
+ Time(15*25);
+ BriefingStop();
+putbriefing();
+
+// script for play
+name("BRIEF_2");
+initbriefing(); 
+ Time(0); 
+ BriefingText(18, 1, 1, 1);
+	Time(1*25);
+	BriefingAni(0, 0, "BOFACE2");	// показать говорящего 
+ Time(9*25);
+	BriefingAni(0, 0, "");		// спрятать говорящего   
+	Time(12*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();

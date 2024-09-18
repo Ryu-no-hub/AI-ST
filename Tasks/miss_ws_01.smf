@@ -1,0 +1,134 @@
+//-
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss101");
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Preparing the Ground");
+
+//Speach for Briefing and Task
+
+#if(_DEBUG)
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wst_0100.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+#endif
+
+// text description of the mission
+initsar(40, 10);
+//- objectives  0-9
+setsar("Protect the ally SubCenter and Depots.");
+setsar("Research the \"Mobile RepSub\" technology and build 3 RepSubs and a TradeCenter.");
+setsar("Collect 4500 measures of Cm276 and load it into 3 cargo containers containing 1500 each on 3 RepSubs.");
+setsar("Deliver the RepSubs with the cargo containers to the southern part of the sector.");
+setsar("Annihilate all enemy objects in the area.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- reports    10-19
+setsar("Your enemies have been eliminated, but you have lost the mission.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("Mission Accomplished. Your actions have brought us all honor and victory. We thank you for such excellent work.");
+setsar("Mission Failed");
+//- briefings 20-29
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("@Sector WS 456. South Atlantic.@To the leader of the reconnoiter group of the 7th Reconnoiter squadron.@Top secret.");
+setsar("@ The Command congratulates you with the new rank of the leader of the reconnoiter group of the South-Atlantic region and requests you to lead a mission, successful accomplishment of which may seriously improve our situation in the fringe area in Sector SA 234.");
+setsar("@ Your mission is to secure the geological survey of the 17th squadron of the Department of Resource Provision and to found a new colony in that region. The transport submarines of the 17th squadron are already there and have already started Corium exploration.@ @ We do not have any confirmed reports about enemy presence in that area. Nevertheless you have to take all measures necessary to secure the new colony.");
+setsar("");
+setsar("");
+//-names		35-
+setsar("QPS 465");					
+setsar("Container 1");					
+setsar("Container 2");					
+setsar("Container 3");					
+setsar("");		   
+
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Protect the ally SubCenter and Depots.");
+setsar("Research the \"Mobile RepSub\" technology and build 3 RepSubs and a TradeCenter.");
+//!@
+//setsar("Collect 4500 measures of Cm276 and load it into 3 cargo containers containing 1500 each on 3 RepSubs.");
+//setsar("Deliver the RepSubs with the cargo containers to the southern part of the sector.");
+//setsar("Annihilate all enemy objects in the area.");
+
+name("OBJECTIVES"); putsar();    
+
+// script for play
+name("TASKPLAY");
+inittask("DEFAULT_WS_ANIMATED", "DEFAULT_WS"); // инициализировать таблицу
+ Time(0);
+ // set controls 
+ SetLevel(10); 
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_MENU, 20, 450, 145, 40);
+ ShowBut(TBTYPE_BACK, 50, 500, 145, 40);
+ ShowBut(TBTYPE_SKIP, 605, 500, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(220, 570, 340, 570, 460, 570);
+
+ SetColor(0, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 200,  20, 580, 100, 1, 30, 1, 15, 10, 1);
+
+//-
+ SetColor(1, 1, 0, 0);
+ SetLevel(10);
+ Time(150);
+ StartWave("DEFAULT_BIP");StartWave("TaskSpeach");
+ ShowATask(1, 110, 135, 580, 295, 1, 31, 1, 15, 50, 1); 
+ Time(560);
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(565); 
+ ShowATask(1, 110, 135, 580, 295, 1, 32, 1, 15, 50, 1); 
+ Time(1300);
+ HideATask(1); StartWave("DEFAULT_BIP");
+ 
+ Time(1320);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(1340);
+
+ SetColor(1, 1, 0, 1); StartWave("DEFAULT_BIP");
+ ShowObjectives(105, 230, 590, 200); 
+ HideBut(TBTYPE_SKIP);
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 635, 450, 145, 40);
+ ShowBut(TBTYPE_START,  605, 500, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+// script for play
+name("BRIEF_1");
+initbriefing(); 
+ Time(0); 
+ BriefingText(18, 1, 1, 1);
+	Time(1*25);
+	BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(12*25);
+	BriefingAni(0, 0, "");		// спрятать говорящего   
+	Time(17*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();

@@ -1,0 +1,132 @@
+/////////////////////////////////////////////////////////////////////////////
+//
+// Container:    Strategist "WS Developing Main Base Assistant"
+// Campaign:     WS Campaign
+// Mission:      04 (Demo 01) "BURST WAVE"
+// Copyright:    1999, Ellipse Studios
+//
+//////////////////////////////////////////////////////////////////////////////
+// Players   Civ    Color     Control      Ally         Enemy        Note
+//----------------------------------------------------------------------------
+//   0       WS     Blue      Human        -            3,4,7
+//   1       BO     Green     Computer     All           -       Just for Baby1 and Baby2
+//   3       BO     Red       Computer     3,7           0
+//   4       BO     Violet    Computer     4,7           0
+//   7       BO     Beige     Computer     3,4           0
+//////////////////////////////////////////////////////////////////////////////
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#import
+  // Names
+  tactic  = "WS Main Base";
+#endimport
+
+#if(_env_var0==0)
+ OpenStrateg("WS Developing Main Base Assistant", CIV_WS);
+#else
+ OpenStrateg(assistant1, CIV_WS);
+#endif
+
+ // Parameters
+ MainEnemy(AICAN_NOT, PLAYER_CURR);
+
+ // Tactics
+ OpenTactic(tactic, CIV_WS, 10);
+
+  // -- Fleets ---
+  OpenFleet("WS Base", CIV_WS, AIF_BASE, 15);
+    // Staff
+    PutInStaff(TOBJ_AIR_EXTRACTOR        , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 45);
+    PutInStaff(TOBJ_SUBCENTER            , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 41);
+    PutInStaff(TOBJ_DEPOT                , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 40);
+    PutInStaff(TOBJ_METAL_EXTRACTOR      , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 40);
+    PutInStaff(TOBJ_CORIUM_EXTRACTOR     , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 40);
+    PutInStaff(TOBJ_GOLD_EXTRACTOR       , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 40);
+    PutInStaff(TOBJ_ARMCENTER            , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 40);
+    PutInStaff(TOBJ_TECHCENTER           , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 20);
+    PutInStaff(TOBJ_REPCENTER            , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 20);
+    PutInStaff(TOBJ_GOLD_EXTRACTOR       , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 15);
+    PutInStaff(TOBJ_ULTRASONIC_GENERATOR , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_ULTRASONIC_GENERATOR , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_INFOCENTER           , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 5);
+    // Param   
+    Build(AICAN_MYSELF);
+    RepairStaff(AICAN_MYSELF, 50, 0, AISF_ALL, AITRG_ALL);
+    CanChangeStaff(AICAN_MYSELF);
+  CloseFleet();
+  //
+  OpenFleet("WS Builder",CIV_WS, AIF_BUILD, 12);
+    // Staff
+    PutInStaff(TOBJ_CONSTRUCTOR , TOBJ_UNDEFINED, TOBJ_UNDEFINED , 10);
+    PutInStaff(TOBJ_TERMINATOR, TOBJ_MARAUDER , TOBJ_SENTINEL  , 5);
+    PutInStaff(TOBJ_LIBERATOR , TOBJ_HUNTER   , TOBJ_UNDEFINED , 5);
+    // Param
+    Build(AICAN_MYSELF);
+  CloseFleet();
+  //
+  OpenFleet("WS Metal Transport",CIV_WS, AIF_RES, 10);
+    // Staff
+    PutInStaff(TOBJ_TRANSUB   , TOBJ_UNDEFINED, TOBJ_UNDEFINED , 45);
+    PutInStaff(TOBJ_TRANSUB   , TOBJ_UNDEFINED, TOBJ_UNDEFINED , 30);
+    // Param
+    GatherRC(AICAN_MYSELF,TOBJ_METAL,0);
+  CloseFleet();
+  //
+  OpenFleet("WS Corium Transport",CIV_WS, AIF_RES, 10);
+    // Staff
+    PutInStaff(TOBJ_TRANSUB   , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 45);
+    PutInStaff(TOBJ_TRANSUB   , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 30);
+    // Param
+    GatherRC(AICAN_MYSELF,TOBJ_CORIUM,0);
+  CloseFleet();
+  //
+  OpenFleet("WS Guard 00", CIV_WS, AIF_MILITARY, 8);
+    // Staff
+    PutInStaff(TOBJ_SENTINEL  , TOBJ_SENTINEL ,TOBJ_UNDEFINED, 35);
+    PutInStaff(TOBJ_CRUISER   , TOBJ_HUNTER   ,TOBJ_UNDEFINED, 35);
+    PutInStaff(TOBJ_CRUISER   , TOBJ_HUNTER   ,TOBJ_UNDEFINED, 35);
+    PutInStaff(TOBJ_CRUISER   , TOBJ_SENTINEL ,TOBJ_UNDEFINED, 35);
+    PutInStaff(TOBJ_LIBERATOR , TOBJ_SENTINEL ,TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_LIBERATOR , TOBJ_HUNTER   ,TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_LIBERATOR , TOBJ_HUNTER   ,TOBJ_UNDEFINED, 10);
+    // Param
+    Patrol(AICAN_BYORDER, 0, 0);
+    SetPatrolPoint(15, 49, 2);
+    GuardZones(AICAN_MYSELF, AITRG_ALL, 1, 0, 180);
+  CloseFleet();
+  //
+  OpenFleet("WS Guard 01", CIV_WS, AIF_MILITARY, 6);
+    // Staff
+    PutInStaff(TOBJ_TERMINATOR, TOBJ_SENTINEL, TOBJ_UNDEFINED, 35);
+    PutInStaff(TOBJ_TERMINATOR, TOBJ_SENTINEL, TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_LIBERATOR , TOBJ_HUNTER  , TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_LIBERATOR , TOBJ_HUNTER  , TOBJ_UNDEFINED, 35);
+    PutInStaff(TOBJ_CRUISER   , TOBJ_HUNTER  , TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_CRUISER   , TOBJ_SENTINEL ,TOBJ_UNDEFINED, 35);
+    // Param
+    Patrol(AICAN_BYORDER, 0, 0);
+    SetPatrolPoint(7, 43, 2);
+    GuardZones(AICAN_MYSELF, AITRG_ALL, 1, 0, 180);
+  CloseFleet();
+
+ CloseTactic();
+
+ // Events
+ OpenEvents();
+
+  Event(TRUE)
+  { _RT0:=GetMissDifficulty();
+  }
+
+  // Execute Tactician
+  Event(getOwnTime()>2) 
+  { actObjSelectM(AITRG_ALL);
+    actExecTactic(tactic);
+    // Tech
+    actTScenDevRun(TECH_SCENARIO_OPTIMAL);
+  };
+
+ CloseEvents();
+
+CloseStrateg();

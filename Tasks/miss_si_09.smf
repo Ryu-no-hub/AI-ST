@@ -1,0 +1,252 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss309");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\si\\";
+source(in_br+"sit_0900.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Purification");
+
+// text description of the mission
+initsar(40, 10);
+/* 00000 */ setsar("3875 CCS 63.78.98.00@978 DF@Urgent Message. 76:84:21");
+/* 00001 */ setsar("");
+/* 00002 */ setsar("Time is of the essence, we must prepare ourselves to assemble the Central Beacon Complex.");
+/* 00003 */ setsar("In order to receive the required components, we must build a Teleport Synchronization site in this sector.");
+/* 00004 */ setsar("Failure to do so will mean certain destruction ... the path home is finally within sight but we must work quickly ... our enemy is upon us.");
+/* 00005 */ setsar("Build a Command Hub, a Quantum Paralyzer and a Teleportation Gate within 15 minutes.");
+/* 00006 */ setsar("Our Teleport Synchronization site is functioning properly ... we are receiving a transmission ... 3 of the devices required for construction of the Central Beacon Complex will be arriving shortly in the Eastern portion of this sector ... prepare to receive.");
+/* 00007 */ setsar("We failed to construct Teleport synchronization site within 15 minutes of our arrival.  Without a Command Hub, Quantum Paralyzer and Teleportation Gate, components for the Central Beacon Complex cannot be received ... we have failed.");
+/* 00008 */ setsar("... incoming message ... 3 more devices on White Shark mobile platforms will be arriving shortly in the Northern portion of this sector.  Prepare a force to intercept them and escort them back to our main base.");
+/* 00009 */ setsar("... the first of 3 objects has arrived in the Eastern portion of this sector.  Secure at our Main Base.");
+/* 00010 */ setsar("Destroy enemy CentComp, 3 Teleporters, Power Protector and Research Laboratory on the north.");
+/* 00011 */ setsar("Time expired..  Mission Failure...");
+/* 00012 */ setsar("Artifact Destroyed...  Mission Failed...");
+/* 00013 */ setsar("White Shark sterilization complete.  Ignore remaining forces. @ @Our supreme omniscience has once again proven too much for the pitiful humans.  Our masterful manipulation of both human factions has resulted in both forces being too weak to disrupt our final operation.");
+/* 00014 */ setsar("Your exceptional performance at carrying out our leaders orders has resulted in you being chosen to initiate the preliminary phase of our final plan.");
+/* 00015 */ setsar("In order to prepare the way for the construction of the Central Beacon Complex in the Northern Crater, a teleportation hub must be constructed for the future building site.");
+/* 00016 */ setsar("You will be provided with 6 mobile platforms that you will use to construct a base that must meet several criteria.  In order not to alert the enemy to our plans, we will provide you with further instructions in short communications during the mission.");
+/* 00017 */ setsar("The success of this mission is paramount. @ @You would be wise not to fail.");
+/* 00018 */ setsar("Prepare to meet 3 Mobile Platforms at the Northwest.  The time is limited to 15 minutes.");
+/* 00019 */ setsar("Receive 3 Suppliers carrying Silicon Artifacts during 5 minutes after the end of the previous construction.");
+/* 00020 */ setsar("... the second of 3 objects has arrived in the Eastern portion of this sector.  Secure at our Main Base.");
+/* 00021 */ setsar("... the third of 3 objects has arrived in the Eastern portion of this sector.  Secure at our Main Base.");
+/* 00022 */ setsar("We have lost key components required for the construction of the Central Beacon Complex ... we have failed our brethren.");
+/* 00023 */ setsar("The White Shark mobile platforms have arrived, escort them back to our Main Base immediately.");
+/* 00024 */ setsar("We now have sufficient components to begin construction of the Central Beacon Complex.");
+/* 00025 */ setsar("Escort all 6 devices to this location in the Western portion of the sector for immediate extraction and destroy the entire Black Octopi base located in the North-Eastern portion of the Sector.");
+/* 00026 */ setsar("Massive enemy activity has been recorded.  Energy levels are much greater than normal.  Begin producing Vacuum Bombs for a pre-emptive strike against the enemy immediately.  Delivery of the 6 devices to the Western portion of this sector is of paramount importance.");
+/* 00027 */ setsar("Escort White Shark mobile platforms to Main Base in the East.");
+/* 00028 */ setsar("Protect all 3 Mobile Platforms and all 3 Suppliers.");
+/* 00029 */ setsar("Deliver the 3 mobile platforms and 3 Suppliers with Artifacts to the Western portion of this sector.");
+
+//- prolog    30-
+setsar("3875 CCS 63.78.98.00@978 DF@Urgent message. 76:84:21");
+setsar(" White Shark sterilization complete.@ Ignore remaining forces.@ @ Our supreme omniscience has once again proven too much for the pitiful humans.@  Our masterful manipulation of both human factions has resulted in both forces being too weak to disrupt our final operation.");
+setsar(" Your exceptional performance at carrying out our leaders orders has resulted in you being chosen to initiate the preliminary phase of our final plan.@ @ In order to prepare the way for the construction of the Central Beacon Complex in the Northern Crater, a teleportation hub must be constructed for the future building site.");
+setsar("You will be provided with 6 mobile platforms that you will use to construct a base that must meet several criteria.@ In order not to alert the enemy to our plans, we will provide you with further instructions in short communications during the mission.@ @ The success of this mission is paramount. You would be wise not to fail.");
+setsar("");
+//-names		35 Names-
+setsar("");					//	
+setsar("");			   		//
+setsar("");    	        	//
+setsar("");				        	//
+setsar("");		           //
+name("DESCRIPTION"); putsar();   
+
+// mission objectives
+initsar(10, 10);
+setsar("Build a Command Hub, a Quantum Paralyzer and a Teleportation Gate within 15 minutes.");
+//setsar("Receive 3 Suppliers carrying SI Artifacts during 5 minutes after the end of the previous construction.");
+name("OBJECTIVES"); putsar();    
+
+name("TASKPLAY");
+inittask("DEFAULT_SI_ANIMATED", "DEFAULT_SI"); // инициализировать таблицу
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+ //-- heading
+ SetColor(1, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 170,  20, 600,  80, 1, 30, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 31, 1, 10, 20, 1); 
+ Time(900);
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(910);
+ ShowATask(2, 100, 120, 600, 210, 1, 32, 1, 10, 20, 1); 
+ Time(1700);
+ HideATask(2); StartWave("DEFAULT_BIP");
+
+ Time(1710);
+ ShowATask(3, 100, 120, 600, 210, 1, 33, 1, 10, 20, 1); 
+
+ Time(2560);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(2580);
+ HideATask(3); StartWave("DEFAULT_BIP");
+ 
+ Time(2600);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 150, 550, 200); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+name("Failure 01");
+initbriefing();
+Time( 0 );
+BriefingText(7, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 02");
+initbriefing();
+Time( 0 );
+BriefingText(22, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 01");
+initbriefing();
+Time( 0 );
+BriefingText(2, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingText(3, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingText(4, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 1450 );
+BriefingAni(0, 0, "");
+Time( 1500 );
+BriefingText(5, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 1950 );
+BriefingAni(0, 0, "");
+Time( 2000 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 02");
+initbriefing();
+Time( 0 );
+BriefingText(6, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 03");
+initbriefing();
+Time( 0 );
+BriefingText(9, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 04");
+initbriefing();
+Time( 0 );
+BriefingText(20, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 05");
+initbriefing();
+Time( 0 );
+BriefingText(21, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingText(8, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 06");
+initbriefing();
+Time( 0 );
+BriefingText(23, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 07");
+initbriefing();
+Time( 0 );
+BriefingText(24, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingText(25, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 08");
+initbriefing();
+Time( 0 );
+BriefingText(26, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 750 );
+BriefingAni(0, 0, "");
+Time( 800 );
+BriefingStop();
+putbriefing();
+
+

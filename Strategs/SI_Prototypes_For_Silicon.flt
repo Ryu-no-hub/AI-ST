@@ -1,0 +1,12 @@
+
+OpenFleet("SI Builder",CIV_SI, AIF_BUILD, 12);
+  // Staff
+  PutInStaff(TOBJ_CAPSULE_PROTOTYPE , TOBJ_UNDEFINED , TOBJ_UNDEFINED, 10);
+
+
+  // Param
+  CanChangeStaff(AICAN_MYSELF);
+  Build(AICAN_MYSELF);
+  RepairStaff(AICAN_MYSELF, 20, 0, AISF_HOMEPOSITION+AISF_PAUSE , AITRG_BOATMILITARY);
+CloseFleet();
+

@@ -1,0 +1,203 @@
+/////////////////////////////////////////////////////////////////////////////
+//
+// Container:    Strategist  "SI ORANGE"
+// Campaign:     BO Campaign
+// Mission:      01 "Discovery"
+// Copyright:    2000, Ellipse Studios
+//
+//////////////////////////////////////////////////////////////////////////////
+// Players   Civ    Color     Control      Ally         Enemy
+//----------------------------------------------------------------------------
+//   0       BO     Blue      Human        -            6
+// * 6       SI     Orange    Computer     6            0
+//////////////////////////////////////////////////////////////////////////////
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#import
+  // tactician name
+  tactic  = "SI Orange Tactic";
+#endimport
+
+OpenStrateg("SI Orange", CIV_SI);
+ 
+ // Set human as main enemy
+ MainEnemy(AICAN_NOT, PLAYER_CURR);
+
+ OpenTactic(tactic, CIV_SI, 10);
+  // -- Fleets --- 
+  // base fleet for silicons
+  OpenFleet("SI base", CIV_SI, AIF_BASE, 15);
+   // Staff
+   PutInStaff(TOBJ_PROTOPLASM_GENERATOR , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 45);
+   PutInStaff(TOBJ_SILICON_EXTRACTOR    , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 42);
+   PutInStaff(TOBJ_ENERGY_ACCUMULATOR   , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 41);
+   PutInStaff(TOBJ_CORIUM_COLLECTOR     , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 40);
+   PutInStaff(TOBJ_CORIUM_SILO          , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 40);
+   PutInStaff(TOBJ_ARSENAL              , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 40);
+   PutInStaff(TOBJ_REPLENISH_POD        , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 35);
+   PutInStaff(TOBJ_PP_PULSAR            , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 35);
+   PutInStaff(TOBJ_PP_PULSAR            , TOBJ_UNDEFINED,TOBJ_UNDEFINED, 35);
+   // Param 
+   Build(AICAN_MYSELF);
+   CanChangeStaff(AICAN_MYSELF);
+  CloseFleet();
+
+  // builders
+  OpenFleet("SI builder", CIV_SI, AIF_BUILD, 12);
+   // Staff
+   PutInStaff(TOBJ_CAPSULE_PROTOTYPE, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+   PutInStaff(TOBJ_CAPSULE_PROTOTYPE, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+   PutInStaff(TOBJ_CAPSULE_PROTOTYPE, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+   PutInStaff(TOBJ_ESCORT           , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 5);
+   PutInStaff(TOBJ_ESCORT           , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 5);
+   // Param
+   Build(AICAN_MYSELF);
+  CloseFleet();
+
+  // resource collectors
+  OpenFleet("SI corium", CIV_SI, AIF_RES, 10);
+   // Staff
+   PutInStaff(TOBJ_TRANSPORT, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 45);
+   PutInStaff(TOBJ_TRANSPORT, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 30);
+   // Param
+   GatherRC(AICAN_MYSELF, TOBJ_CORIUM, 0);
+  CloseFleet();
+
+  // military patrol fleet
+  OpenFleet("SI patrol", CIV_SI, AIF_MILITARY, 5);
+    // Staff
+    PutInStaff(TOBJ_ESCORT , TOBJ_SHS_SUB, TOBJ_SHS_SUB  , 35);
+    PutInStaff(TOBJ_ESCORT , TOBJ_SHS_SUB, TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_SHS_SUB, TOBJ_SHS_SUB, TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_SHS_SUB, TOBJ_SHS_SUB, TOBJ_UNDEFINED, 10);
+    // Param
+    Patrol(AICAN_BYORDER, 0, 60);
+    SetPatrolPoint( 7, 29, 2, 0, 15);
+    SetPatrolPoint(17, 22, 3, 0, 15);
+    SetPatrolPoint(36, 28, 1, 0, 15);
+    SetPatrolPoint(29, 37, 4, 0, 15);
+    SetPatrolPoint(17, 29, 3, 0, 15);
+    GuardZones(AICAN_MYSELF, AITRG_ALL, 1, 0, 120);
+    SetZone(13, 22, 0, 21, 10, 5);
+    SetZone(11, 32, 0, 23,  8, 5);
+    Raid(AICAN_MYSELF, AITRG_TLOINTELLIGENCE, 3, 1, AIATTACK_HUNT, 120, 120);
+    RepairStaff(AICAN_MYSELF, 90, 0, AISF_ALL, AITRG_ALL);
+  CloseFleet();
+
+  // military guard fleet
+  OpenFleet("SI guard", CIV_SI, AIF_MILITARY, 7);
+    // Staff
+    PutInStaff(TOBJ_ESCORT , TOBJ_SHS_SUB, TOBJ_SHS_SUB  , 35);
+    PutInStaff(TOBJ_ESCORT , TOBJ_SHS_SUB, TOBJ_SHS_SUB  , 35);
+    PutInStaff(TOBJ_ESCORT , TOBJ_SHS_SUB, TOBJ_SHS_SUB  , 35);
+    PutInStaff(TOBJ_SHS_SUB, TOBJ_SHS_SUB, TOBJ_UNDEFINED, 10);
+    PutInStaff(TOBJ_SHS_SUB, TOBJ_SHS_SUB, TOBJ_UNDEFINED, 10);
+    // Param   
+    Patrol(AICAN_MYSELF, 0, 60);
+    GuardZones(AICAN_MYSELF, AITRG_ALL, 1, 0, 180);
+    Raid(AICAN_MYSELF, AITRG_TLOINTELLIGENCE | AITRG_TLORC, 3, 1, AIATTACK_HUNT, 120, 120);
+    RepairStaff(AICAN_MYSELF, 90, 0, AISF_ALL, AITRG_ALL);
+  CloseFleet();
+ CloseTactic();
+
+ // Events section
+ OpenEvents();
+
+  // Initial event
+  Event(TRUE)
+  { // get mission difficulty
+    _RT0 := GetMissDifficulty();
+    // set scenario for technology development
+    actTScenDevRun(TECH_SCENARIO_DEFENCE);
+    // set initial builders to the map
+    actCreatePlObj(TOBJ_CAPSULE_PROTOTYPE, 15, 35, 3);
+    actCreatePlObj(TOBJ_CAPSULE_PROTOTYPE, 15, 36, 3);
+    actCreatePlObj(TOBJ_CAPSULE_PROTOTYPE, 15, 34, 4);
+    // run tactician
+    actObjSelectM(AITRG_BOATCONSTRUCT);
+    actExecTactic(tactic, 15, 36, 0);
+  }
+
+  // Adjust AI (should be called after some time next to initial event)
+  Event(getOwnTime() > 2) 
+  { // Create fleet for first scirmish
+    actCreateFleet("SI first", CIV_SI, AIF_MILITARY); 
+    // store fleet number
+    _RT11 := getFleetNum("SI first");
+    // put some military subs to fleet
+    actCreatePlObj(TOBJ_ESCORT,  0, 1, 1, LOGO_DEFAULT, "", _RT11, 100);
+    actCreatePlObj(TOBJ_ESCORT,  0, 1, 2, LOGO_DEFAULT, "", _RT11, 100);
+    actCreatePlObj(TOBJ_SHS_SUB, 0, 2, 3, LOGO_DEFAULT, "", _RT11, 100);
+    actCreatePlObj(TOBJ_SHS_SUB, 0, 2, 4, LOGO_DEFAULT, "", _RT11, 100);
+    // adjust AI depends on difficulty
+    if(_RT0 >= DIFF_MEDIUM)
+    { actCreatePlObj(TOBJ_SHS_SUB, 0, 3, 3, LOGO_DEFAULT, "", _RT11, 100);
+      actCreatePlObj(TOBJ_SHS_SUB, 0, 3, 4, LOGO_DEFAULT, "", _RT11, 100);
+    }
+    // set behavior to fleet
+    //- patrol with parameters
+    actFParPatrol(_RT11, AICAN_BYORDER, 0, 40);
+    actFParSetPatrolPoint(_RT11,  1,  1, 5, 0, 15);
+    actFParSetPatrolPoint(_RT11, 12, 10, 3, 0, 15);
+    actFParSetPatrolPoint(_RT11, 10,  1, 0, 0, 15);
+    //- gurad specific zone
+    actFParGuardZones(_RT11, AICAN_BYORDER, AITRG_ALL, 1, 0, 0);
+    actFParSetZone(_RT11, 0,0,0, 15,11,5);
+
+    // Create fleet for ambush (depends on difficulty)
+    if(_RT0 >= DIFF_MEDIUM)
+    { // create fleet
+      actCreateFleet("SI ambush", CIV_SI, AIF_MILITARY);
+      // store fleet number
+      _RT11 := getFleetNum("SI ambush");
+      // link fleet to tactician 
+      actLinkFleet(_RT11, tactic);
+      // put some military subs to the fleet
+      actCreatePlObj(TOBJ_ESCORT,  2, 17, 3, LOGO_DEFAULT, "", _RT11, 100);
+      actCreatePlObj(TOBJ_ESCORT,  3, 17, 3, LOGO_DEFAULT, "", _RT11, 100);
+      actCreatePlObj(TOBJ_SHS_SUB, 2, 16, 3, LOGO_DEFAULT, "", _RT11, 100);
+      actCreatePlObj(TOBJ_SHS_SUB, 3, 16, 3, LOGO_DEFAULT, "", _RT11, 100);
+      if(_RT0 == DIFF_STRONG)
+      { actCreatePlObj(TOBJ_ESCORT, 2, 18, 3, LOGO_DEFAULT, "", _RT11, 100);
+        actCreatePlObj(TOBJ_ESCORT, 3, 18, 3, LOGO_DEFAULT, "", _RT11, 100);
+      }
+      // random element :)
+      if(GetRnd(0, 1))
+      { actCreatePlObj(TOBJ_ESCORT,  3, 19, 3, LOGO_DEFAULT, "", _RT11, 100);
+        actCreatePlObj(TOBJ_SHS_SUB, 3, 19, 3, LOGO_DEFAULT, "", _RT11, 100);
+      }
+      // set staff to ambush fleet (will allow rebuild staff for fleet)
+      actFParPutInStaff(_RT11, TOBJ_ESCORT , TOBJ_SHS_SUB, TOBJ_UNDEFINED, 10);
+      actFParPutInStaff(_RT11, TOBJ_ESCORT , TOBJ_SHS_SUB, TOBJ_UNDEFINED, 10);
+      actFParPutInStaff(_RT11, TOBJ_ESCORT , TOBJ_SHS_SUB, TOBJ_UNDEFINED, 10);
+      actFParPutInStaff(_RT11, TOBJ_SHS_SUB, TOBJ_SHS_SUB, TOBJ_UNDEFINED, 10);
+      actFParPutInStaff(_RT11, TOBJ_SHS_SUB, TOBJ_SHS_SUB, TOBJ_UNDEFINED, 10);
+      // set behaviour to fleet
+      //- patrol with parameters
+      actFParPatrol(_RT11, AICAN_BYORDER, 0, 40);
+      actFParSetPatrolPoint(_RT11,  2, 15, 5, 0, 15);
+      actFParSetPatrolPoint(_RT11, 11, 29, 0, 0, 15);
+      actFParSetPatrolPoint(_RT11,  1, 32, 0, 0, 15);
+      //- guard specific zones
+      actFParGuardZones(_RT11, AICAN_BYORDER, AITRG_ALL, 1, 0, 0);
+      actFParSetZone(_RT11, 21,24,0, 15,12,5);
+      actFParSetZone(_RT11,  6,33,0, 27, 7,5);
+    }
+    // Adjust staff for basic fleets depends on difficulty level
+    _RT11 := getFleetNum("SI base");
+    if(_RT0 >= DIFF_MEDIUM){ actFParPutInStaff(_RT11, TOBJ_PP_PULSAR, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 35);}
+    if(_RT0 >= DIFF_STRONG){ actFParPutInStaff(_RT11, TOBJ_PP_PULSAR, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 35);}
+    _RT11 := getFleetNum("SI patrol");                                               
+    if(_RT0 >= DIFF_MEDIUM){ actFParPutInStaff(_RT11, TOBJ_ESCORT , TOBJ_SHS_SUB, TOBJ_UNDEFINED, 10);}
+    if(_RT0 >= DIFF_STRONG){ actFParPutInStaff(_RT11, TOBJ_SHS_SUB, TOBJ_SHS_SUB, TOBJ_UNDEFINED, 10);}
+    _RT11 := getFleetNum("SI guard");
+    if(_RT0 >= DIFF_MEDIUM){ actFParPutInStaff(_RT11, TOBJ_ESCORT , TOBJ_SHS_SUB, TOBJ_SHS_SUB  , 20);}
+    if(_RT0 >= DIFF_STRONG){ actFParPutInStaff(_RT11, TOBJ_SHS_SUB, TOBJ_SHS_SUB, TOBJ_UNDEFINED, 20);}
+  }
+
+ CloseEvents();
+
+CloseStrateg();
+
+

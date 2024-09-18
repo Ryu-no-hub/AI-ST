@@ -1,0 +1,163 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss103");
+//append(out_campaign+"MissTest");
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("The Deal");
+
+//Speach for Briefing and Task
+
+#if(_DEBUG)
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wst_0300.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+//source(in_br+"wsb_0301.wav"); name("Briefing");  putwav(1, _MF_PCM);
+#endif
+
+// text description of the mission
+initsar(50, 10);
+//- objectives  0-9
+setsar("Convoy 4 RepSubs to the BO Market \"Market S27\" and unload 4 containers there.");
+setsar("Within 20 minutes load the Raider \"Black Widow\" with the X-Box on the RepSub and deliver it to where you originally started the mission.");
+setsar("The Raider \"Black Widow\" must survive.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- reports    10-19
+setsar("Your enemies have been eliminated, but you have lost the mission.");
+setsar("You have lost the objects, which must survive");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("Mission Accomplished. Our enemies will soon learn to fear your name. Congratulations on your victory!");
+setsar("Mission Failed");
+//- briefings 20-29
+setsar(" Excellent work! The enemies do not know about the deal yet and the Black Octopi Raider \"Black Widow\" will appear soon near the Market.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("@Sector SS 117. South Atlantic.@To the leader of the reconnoiter group of the 7th Reconnoiter squadron.@Top secret.");
+setsar(" Money can do anything. Especially when you have someone who needs it.@ @ This time your mission will be an unusual one but its successful accomplishment may seriously affect your whole career... This is a top-secret operation and its success is not determined by accurate torpedo shots but the ability to sneak quickly between the enemies.");
+setsar(" You will be given RepSubs loaded with cargo containers to convoy them to a Market belonging to one of the subdivisions of the Black Octopi. You will have to unload the containers at the Market. Don't be scared, no one will accuse you of betrayal.@ @ Within a few minutes of unloading the containers, a Black Octopi Raider \"Black Widow\" with secret documents will appear. These documents contain materials on the newest turbo-generator developed by the Black Octopi scientists.");
+setsar(" The enemy does not suspect about the upcoming deal and if you reveal yourself you may spoil the deal.@ @ You will then have to put the raider on one of the RepSubs and deliver it to the place from where you began the mission and protect the sub until a teleportation channel opens up.");
+setsar("");
+//-names		35-
+setsar("RepSub RS1");					//sabsC0
+setsar("RepSub RS2");					//sabsC1
+setsar("RepSub RS3");					//sabsC2
+setsar("RepSub RS4");					//sabsC3
+setsar("Container 1");  				//ContC0
+
+//-names		40-
+setsar("Container 2");	 //ContC1
+setsar("Container 3");	 //ContC3
+setsar("Container 4");	 //ContC4
+setsar("Black Widow");	 //nRaid1
+setsar("Market S27");	 //nMark
+setsar("");	             //
+setsar("");	             //
+setsar("");
+setsar("");
+
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Convoy 4 RepSubs to the BO Market \"Market S27\" and unload 4 containers there.");
+setsar("Within 20 minutes deliver the Raider \"Black Widow\" with the X-Box where you originally started the mission.");
+setsar("The Raider \"Black Widow\" must survive.");
+name("OBJECTIVES"); putsar();    
+
+// script for play
+name("TASKPLAY");
+inittask("DEFAULT_WS_ANIMATED", "DEFAULT_WS"); // инициализировать таблицу
+ Time(0);
+ // set controls 
+ SetLevel(10); 
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_MENU, 20, 450, 145, 40);
+ ShowBut(TBTYPE_BACK, 50, 500, 145, 40);
+ ShowBut(TBTYPE_SKIP, 605, 500, 145, 40);
+
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(220, 570, 340, 570, 460, 570);
+
+ SetColor(0, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 200,  20, 580, 100, 1, 30, 1, 15, 10, 1);
+
+//-
+ SetColor(1, 1, 0, 0);
+ SetLevel(10);
+ Time(150);
+ StartWave("DEFAULT_BIP"); StartWave("TaskSpeach");
+ ShowATask(1, 110, 135, 580, 295, 1, 31, 1, 15, 50, 1); 
+ Time(670);
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(675);
+ ShowATask(1, 110, 135, 580, 295, 1, 32, 1, 15, 15, 1); 
+ Time(1420);
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(1425);
+ ShowATask(1, 110, 135, 580, 295, 1, 33, 1, 15, 50, 1); 
+ Time(1900);
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(1920);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ 
+ Time(1940);
+ SetColor(1, 1, 0, 1); StartWave("DEFAULT_BIP");
+ ShowObjectives(105, 230, 590, 180); 
+ HideBut(TBTYPE_SKIP);
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 635, 450, 145, 40);
+ ShowBut(TBTYPE_START,  605, 500, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+// script for play
+name("BRIEF_1");
+initbriefing(); 
+ Time(0); 
+ BriefingText(20, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing");
+ Time(9*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(15*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_2");
+initbriefing(); 
+ Time(0); 
+ BriefingText(18, 1, 1, 1);
+	Time(1*25);
+	BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(11*25);
+	BriefingAni(0, 0, "");		// спрятать говорящего   
+	Time(15*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();

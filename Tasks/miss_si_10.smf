@@ -1,0 +1,268 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss310");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\si\\";
+source(in_br+"sit_1001.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Beacon");
+
+// text description of the mission
+initsar(40, 10);
+/* 00000 */ setsar("We are halfway to the end of our vagrancy. The research of \"Energy Shield Neutralization\" technology is of vital importance for the return of our Central Beacon.");
+/* 00001 */ setsar("The teleportation channel will be activated in 20 minutes. This time is enough to establish contact with our brothers. Protect the Central Beacon from destruction at any cost.");
+/* 00002 */ setsar("We have reached our objective. Now we can leave this hostile planet ... but ...");
+/* 00003 */ setsar("1092 FGR 23.13.674.67 @976 MN 67 @Urgent Message.  76:94:21");
+/* 00004 */ setsar("Liberation is near.  Our enemies are doing everything to prevent us from leaving this infernal planet.  They have launched a concentric attack and have managed to capture the Central Beacon and the Teleportation Gate.");
+/* 00005 */ setsar("The attack has isolated the Command Hub located in the central area of sector 548 FG 17.  It is vital that they must not be allowed to delay our plan any further.  You must deliver the Artifact to the isolated Command Center immediately.");
+/* 00006 */ setsar("Build a Submarine Hub Module and research the technology \"Energy Shield Neutralization\".");
+/* 00007 */ setsar("Re-capture all Silicons structures at the eastern part of the region.");
+/* 00008 */ setsar("The teleportation channel will be activated in a matter of minutes. There will be just enough time to establish contact with our brothers. Protect the Central Beacon from destruction at any cost.");
+/* 00009 */ setsar("Break through to the Teleportation Gate captured by the White Sharks and re-capture.");
+/* 00010 */ setsar("Build the second part of the Teleportation Gates near the Command Hub at the central closed area and deliver the Black Octopi Repair Platform with the Artifact to the Command Hub.");
+/* 00011 */ setsar("We have reached our objective. Now we can leave this hostile planet. But before we do this we must destroy the samples of our technology at the BO and WS bases in order not to let them follow our technology path.");
+/* 00012 */ setsar("Deliver the Black Octopi Repair Platform with the Artifact to the Command Hub.");
+/* 00013 */ setsar("The Beacon is currently protected by a Black Octopi Power Protector in the eastern portion of this sector. @ @After completion of our technological research, it is necessary to build Paralysis Probes out of the resources that we have and destroy the energy shield with them.");
+/* 00014 */ setsar("We must then re-capture all of our structures in the east including the Central Beacon. @ @The attack has isolated the Command Hub located in the central area of sector 548 FG 17.");
+/* 00015 */ setsar("It is vital that they must not be allowed to delay our plan any further.  You must deliver the Artifact to the isolated Command Hub immediately.");
+/* 00016 */ setsar("With what resources we have available, build Paralysis Probes to destroy the Energy Shield.");
+/* 00017 */ setsar("");
+/* 00018 */ setsar("With the Artifact delivered safely, we must now work quickly to research the technology required to re-capture our spawn it the eastern part of this region.");
+/* 00019 */ setsar("Build a Submarine Hub Module and research the technology 'Energy Shield Neutralization'.  Once this is accomplished, re-capture all Silicons structures at the eastern part of the region.");
+/* 00020 */ setsar("'Energy Shield Neutralization' has been researched successfully, we must now re-capture all Silicons structures at the eastern part of the region.");
+/* 00021 */ setsar("The teleportation channel will be activated in a matter of minutes. There will be just enough time to establish contact with our brothers. Protect the Central Beacon from destruction at any cost.");
+/* 00022 */ setsar("Before we do this we must destroy the samples of our technology at the Black Octopi and White Shark bases in order not to let them follow our technology path.");
+/* 00023 */ setsar("Destroy the White Shark base to the North-East and the Black Octopi base to the South-West.");
+/* 00024 */ setsar("The Artifact has been destroyed ... completion of the Central Beacon is now impossible ... our chances to return home have been shattered ... Failure.");
+/* 00025 */ setsar("Essential structural components of the Central Beacon have been permanently damaged ... all is lost ... with home just within our grasp ... Failure.");
+/* 00026 */ setsar("All of our Usurpers have been destroyed ... without them we have no chance of recapturing the Central Beacon ... we are doomed to die on this vile planet ... Failure.");
+/* 00027 */ setsar("... the teleportation channel is still active ...");
+/* 00028 */ setsar("... our Brethren have not forsaken us ...");
+/* 00029 */ setsar("... the humans on this vile planet will no longer be able to exploit our technological superiority ...");
+/* 00030 */ setsar("... the time has finally come to return home ... Victory is ours.");
+//- prolog    31-
+setsar("1092 FGR 23.13.674.67@976 MN 67@Urgent message. 76:94:21");
+setsar(" We are halfway to the end of our vagrancy.@ @ The research of \"Energy Shield Neutralization\" technology is of vital importance for the return of our Central Beacon.");
+setsar(" The Beacon is currently protected by a Black Octopi Power Protector in the eastern portion of this sector. @ @ After completion of our technological research, it is necessary to build Paralysis Probes out of the resources that we have and destroy the energy shield with them.");
+setsar(" We must then re-capture all of our structures in the east including the Central Beacon. @ @ The attack has isolated the Command Hub located in the central area of sector 548 FG 17.@ It is vital that they must not be allowed to delay our plan any further.  You must deliver the Artifact to the isolated Command Hub immediately.");
+setsar("");
+//-names		35 Names-
+setsar("");					//	
+setsar("");			   		//
+setsar("");    	        	//
+setsar("");				        	//
+setsar("");		           //
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Break through to the Teleportation Gate captured by the White Sharks and re-capture.");
+setsar("Build the second part of the Teleportation Gates near the Command Hub at the central closed area.");
+setsar("Deliver Black Octopi Repair Platform with the Artifact to the Command Hub.");
+name("OBJECTIVES"); putsar();    
+
+name("TASKPLAY");
+inittask("DEFAULT_SI_ANIMATED", "DEFAULT_SI"); // инициализировать таблицу
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(31, 515, 50, 540, 70, 565);
+ 
+ //-- heading
+ SetColor(1, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 170,  20, 600,  80, 1, 31, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 32, 1, 10, 50, 1); 
+ Time(550);
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(560);
+ ShowATask(2, 100, 120, 600, 210, 1, 33, 1, 10, 30, 1); 
+ Time(1150);
+ HideATask(2); StartWave("DEFAULT_BIP");
+
+ Time(1160);
+ ShowATask(3, 100, 120, 600, 210, 1, 34, 1, 10, 20, 1); 
+
+ Time(2020);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(2040);
+ HideATask(3); StartWave("DEFAULT_BIP");
+ 
+ Time(2060);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 150, 550, 200); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+name("Victory");
+initbriefing();
+Time( 0 );
+BriefingText(27, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingText(28, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingText(29, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 1450 );
+BriefingAni(0, 0, "");
+Time( 1500 );
+BriefingText(30, 1, 0, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 1950 );
+BriefingAni(0, 0, "");
+Time( 2000 );
+BriefingStop();
+putbriefing();
+
+name("Failure 01");
+initbriefing();
+Time( 0 );
+BriefingText(24, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 02");
+initbriefing();
+Time( 0 );
+BriefingText(25, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 550 );
+BriefingAni(0, 0, "");
+Time( 600 );
+BriefingStop();
+putbriefing();
+
+name("Failure 03");
+initbriefing();
+Time( 0 );
+BriefingText(26, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 550 );
+BriefingAni(0, 0, "");
+Time( 600 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 01");
+initbriefing();
+Time( 0 );
+BriefingText(4, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingText(9, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 02");
+initbriefing();
+Time( 0 );
+BriefingText(10, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 550 );
+BriefingAni(0, 0, "");
+Time( 600 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 03");
+initbriefing();
+Time( 0 );
+BriefingText(20, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingText(16, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 04");
+initbriefing();
+Time( 0 );
+BriefingText(0, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingText(19, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 05");
+initbriefing();
+Time( 0 );
+BriefingText(2, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingText(22, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingText(23, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 1450 );
+BriefingAni(0, 0, "");
+Time( 1500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 06");
+initbriefing();
+Time( 0 );
+BriefingText(21, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 550 );
+BriefingAni(0, 0, "");
+Time( 600 );
+BriefingStop();
+putbriefing();
+
+

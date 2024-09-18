@@ -1,0 +1,213 @@
+//====================================================================
+//      ST AiScript: SI Computer Opponent Level 02
+//====================================================================
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#if(_env_var1==0)
+ _full_name = "SI Opponent Level 02";_short_name = "AI STRONG";
+#endif
+
+OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
+  
+ // Parameters
+ MainEnemy(AICAN_MYSELF, PLAYER_ALL);
+ OffensiveStroke(AICAN_MYSELF, 20, 30, 120);
+
+ // Tactics
+ include<[_curr_path]\SI_MainBase.tct>;
+
+ // Events
+ OpenEvents();
+  Event(TRUE)
+  { // Off
+    actOffEvent(20);
+    actOffEvent(12);
+    actOffEvent(11);
+  }
+  // 1 Execute Tactician  & Technologies
+  Event(getOwnTime()>1, 1) 
+  {
+    //actTechSetAll();
+    actObjSelectM(AITRG_ALL);
+    actExecTactic("SI Main Base");
+    actTScenDevRun(TECH_SCENARIO_OPTIMAL);
+    // Store fleets numbers
+    _RT20:=getFleetNum("SI Guard 00", "SI Main Base");
+    _RT21:=getFleetNum("SI Guard 01", "SI Main Base");
+    _RT22:=getFleetNum("SI Raider 00", "SI Main Base");
+    _RT23:=getFleetNum("SI Raider 01", "SI Main Base");
+    _RT30:=getFleetNum("SI Base", "SI Main Base");
+    _RT31:=getFleetNum("SI Corium Transport", "SI Main Base");
+    _RT62:=0; // satellite weapons amount
+    _RT63:=0; // vacuum bombs amount
+  };
+/*
+  //
+  Event(TRUE, 0)// 0
+  { actOffEvent(3);
+    actOffEvent(5);
+  }
+
+  // 2
+  Event(_RT20>0 && _RT22>0 && getFleetObjM(_RT20)>0 && getFleetObjM(_RT22)>0, 2) 
+  { actFCmdGuardF(_RT20, _RT22);
+    actOnEvent(3);
+  }
+  // 3
+  Event(getFleetObjM(_RT20)==0 || getFleetObjM(_RT22)==0, 3)
+  { actOnEvent(2);
+  }
+
+  // 4
+  Event(_RT21>0 && _RT23>0 && getFleetObjM(_RT21)>0 && getFleetObjM(_RT23)>0, 4) 
+  { actFCmdGuardF(_RT21, _RT23);
+    actOnEvent(5);
+  }
+  // 5
+  Event(getFleetObjM(_RT21)==0 || getFleetObjM(_RT23)==0, 5)
+  { actOnEvent(4);
+  }
+*/
+
+  //Event(_RT11<3 && getPlRes(TOBJ_CORIUM)<2000)
+  //Event(getOwnTime()>(1800+(_RT11*120)) && getPlRes(TOBJ_CORIUM)<100)
+  Event(getPlRes(TOBJ_CORIUM)<100)
+  { _RT11+=1;
+    actSetPlRC(TOBJ_CORIUM, 1, 2000);
+    actFParGatherRC(_RT31, AICAN_MYSELF, TOBJ_CORIUM, 0)
+    actLockEvent();
+  }
+
+  //Event(_RT12<5 && getPlRes(TOBJ_SILICON)<2000)
+  Event(getOwnTime()>(1800+(_RT12*60)) && getPlRes(TOBJ_SILICON)<100)
+  { _RT12+=1;
+    actSetPlRC(TOBJ_SILICON, 1, 4000);
+    actLockEvent();
+  }
+  
+  Event(getOwnTime()>300 && _RT30>0 && isTechDev(TTECH_SI_ION_CASSETTE_SHELLS, TTECH_LEV1))
+  { actFParPutInStaff(_RT30, TOBJ_PROTOPLASM_GENERATOR, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 35);
+    actOnEvent(20);
+  }
+  Event(isTechDev(TTECH_SI_ENEMY_CAPTURE, TTECH_LEV1), 20)
+  { actFParPutInStaff(_RT30, TOBJ_PROTOPLASM_GENERATOR, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 30);
+  }
+
+// Produce missile
+  EventPlObjCreated(_PI3 == TOBJ_VACUUM_BOMB_LAUNCHER || _PI3 == TOBJ_GAS_LASER_SATELLITE_LAUNCHER)
+  { 
+     //_actStringMess("MASS DESTRUCTION WEAPON BUILT by player " + GetPlName(_PI10))
+     actOnEvent(11);
+
+    if(isFleetCanProduce(_RT30, WEAPON_VACUUM_BOMB))
+      {
+        //_actStringMess("Start vacuum bomb production")
+        actFCmdProduction(_RT30, WEAPON_VACUUM_BOMB);
+      }
+
+     ActLockEvent();
+  };
+
+
+  // Check destroyed
+  EventPlObjKilled(_PI3 == TOBJ_VACUUM_BOMB_LAUNCHER || _PI3 == TOBJ_GAS_LASER_SATELLITE_LAUNCHER)
+  { 
+     //_actStringMess("MASS DESTRUCTION WEAPON destroyed of player " + GetPlName(_PI0))
+     if(!getFleetObjT(_RT30, TOBJ_GAS_LASER_SATELLITE_LAUNCHER) && !getFleetObjT(_RT30, TOBJ_VACUUM_BOMB_LAUNCHER))
+     {
+       //_actStringMess("All MASS DESTRUCTION WEAPONS destroyed of player " + GetPlName(_PI0))
+       actOffEvent(11);
+     }
+     ActLockEvent();
+  };
+
+  // Check ready
+  Event(TRUE, 11)
+  {
+    _RT64 := getFleetMassWeaponReady(_RT30, WEAPON_SATELLITE_GAS_LASER, 0, 0, 0);
+    _RT65 := getFleetMassWeaponReady(_RT30, WEAPON_VACUUM_BOMB, 0, 0, 0);
+
+    if(_RT64 > _RT62)
+    {
+      //_actStringMess("NEW SATELLITE READY, total = " + _inttostr(_RT64))
+      _RT62 := _RT64;
+
+      if(_RT61 != 20) // lock event 12 timer
+      {actOnEvent(12);}
+    }
+    else
+    { if(_RT65 > _RT63)
+      {
+        //_actStringMess("NEW VACUUM BOMB READY, total = " + _inttostr(_RT65))
+        _RT63 := _RT65;
+
+        if(_RT61 != 20) // lock event 12 timer
+        {actOnEvent(12);}
+      }
+    }
+    actLockEvent(3);
+  };
+
+
+  // Search and launch
+  //Event(getOwnTime()%2 == 1, 12)
+  Event(TRUE, 12)
+  {
+    _RT44 := GetRnd(PLAYER_0, PLAYER_7);
+    //_actStringMess("Searching objects of random player " + _inttostr(_RT44));
+    _RT61 := 1; // lock this event timer
+
+    if(IsPlPresent(_RT44))
+    {
+     if(GetTeam(_RT44) != GetTeam(PLAYER_ME))
+     { 
+      if(IsPlObjExist(_RT44, GetStrRes(26), 24, 25, 26, 27))
+      {
+        //_actStringMess("AI player " + GetPlName(PLAYER_ME) + " (team " + _inttostr(GetTeam(PLAYER_ME)) + ") " + " found enemy object " + GetStrRes(26) + " at " + _inttostr(_RT24) + " " + _inttostr(_RT25) + " " + _inttostr(_RT26) + " " + _inttostr(_RT27) + " of player " + GetPlName(_RT44) + " (team " + _inttostr(GetTeam(_RT44)) + ")")
+        
+        if(_RT63) // vacuum bombs amount
+        {
+          _RT59 := 100/_RT63; // percentage of vacuum bombs to launch
+          actFCmdMassWeaponHit(_RT30, WEAPON_VACUUM_BOMB, _RT24, _RT25, _RT26, _RT59);
+          //_actStringMess("LAUNCHING VACUUM BOMB")
+          _RT63 -= 1;
+
+          _RT61 := 20; // lock this event timer
+          actFCmdProduction(_RT30, WEAPON_VACUUM_BOMB);
+        }
+        else
+        { if (_RT62) // satelites amount
+          {
+            _RT60 := 100/_RT62; // percentage of satelites to launch
+            actFCmdMassWeaponHit(_RT30, WEAPON_SATELLITE_GAS_LASER, _RT24, _RT25, _RT26, _RT60);
+            //_actStringMess("LAUNCHING SATELLITE")
+            _RT62 -= 1;
+
+            _RT61 := 20; // lock this event timer
+          }
+        }
+      }
+      //else {_actStringMess("No player objects")}
+     }
+     //else {_actStringMess("Ally")}
+    }
+    //else {_actStringMess("No player")}
+
+    if(!_RT62 && !_RT63)
+    {
+      //_actStringMess("No more mass weapons ready, stopping objects search")
+      actOffEvent(12);
+      _RT61 := 1; // lock this event timer
+    }
+    else
+    {
+      //_actStringMess("Lock Event for " + _inttostr(_RT61) + " sec")
+      actOffEvent(12);
+      actLockEvent(_RT61);
+    }
+    _actStringMess("")
+  };
+
+ CloseEvents();
+CloseStrateg();

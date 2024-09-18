@@ -1,0 +1,279 @@
+//====================================================================
+//      ST AiScript: Arbiter for Kill All Without Minerals game
+//====================================================================
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#if(_env_var1==0)
+ _full_name = "Kill All Without Minerals";
+#endif
+
+OpenArbiter(_full_name, 0x00000002);
+ 
+  // Events 
+ OpenEvents();
+  // Used variables :
+  //   _RT100-_RT107 - mission conditions
+  //   _RT150-_RT170 - resources adjustment
+   
+  // Const
+  s_win     = 14;
+  s_defeat  = 15;
+  s_resget  = 25;
+  s_gold    = 16;
+  s_metal   = 17;
+  s_corium  = 18;
+  s_silicon = 19;
+  s_energy  = 20;
+
+// Resource   | amount | period by game seconds
+//---------------------------------------------------------------
+  // Init
+  Event(TRUE) 
+  { // Start set
+    //ActCreateStartSet(PLAYER_ALL,AIREL_MYSELF, LEVEL_DEFINED);
+    _ploop_begin
+      if(GetPlCiv(_pl_)==CIV_WS)     //--WS--
+      { ActCreatePlObj(_plmyself, TOBJ_CONSTRUCTOR); 
+        if(GetStartSetLevel()>LEVEL_LOW)        
+        { ActCreatePlObj(_plmyself, TOBJ_SENTINEL); 
+          ActCreatePlObj(_plmyself, TOBJ_SENTINEL); 
+          ActCreatePlObj(_plmyself, TOBJ_HUNTER); 
+        }
+        if(GetStartSetLevel()>LEVEL_MEDIUM)  
+        { ActCreatePlObj(_plmyself, TOBJ_CRUISER); 
+          ActCreatePlObj(_plmyself, TOBJ_MARAUDER); 
+        }
+      }
+      else
+      { if(GetPlCiv(_pl_)==CIV_BO)   //--BO--
+        { ActCreatePlObj(_plmyself, TOBJ_ASSEMBLER); 
+          if(GetStartSetLevel()>LEVEL_LOW)        
+          { ActCreatePlObj(_plmyself, TOBJ_FIGHTER); 
+            ActCreatePlObj(_plmyself, TOBJ_FIGHTER); 
+            ActCreatePlObj(_plmyself, TOBJ_DESTROYER); 
+          }
+          if(GetStartSetLevel()>LEVEL_MEDIUM)  
+          { ActCreatePlObj(_plmyself, TOBJ_HEAVY_CRUISER); 
+            ActCreatePlObj(_plmyself, TOBJ_RAIDER); 
+          }
+        }
+        else                         //--SI--
+        { ActCreatePlObj(_plmyself, TOBJ_CAPSULE_PROTOTYPE); 
+          ActCreatePlObj(_plmyself, TOBJ_CAPSULE_PROTOTYPE); 
+          ActCreatePlObj(_plmyself, TOBJ_CAPSULE_PROTOTYPE); 
+          if(GetStartSetLevel()>LEVEL_LOW)        
+          { ActCreatePlObj(_plmyself, TOBJ_SHS_SUB); 
+            ActCreatePlObj(_plmyself, TOBJ_SHS_SUB); 
+            ActCreatePlObj(_plmyself, TOBJ_SHS_SUB); 
+          }
+          if(GetStartSetLevel()>LEVEL_MEDIUM)  
+          { ActCreatePlObj(_plmyself, TOBJ_ESCORT); 
+            ActCreatePlObj(_plmyself, TOBJ_USURPER); 
+          }
+        }
+      }
+    _ploop_end
+    // Resources adjustment
+    _RT150 := 200;  /* gold_val   */   _RT160 := 300; // gold_period   
+    _RT151 := 2000; /* metal_val  */   _RT161 := 240; // metal_period  
+    _RT152 := 1000; /* corium_val */   _RT162 := 260; // corium_period 
+    _RT153 := 1000; /* corSI_val  */   _RT163 := 260; // corSI_period  
+    _RT154 := 2000; /* silicon_val*/   _RT164 := 240; // silicon_period
+    _RT155 := 1500; /* energy_val */   _RT165 := 200; // energy_period 
+    if(GetRCLevel()>LEVEL_LOW)        
+    { _RT150 += 200;  /* gold_val   */
+      _RT151 += 2000; /* metal_val  */
+      _RT152 += 1000; /* corium_val */
+      _RT153 += 1000; /* corSI_val  */
+      _RT154 += 2000; /* silicon_val*/
+      _RT155 += 1500; /* energy_val */
+    }
+    if(GetRCLevel()>LEVEL_MEDIUM)  
+    { _RT160 := 240; // gold_period    
+      _RT161 := 180; // metal_period   
+      _RT162 := 200; // corium_period  
+      _RT163 := 200; // corSI_period   
+      _RT164 := 180; // silicon_period 
+      _RT165 := 220; // energy_period  
+    }
+    // Delete minerals from a map
+    ActSetDisGold(0,0);
+    ActDelRCField();
+    ActSetSiliconPerCell(0);
+    //  Disable some objects
+    _ploop_begin
+      if(GetPlCiv(_pl_)==CIV_WS)
+      { ActBldObj(_plmyself, TOBJ_GOLD_EXTRACTOR, FALSE);
+        ActBldObj(_plmyself, TOBJ_TRANSUB, FALSE);
+        ActBldObj(_plmyself, TOBJ_DEPOT, FALSE);
+        ActBldObj(_plmyself, TOBJ_CORIUM_EXTRACTOR, FALSE);
+        ActBldObj(_plmyself, TOBJ_METAL_EXTRACTOR, FALSE);
+      }
+      else
+      { if(GetPlCiv(_pl_)==CIV_BO)
+        { ActBldObj(_plmyself, TOBJ_GOLD_SUBLIMATOR, FALSE);
+          ActBldObj(_plmyself, TOBJ_CARGO_SUB, FALSE);
+          ActBldObj(_plmyself, TOBJ_SILO, FALSE);
+          ActBldObj(_plmyself, TOBJ_CORIUM_MINE, FALSE);
+          ActBldObj(_plmyself, TOBJ_METAL_MINE, FALSE);
+        }
+        else
+        { ActBldObj(_plmyself, TOBJ_SILICON_EXTRACTOR, FALSE);
+          ActBldObj(_plmyself, TOBJ_TRANSPORT, FALSE);
+          ActBldObj(_plmyself, TOBJ_CORIUM_SILO, FALSE);
+          ActBldObj(_plmyself, TOBJ_CORIUM_COLLECTOR, FALSE);
+          ActBldObj(_plmyself, TOBJ_ENERGY_ACCUMULATOR, FALSE);
+        }
+      }
+    _ploop_end
+    // Off
+    actOffEvent(10);actOffEvent(20);actOffEvent(30); actOffEvent(100);
+    actOffEvent(110, 115);
+  }
+
+  // On
+  Event(getOwnTime()>10)
+  { actOnEvent(IsTeamGame() ? 20 : 10);
+    actOnEvent(30);
+    actOnEvent(100);
+    //
+    actOnEvent(110, 115);
+  }
+  // Player has been killed
+  Event(getOwnTime()%3==1, 10)
+  { _ploop_begin
+     if(!getVar(100+_pl_) && GetPlObjM(_plmyself, AITRG_ALL)==0)
+     { actSetVar(100+_pl_, ENDMISS_FAILED);ActOnTimer(_plmyself,10);ActOffFOW(_plmyself);                                 
+       _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
+     }
+    _ploop_end
+    actLockEvent();
+  }
+  // Player's team has been killed
+  Event(getOwnTime()%3==1, 20)
+  { _ploop_begin
+     if(!getVar(100+_pl_) && GetPlObjM(_plunion, AITRG_ALL)==0)
+     { actSetVar(100+_pl_, ENDMISS_FAILED);ActOnTimer(_plmyself,10);ActOffFOW(_plmyself);                                 
+       _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
+     }
+    _ploop_end
+    actLockEvent();
+  }
+  // Player's enemies have been killed
+  Event(getOwnTime()%3==1, 30)
+  { _ploop_begin
+     if(!getVar(100+_pl_) && GetPlObjM(_plnotally, AITRG_ALL)==0)
+     { actSetVar(100+_pl_, ENDMISS_ACCOMPL);ActOnTimer(_plmyself,10);ActOffFOW(_plmyself);                                 
+       _actStringMess(_strf(GetStrRes(s_win), GetPlName(_pl_)));
+     }
+    _ploop_end
+    actLockEvent();
+  }
+  // The final phase 
+  Event(TRUE, 100)
+  { _ploop_begin
+     if(getVar(100+_pl_)>0 && GetTimerTime(_pl_)==0)
+     { ActOffTimer(_plmyself);ActTotalStatistics(_plmyself, 10);ActEndMiss(_plmyself, getVar(100+_pl_));actSetVar(100+_pl_, -1);
+     }
+    _ploop_end
+    actLockEvent();
+  }
+  ///////////////////////////////
+  // Add gold
+  Event(_PI32%_RT160==0, 110)
+  { _ploop_begin
+     if(GetPlCiv(_pl_)!=CIV_SI)
+     { ActSetPlRC(_plmyself, TOBJ_GOLD, 1, _RT150);
+       if(_pl_==GetCurrPl())
+       { _actStringMess(_strf(GetStrRes(s_resget), _RT150, GetStrRes(s_gold)));
+       }
+     }
+    _ploop_end
+    actLockEvent();
+  }
+  // Add metal
+  Event(_PI32%_RT161==0, 111)
+  { _ploop_begin
+     if(GetPlCiv(_pl_)!=CIV_SI)
+     { ActSetPlRC(_plmyself, TOBJ_METAL, 1, _RT151);
+       if(_pl_==GetCurrPl())
+       { _actStringMess(_strf(GetStrRes(s_resget), _RT151, GetStrRes(s_metal)));
+       }
+     }
+    _ploop_end
+    actLockEvent();
+  }
+  // Add corium
+  Event(_PI32%_RT162==0, 112)
+  { _ploop_begin
+     if(GetPlCiv(_pl_)!=CIV_SI)
+     { ActSetPlRC(_plmyself, TOBJ_CORIUM, 1, _RT152);
+       if(_pl_==GetCurrPl())
+       { _actStringMess(_strf(GetStrRes(s_resget), _RT152, GetStrRes(s_corium)));
+       }
+     }
+    _ploop_end
+    actLockEvent();
+  }
+  // Add corium for SI
+  Event(_PI32%_RT163==0, 113)
+  { _ploop_begin
+     if(GetPlCiv(_pl_)==CIV_SI)
+     { ActSetPlRC(_plmyself, TOBJ_CORIUM, 1, _RT153);
+       if(_pl_==GetCurrPl())
+       { _actStringMess(_strf(GetStrRes(s_resget), _RT153, GetStrRes(s_corium)));
+       }
+     }
+    _ploop_end
+    actLockEvent();
+  }
+  // Add silicon
+  Event(_PI32%_RT164==0, 114)
+  { _ploop_begin
+     if(GetPlCiv(_pl_)==CIV_SI)
+     { ActSetPlRC(_plmyself, TOBJ_SILICON, 1, _RT154);
+       if(_pl_==GetCurrPl())
+       { _actStringMess(_strf(GetStrRes(s_resget), _RT154, GetStrRes(s_silicon)));
+       }
+     }
+    _ploop_end
+    actLockEvent();
+  }
+  // Add energy
+  Event(_PI32%_RT165==0, 115)
+  { _ploop_begin
+     if(GetPlCiv(_pl_)==CIV_SI)
+     { ActSetPlRC(_plmyself, TOBJ_ENERGY, 1, _RT155);
+       if(_pl_==GetCurrPl())
+       { _actStringMess(_strf(GetStrRes(s_resget), _RT155, GetStrRes(s_energy)));
+       }
+     }
+    _ploop_end
+    actLockEvent();
+  }
+
+
+
+////////////// Debug //////////////////
+
+EventInput(_PI0==7){ActDelPlObjEx(PLAYER_0, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+EventInput(_PI0==0){ActDelPlObjEx(PLAYER_1, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+EventInput(_PI0==1){ActDelPlObjEx(PLAYER_2, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+EventInput(_PI0==2){ActDelPlObjEx(PLAYER_3, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+EventInput(_PI0==3){ActDelPlObjEx(PLAYER_4, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+EventInput(_PI0==4){ActDelPlObjEx(PLAYER_5, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+EventInput(_PI0==5){ActDelPlObjEx(PLAYER_6, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+EventInput(_PI0==6){ActDelPlObjEx(PLAYER_7, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+
+/* 
+enem_boats = GetPlObjM(PLAYER_CURR, AIREL_ENEMYS, AITRG_BOATALL);
+enem_tlo   = GetPlObjM(PLAYER_CURR, AIREL_ENEMYS, AITRG_TLOALL);
+enem_gold  = GetPlRes(PLAYER_CURR, AIREL_ENEMYS, TOBJ_GOLD);
+enem_cor   = GetPlRes(PLAYER_CURR, AIREL_ENEMYS, TOBJ_CORIUM);
+enem_metal = GetPlRes(PLAYER_CURR, AIREL_ENEMYS, TOBJ_METAL, );
+*/
+
+ CloseEvents();
+
+CloseArbiter();

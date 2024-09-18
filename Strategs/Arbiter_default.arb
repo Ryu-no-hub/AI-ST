@@ -1,0 +1,96 @@
+//====================================================================
+//      ST AiScript: Default Arbiter for Scripted Game (Kill all)
+//====================================================================
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+OpenArbiter("Arbiter for Script (Kill All)");
+  
+ // Events 
+ OpenEvents();
+
+  Event(TRUE) 
+  { // Off
+    actOffEvent(10, 39);
+    actOffEvent(100, 109);
+  }
+  // On
+  Event(getOwnTime()>10)
+  {
+    if(IsTeamGame())  // Team game
+    { if(IsPlPresent(PLAYER_0)){actOnEvent(20);actOnEvent(30);}
+      if(IsPlPresent(PLAYER_1)){actOnEvent(21);actOnEvent(31);}
+      if(IsPlPresent(PLAYER_2)){actOnEvent(22);actOnEvent(32);}
+      if(IsPlPresent(PLAYER_3)){actOnEvent(23);actOnEvent(33);}
+      if(IsPlPresent(PLAYER_4)){actOnEvent(24);actOnEvent(34);}
+      if(IsPlPresent(PLAYER_5)){actOnEvent(25);actOnEvent(35);}
+      if(IsPlPresent(PLAYER_6)){actOnEvent(26);actOnEvent(36);}
+      if(IsPlPresent(PLAYER_7)){actOnEvent(27);actOnEvent(37);}
+    }
+    else             // Non team game
+    { if(IsPlPresent(PLAYER_0)){actOnEvent(10);actOnEvent(30);}
+      if(IsPlPresent(PLAYER_1)){actOnEvent(11);actOnEvent(31);}
+      if(IsPlPresent(PLAYER_2)){actOnEvent(12);actOnEvent(32);}
+      if(IsPlPresent(PLAYER_3)){actOnEvent(13);actOnEvent(33);}
+      if(IsPlPresent(PLAYER_4)){actOnEvent(14);actOnEvent(34);}
+      if(IsPlPresent(PLAYER_5)){actOnEvent(15);actOnEvent(35);}
+      if(IsPlPresent(PLAYER_6)){actOnEvent(16);actOnEvent(36);}
+      if(IsPlPresent(PLAYER_7)){actOnEvent(17);actOnEvent(37);}
+    }
+  }
+
+  // Player has been killed
+  Event(getOwnTime()%3==0 && GetPlObjM(PLAYER_0, AIREL_MYSELF, AITRG_ALL)==0, 10) {_RT100:=ENDMISS_FAILED; actOnEvent(100);actOffEvent(20);actOffEvent(30); ActOnTimer(PLAYER_0, AIREL_MYSELF,10);ActOffFOW(PLAYER_0, AIREL_MYSELF);}
+  Event(getOwnTime()%3==0 && GetPlObjM(PLAYER_1, AIREL_MYSELF, AITRG_ALL)==0, 11) {_RT101:=ENDMISS_FAILED; actOnEvent(101);actOffEvent(21);actOffEvent(31); ActOnTimer(PLAYER_1, AIREL_MYSELF,10);ActOffFOW(PLAYER_1, AIREL_MYSELF);}
+  Event(getOwnTime()%3==0 && GetPlObjM(PLAYER_2, AIREL_MYSELF, AITRG_ALL)==0, 12) {_RT102:=ENDMISS_FAILED; actOnEvent(102);actOffEvent(22);actOffEvent(32); ActOnTimer(PLAYER_2, AIREL_MYSELF,10);ActOffFOW(PLAYER_2, AIREL_MYSELF);}
+  Event(getOwnTime()%3==0 && GetPlObjM(PLAYER_3, AIREL_MYSELF, AITRG_ALL)==0, 13) {_RT103:=ENDMISS_FAILED; actOnEvent(103);actOffEvent(23);actOffEvent(33); ActOnTimer(PLAYER_3, AIREL_MYSELF,10);ActOffFOW(PLAYER_3, AIREL_MYSELF);}
+  Event(getOwnTime()%3==0 && GetPlObjM(PLAYER_4, AIREL_MYSELF, AITRG_ALL)==0, 14) {_RT104:=ENDMISS_FAILED; actOnEvent(104);actOffEvent(24);actOffEvent(34); ActOnTimer(PLAYER_4, AIREL_MYSELF,10);ActOffFOW(PLAYER_4, AIREL_MYSELF);}
+  Event(getOwnTime()%3==0 && GetPlObjM(PLAYER_5, AIREL_MYSELF, AITRG_ALL)==0, 15) {_RT105:=ENDMISS_FAILED; actOnEvent(105);actOffEvent(25);actOffEvent(35); ActOnTimer(PLAYER_5, AIREL_MYSELF,10);ActOffFOW(PLAYER_5, AIREL_MYSELF);}
+  Event(getOwnTime()%3==0 && GetPlObjM(PLAYER_6, AIREL_MYSELF, AITRG_ALL)==0, 16) {_RT106:=ENDMISS_FAILED; actOnEvent(106);actOffEvent(26);actOffEvent(36); ActOnTimer(PLAYER_6, AIREL_MYSELF,10);ActOffFOW(PLAYER_6, AIREL_MYSELF);}
+  Event(getOwnTime()%3==0 && GetPlObjM(PLAYER_7, AIREL_MYSELF, AITRG_ALL)==0, 17) {_RT107:=ENDMISS_FAILED; actOnEvent(107);actOffEvent(27);actOffEvent(37); ActOnTimer(PLAYER_7, AIREL_MYSELF,10);ActOffFOW(PLAYER_7, AIREL_MYSELF);}
+
+  // Player's team has been killed
+  Event(getOwnTime()%3==1 && GetPlObjM(PLAYER_0, AIREL_MYTEAM, AITRG_ALL)==0, 20) {_RT100:=ENDMISS_FAILED; actOnEvent(100);actOffEvent(10);actOffEvent(30); ActOnTimer(PLAYER_0, AIREL_MYSELF,10);ActOffFOW(PLAYER_0, AIREL_MYSELF);}
+  Event(getOwnTime()%3==1 && GetPlObjM(PLAYER_1, AIREL_MYTEAM, AITRG_ALL)==0, 21) {_RT101:=ENDMISS_FAILED; actOnEvent(101);actOffEvent(11);actOffEvent(31); ActOnTimer(PLAYER_1, AIREL_MYSELF,10);ActOffFOW(PLAYER_1, AIREL_MYSELF);}
+  Event(getOwnTime()%3==1 && GetPlObjM(PLAYER_2, AIREL_MYTEAM, AITRG_ALL)==0, 22) {_RT102:=ENDMISS_FAILED; actOnEvent(102);actOffEvent(12);actOffEvent(32); ActOnTimer(PLAYER_2, AIREL_MYSELF,10);ActOffFOW(PLAYER_2, AIREL_MYSELF);}
+  Event(getOwnTime()%3==1 && GetPlObjM(PLAYER_3, AIREL_MYTEAM, AITRG_ALL)==0, 23) {_RT103:=ENDMISS_FAILED; actOnEvent(103);actOffEvent(13);actOffEvent(33); ActOnTimer(PLAYER_3, AIREL_MYSELF,10);ActOffFOW(PLAYER_3, AIREL_MYSELF);}
+  Event(getOwnTime()%3==1 && GetPlObjM(PLAYER_4, AIREL_MYTEAM, AITRG_ALL)==0, 24) {_RT104:=ENDMISS_FAILED; actOnEvent(104);actOffEvent(14);actOffEvent(34); ActOnTimer(PLAYER_4, AIREL_MYSELF,10);ActOffFOW(PLAYER_4, AIREL_MYSELF);}
+  Event(getOwnTime()%3==1 && GetPlObjM(PLAYER_5, AIREL_MYTEAM, AITRG_ALL)==0, 25) {_RT105:=ENDMISS_FAILED; actOnEvent(105);actOffEvent(15);actOffEvent(35); ActOnTimer(PLAYER_5, AIREL_MYSELF,10);ActOffFOW(PLAYER_5, AIREL_MYSELF);}
+  Event(getOwnTime()%3==1 && GetPlObjM(PLAYER_6, AIREL_MYTEAM, AITRG_ALL)==0, 26) {_RT106:=ENDMISS_FAILED; actOnEvent(106);actOffEvent(16);actOffEvent(36); ActOnTimer(PLAYER_6, AIREL_MYSELF,10);ActOffFOW(PLAYER_6, AIREL_MYSELF);}
+  Event(getOwnTime()%3==1 && GetPlObjM(PLAYER_7, AIREL_MYTEAM, AITRG_ALL)==0, 27) {_RT107:=ENDMISS_FAILED; actOnEvent(107);actOffEvent(17);actOffEvent(37); ActOnTimer(PLAYER_7, AIREL_MYSELF,10);ActOffFOW(PLAYER_7, AIREL_MYSELF);}
+
+  // Player's enemy has been killed
+  Event(getOwnTime()%3==2 && GetPlObjM(PLAYER_0, AIREL_ENEMYS, AITRG_ALL)==0, 30) {_RT100:=ENDMISS_ACCOMPL; actOnEvent(100);actOffEvent(20);actOffEvent(10); ActOnTimer(PLAYER_0, AIREL_MYSELF,10);ActOffFOW(PLAYER_0, AIREL_MYSELF);}
+  Event(getOwnTime()%3==2 && GetPlObjM(PLAYER_1, AIREL_ENEMYS, AITRG_ALL)==0, 31) {_RT101:=ENDMISS_ACCOMPL; actOnEvent(101);actOffEvent(21);actOffEvent(11); ActOnTimer(PLAYER_1, AIREL_MYSELF,10);ActOffFOW(PLAYER_1, AIREL_MYSELF);}
+  Event(getOwnTime()%3==2 && GetPlObjM(PLAYER_2, AIREL_ENEMYS, AITRG_ALL)==0, 32) {_RT102:=ENDMISS_ACCOMPL; actOnEvent(102);actOffEvent(22);actOffEvent(12); ActOnTimer(PLAYER_2, AIREL_MYSELF,10);ActOffFOW(PLAYER_2, AIREL_MYSELF);}
+  Event(getOwnTime()%3==2 && GetPlObjM(PLAYER_3, AIREL_ENEMYS, AITRG_ALL)==0, 33) {_RT103:=ENDMISS_ACCOMPL; actOnEvent(103);actOffEvent(23);actOffEvent(13); ActOnTimer(PLAYER_3, AIREL_MYSELF,10);ActOffFOW(PLAYER_3, AIREL_MYSELF);}
+  Event(getOwnTime()%3==2 && GetPlObjM(PLAYER_4, AIREL_ENEMYS, AITRG_ALL)==0, 34) {_RT104:=ENDMISS_ACCOMPL; actOnEvent(104);actOffEvent(24);actOffEvent(14); ActOnTimer(PLAYER_4, AIREL_MYSELF,10);ActOffFOW(PLAYER_4, AIREL_MYSELF);}
+  Event(getOwnTime()%3==2 && GetPlObjM(PLAYER_5, AIREL_ENEMYS, AITRG_ALL)==0, 35) {_RT105:=ENDMISS_ACCOMPL; actOnEvent(105);actOffEvent(25);actOffEvent(15); ActOnTimer(PLAYER_5, AIREL_MYSELF,10);ActOffFOW(PLAYER_5, AIREL_MYSELF);}
+  Event(getOwnTime()%3==2 && GetPlObjM(PLAYER_6, AIREL_ENEMYS, AITRG_ALL)==0, 36) {_RT106:=ENDMISS_ACCOMPL; actOnEvent(106);actOffEvent(26);actOffEvent(16); ActOnTimer(PLAYER_6, AIREL_MYSELF,10);ActOffFOW(PLAYER_6, AIREL_MYSELF);}
+  Event(getOwnTime()%3==2 && GetPlObjM(PLAYER_7, AIREL_ENEMYS, AITRG_ALL)==0, 37) {_RT107:=ENDMISS_ACCOMPL; actOnEvent(107);actOffEvent(27);actOffEvent(17); ActOnTimer(PLAYER_7, AIREL_MYSELF,10);ActOffFOW(PLAYER_7, AIREL_MYSELF);}
+                                                                                                                            
+  // The final phase 
+  Event(GetTimerTime(PLAYER_0)==0, 100){ActOffTimer(PLAYER_0, AIREL_MYSELF); ActTotalStatistics(PLAYER_0, AIREL_MYSELF, 10); ActEndMiss(PLAYER_0, AIREL_MYSELF, _RT100);}
+  Event(GetTimerTime(PLAYER_1)==0, 101){ActOffTimer(PLAYER_1, AIREL_MYSELF); ActTotalStatistics(PLAYER_1, AIREL_MYSELF, 10); ActEndMiss(PLAYER_1, AIREL_MYSELF, _RT101);}
+  Event(GetTimerTime(PLAYER_2)==0, 102){ActOffTimer(PLAYER_2, AIREL_MYSELF); ActTotalStatistics(PLAYER_2, AIREL_MYSELF, 10); ActEndMiss(PLAYER_2, AIREL_MYSELF, _RT102);}
+  Event(GetTimerTime(PLAYER_3)==0, 103){ActOffTimer(PLAYER_3, AIREL_MYSELF); ActTotalStatistics(PLAYER_3, AIREL_MYSELF, 10); ActEndMiss(PLAYER_3, AIREL_MYSELF, _RT103);}
+  Event(GetTimerTime(PLAYER_4)==0, 104){ActOffTimer(PLAYER_4, AIREL_MYSELF); ActTotalStatistics(PLAYER_4, AIREL_MYSELF, 10); ActEndMiss(PLAYER_4, AIREL_MYSELF, _RT104);}
+  Event(GetTimerTime(PLAYER_5)==0, 105){ActOffTimer(PLAYER_5, AIREL_MYSELF); ActTotalStatistics(PLAYER_5, AIREL_MYSELF, 10); ActEndMiss(PLAYER_5, AIREL_MYSELF, _RT105);}
+  Event(GetTimerTime(PLAYER_6)==0, 106){ActOffTimer(PLAYER_6, AIREL_MYSELF); ActTotalStatistics(PLAYER_6, AIREL_MYSELF, 10); ActEndMiss(PLAYER_6, AIREL_MYSELF, _RT106);}
+  Event(GetTimerTime(PLAYER_7)==0, 107){ActOffTimer(PLAYER_7, AIREL_MYSELF); ActTotalStatistics(PLAYER_7, AIREL_MYSELF, 10); ActEndMiss(PLAYER_7, AIREL_MYSELF, _RT107);}
+
+////////////// Debug //////////////////
+/*
+EventInput(_PI0==7){ActDelPlObjEx(PLAYER_0, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+EventInput(_PI0==0){ActDelPlObjEx(PLAYER_1, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+EventInput(_PI0==1){ActDelPlObjEx(PLAYER_2, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+EventInput(_PI0==2){ActDelPlObjEx(PLAYER_3, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+EventInput(_PI0==3){ActDelPlObjEx(PLAYER_4, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+EventInput(_PI0==4){ActDelPlObjEx(PLAYER_5, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+EventInput(_PI0==5){ActDelPlObjEx(PLAYER_6, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+EventInput(_PI0==6){ActDelPlObjEx(PLAYER_7, AIREL_MYSELF, AITRG_ALL);actLockEvent();}
+*/
+
+ CloseEvents();
+
+CloseArbiter();

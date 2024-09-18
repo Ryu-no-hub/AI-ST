@@ -1,0 +1,32 @@
+
+#if(_env_var0==0)
+// work output with installed ST
+ append(_main_path+"\\Missions\\miss201.dkd");
+#else
+// output in localisation kit
+ append(_curr_path+"..\\..\\..\\out\\campaign\\miss201.dkd");
+#endif
+
+#if(_env_var1==1)
+	_DEBUG=1;
+#else
+	_DEBUG=0;
+#endif
+	_DEBUG=0;
+
+// pack data
+pack(1);
+
+// main arbiter
+name("AIBOSS");
+ include<[_curr_path]\Arbiter_Bo01.arb>;
+
+// strategist for main opponent
+name("STRATEG6000");
+ include<[_curr_path]\SI_Bo01_06.stg>;
+
+// assistant for player
+name("STRATEG0000");
+ include<[_curr_path]\BO_Bo01_Assistant_00.stg>;
+
+close();

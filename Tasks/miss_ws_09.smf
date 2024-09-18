@@ -1,0 +1,250 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss109");
+//append(out_campaign+"MissTest");
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Meat Grinder");
+
+//Speach for Briefing and Task
+
+#if(_DEBUG)
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wst_0900.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+/*
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0901.wav"); name("Briefing1");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0902.wav"); name("Briefing2");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0903.wav"); name("Briefing3");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0904.wav"); name("Briefing4");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0905.wav"); name("Briefing5");  putwav(1, _MF_PCM);
+*/
+#endif
+
+// text description of the mission
+initsar(55, 10);
+//- objectives  0-9
+setsar("Protect the TranCenter, CentComp, Market, 2 RepSubs with artifacts, and the RepSub with \"Recruit\" for 10 minutes.");
+setsar("CentComps with adjoining structures in the northeast and southwest must be preserved.");
+setsar("Protect the TranCenter, CentComp, Market, 2 RepSubs with artifacts and the RepSub with \"Recruit\" for 15 minutes before a Constructor arrives.");
+setsar("Protect the TranCenter, CentComp, 2 RepSubs with artifacts until the TechCenter \"ACS 13\" construction is completed.");
+setsar("Deliver the 2 RepSubs with artifacts to the TechCenter \"ACS 13\".");
+setsar("Capture the Teleporter in the southeastern part of the sector and deliver the RepSub with the Black Octopi Raider \"Recruit\" to the captured Teleporter.");
+setsar("Protect the TranCenter, CentComp until the Marauder \"Sting Ray\" arrives.");
+setsar("Research the technology \"Research Corium 296\" and \"Thermo-nuclear technology\".");
+setsar("Build a Plasmatron and a TLS within 20 minutes and make a thermo-nuclear strike on the Black Octopi CentComps at the northeastern part and the southwestern part of the sector.");
+setsar("Destroy the Silicons base.");
+//- reports    10-19
+setsar("Essential constructions have been destroyed.");
+setsar("Time has run out, you have lost the mission.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("Mission Accomplished. Where others predicted defeat, you enacted success. You actions have helped tremendously and we thank you.");
+setsar("Mission Failed");
+//- briefings 20-29
+setsar(" ");
+setsar(" Excellent, Commander. We have established the connection with the communication center, which is under your control.@ @ In a few minutes teleportation channels will be activated to teleport a special group to construct a TechCenter \"ACS 13\". Make sure that the place next to the CentComp will be available for the construction. Periodically you will get resource aid from us, but you will have to secure your TranCenter and Market for that.");
+setsar(" The Constructor has arrived and is ready to construct a TechCenter \"ACS 13\". After completing the construction make sure that the RepSubs with the artifacts are next to the \"ACS 13\".@ Capture the Teleporters in the southeastern part of the sector and make sure that the materials on board of the Black Octopi Raider \"Recruit\" are secure.");
+setsar(" Everything goes according to plan, Commander. A group of scientists who have access to the thermonuclear technology materials will arrive soon. A Special Marauder \"Sting Ray\" will deliver additional equipment for the production of the guidance systems. You will be able to gain access to the technology of the production of thermonuclear rockets, if you already have access to all the preceding technologies. You will have to research the technology \"Research Corium 296\" and \"Thermo-nuclear technology\" at your available TechCenters.");
+setsar(" Build a Plasmatron and a TLS immediately. After that make a thermo-nuclear strike on the Black Octopi CentComp in the southeast so that the Black Octopi will be obliged to join our side. Use a preliminary reconnoiter to make a more accurate strike.");
+setsar(" You have justified our expectations, Commander. At times you have changed the course of history. But the work is not over yet. You must destroy the Silicons base in the sector. Be decisive - the enemy is ready to use its weapons of mass destruction. You must be quicker than the enemy.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("@Sector GFD 45. Pacific region.@To the leader of the 37th special division.@Top secret.");
+setsar("@ The work we started during the last operation requires its logical continuation and ending.@ @ We have confirmed reports that there is a mistrust between the Silicons and the Black Octopi that has gradually grown into open enmity. The Black Octopi head quarters thinks that the Silicons can turn their increasing power against them.@ @ We should use this to our benefit and attract the Black Octopi to our side.");
+setsar("@ This operation must not spoil those efforts that we have put in during the last few weeks, or even months.@ @ The operation \"Meat Grinder\" will be carried out in a few phases and you must strictly follow all our directives to ensure the successful accomplishment of the campaign in the region.");
+setsar("@ At the very center of Sector GFF 23, where your striking reconnoiter group will be teleported, there is a weakly protected base with materials, which will be used in the research and production of thermonuclear rockets.@ @ Your main objective is not to let the enemy capture or destroy those materials. The situation is complicated with the two factors: first - you will have to act with limited resources, second - you must not destroy the CentComps, the communication centers of the Black Octopi in the northeast and southwest part of the sector.");
+setsar("@ At the base you will also find a RepSub with a Black Octopi Raider \"Recruit\" loaded on it. Inside the Raider \"Recruit\" our friends left us the plans of enemy locations in the Pacific and Atlantic regions and routes of the reconnoiter expeditions in the Indian and Arctic regions.@ @ Those plans must be preserved until you get special commands.@ @ Good luck to you, Commander.");
+//- names  35------
+setsar("Sub SS-457");		        //sabsC1
+setsar("Sub SS-458");	       		//sabsC2
+setsar("Artifact 1");			//artA1
+setsar("Artifact 2");			//artA2
+setsar("Container 1");			//contC1
+//- names  40------
+setsar("Container 2");			//contC2
+setsar("RepSub RS1");			//sabsA1
+setsar("RepSub RS2");			//sabsA2
+setsar("RepSub RS3");			//sabsA3
+setsar("Top Secret. Part 1");			//textA1
+setsar("Top Secret. Part 2");			//textA2
+setsar("Recruit");			    //rRecr
+setsar("THV-233 SX");			  //nTelep
+setsar("CentComp C-23");		//nCent
+setsar("Market MX-44");   //nMark
+//----50	-----
+setsar("Sting Ray");			//sRay	
+setsar("Sub SN-253");			//sBuilder1
+setsar("ACS 13");	       		//Name of TechCenter
+setsar("Sub CH-48");			//Constractur of teleporter
+setsar("Terminal PQ37");		//teleporter
+setsar("");
+	
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Protect the TranCenter, CentComp, Market, 2 RepSubs with artifacts and the RepSub with \"Recruit\" for 10 minutes.");
+setsar("CentComps with adjoining structures in the northeast and southwest must be preserved.");
+name("OBJECTIVES"); putsar();    
+
+// script for play
+name("TASKPLAY");
+inittask("DEFAULT_WS_ANIMATED", "DEFAULT_WS"); // инициализировать таблицу
+ Time(0);
+ // set controls 
+ SetLevel(10); 
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_MENU, 20, 450, 145, 40);
+ ShowBut(TBTYPE_BACK, 50, 500, 145, 40);
+ ShowBut(TBTYPE_SKIP, 605, 500, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(220, 570, 340, 570, 460, 570);
+
+ SetColor(0, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 180,  20, 590, 80, 1, 30, 1, 15, 10, 1);
+
+//-
+ SetColor(1, 1, 0, 0);
+ SetLevel(10);
+ Time(150);
+ StartWave("DEFAULT_BIP"); StartWave("TaskSpeach");
+ ShowATask(1, 110, 135, 580, 295, 1, 31, 1, 15, 30, 1); 
+ Time(770);
+ HideATask(1); 
+
+ Time(775);
+ StartWave("DEFAULT_BIP");
+ ShowATask(1, 110, 135, 580, 295, 1, 32, 1, 15, 70, 1); 
+ Time(1220);
+ HideATask(1); 
+ 
+ Time(1225);
+ StartWave("DEFAULT_BIP");
+ ShowATask(1, 110, 135, 580, 295, 1, 33, 1, 15, 20, 1); 
+ Time(2080);
+ HideATask(1); 
+
+ Time(2085);
+ StartWave("DEFAULT_BIP");
+ ShowATask(1, 110, 135, 580, 295, 1, 34, 1, 15, 30, 1); 
+ Time(2700);
+ HideATask(1); 
+
+ Time(2720);
+ HideATask(0); 
+ Time(2740);
+ SetColor(1, 1, 0, 1); StartWave("DEFAULT_BIP");
+ ShowObjectives(105, 230, 590, 160); 
+ HideBut(TBTYPE_SKIP);
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 635, 450, 145, 40);
+ ShowBut(TBTYPE_START,  605, 500, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+// script for play
+name("BRIEF_1");
+initbriefing(); 
+ Time(0); 
+ BriefingText(21, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing1");
+ Time(24*25);			// время проигрывания звука (с прерывающейся связью)
+ BriefingAni(0, 0, "");		// спрятать говорящего
+ Time(40*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_2");
+initbriefing(); 
+ Time(0); 
+ BriefingText(22, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing2");
+ Time(19*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(30*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_3");
+initbriefing(); 
+ Time(0); 
+ BriefingText(23, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing3");
+ Time(30*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(47*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_4");
+initbriefing(); 
+ Time(0); 
+ BriefingText(24, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего DC Bomber-leader
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing4");
+ Time(16*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(23*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_5");
+initbriefing(); 
+ Time(0); 
+ BriefingText(25, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего DC Bomber-leader
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing5");
+ Time(18*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(27*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_6");
+initbriefing(); 
+ Time(0); 
+ BriefingText(18, 1, 1, 1);
+	Time(1*25);
+	BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(14*25);
+	BriefingAni(0, 0, "");		// спрятать говорящего   
+	Time(16*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();

@@ -1,0 +1,11 @@
+
+OpenTactic("SI Guard Base", CIV_SI, 10);
+  // Parameters
+
+  // Fleets
+  include<[_curr_path]\SI_BaseGuard.flt>; 
+  include<[_curr_path]\SI_Builder.flt>; 
+  include<[_curr_path]\SI_Transport_Corium.flt>; 
+  include<[_curr_path]\SI_Guard_00.flt>; 
+  include<[_curr_path]\SI_Guard_01.flt>; 
+CloseTactic();

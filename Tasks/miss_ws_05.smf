@@ -1,0 +1,201 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss105");
+//append(out_campaign+"MissTest");
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Hurricane");
+
+//Speach for Briefing and Task
+
+#if(_DEBUG)
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wst_0500.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+/*
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0501.wav"); name("Briefing1");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0502.wav"); name("Briefing2");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0503.wav"); name("Briefing3");  putwav(1, _MF_PCM);
+*/
+#endif
+
+// text description of the mission
+initsar(50, 10);
+//- objectives  0-9
+setsar("Find the lost convoy and RepSubs with technology samples within 25 minutes.");
+setsar("Deliver the RepSubs to the TechCenter THS 467-Q.");
+setsar("Develop the \"Teleshield\" technology. RepSubs must survive.");
+setsar("Annihilate all Black Octopi forces in this sector.");
+setsar("Destroy 3 Teleports in the southwestern part of the sector.");
+setsar("Protect the RepSubs with technology samples.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- reports    10-19
+setsar("Take measures to protect the RepSubs with technology samples immediately.");
+setsar("The enemy has activated some teleportation channels and is preparing to invade the area with a number of submarines. In the southwest area of your sector we have registered powerful energy outbursts indicating the work of several teleportation receivers. The number of teleportation channels opened in a few minutes will define the number of teleported subs.");
+setsar("RepSubs have arrived. Research the \"Teleshield\" technology as soon as possible.");
+setsar("The RepSub has been destroyed, you have lost the mission.");
+setsar("Time has run out, you have lost the mission.");
+setsar("The Artifact has been destroyed, you have lost the mission.");
+setsar("The Artifacts have been delivered. Research the \"Teleshield\" technology immediately.");
+setsar("You have destroyed all enemies, but your task is not complete.");
+setsar("The lost convoy has been found.");
+setsar("");
+//- briefings 20-29
+setsar(" Take measures to protect the RepSubs with technology samples immediately. The enemy has activated some teleportation channels and is preparing to invade the area with a number of submarines. In the southwest area of your sector we have registered powerful energy outbursts indicating the work of several teleportation receivers. The number of teleportation channels opened in a few minutes will define the number of teleported subs.");
+setsar(" Excellent work! To accomplish the mission you must destroy all Black Octopi forces in this sector.@ @ Kill them all take no prisoners.");
+setsar(" ...What the hell!...What's going on? We are losing control over connection channels...Do you read me?...I repeat, do you read me?...");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("@Sector TR 33. Central Atlantic.@To the leader of the special squadron of the 6th Strike Wing.@Top secret.");
+setsar("@ The samples of the experimental subs we have got will advance our own research in the area of submarine armor and engines. Our latest achievements allow us to produce new effective means of base defense. One such means is a generator of a vortex ion-positron power field that prevents enemy objects from teleporting into the area using a generator called Teleshield.@ @ The Command and the Supreme Staff have already sent all materials and samples necessary for the local production to different regions including Sector TR 33 where your squadron is based.");
+setsar("@ Unfortunately, the enemy learned somehow the place of destination of the one-way teleportation to the sector. As a result we have lost control over several channels, including connection with the channel leading to TR 33. At the moment we know only that the transport platforms with the convoy are in sector TH 46, which is not controlled by any side. That area is low in resources, which are scattered all over the place and that is why no one has taken it under control.@ @ You must find the lost convoy and not let the enemy capture or destroy the experimental samples of the Teleshield generator.");
+setsar("");
+setsar("");
+//-names		35-
+setsar("RepSub RS1");					//sabsA1
+setsar("RepSub RS2");					//sabsA2
+setsar("RepSub RS3");					//sabsC1
+setsar("RepSub RS4");					//sabsC2
+setsar("Artifact 1");				//artA1
+//-names		40-
+setsar("Artifact 2");			 //artA2
+setsar("Container 1");		//contC1
+setsar("Container 2");		//contC2
+setsar(" \"Teleshield\". Part 1");	//textA1
+setsar(" \"Teleshield\". Part 2");	//textA2
+setsar("THS 467-Q");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Find the lost convoy and RepSubs with technology samples within 25 minutes.");
+name("OBJECTIVES"); putsar();    
+
+// script for play
+name("TASKPLAY");
+inittask("DEFAULT_WS_ANIMATED", "DEFAULT_WS"); // инициализировать таблицу
+ Time(0);
+ // set controls 
+ SetLevel(10); 
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_MENU, 20, 450, 145, 40);
+ ShowBut(TBTYPE_BACK, 50, 500, 145, 40);
+ ShowBut(TBTYPE_SKIP, 605, 500, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(220, 570, 340, 570, 460, 570);
+
+ SetColor(0, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 180,  20, 590, 100, 1, 30, 1, 15, 10, 1);
+
+//-
+ SetColor(1, 1, 0, 0);
+ SetLevel(10);
+ Time(150); 
+ StartWave("DEFAULT_BIP"); StartWave("TaskSpeach");
+ ShowATask(1, 110, 135, 580, 295, 1, 31, 1, 15, 20, 1); 
+
+ Time(1020);
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(1025);
+ ShowATask(1, 110, 135, 580, 295, 1, 32, 1, 15, 15, 1); 
+ 
+ Time(2080);
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(2100);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(2120);
+
+ SetColor(1, 1, 0, 1); StartWave("DEFAULT_BIP");
+ ShowObjectives(105, 230, 590, 140); 
+ HideBut(TBTYPE_SKIP);
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 635, 450, 145, 40);
+ ShowBut(TBTYPE_START,  605, 500, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+// script for play
+name("BRIEF_1");
+initbriefing(); 
+ Time(0); 
+ BriefingText(20, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing1");
+ Time(24*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(38*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_2");
+initbriefing(); 
+ Time(0);
+ BriefingText(21, 1, 1, 1);   
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing2");
+ Time(10*25);
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(12*25);
+ BriefingStop();
+putbriefing();
+
+// script for play
+name("BRIEF_3");
+initbriefing(); 
+ Time(0);
+ BriefingText(22, 1, 1, 1);   
+ Time(2*25);
+ BriefingWave(0, "Briefing3");
+ Time(3*25);
+ BriefingAni(0, 0, "WSFACE2");
+
+// иммитация помех и неустойчивой связи на TV
+ Time(5*25);
+ BriefingAni(0, 0, "");
+ Time(7*25);
+ BriefingAni(0, 0, "WSFACE2");
+
+ Time(8*25);
+ BriefingAni(0, 0, "");
+ Time(9*25);
+ BriefingAni(0, 0, "WSFACE2");
+
+ Time(10*25);
+ BriefingAni(0, 0, "");
+  
+// конец связи
+ Time(14*25);
+ BriefingAni(0, 0, "");
+ Time(18*25);
+ BriefingStop();
+putbriefing();

@@ -1,0 +1,196 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss306");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\si\\";
+source(in_br+"sit_0600.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Shield");
+
+// text description of the mission
+initsar(40, 10);
+/* 00000 */ setsar("8752 ASR 56.33.845.734 @345 NB @Urgent Message. 34:20:00");
+/* 00001 */ setsar("Miscalculation of Mission Balance has the White Shark organization in dominance.  This leaves resource security insufficient for Plan progression. @ @ @REBALANCE REQUIRED");
+/* 00002 */ setsar("Our exalted leadership, in their infinite wisdom, do not wish the White Sharks to destroy the Black Octopi just yet.  @ @The elimination of their enemy would enable the White Sharks to turn their full attention towards us.");
+/* 00003 */ setsar("The Black Octopi will serve our purposes well if we ally with them against the White Sharks, we must protect their base from enemy assault until their Artifacts arrive in the South-Eastern portion of this sector.");
+/* 00004 */ setsar("Protect the Black Octopi base and Research Laboratory from White Sharks raiding fleets.");
+/* 00005 */ setsar("The Black Octopi Artifacts have arrived in the South-East.  In order to Maintain our truce with them, we must deliver this cargo safely to the Black Octopi Research Laboratory ... beware of increased White Shark activity.");
+/* 00006 */ setsar("Ceasefire with Black Octopi organization has been confirmed.  Our show of force against the White Sharks has won their confidence.  Prepare for the arrival of several Artifacts in the South-East of this sector ...");
+/* 00007 */ setsar("The Artifacts have been successfully delivered to the Black Octopi Research Laboratory ... prepare for teleportation ...");
+/* 00008 */ setsar("Teleportation of human Artifacts accomplished ... our plan has taken effect successfully.");
+/* 00009 */ setsar("The Black Octopi Research Laboratory has been destroyed.  Without the delivery of their Artifacts and their support of an alliance, we are doomed ... failure.");
+/* 00010 */ setsar("One of the human Artifacts has been destroyed.  Without the delivery of the Black Octopi Artifacts and their support of an alliance, we are doomed ... failure.");
+/* 00011 */ setsar("We must protect the remaining Black Octopi forces for now, until our plan is ready to be activated.  @ @We have discovered that the White Sharks are planning an all-out offensive on a Black Octopi base that contains a research laboratory.");
+/* 00012 */ setsar("Spoil the White Shark attack and ensure that the Black Octopi research laboratory survives.  @ @Avoid the Black Octopi forces, they are still hostile. Our time is at hand.");
+/* 00013 */ setsar("Protect the Black Octopi base and Research Laboratory against the advancing White Sharks.");
+/* 00014 */ setsar("");
+/* 00015 */ setsar(" Protect the Black Octopi base and Research Laboratory against the advancing White Sharks.");
+/* 00016 */ setsar("Protect the 4 Repair Platforms with cargo until they arrive at the Black Octopi Research Laboratory.");
+/* 00017 */ setsar("Escort Repair Platforms southeast.");
+setsar("");
+setsar("");
+//- briefings 20-29
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("8752 ASR 56.33.845.734@345 NB@Urgent message. 34:20:00");
+setsar(" Miscalculation of Mission Balance has the White Shark organization in dominance.  This leaves resource security insufficient for Plan progression.@ REBALANCE REQUIRED.@ Our exalted leadership, in their infinite wisdom, do not wish the White Sharks to destroy the Black Octopi just yet.  The elimination of their enemy would enable the White Sharks to turn their full attention towards us.");
+setsar(" We must protect the remaining Black Octopi forces for now, until our plan is ready to be activated.@ We have discovered that the White Sharks are planning an all-out offensive on a Black Octopi base that contains a research laboratory.");
+setsar(" Spoil the White Shark attack and ensure that the Black Octopi research laboratory survives.@ @ Avoid the Black Octopi forces, they are still hostile.@ @ Our time is at hand.");
+setsar("");
+//-names		35 Names-
+setsar("");					//	
+setsar("");			   		//
+setsar("");    	        	//
+setsar("");				        	//
+setsar("");		           //
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Protect the Black Octopi base and Research Laboratory against the advancing White Sharks.");
+name("OBJECTIVES"); putsar();    
+
+name("TASKPLAY");
+inittask("DEFAULT_SI_ANIMATED", "DEFAULT_SI"); // инициализировать таблицу
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+ //-- heading
+ SetColor(1, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 170,  20, 600,  80, 1, 30, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 31, 1, 10, 20, 1); 
+ Time(1080);
+ HideATask(1); StartWave("DEFAULT_BIP");
+ 
+ Time(1090);
+ ShowATask(2, 100, 120, 600, 210, 1, 32, 1, 10, 40, 1); 
+ Time(1640);
+ HideATask(2); StartWave("DEFAULT_BIP");
+
+ Time(1650);
+ ShowATask(3, 100, 120, 600, 210, 1, 33, 1, 10, 30, 1); 
+
+ Time(2130);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(2150);
+ HideATask(3); StartWave("DEFAULT_BIP");
+ 
+ Time(2170);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 180, 550, 170); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+name("Victory");
+initbriefing();
+Time( 0 );
+BriefingText(8, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 01");
+initbriefing();
+Time( 0 );
+BriefingText(9, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 02");
+initbriefing();
+Time( 0 );
+BriefingText(10, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 01");
+initbriefing();
+Time( 0 );
+BriefingText(3, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingText(4, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 02");
+initbriefing();
+Time( 0 );
+BriefingText(5, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 650 );
+BriefingAni(0, 0, "");
+Time( 700 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 03");
+initbriefing();
+Time( 0 );
+BriefingText(6, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 04");
+initbriefing();
+Time( 0 );
+BriefingText(7, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 350 );
+BriefingAni(0, 0, "");
+Time( 400 );
+BriefingStop();
+putbriefing();

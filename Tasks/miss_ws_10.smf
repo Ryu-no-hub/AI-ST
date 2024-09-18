@@ -1,0 +1,197 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss110");
+//append(out_campaign+"MissTest");
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("The Last Assault");
+
+//Speach for Briefing and Task
+
+#if(_DEBUG)
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wst_1000.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+/*
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_1001.wav"); name("Briefing1");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_1002.wav"); name("Briefing2");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_1003.wav"); name("Briefing3");  putwav(1, _MF_PCM);
+*/
+#endif
+
+// text description of the mission
+initsar(50, 10);
+//- objectives  0-9
+setsar("Capture a Plasmatron, 2 TLS's, TradeCenter, SubCenter and an Air Extractor.");
+setsar("Artifacts must be preserved.");
+setsar("Unload 2 Artifacts next to the Plasmatron.");
+//!@
+setsar("Destroy the CentComps in the central closed area.");
+//!@
+setsar("Build a TranCenter in the central closed area and protect it until the flagship arrives.");
+setsar("Do not enter the southeastern and southwestern areas until you receive special orders.");
+setsar("Capture the Central Beacon complex at the southwestern part of the sector.");
+setsar("Destroy all remaining Silicons forces in the region.");
+setsar("");
+setsar("");
+//- reports    10-19
+setsar(" ");
+setsar("The first part of the mission has been completed.");
+setsar("Time has run out, you have lost the mission.");
+setsar("Wait for the arrival of the flagship.");
+setsar("Destroy the CentComp in the central closed area immediately.");
+setsar("Eliminate all Silicons in the sector.");
+setsar("Essential constructions have been destroyed.");
+setsar("");
+setsar("Mission Accomplished. Congratulations on your victory, Admiral. Your nonstop success has won you the support of the soldiers and civilians.  With the unification of mankind at hand, do not be surprised if you find yourself nominated as one of the new leaders of the human race.");
+setsar("Mission Failed");
+//- briefings 20-29
+setsar(" Wonderful Job, Commander. Unload the artifacts next to the Plasmatron and start producing thermo-nuclear rockets. Do not waste any time. The Black Octopi are going to start a massive attack on your base in a few minutes. You must destroy their base and the CentComps in the central closed area before they start invasion.");
+setsar(" Nice work, Commander. Build a TranCenter in the central zone and wait for the arrival of the flagship with the instructions for your next activities and ending of the operation.");
+setsar(" Take all measures to protect the flagship from the Silicons attacks. You will now enter into the final phase of the operation, in which you must capture the teleportation complex of the Silicons in the southwestern part of the sector, which contains several Teleportation Gates, a central Command Hub and its modules.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("@Sector SSL 63. Pacific region.@To the leader of the 37th special division.@Top secret.");
+setsar("@ Your next mission is the logical ending of all our efforts to gain the dominant position on this planet and it will be your responsibility to fulfill the final phase of the operation.@ @ During the first phase of the operation you will command a small reconnoiter group to find our technology base captured by the Black Octopi. The base is situated in the northeastern part of the sector. The passage is protected by the Black Octopi forces. You may also encounter the Silicons reconnoiter and striking groups.");
+setsar("@ You will then have to deliver the RepSubs with the isotope Corium 296 and disassembled parts of a thermonuclear rocket to the northern base. It  will be necessary for you to produce rockets at the captured Plasmatron.@ @ Strict observance of our orders is what will ensure the successful accomplishment of the operation.@ @ Good luck to you, Commander.");
+setsar("");
+setsar("");
+	//- names of objects
+setsar("Sub SS-764");
+setsar("Sub SS-765");
+setsar("Sub SS-766");
+setsar("Sub SS-767");
+setsar("Sub SS-768");
+//- names of objects	40-
+setsar("Sub SS-769");
+setsar("Artifact 1");
+setsar("Artifact 2");
+setsar("Container 1");
+setsar("Container 2");
+setsar("Top Secret. Part1");
+setsar("Top Secret. Part2");
+setsar("GFX 344-13");	//???
+setsar("WS FlagShip");
+setsar("");
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Capture a Plasmatron, 2 TLS's, TradeCenter, SubCenter and an Air Extractor.");
+setsar("Artifacts must be preserved.");
+name("OBJECTIVES"); putsar();    
+
+// script for play
+name("TASKPLAY");
+inittask("DEFAULT_WS_ANIMATED", "DEFAULT_WS"); // инициализировать таблицу
+ Time(0);
+ // set controls 
+ SetLevel(10); 
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_MENU, 20, 450, 145, 40);
+ ShowBut(TBTYPE_BACK, 50, 500, 145, 40);
+ ShowBut(TBTYPE_SKIP, 605, 500, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(220, 570, 340, 570, 460, 570);
+
+ SetColor(0, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 180,  20, 590, 80, 1, 30, 1, 15, 10, 1);
+
+//-
+ SetColor(1, 1, 0, 0);
+ SetLevel(10);
+ Time(150);
+ StartWave("DEFAULT_BIP"); StartWave("TaskSpeach");
+ ShowATask(1, 110, 135, 580, 295, 1, 31, 1, 15, 20, 1); 
+ Time(930);
+ HideATask(1); 
+
+ Time(935);
+ StartWave("DEFAULT_BIP");
+ ShowATask(1, 110, 135, 580, 295, 1, 32, 1, 15, 40, 1); 
+ Time(1520);
+ HideATask(1); 
+
+ Time(1540);
+ HideATask(0); 
+ Time(1560);
+
+ SetColor(1, 1, 0, 1); StartWave("DEFAULT_BIP");
+ ShowObjectives(105, 230, 590, 150); 
+ HideBut(TBTYPE_SKIP);
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 635, 450, 145, 40);
+ ShowBut(TBTYPE_START,  605, 500, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+// script for play
+name("BRIEF_1");
+initbriefing(); 
+ Time(0); 
+ BriefingText(20, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing1");
+ Time(19*25);			// время проигрывания звука (с прерывающейся связью)
+ BriefingAni(0, 0, "");		// спрятать говорящего
+ Time(29*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_2");
+initbriefing(); 
+ Time(0); 
+ BriefingText(21, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing2");
+ Time(10*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(18*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_3");
+initbriefing(); 
+ Time(0); 
+ BriefingText(22, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing3");
+ Time(18*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(30*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_4");
+initbriefing(); 
+ Time(0); 
+ BriefingText(18, 1, 1, 1);
+	Time(1*25);
+	BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(25*25);
+	BriefingAni(0, 0, "");		// спрятать говорящего   
+	Time(30*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();

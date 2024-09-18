@@ -1,0 +1,214 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss304");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\si\\";
+source(in_br+"sit_0400.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Retrieval");
+
+// text description of the mission
+initsar(40, 10);
+/* 00000 */ setsar("9872 FGR 42.25.987.12 @986 YG @Urgent Message. 77:13:56 @ @");
+/* 00001 */ setsar("The White Sharks have allowed their base to be overrun by the Black Octopi.");
+/* 00002 */ setsar("As a result, our Shell Technologist was taken prisonner while partaking in a technological exchange and is currently being held in the captured 'Main Terminal' located at the exposed area to the North.");
+/* 00003 */ setsar("We have dedicated special resources to spawning the Usurper 'Retribution' (red blip on mini-map).");
+/* 00004 */ setsar("'Retribution' is our only hope to re-capture the CentComp 'Main Terminal' and save our Shell Technologist.");
+/* 00005 */ setsar("Our Shell Technologist has now been merged with 'Retribution'.  Return the Usurper to our Command Hub immediately.");
+/* 00006 */ setsar("Our Shell Technologist has been returned to us unharmed.  It seems as though the White Sharks are incapable of providing even the most basic level of protection ... this betrayal is inexcusable.");
+/* 00007 */ setsar("Our Shell Technologist has informed us that the Black Octopi are making significant advances in Teleportation Technology.");
+/* 00008 */ setsar("We must research the necessary technology in order to prepare for any future assaults.  Our Shell Technologist must make use of special equipment found at this outpost's Main Command Hub.  Defend this structure at all cost.");
+/* 00009 */ setsar("Defend the Command Hub and Research Teleportation Technology as quickly as possible.");
+/* 00010 */ setsar("Teleportation Detection Technology has been successfully researched ... Victory will soon be ours.");
+/* 00011 */ setsar("'Retribution' has been destroyed.  Without our Shell Technologist to assist in the development of new technology, our cause is hopeless ... this defeat has plagued us all.");
+/* 00012 */ setsar("This outpost's Command Hub and all of our Shell Technologist's special laboratory equipment has been destroyed.  Without it, we will not be able to maintain our technological superiority over the Black Octopi ... we have failed.");
+/* 00013 */ setsar("The humans known as the Black Octopi have captured one of our shell technologists in the care of White Shark forces.  @ @The technologist has been transferred to a Black Octopi CentComp \"central terminal\" to the north.");
+/* 00014 */ setsar("Capture the CentComp ''Main Terminal'' in the Black Octopi base to the North with the Usurper 'Retribution'.");
+/* 00015 */ setsar("Retrieve the technologist, and destroy the Black Octopi forces for their insolence.  @ @Transport the technologist back to your command hub and research the \"teleportation detection\" technology to complete the mission.");
+/* 00016 */ setsar("Capture the CentComp \"Central Terminal\" in the Black Octopi base to the north and retrieve the Silicon shell technologist by the Usurper \"Retribution\".");
+/* 00017 */ setsar("Deliver the Usurper \"Retribution\" to the Command Hub.");
+/* 00018 */ setsar("Research the \"Teleportation Detection\" technology.");
+/* 00019 */ setsar("Deliver the Usurper \"Retribution\" to the Command Hub.");
+
+//- briefings 20-29
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("9872 FGR 42.25.987.12@986 YG@Urgent message. 77:13:56");
+setsar(" The humans known as the Black Octopi have captured one of our shell technologists in the care of White Shark forces.@ @ The technologist has been transferred to a Black Octopi CentComp \"central terminal\" to the north.");
+setsar(" Retrieve the technologist, and destroy the Black Octopi forces for their insolence.@ @ The Usurper technologist.@ @ Transport the technologist back to your command hub and research the \"teleportation detection\" technology to complete the mission.");
+setsar("");
+setsar("");
+//-names		35 Names-
+setsar("");					//	
+setsar("");			   		//
+setsar("");    	        	//
+setsar("");				        	//
+setsar("");		           //
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Capture the CentComp \"Central Terminal\" in the Black Octopi base to the north and retrieve the Silicon shell technologist by the Usurper \"Retribution\".");
+//setsar("Deliver the Usurper \"Retribution\" to the Command Hub.");
+//setsar("Research the \"Teleportation Detection\" technology.");
+name("OBJECTIVES"); putsar();
+
+name("TASKPLAY");
+inittask("DEFAULT_SI_ANIMATED", "DEFAULT_SI"); // инициализировать таблицу
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+ //-- heading
+ SetColor(1, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 170,  20, 600,  80, 1, 30, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 31, 1, 10, 40, 1); 
+ Time(640);
+ HideATask(1); StartWave("DEFAULT_BIP");
+ 
+ Time(650);
+ ShowATask(2, 100, 120, 600, 210, 1, 32, 1, 10, 20, 1); 
+
+ Time(1220);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(1240);
+ HideATask(2); StartWave("DEFAULT_BIP");
+ 
+ Time(1260);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 180, 550, 170); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+name("Victory");
+initbriefing();
+Time( 0 );
+BriefingText(10, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 01");
+initbriefing();
+Time( 0 );
+BriefingText(11, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 02");
+initbriefing();
+Time( 0 );
+BriefingText(12, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 01");
+initbriefing();
+Time( 0 );
+BriefingText(1, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingText(2, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingText(3, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 1450 );
+BriefingAni(0, 0, "");
+Time( 1500 );
+BriefingText(4, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 1950 );
+BriefingAni(0, 0, "");
+Time( 2000 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 02");
+initbriefing();
+Time( 0 );
+BriefingText(5, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 03");
+initbriefing();
+Time( 0 );
+BriefingText(6, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 04");
+initbriefing();
+Time( 0 );
+BriefingText(7, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingText(8, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingText(9, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 1450 );
+BriefingAni(0, 0, "");
+Time( 1500 );
+BriefingStop();
+putbriefing();

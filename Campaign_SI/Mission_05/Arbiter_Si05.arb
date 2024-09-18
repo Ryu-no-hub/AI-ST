@@ -1,0 +1,520 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////
+// 
+// Container:		Arbiter
+// Campaign:		SI Campaign
+// Mission:		Mission 5 : Betrayal
+// Copyright:		2000, Strategy First Inc.
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////
+// Players	Civ	Color		Control		Ally		Enemy
+//--------------------------------------------------------------------------------------------------------------------------------------------
+//    *  4		 SI	Violet		Human		  -		    4-6
+//        1             BO      Green              Computer           6		      4
+//        6             WS     Orange            Computer           1                          4
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////
+
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+OpenArbiter("SI Campaign Mission 5");
+
+	// Events
+	
+	OpenEvents();
+	
+	// Initialize mission
+
+	Event(TRUE)
+	{
+
+
+		// Alliances for WS Player
+	            ActSetFriend(PLAYER_6, AIREL_MYSELF, PLAYER_1);
+
+		// Alliance for BO Player
+		ActSetFriend(PLAYER_1, AIREL_MYSELF, PLAYER_6);
+
+		// Enemy for SI Player
+		_actSetEnemy(PLAYER_1);
+
+		// Enemy for WS Player
+		ActSetEnemy(PLAYER_6, AIREL_MYSELF, PLAYER_1);
+
+		// Enemies for BO Player
+		ActSetEnemy(PLAYER_1, AIREL_MYSELF, PLAYER_4);
+
+
+		ActInitDisGold(LEVEL_HIGH);
+
+		//set human resources
+		_actSetPlRC(TOBJ_CORIUM, 0, 2000);
+		_actSetPlRC(TOBJ_ENERGY, 0, 1000);
+		_actSetPlRC(TOBJ_SILICON, 0, 10000);
+
+		//set computer 1 BO resources
+		ActSetPlRC(PLAYER_1,AIREL_MYSELF, TOBJ_METAL, 0, 20000);
+		ActSetPlRC(PLAYER_1,AIREL_MYSELF, TOBJ_CORIUM, 0, 1500);
+		ActSetPlRC(PLAYER_1,AIREL_MYSELF, TOBJ_GOLD, 0, 1000);
+
+		//set computer 6 WS resources
+
+		ActSetPlRC(PLAYER_6,AIREL_MYSELF, TOBJ_METAL, 0, 15000);
+		ActSetPlRC(PLAYER_6,AIREL_MYSELF, TOBJ_CORIUM, 0, 1500);
+		ActSetPlRC(PLAYER_6,AIREL_MYSELF, TOBJ_GOLD, 0, 1000);
+
+		// Tehcnologies
+		_actTechDevEnableAll();
+		ActTechDevEnableAll(PLAYER_1,AIREL_MYSELF);
+		ActTechDevEnableAll(PLAYER_6,AIREL_MYSELF);
+
+		// Player 0 Silicon Tehcnologies
+#if(_DEBUG)
+			// Silicons Tech Lvl 1
+			 _actTechSet(TTECH_SI_BIOSONAR_TECHNOLOGY,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_POLARIZED_PLASMA_PULSAR,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_ION_CASSETTE_SHELLS,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_HUMAN_CIPHER_KEY,TTECH_LEV1);
+
+			// Silicons Tech Lvl 2
+			 _actTechSet(TTECH_SI_UPGRADE_ENERGY_CONSERVATION,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_GAS_SHELL_LAUNCHER,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_BHE_SHELLS,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_UPGRADE_MOVEMENT_LEVEL,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_DATA_INTRUSION,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_DOUBLE_PLASMA_TURRET_GUN,TTECH_LEV1);
+
+			// Silicons Tech Lvl 3
+			  _actTechSet(TTECH_SI_LOCAL_TELEPORTATION,TTECH_LEV1);
+			  _actTechSet(TTECH_SI_LOCATOR,TTECH_LEV1);
+			  _actTechSet(TTECH_SI_TRANSFORM_CORIUM_TO_ENERGY,TTECH_LEV1);
+			  _actTechSet(TTECH_SI_UPGRADE_PP_PULSAR_FIRE_RATE,TTECH_LEV1);
+			  _actTechSet(TTECH_SI_TORPEDO_EVASION,TTECH_LEV1);
+			  _actTechSet(TTECH_SI_SILICON_ARMOR_UPGRADE,TTECH_LEV1);
+			  _actTechSet(TTECH_SI_BIO_ACID_SHELLS,TTECH_LEV1);
+			  _actTechSet(TTECH_SI_ENERGY_SHELL,TTECH_LEV1);
+			  _actTechSet(TTECH_SI_BIO_MINE_LAUNCHER,TTECH_LEV1);
+
+			// Silicons Tech Lvl 4
+			 _actTechSet(TTECH_SI_JUMP_MINE_LAUNCHER,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_SOLITON_OSCILLATOR,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_UPGRADE_ION_DEFENSIVE_SHEATH,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_ENEMY_CAPTURE,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_ANTI_SONAR_DISPERSION_SCREEN,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_ACOUSTIC_MINES,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_UPGRADE_GSL_FIRE_RATE,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_TELEPORTATION_DETECTION,TTECH_LEV1);
+			 _actTechSet(TTECH_SI_ION_REFLECTOR,TTECH_LEV1);
+#endif
+			// Silicons Tech Lvl 5
+			//_actTechDevDisable(TTECH_SI_DATA_SECURITY_UPGRADE,TTECH_LEV1);
+			//_actTechDevDisable(TTECH_SI_TELEPORTATION_GATE,TTECH_LEV1);
+			//_actTechDevDisable(TTECH_SI_UPGRADE_ENERGY_ACCUMULATOR,TTECH_LEV1);
+			//_actTechDevDisable(TTECH_SI_SILICON_ARMOR_UPGRADE,TTECH_LEV2);
+			//_actTechDevDisable(TTECH_SI_UPGRADE_DPT_GUN_RANGE,TTECH_LEV1);
+			//_actTechDevDisable(TTECH_SI_PARCHER,TTECH_LEV1);
+			//_actTechDevDisable(TTECH_SI_HIGH_RANGE_EXPLORER ,TTECH_LEV1);
+			//_actTechDevDisable(TTECH_SI_UPGRADE_ION_REFLECTOR,TTECH_LEV1);
+
+
+			// Silicons Tech Lvl 6
+			_actTechDevDisable(TTECH_SI_ANNIHILATION_TECHNOLOGY,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_NEURO_PARALYSIS_SHELLS,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_UPGRADE_BIO_ACID_SHELLS,TTECH_LEV1);       
+			_actTechDevDisable(TTECH_SI_ENERGY_TRANSMITTER,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_UPGRADE_ION_DEFENSIVE_SHEATH,TTECH_LEV2);
+			_actTechDevDisable(TTECH_SI_UPGRADE_MOVEMENT_LEVEL,TTECH_LEV2);
+			_actTechDevDisable(TTECH_SI_ENEMY_CAPTURE_UPGRADE,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_UPGRADE_REGENERATION_SPEED,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_QUANTUM_PARALYZER,TTECH_LEV1);
+
+			// Silicons Tech Lvl 7
+			_actTechDevDisable(TTECH_SI_ANTI_STEALTH_BIOSONAR,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_DEPTH_ACOUSTIC_MINE_DETECTION,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_LASER_SNARE_DETECTION,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_UPGRADE_ENERGY_CONSERVATION,TTECH_LEV2);
+			_actTechDevDisable(TTECH_SI_MOLECULAR_REPAIR_FACILITY,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_BHE_SHELL_RANGE_UPGRADE,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_UPGRADE_ION_DEFENSIVE_SHEATH,TTECH_LEV3);
+			_actTechDevDisable(TTECH_SI_ION_FIELD_GENERATOR,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_LASER_REPLENISH_SHEATH,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_SILICON_ARMOR_UPGRADE,TTECH_LEV3);
+			_actTechDevDisable(TTECH_SI_ID_TELEPORTATION,TTECH_LEV1);
+
+			// Silicons Tech Lvl 8
+			_actTechDevDisable(TTECH_SI_UPGRADE_SILICON_EXTRACTOR,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_ANTI_ULTRASONIC_SCREEN,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_PSY_SHIELD ,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_GAS_LASER_SATELLITE,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_ENERGY_SHELL,TTECH_LEV2);
+			_actTechDevDisable(TTECH_SI_UPGRADE_PARALYTIC_WEAPONS,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_UPGRADE_MOVEMENT_LEVEL,TTECH_LEV3);
+
+			// Silicons Tech Lvl 9
+			_actTechDevDisable(TTECH_SI_UPGRADE_ENERGY_CONSERVATION,TTECH_LEV3);
+			_actTechDevDisable(TTECH_SI_UPGRADE_CORIUM_COLLECTOR,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_UPGRADE_PARALYTIC_WEAPONS,TTECH_LEV2);
+			_actTechDevDisable(TTECH_SI_ANTI_MASS_WEAPONS_DEFENSE_SYSTEM,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_VACUUM_BOMB,TTECH_LEV1);
+			_actTechDevDisable(TTECH_SI_UPGRADE_ARSENAL,TTECH_LEV1);
+
+			// Silicons Tech Lvl 10
+			_actTechDevDisable(TTECH_SI_ENERGY_SHIELD_NEUTRALIZATION,TTECH_LEV1);  
+
+		// Player 6 White Shark Tehcnologies
+
+			// White Sharks Tech Lvl 1
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_HYDRO_FUSION_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_LONG_RANGE_SONAR,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_ENGINE_UPGRADE,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_MOBILE_REPSUB,TTECH_LEV1);
+
+			// White Sharks Tech Lvl 2
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_MEDIUM_TORPEDO_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_LARGE_TORPEDO_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_RESEARCH_ENEMY_CIPHER_KEY,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_MARAUDER_EQUIPMENT,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_TORPEDO_UPGRADE,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_UPGRADE_TO_MOBILITY,TTECH_LEV1);
+
+			// White Sharks Tech Lvl 3
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_ARMOR_UPGRADE,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_MOBILE_SONAR_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_UPGRADE_HF_CANNON_FIRE_RATE,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_DEPTH_MINE_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_UPGRADE_HACK_ABILITY,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_ULTRASONIC_TECHNOLOGY,TTECH_LEV1);
+
+			// White Sharks Tech Lvl 4
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_ENGINE_UPGRADE,TTECH_LEV2);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_TORPEDO_UPGRADE,TTECH_LEV2);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_DISPERSER_SCREEN_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_INCREASE_INFORMATION_SECURITY,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_DEPTH_BOMB_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_DETECT_TELEPORTATION,TTECH_LEV1);
+			ActTechSet(PLAYER_6,AIREL_MYSELF,TTECH_WS_MARAUDER_EQUIPMENT_UPGRADE,TTECH_LEV1);
+
+			// White Sharks Tech Lvl 5
+			//ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_IMPROVE_REPAIR_TECHNOLOGY,TTECH_LEV1);
+			//ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_UPGRADE_SONAR_RANGE,TTECH_LEV1);
+			//ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_TELESHIELD,TTECH_LEV1);
+			//ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_TORPEDO_SPEED_UPGRADE,TTECH_LEV1);
+			//ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_UPGRADE_ULTRASONIC_GENERATOR,TTECH_LEV1);
+			//ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_ARMOR_UPGRADE,TTECH_LEV2);
+
+			// White Sharks Tech Lvl 6
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_ENGINE_UPGRADE,TTECH_LEV3);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_SHARK_CONTROL_TECHNOLOGY,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_HF_SHELL_UPGRADE,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_DEPTH_ACOUSTIC_MINE_DETECTION,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_BO_LASER_SNARE_DETECTION,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_CYBER_TECHNOLOGY,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_PSY_TECHNOLOGY,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_TELEPORTATION_TECHNOLOGY,TTECH_LEV1);
+
+			// White Sharks Tech Lvl 7
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_ANTI_PHANTOM_TECHNOLOGY,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_TORPEDO_UPGRADE,TTECH_LEV3);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_ARMCENTER_UPGRADE,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_INCREASE_TRANCENTER_RECHARGE,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_UPGRADE_SHARK_CONTROL,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_PLASMA_GENERATOR,TTECH_LEV1);
+
+			// White Sharks Tech Lvl 8
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_ANTI_LASER_SCREEN,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_PLASMA_CANNON_TECHNOLOGY,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_UPGRADE_MINE_PRODUCTIVITY,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_TORPEDO_UPGRADE,TTECH_LEV4);
+
+			// White Sharks Tech Lvl 9
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_ARMOR_UPGRADE,TTECH_LEV3);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_ANTI_MASS_WEAPONS_DEFENSE_SYSTEM,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_RESEARCH_CORIUM_296,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_6,AIREL_MYSELF,TTECH_WS_THERMO_NUCLEAR_TECHNOLOGY,TTECH_LEV1);		        //TTECH_TN_TECHNOLOGY
+
+
+		// Player 1 Black Octopi Tehcnologies
+
+			// Black Octopi Tech Lvl 1
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_SPLINTER_TORPEDO_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_LIGHT_LASER_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_LONG_RANGE_ASDIC,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_RESEARCH_ENEMY_CIPHER_KEY,TTECH_LEV1);
+
+			// Black Octopi Tech Lvl 2
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_RAIDER_EQUIPMENT,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_ENGINE_UPGRADE,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_UPGRADE_LIGHT_LASER_RANGE,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_TORPEDO_UPGRADE,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_MOBILE_REPAIR_PLATFORM,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_RUBY_LASER_TECHNOLOGY,TTECH_LEV1);
+
+			// Black Octopi Tech Lvl 3
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_ARMOR_UPGRADE,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_LASER_SNARE_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_UPGRADE_HACK_ABILITY,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_DISPERSER_SCREEN_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_GAS_LASER_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_UPGRADE_TO_MOBILITY,TTECH_LEV1);
+
+			// Black Octopi Tech Lvl 4
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_TORPEDO_UPGRADE ,TTECH_LEV2);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_RESEARCH_ENERGY_SUPPLY,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_TELEPORTATION_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_RADIO_CLUTTER_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_STEALTH_SCOUT_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_CASSETTE_SHELL_TECHNOLOGY,TTECH_LEV1);
+			ActTechSet(PLAYER_1,AIREL_MYSELF,TTECH_BO_UPGRADE_HEAVY_LASER_RANGE,TTECH_LEV1);
+
+			// Black Octopi Tech Lvl 5
+			//ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_ARMOR_UPGRADE,TTECH_LEV2);		          
+			//ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_MAGNETIC_MINE_TECHNOLOGY,TTECH_LEV1);      
+			//ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_ENGINE_UPGRADE,TTECH_LEV2);    
+			//ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_TORPEDO_UPGRADE,TTECH_LEV3);    
+			//ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_UPGRADE_LIGHT_LASER_RATE,TTECH_LEV1);    
+			//ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_DETECT_TELEPORTATION,TTECH_LEV1);   
+			//ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_DEPTH_ACOUSTIC_MINE_DETECTION,TTECH_LEV1);   
+			//ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_LASER_SNARE_DETECTION,TTECH_LEV1);   
+
+			// Black Octopi Tech Lvl 6
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_ELECTRO_MAGNETIC_TORPEDOES,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_CYBER_TECHNOLOGY,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_UPGRADE_ENERGY_SUPPLY,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_TORPEDO_UPGRADE,TTECH_LEV4);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_ARMOR_UPGRADE,TTECH_LEV3);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_TORPEDO_SPEED_UPGRADE,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_SPLINTER_TORPEDO_UPGRADE,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_MUNITIONS_FACTORY_UPGRADE,TTECH_LEV1);
+
+			// Black Octopi Tech Lvl 7
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_PHANTOM_EQUIPMENT,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_UPGRADE_SUBS_LASER_RATE,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_PROTECTIVE_SCREEN_TECHNOLOGY,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_UPGRADE_HEAVY_LASER_RATE,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_RAIDER_EQUIPMENT_UPGRADE,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_INCREASE_INFORMATION_SECURITY,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_PARALYZING_RAYS_TECHNOLOGY,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_ASDIC_UPGRADE,TTECH_LEV1);
+
+			// Black Octopi Tech Lvl 8
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_UPGRADE_MINE_PRODUCTIVITY,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_ENGINE_UPGRADE,TTECH_LEV3);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_EM_TORPEDO_UPGRADE,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_ANTI_ULTRASONIC_SCREEN,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_ENERGY_SHIELD,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_INCREASE_TELEPORTER_RECHARGE,TTECH_LEV1);
+
+			// Black Octopi Tech Lvl 9
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_PHANTOM_RECHARGE_UPGRADE,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_IMPROVE_REPAIR_TECHNOLOGY,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_ANTI_MASS_WEAPONS_DEFENSE_SYSTEM,TTECH_LEV1);
+			ActTechDevDisable(PLAYER_1,AIREL_MYSELF,TTECH_BO_LASER_BOMB_TECHNOLOGY,TTECH_LEV1);
+
+		// _actAddObjective( 1, "1. Capture the 3 Black Octopi Research Laboratories to the North.");
+
+		// Artifacts have been unloaded
+		_GL1 := TRUE;
+		_GL2 := TRUE;
+		_GL3 := TRUE;
+
+		_RT1 := FALSE;
+
+	             actOffEvent( 1 ); actOffEvent( 2 ); actOffEvent( 100 ); actOffEvent( 101 );
+
+	}
+
+
+	// Intro message
+	Event(getOwnTime()>4 )
+	{
+		_actPlayBriefing("Briefing 01");
+	}
+
+
+	// Remind player of primary objective (capture labs & defend command hub)
+	Event(_getPlObjT(TOBJ_UNDEFINED, LOGO_UNDEF, 30, 50, 00, 42, 02, 05 ) >= 1)
+	{
+		_actPlayBriefing("Briefing 02");
+	}
+
+
+	EventArtLoaded( _PI3 == TART_NON_LINEAR_PHOTON_CONCENTRATOR )
+	{
+		_GL1 := FALSE;
+		actLockEvent();
+	}
+	
+	EventArtLoaded( _PI3 == TART_PLASMIC_TURBOCOMPRESSOR )
+	{
+		_GL2 := FALSE;
+		actLockEvent();
+	}
+
+	EventArtLoaded( _PI3 == TART_ION_PLASMIC_ACCUMULATOR )
+	{
+		_GL3 := FALSE;
+		actLockEvent();
+	}
+
+	EventArtUnLoaded( _PI3 == TART_NON_LINEAR_PHOTON_CONCENTRATOR )
+	{
+		_GL1 := TRUE;
+		actLockEvent();
+	}
+	
+	EventArtUnLoaded( _PI3 == TART_PLASMIC_TURBOCOMPRESSOR )
+	{
+		_GL2 := TRUE;
+		actLockEvent();
+	}
+
+	EventArtUnLoaded( _PI3 == TART_ION_PLASMIC_ACCUMULATOR )
+	{
+		_GL3 := TRUE;
+		actLockEvent();
+	}
+
+	Event ( _GL1 == TRUE && _GL2 == TRUE && _GL3 == TRUE &&
+		GetArt( TART_UNDEFINED, "", 84, 91, 7, 7, 5)==3)
+	{
+		_RT1 := TRUE;
+	}
+ 
+	// When 3 Labs are Captured Trigger Artifact Event	
+	Event( _getPlObjT( TOBJ_RESEARCH_LABORATORY, LOGO_UNDEF, 08, 04, 00, 8, 9, 5) >2 )
+	{
+		_actPlayBriefing("Briefing 03");
+
+		_actOnTimer(120);
+		actOnEvent( 2 );
+	}
+	
+	// When Capturing is started.. Disable Lab Count for mission failure
+/*	Event( _getPlObjT( TOBJ_RESEARCH_LABORATORY, LOGO_UNDEF, 08, 04, 00, 8, 9, 5) > 0)
+	{
+		actOffEvent( 3 );
+	}
+*/
+	Event( _getPlObjT( TOBJ_UNDEFINED) == 0 )
+	{
+		_actPlayBriefing("Failure 01");
+	}
+
+	// if Artifacts are destroyed... Game Over
+	Event( GetArt() < 3 , 1 )
+	{
+		_actPlayBriefing("Failure 02");
+
+		_actOnTimer( 20 ) ;
+		actOnEvent( 100 );
+	}
+		
+	// Creation of Artifacts
+	Event ( _getTimerTime() == 0, 2)
+	{
+		_actSetScreen(12,10, SCROLL_SOFT);
+		ActCreateArt( TART_NON_LINEAR_PHOTON_CONCENTRATOR, CIV_BO, 15, 08, 02, "", "", VEFF_TELEPORT );
+		ActCreateArt( TART_PLASMIC_TURBOCOMPRESSOR, CIV_BO, 15, 10, 02, "", "", VEFF_TELEPORT );
+		ActCreateArt( TART_ION_PLASMIC_ACCUMULATOR, CIV_BO, 15, 12, 02, "", "", VEFF_TELEPORT );
+
+		_actAddObjective( 2, GetStrRes(22));
+		_actPlayBriefing("Briefing 04");
+		_actOffTimer(); 
+
+	//	_actOnTimer( 120 );
+		
+		if( GetPlObjT( PLAYER_6, AIREL_MYSELF, TOBJ_UNDEFINED) >0 )
+		{
+			_actAddObjective( 3, GetStrRes(23));
+			_actPlayBriefing("Briefing 05");
+		}
+
+		actOnEvent( 1 ) ;
+	}
+
+	// If a Lab is destroyed before being captured... Game Over
+/*	Event( GetPlObjT( PLAYER_1, AIREL_MYSELF, TOBJ_RESEARCH_LABORATORY, LOGO_UNDEF, 08, 04, 00, 8, 9, 5) < 3 ,3 )
+	{
+		_actPlayBriefing("Failure 03");
+
+		_actOnTimer( 15 );
+		actOnEvent( 100 );
+	}
+*/
+	EventPlObjKilled( _PI0 == PLAYER_1 && _PI3 == TOBJ_RESEARCH_LABORATORY,3 )
+	{
+		_actPlayBriefing("Failure 03");
+
+		_actOnTimer( 15 );
+		actOnEvent( 100 );
+	}
+
+
+	// IF Arts Unloaded And WS Annihiliated then Win...
+	Event ( _RT1 == TRUE && GetPlObjT( PLAYER_6, AIREL_MYSELF, TOBJ_UNDEFINED ) == 0 &&
+		_getPlObjT( TOBJ_RESEARCH_LABORATORY, LOGO_UNDEF, 08, 04, 00, 8, 9, 5) == 3)
+	{ActSaveMission();
+		_actPlayBriefing("Victory");
+
+		_actOnTimer( 20 );
+		actOnEvent( 101 );
+	}
+
+	// Calls mission Failure Screen
+	Event(_getTimerTime()==0,100)
+	{
+		
+		_actTotalStatistics(10);
+		_actEndMiss(ENDMISS_FAILED);
+
+	}
+	
+	// Calls mission success Screen
+	Event(_getTimerTime()==0,101)
+	{_actVideo(5, "SI_05.avi",MODE_RECT,MODE_640x480,MODE_24BIT,0,94,640,292,MODE_WHOLE);
+		_actTotalStatistics(10);
+		_actEndMiss(ENDMISS_ACCOMPL);
+		_actNextMiss("miss306");
+	}
+
+// =============================================================================
+//	Technology Development
+// =============================================================================
+
+include<[_inc_path]\TechDev.txt>;
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+//	Mission 5 Maximum Tech Counts
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	StructureModuleMaxTechCount = 12;
+	MobilityModuleMaxTechCount = 2;
+	SubmarineModuleMaxTechCount = 5;
+	IntelligenceModuleMaxTechCount = 9;
+	RegenerationModuleMaxTechCount = 3;
+	EnergyModuleMaxTechCount = 3;
+	SuperTechModuleMaxTechCount = 2;
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+//	Enable required research modules
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Event( TRUE )
+
+{
+	if( StructureModuleTechCount == StructureModuleMaxTechCount ) { _actBldObj( TOBJ_STRUCTURE_HUB_MODULE, FALSE ); 	}
+	if( MobilityModuleTechCount == MobilityModuleMaxTechCount ) { _actBldObj( TOBJ_MOBILITY_HUB_MODULE, FALSE ); }
+	if( SubmarineModuleTechCount == SubmarineModuleMaxTechCount ) { _actBldObj( TOBJ_SUBMARINE_HUB_MODULE, FALSE ); }
+	if( IntelligenceModuleTechCount == IntelligenceModuleMaxTechCount ) { _actBldObj( TOBJ_INTELLIGENCE_HUB_MODULE, FALSE ); }
+	if( RegenerationModuleTechCount == RegenerationModuleMaxTechCount ) { _actBldObj( TOBJ_REGENERATION_HUB_MODULE, FALSE ); }
+	if( EnergyModuleTechCount == EnergyModuleMaxTechCount ) { _actBldObj( TOBJ_ENERGY_HUB_MODULE, FALSE ); }
+	if( SuperTechModuleTechCount == SuperTechModuleMaxTechCount ) { _actBldObj( TOBJ_SUPER_TECH_HUB_MODULE, FALSE ); }
+}
+
+
+
+	CloseEvents();
+
+CloseArbiter();

@@ -1,0 +1,33 @@
+
+OpenFleet("SI Raider 00", CIV_SI, AIF_MILITARY, 9);
+  // Staff
+  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
+  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
+  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
+  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
+  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
+  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
+  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
+  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
+  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
+
+  PutInStaff(TOBJ_USURPER            , TOBJ_SHS_SUB     , TOBJ_UNDEFINED, 16);
+  PutInStaff(TOBJ_USURPER            , TOBJ_SHS_SUB     , TOBJ_UNDEFINED, 16);
+
+  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB     , TOBJ_UNDEFINED, 16);
+  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB     , TOBJ_UNDEFINED, 16);
+  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB     , TOBJ_UNDEFINED, 16);
+  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB     , TOBJ_UNDEFINED, 16);
+
+  PutInStaff(TOBJ_PARALYSIS_PROBE    , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 5);
+  PutInStaff(TOBJ_VERMIN          , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 5);
+  PutInStaff(TOBJ_REPLENISHER        , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 4);
+
+  // Param  
+  CanChangeStaff(AICAN_MYSELF); 
+  Patrol(AICAN_MYSELF, 0, 300);
+  GuardZones(AICAN_MYSELF, AITRG_ALL, 1, 0, 280);
+  Raid(AICAN_MYSELF, AITRG_BOATCIVIL, 10, 2, AIATTACK_GLADE, 180, 180);
+  RepairStaff(AICAN_MYSELF, 50, 5, AISF_HOMEPOSITION+AISF_PATROL+AISF_PAUSE, AITRG_ALL);
+  Offensive(AICAN_MYSELF, AITRG_TLOPRODUCTIVE+AITRG_TLOSUPPLY, 8, 3, 250);
+CloseFleet();

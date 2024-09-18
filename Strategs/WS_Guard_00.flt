@@ -1,0 +1,39 @@
+
+OpenFleet("WS Guard 00", CIV_WS, AIF_MILITARY, 9);
+  // Staff
+  PutInStaff(TOBJ_CRUISER,  TOBJ_SENTINEL ,TOBJ_UNDEFINED, 35);
+  PutInStaff(TOBJ_CRUISER,  TOBJ_SENTINEL ,TOBJ_UNDEFINED, 35);
+  PutInStaff(TOBJ_CRUISER,  TOBJ_HUNTER   ,TOBJ_UNDEFINED, 35);
+  PutInStaff(TOBJ_CRUISER,  TOBJ_HUNTER   ,TOBJ_UNDEFINED, 35);
+
+  PutInStaff(TOBJ_MARAUDER  ,  TOBJ_SENTINEL,TOBJ_UNDEFINED, 10);
+  PutInStaff(TOBJ_MARAUDER  ,  TOBJ_HUNTER  ,TOBJ_UNDEFINED, 10);
+
+  PutInStaff(TOBJ_TERMINATOR,  TOBJ_CRUISER ,TOBJ_SENTINEL, 40);
+  PutInStaff(TOBJ_TERMINATOR,  TOBJ_CRUISER ,TOBJ_HUNTER  , 40);
+  PutInStaff(TOBJ_TERMINATOR,  TOBJ_CRUISER ,TOBJ_HUNTER  , 40);
+
+  PutInStaff(TOBJ_LIBERATOR ,  TOBJ_MARAUDER,TOBJ_SENTINEL, 40);
+  // Param
+  CanChangeStaff(AICAN_MYSELF);
+  Patrol(AICAN_MYSELF, 0, 360);
+  GuardZones(AICAN_MYSELF, AITRG_ALL, 1, 0, 180);
+  RepairStaff(AICAN_MYSELF, 50, 5, AISF_HOMEPOSITION+AISF_PATROL+AISF_PAUSE, AITRG_ALL);
+  Offensive(AICAN_MYSELF, AITRG_TLORC, 7, 3, 310);
+CloseFleet();
+
+/*
+TOBJ_SENTINEL                       = 1; 
+TOBJ_HUNTER                         = 2; 
+TOBJ_CRUISER                        = 3; 
+
+TOBJ_DC_BOMBER                      = 4; // HUNTER 
+TOBJ_MINE_LAYER                     = 5; // HUNTER 
+
+TOBJ_MARAUDER                       = 6; // HUNTER 
+
+TOBJ_TERMINATOR                     = 10; 
+TOBJ_LIBERATOR                      = 11; // HUNTER делает видимымми фантомы по одному в эскадру
+
+TOBJ_CYBER_WORM                     = 9; 
+*/

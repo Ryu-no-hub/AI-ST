@@ -1,0 +1,316 @@
+//-
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"tutor301");
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("THE NEW CIRCLE");
+
+// text description of the mission
+initsar(10, 10);
+//-0
+setsar("Well done! Your drill is complete. Take control of our forces!@ Good luck!");
+
+//-1 1
+setsar("Let's start your drill. Go to the open area on the map. Click on the CAPSULE-PROTOTYPE (by default left click) and click on the open area (by default right click).");
+//-2 2
+setsar("Note that the CAPSULE-PROTOTYPE can only be used once. The first step is to build a PROTOPLASM GENERATOR. Click on the BUILD OBJECT button, then click on the BASIC CONSTRUCTIONS switch and click on the PROTOPLASM GENERATOR. Choose a place to build it with a left click (image should be green).");
+//-3 3
+setsar("To build other structures you have to build more CAPSULE-PROTOTYPES. Produce 3 CAPSULE-PROTOTYPES in the PROTOPLASM GENERATOR now. Click on the PROTOPLASM GENERATOR, then on the BUILD SUBMARINE button and on the SUPPLY SUBS switch and choose the CAPSULE-PROTOTYPE. You can click on the CAPSULE-PROTOTYPE several times to build more than one submarine.");
+//-4 4
+setsar("You need to build  extractors to get  resources (CORIUM and SILICON). Click on the CAPSULE-PROTOTYPE, then on the BUILD OBJECT button, then click on the SUPPLY CONSTRUCTIONS switch and build a SILICON EXTRACTOR. Then click on the second CAPSULE-PROTOTYPE and build a CORIUM COLLECTOR.");
+//-5 5
+setsar("To store extracted CORIUM you need a CORIUM SILO. Build it close to the CORIUM COLLECTOR (SUPPLY CONSTRUCTIONS switch).");
+//-6 6
+setsar("To transport extracted resources you need a TRANSPORT (The SUPPLY SUBS switch in the PROTOPLASM GENERATOR). When you have built the TRANSPORT click on it and right click (by default) on the collector. The TRANSPORT will be loaded with the extracted CORIUM and will bring it to the CORIUM SILO.");
+//-7 7
+setsar("To continue developing your base produce 4 more CAPSULE-PROTOTYPES in the PROTOPLASM GENERATOR. Click on the PROTOPLASM GENERATOR, then on the BUILD SUBMARINE button and on the SUPPLY SUBS switch and choose the CAPSULE-PROTOTYPE.");
+//-8 8
+setsar("Your structures will need ENERGY. Build an ENERGY ACCUMULATOR now to extract ENERGY from the METAL SOURCE.");
+//-9 9
+setsar("The next important structure is the REPLENISH POD (BASIC CONSTRUCTIONS switch). The REPLENISH POD will save and distribute extracted ENERGY for your submarines. Without the REPLENISH POD your submarines and structures cannot recharge.");
+//-10 10
+setsar("The COMMAND HUB is the basic research facility of your base. It needs specific additional facilities, so you have to build the COMMAND HUB free from other structures around it. Build the COMMAND HUB now.");
+//-11 11
+setsar("To make DEFENSIVE researches you have to build a STRUCTURE HUB MODULE cell. Click on the COMMAND HUB, then click on the BUILD RESEARCH MODULES button and choose the STRUCTURE HUB MODULE. Build it around the main COMMAND HUB.");
+//-12 12
+setsar("To produce weapons you will need to build an ARSENAL. Build an ARSENAL now (BASIC CONSTRUCTIONS switch).");
+//---
+//---
+//-13  20
+setsar("The first stage of your drill is done. You will now learn how to defend your base.");
+//-14
+setsar("To build defensive structures you have to research some defensive technologies. Click on the STRUCTURE HUB MODULE cell, then click on the RESEARCH NEW TECHNOLOGY button and click on the POLARIZED PLASMA PULSAR.");
+//-15 21
+setsar("Researching of the POLARIZED PLASMA PULSAR TECHNOLOGY is done. Now you have to build 3 CAPSULE-PROTOTYPES.");
+//-16 22
+setsar("Now build 3 PP PULSARS (DEFENSIVE CONSTRUCTIONS switch) to the North of your base.");
+//-17 23
+setsar("To produce new types of submarines you have to research new technologies. Build the SUBMARINE HUB MODULE cell now. Click on the COMMAND HUB, then click on the BUILD RESEARCH MODULES button and choose the SUBMARINE HUB MODULE.");
+//-18 24
+setsar("Research the BIO-ACID SHELLS TECHNOLOGY in the SUBMARINE HUB MODULE cell. Click on the SUBMARINE HUB MODULE, then click on the RESEARCH NEW TECHNOLOGY button and choose the BIO-ACID SHELLS.");
+//-19 25
+setsar("You can now produce the BIO-ACID ASSAULTER submarine. However you can increase it's power by researching the ACOUSTIC MINES TECHNOLOGY. Click on the SUBMARINE HUB MODULE cell, then click on the RESEARCH NEW TECHNOLOGY button and choose the ACOUSTIC MINES.");
+//-20 26
+setsar("Now produce the BIO-ACID ASSAULTER submarine. Click on the PROTOPLASM GENERATOR, then on the BUILD SUBMARINE button and on the SPECIAL SUBS switch and choose the BIO-ACID ASSAULTER.");
+//-21 27
+setsar("Set the ACOUSTIC MINE in front of your PP PULSARS. Click on the SET SPECIAL EQUIPMENT button, click on an area where you want the ACOUSTIC MINE placed. Remember that the mine will be set on the same depth as the BIO-ACID ASSAULTER.");
+//-22 28 
+setsar("After setting your mines move away to avoid getting blown up with your own mine.");
+//-23 29
+setsar("The second stage of your drill is now complete. The next stage is capturing of an enemy structure. Build a INTELLIGENCE HUB MODULE cell now.");
+//-24 30
+setsar("It's time to develop the ENEMY CAPTURE TECHNOLOGY. Click on the INTELLIGENCE HUB MODULE cell and run the ENEMY CAPTURE TECHNOLOGY.");
+//-25 31
+setsar("Researching of the ENEMY CAPTURE TECHNOLOGY is done. Produce an Usurper submarine now (SPECIAL SUBS switch in the PROTOPLASMA GENERATOR).");
+//-26 32
+setsar("Go to the North and capture the enemy CORIUM MINE. Click on the CAPTURE OBJECT button and then left click on the structure to capture it. Note that the capturing is not always successful. Sometimes you have to repeat it several times.");
+//-27 33
+setsar("Produce a SUPPLIER (SUPPLY SUBS switch) in the PROTOPLASM GENERATOR now.");
+//-28 34
+setsar("Load the BIO-ACID ASSAULTER on the SUPPLIER now. Click on the SUPPLIER, then click on the LOAD OBJECT button and click on the BIO-ACID ASSAULTER.");
+//-29 35
+setsar("Go to the captured CORIUM MINE in the Northern part of the map and unload the BIO-ACID ASSAULTER there. To unload the BIO-ACID ASSAULTER click on the UNLOAD OBJECT button.");
+
+//--------
+// PROLOG
+//--------
+//-30
+setsar("652 GGR 12.43.756.778@866 FG@Urgent message. 42:13:00");
+//-31
+setsar("@ The necessity obliges us to mobilize all our efforts and abilities. The survival on this hostile and uncongenial planet is our main task and responsibility to our descendants. Training is the basic principle of our victory and return to our mother planet. Merit your ancestors.@ @ It's dogged that does it.");
+
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar(" ");
+name("OBJECTIVES"); putsar();    
+
+// script for play
+name("TASKPLAY");
+inittask("DEFAULT_SI_ANIMATED", "DEFAULT_SI"); // инициализировать таблицу
+ Time(0);
+ SetLevel(10); SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_MENU,   15, 490, 145, 40);
+ ShowBut(TBTYPE_BACK,   35, 540, 145, 40);
+ ShowBut(TBTYPE_START, 620, 540, 145, 40);
+ 
+ SetColor(1, 1, 1, 0); SetLevel(10);
+ ShowATask(0,  55,  65, 575,  80, 1, 30, 1, 15, 10, 1);
+ 
+ SetColor(0, 0, 0, 0); SetLevel(10);
+ Time(70); StartWave("DEFAULT_BIP");
+ ShowTTask(1, 160, 170, 620, 160, 1, 31, 1, 10, 5); 
+puttask();  // добавить Task в секцию M_DAR
+
+// script for play
+name("BRIEF1");
+initbriefing(); 
+ Time(0);
+ BriefingAni(25, 3, "");
+ BriefingText(1, 1, 1, 1);   
+putbriefing();
+
+name("BRIEF2");
+initbriefing(); 
+ Time(0);
+ BriefingAni(25, 3, "");
+ BriefingText(2, 1, 1, 1);
+putbriefing();
+
+name("BRIEF3");
+initbriefing(); 
+ Time(0);
+ BriefingAni(92, 3, "");
+ BriefingText(3, 1, 1, 1);
+putbriefing();
+
+name("BRIEF4");
+initbriefing(); 
+ Time(0);
+ BriefingAni(25, 3, "");
+ BriefingText(4, 1, 1, 1);
+putbriefing();
+
+name("BRIEF5");
+initbriefing(); 
+ Time(0);
+ BriefingAni(25, 3, "");
+ BriefingText(5, 1, 1, 1);
+putbriefing();
+
+name("BRIEF6");
+initbriefing(); 
+ Time(0);
+ BriefingAni(92, 3, "");
+ BriefingText(6, 1, 1, 1);
+putbriefing();
+
+name("BRIEF7");
+initbriefing(); 
+ Time(0);
+ BriefingAni(92, 3, "");
+ BriefingText(7, 1, 1, 1);
+putbriefing();
+
+name("BRIEF8");
+initbriefing(); 
+ Time(0);
+ BriefingAni(25, 3, "");
+ BriefingText(8, 1, 1, 1);
+putbriefing();
+
+name("BRIEF9");
+initbriefing(); 
+ Time(0);
+ BriefingAni(25, 3, "");
+ BriefingText(9, 1, 1, 1);
+putbriefing();
+
+name("BRIEF10");
+initbriefing(); 
+ Time(0);
+ BriefingAni(25, 3, "");
+ BriefingText(10, 1, 1, 1);
+putbriefing();
+
+name("BRIEF11");
+initbriefing(); 
+ Time(0);
+ BriefingAni(83, 3, "");
+ BriefingText(11, 1, 1, 1);
+putbriefing();
+
+name("BRIEF12");
+initbriefing(); 
+ Time(0);
+ BriefingAni(25, 3, "");
+ BriefingText(12, 1, 1, 1);
+putbriefing();
+
+name("BRIEF20");
+initbriefing(); 
+ Time(0);
+ BriefingAni(83, 3, "");
+ BriefingText(13, 1, 1, 1);
+ Time(20*25);
+ BriefingText(14, 1, 1, 1);
+putbriefing();
+
+name("BRIEF21");
+initbriefing(); 
+ Time(0);
+ BriefingAni(92, 3, "");
+ BriefingText(15, 1, 1, 1);
+putbriefing();
+
+name("BRIEF22");
+initbriefing(); 
+ Time(0);
+ BriefingAni(25, 3, "");
+ BriefingText(16, 1, 1, 1);
+putbriefing();
+
+name("BRIEF23");
+initbriefing(); 
+ Time(0);
+ BriefingAni(83, 3, "");
+ BriefingText(17, 1, 1, 1);
+putbriefing();
+
+name("BRIEF24");
+initbriefing(); 
+ Time(0);
+ BriefingAni(85, 3, "");
+ BriefingText(18, 1, 1, 1);
+putbriefing();
+
+name("BRIEF25");
+initbriefing(); 
+ Time(0);
+ BriefingAni(85, 3, "");
+ BriefingText(19, 1, 1, 1);
+putbriefing();
+
+name("BRIEF26");
+initbriefing(); 
+ Time(0);
+ BriefingAni(92, 3, "");
+ BriefingText(20, 1, 1, 1);
+putbriefing();
+
+name("BRIEF27");
+initbriefing(); 
+ Time(0);
+ BriefingAni(33, 3, "");
+ BriefingText(21, 1, 1, 1);
+putbriefing();
+
+name("BRIEF28");
+initbriefing(); 
+ Time(0);
+ BriefingAni(33, 3, "");
+ BriefingText(22, 1, 1, 1);
+putbriefing();
+
+name("BRIEF29");
+initbriefing(); 
+ Time(0);
+ BriefingAni(83, 3, "");
+ BriefingText(23, 1, 1, 1);
+putbriefing();
+
+name("BRIEF30");
+initbriefing(); 
+ Time(0);
+ BriefingAni(89, 3, "");
+ BriefingText(24, 1, 1, 1);
+putbriefing();
+
+name("BRIEF31");
+initbriefing(); 
+ Time(0);
+ BriefingAni(92, 3, "");
+ BriefingText(25, 1, 1, 1);
+putbriefing();
+
+name("BRIEF32");
+initbriefing(); 
+ Time(0);
+ BriefingAni(34, 3, "");
+ BriefingText(26, 1, 1, 1);
+putbriefing();
+
+name("BRIEF33");
+initbriefing(); 
+ Time(0);
+ BriefingAni(92, 3, "");
+ BriefingText(27, 1, 1, 1);
+putbriefing();
+
+name("BRIEF34");
+initbriefing(); 
+ Time(0);
+ BriefingAni(27, 3, "");
+ BriefingText(28, 1, 1, 1);
+putbriefing();
+
+name("BRIEF35");
+initbriefing(); 
+ Time(0);
+ BriefingAni(27, 3, "");
+ BriefingText(29, 1, 1, 1);
+putbriefing();
+
+name("BRIEF100");
+initbriefing(); 
+ Time(0);
+ BriefingAni(83, 3, "");
+ BriefingText(0, 1, 1, 1);
+ Time(30*25);
+ BriefingStop();
+putbriefing();
+

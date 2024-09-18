@@ -1,0 +1,126 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss209");
+//append(out_campaign+"MissTest");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\bo\\";
+source(in_br+"bot_0900.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Destiny");
+
+// text description of the mission
+initsar(40, 10);
+//- objectives  0-9
+setsar("Reduce the White Shark Capital.");
+setsar("Destroy all White Sharks TLS's in the area.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- reports    10-19
+setsar("Mission Accomplished");
+setsar("Mission Failed");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar(" The world has taken a step toward a better future.  The whole human race will thank you someday, but we have the honor of thanking you now.");
+setsar(" Mission Failed.");
+//- briefings 20-29
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("Sector SWS 32. South Pacific.@To the leader of the 19th Special Squadron.@Top secret.");
+setsar(" Commander, we are now prepared to end the White Shark threat. Our fleets were able to break their lines of defense with a surprise attack and their capital is exposed.@ The High Command has given you the honor of closing this chapter of our history. Destroy the Sharks' power for all time.");
+setsar(" The White Sharks are not hesitating to use the Thermo-nuclear Bombs if they have any. That is why we do recommend you use the CentComps with the developed \" Anti Mass Weapons Defense system \" technology.@ We have yet unconfirmed reports that the White Sharks have a few Thermo-Nuclear launching Shafts (TLS) scattered over various parts of your sector. The destruction of the TLSs will avoid our mass losses.");
+setsar("");
+setsar("");
+//-names		35 Names-
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Reduce the White Shark Capital.");
+setsar("Destroy all White Sharks TLS's in the area.");
+name("OBJECTIVES"); putsar();    
+
+name("TASKPLAY");
+inittask("DEFAULT_BO_ANIMATED", "DEFAULT_BO");
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(1, 1, 1, 1);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+ //-- heading
+ SetColor(1, 1, 1, 0);
+ SetLevel(10);
+ ShowATask(0, 50,  20, 700,  80, 1, 30, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 31, 1, 10, 30, 1); 
+ Time(690);                
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(700);
+ ShowATask(2, 100, 120, 600, 210, 1, 32, 1, 10, 10, 1); 
+ Time(1420);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(1440);
+ HideATask(2); StartWave("DEFAULT_BIP");
+ 
+ Time(1460);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 180, 550, 170); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();
+
+// script for play
+name("BRIEF_1");
+initbriefing(); 
+ Time(0); 
+ BriefingText(18, 1, 1, 1);
+	Time(1*25);
+	BriefingAni(0, 0, "BOFACE2");	// показать говорящего 
+ Time(14*25);
+	BriefingAni(0, 0, "");		// спрятать говорящего   
+	Time(17*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();

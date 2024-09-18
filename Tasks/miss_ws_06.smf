@@ -1,0 +1,206 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss106");
+//append(out_campaign+"MissTest");
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Sudden Impact");
+
+//Speach for Briefing and Task
+
+#if(_DEBUG)
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wst_0600.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+/*
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0601.wav"); name("Briefing1");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0602.wav"); name("Briefing2");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0603.wav"); name("Briefing3");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0604.wav"); name("Briefing4");  putwav(1, _MF_PCM);
+*/
+#endif
+
+// text description of the mission
+initsar(50, 10);
+//- objectives  0-9
+setsar("Find and join the fleet of the 2nd Department within 10 minutes.");
+setsar("Build a SubCenter in the northeastern part of the sector next to the ally base.");
+setsar("Protect 3 TechCenters and TradeCenter of the 2nd Department from enemy attacks till you get special directives.");
+setsar("Unload 6 containers with 2000 units of Cm276 each to the TradeCenter \"Big Belly 17\".");
+setsar("Capture the Silicons Gate in the northwestern part of the sector.");
+setsar("Wait for 2 Silicon Artifacts to appear next to the captured Gate and load them onto RepSubs.");
+setsar("Deliver the 2 Silicon Artifacts to the TechCenter.");
+setsar("Research the \"Psy-technology\" technology without losing the 2 Silicon Artifacts.");
+setsar("Annihilate the strong point of the Silicons in the western part of the sector.");
+setsar("");
+//- reports    10-19
+setsar("Essential constructions have been destroyed.");
+setsar("You have destroyed all enemies, but your task is not complete.");
+setsar("It's a victory!");
+setsar("The ally Base has been found.");
+//!@
+setsar("You have joined the fleet of the 2nd Department");
+setsar("");
+setsar("");
+//!@
+setsar("Time has run out, you have lost the mission.");
+setsar("Mission Accomplished.");
+setsar("Mission Failed");
+//- briefings 20-29
+setsar(" Immediately build a base in the southeastern part of the sector. You will need local teleportation to relocate to that area. Use the TranCenter to do that. The destination area is abundant in Corium and you will have to transfer several containers with Corium to the northeastern part of the sector and upload them into our TradeCenter \"Big Belly 17\". Wish you all success.");
+setsar(" We have intercepted a message that the Silicons have contacted our enemies, concerning the Black Octopi, and are going to pass them samples of the newest Psy-technology to create Psy-field generators, which promise to be very effective in establishing solid lines of defense. Your mission is to capture the Silicon's Gate before the Silcon Artifacts containing technology samples arrive through it. Load the Silicon Artifacts on RepSubs and deliver them to your TechCenter to research the Psy-technology.");
+setsar(" Great work! But your mission is not over yet. Your division must destroy the Silicons base and all Silicons objects in the area.");
+setsar(" I am sorry, but the circumstances are beyond my control. Next time when we meet you may ask me why I've done this. Farewell...");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("@Sector TH 46. Central Atlantic.@To the leader of the special division of the 6th Strike Wing.@Top secret.");
+setsar("@ We are glad to hear you again. The sudden attack of the Silicons dispersed our doubts about their existence on our planet. We know how intelligent those extraterrestrials are but there is no doubt that they are dangerous to us.@ @ Your mission will be to get more information about the Silicons power, their location and their molecular structure.");
+setsar("@ For this assignment you are given the 37th Special division which is awaiting your orders now. @ @ Your actions will be co-ordinated with the 2nd Department of Paranormal phenomena of the Central Security Agency (CSA). You will have to support the CSA fleet and to cover it in case of necessity.@ @ From the moment you join the fleet you are under the command of the 2nd Department till you get a special directive from the Supreme Staff.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+	//---names------
+setsar("TechCenter A1");		 //techA1
+setsar("TechCenter A2");		 //techA2
+setsar("TechCenter A3");		 //techA3
+setsar("SubCenter S1");			 //subC1
+setsar("SI X-Box 1");		 //xBoxSi1
+setsar("SI X-Box 2");		 //xBoxSi2
+setsar("Gate 23.675-TH");										//nGate1
+setsar("C-Platform");		//cPlatf
+setsar("Big Belly 17");		//nTradC
+setsar("");
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Find and join the fleet of the 2nd Department within 10 minutes.");
+name("OBJECTIVES"); putsar();    
+
+name("TASKPLAY");
+inittask("DEFAULT_WS_ANIMATED", "DEFAULT_WS"); // инициализировать таблицу
+ Time(0);
+ // set controls 
+ SetLevel(10); 
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_MENU, 20, 450, 145, 40);
+ ShowBut(TBTYPE_BACK, 50, 500, 145, 40);
+ ShowBut(TBTYPE_SKIP, 605, 500, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(220, 570, 340, 570, 460, 570);
+
+ SetColor(0, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 180,  20, 590, 100, 1, 30, 1, 15, 10, 1);
+
+//-
+ SetColor(1, 1, 0, 0);
+ SetLevel(10);
+ Time(150);
+ StartWave("DEFAULT_BIP"); StartWave("TaskSpeach");
+ ShowATask(1, 110, 135, 580, 295, 1, 31, 1, 15, 55, 1); 
+
+ Time(660);
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(665);
+ ShowATask(1, 110, 135, 580, 295, 1, 32, 1, 15, 30, 1); 
+ 
+ Time(1380);
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(1400);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(1420);
+
+ SetColor(1, 1, 0, 1); StartWave("DEFAULT_BIP");
+ ShowObjectives(105, 230, 590, 130); 
+ HideBut(TBTYPE_SKIP);
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 635, 450, 145, 40);
+ ShowBut(TBTYPE_START,  605, 500, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+// script for play
+name("BRIEF_1");
+initbriefing(); 
+ Time(0); 
+ BriefingText(20, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(4, 1, "");		// показать говорящего DC Bomber-leader
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing1");
+ Time(22*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(35*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_2");
+initbriefing(); 
+ Time(0); 
+ BriefingText(21, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(4, 1, "");		// показать говорящего DC Bomber-leader
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing2");
+ 
+ Time(23*25);
+ BriefingAni(7, 1, "");		// показать RepSub в окне TV
+ Time(26*25);
+ BriefingAni(4, 1, "");		// снова показать говорящего DC Bomber-leader
+
+ Time(29*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(44*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_3");
+initbriefing(); 
+ Time(0); 
+ BriefingText(22, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(4, 1, "");		// показать говорящего DC Bomber-leader
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing3");
+ Time(9*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(13*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_4");
+initbriefing(); 
+ Time(0); 
+ BriefingText(23, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(4, 1, "");		// показать говорящего DC Bomber-leader
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing4");
+ Time(9*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(13*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();

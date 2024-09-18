@@ -1,0 +1,206 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss302");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\si\\";
+source(in_br+"sit_0200.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Escalation");
+
+
+// text description of the mission
+initsar(40, 10);
+/* 00000 */ setsar("1372 FGR 17.53.456.745 @573 HK @Urgent Message. 35:43:00");
+/* 00001 */ setsar("Alert! Alert!  A surprise human assault is in progress as we speak in the Northern Crater.  @ @We must evacuate as many artifacts as we can to minimize the disruption of our plans.");
+/* 00002 */ setsar("Protect the main Command Hub from attacking human forces.");
+/* 00003 */ setsar("Evacuate 6 Suppliers with artifacts and silicon containers to the West.");
+/* 00004 */ setsar("Corium supplies have arrived safely at the Northern Crater, however loathsome humans have sterilized this area.");
+/* 00005 */ setsar("We have managed to salvage the Artifacts concealed here, however they must be escorted along with our precious Corium cargo to the extraction point in the West.");
+/* 00006 */ setsar("In order to send our exact evacuation coordinates we must protect this outpost's Command Hub until all six suppliers have escaped safely to the West.");
+/* 00007 */ setsar("Suppliers now arriving at extraction zone.  Emitting evacuation coordinates ... Energizing ...");
+/* 00008 */ setsar("Without the Main Command Hub to emit our evacuation coordinates, extraction of our Suppliers is impossible ... we have humiliated our great species.");
+/* 00009 */ setsar("This outpost's Main Command Hub has been destroyed ...");
+/* 00010 */ setsar("One of our Artifacts has been destroyed ...");
+/* 00011 */ setsar("Our Ambassador requires all three of the salvaged Artifacts in order to begin negotiations with the White Sharks ... we have failed miserably.");
+/* 00012 */ setsar("One of our Corium Containers has been destroyed ...");
+/* 00013 */ setsar("We require all 3 Corium containers to establish a sufficient escort for our Ambassador in the next sector.  Negotiations with the White Sharks can no longer be initiated  ... we have failed miserably.");
+/* 00014 */ setsar("Suppliers have escaped safely ... mission successful.");
+/* 00015 */ setsar("You are to ensure the escape of six suppliers carrying artifacts and corium from the doomed base. @ @You will have access to a command hub that must be protected from human forces in the area.  @ @Ensure the evacuation of the suppliers, artifacts and Corium containers to the west.");
+/* 00016 */ setsar("Protect the main Command Hub from attacking human forces.");
+/* 00017 */ setsar("Evacuate 6 Suppliers with artifacts and silicon containers to the west.");
+setsar("");
+setsar("");
+//- briefings 20-29
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("1372 FGR 17.53.456.745@573 HK@Urgent message. 35:43:00");
+setsar(" Alert! Alert!@ @ A surprise human assault is in progress as we speak in the Northern Crater.@ @ We must evacuate as many artifacts as we can to minimize the disruption of our plans.");
+setsar("@ You are to ensure the escape of six suppliers carrying artifacts and corium from the doomed base.@ @ You will have access to a command hub that must be protected from human forces in the area.@ @ Ensure the evacuation of the suppliers, artifacts and Corium containers to the west.");
+setsar("");
+setsar("");
+//-names		35 Names-
+setsar("");					//	
+setsar("");			   		//
+setsar("");    	        	//
+setsar("");				        	//
+setsar("");		           //
+name("DESCRIPTION"); putsar();    
+
+
+// mission objectives
+initsar(10, 10);
+setsar("Protect the main Command Hub from attacking human forces.");
+setsar("Evacuate 6 Suppliers with artifacts and silicon containers to the west.");
+name("OBJECTIVES"); putsar();    
+
+name("TASKPLAY");
+inittask("DEFAULT_SI_ANIMATED", "DEFAULT_SI"); // инициализировать таблицу
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+ //-- heading
+ SetColor(1, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 170,  20, 600,  80, 1, 30, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 31, 1, 10, 30, 1); 
+ Time(560);
+ HideATask(1); StartWave("DEFAULT_BIP");
+ 
+ Time(570);
+ ShowATask(2, 100, 120, 600, 210, 1, 32, 1, 10, 20, 1); 
+
+ Time(1220);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(1240);
+ HideATask(2); StartWave("DEFAULT_BIP");
+ 
+ Time(1260);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 180, 550, 170); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+name("Victory");
+initbriefing();
+Time( 0 );
+BriefingText(14, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 500 );
+BriefingAni(0, 0, "");
+putbriefing();
+
+name("Failure 01");
+initbriefing();
+Time( 0 );
+BriefingText(9, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 250 );
+BriefingAni(0, 0, "");
+Time( 300 );
+BriefingText(8, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 750 );
+BriefingAni(0, 0, "");
+Time( 800 );
+BriefingStop();
+putbriefing();
+
+
+name("Failure 02");
+initbriefing();
+Time( 0 );
+BriefingText(10, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 250 );
+BriefingAni(0, 0, "");
+Time( 300 );
+BriefingText(11, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 750 );
+BriefingAni(0, 0, "");
+Time( 800 );
+BriefingStop();
+putbriefing();
+
+
+name("Failure 03");
+initbriefing();
+Time( 0 );
+BriefingText(12, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 250 );
+BriefingAni(0, 0, "");
+Time( 300 );
+BriefingText(13, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 750 );
+BriefingAni(0, 0, "");
+Time( 800 );
+BriefingStop();
+putbriefing();
+
+
+name("Briefing 01");
+initbriefing();
+Time( 0 );
+BriefingText(4, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingText(5, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingText(6, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 1450 );
+BriefingAni(0, 0, "");
+Time( 1500 );
+BriefingStop();
+putbriefing();
+
+
+name("Briefing 02");
+initbriefing();
+Time( 0 );
+BriefingText(7, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+putbriefing();
+
+

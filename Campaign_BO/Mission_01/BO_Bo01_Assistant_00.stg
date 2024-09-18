@@ -1,0 +1,151 @@
+/////////////////////////////////////////////////////////////////////////////
+//
+// Container:    Strategist  "BO BLUE"
+// Campaign:     BO Campaign
+// Mission:      01 "Discovery"
+// Copyright:    2000, Ellipse Studios
+//
+//////////////////////////////////////////////////////////////////////////////
+// Players   Civ    Color     Control      Ally         Enemy
+//----------------------------------------------------------------------------
+// * 0       BO     Blue      Human        -            6
+//   6       SI     Orange    Computer     6            0
+//////////////////////////////////////////////////////////////////////////////
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#if(_env_var0==0)
+ OpenStrateg("Build Base Assistant", CIV_BO, "ASSISTANT 1");
+#else
+ OpenStrateg(assistant1, CIV_BO, "ASSISTANT 1");
+#endif
+ 
+ // Set enemies to human
+ MainEnemy(AICAN_MYSELF, PLAYER_ALL);
+
+ // Assistant tactician
+ OpenTactic("BO Base", CIV_BO, 10);
+
+  // basic base to support needs
+  OpenFleet("BO Base", CIV_BO, AIF_BASE, 15);
+   // Staff
+   PutInStaff(TOBJ_O2_SUBLIMATOR, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 45);
+   PutInStaff(TOBJ_DOCKYARD     , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 41);
+   PutInStaff(TOBJ_SILO         , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 40, 28, 6, 0);
+   PutInStaff(TOBJ_METAL_MINE   , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 40);
+   // Param   
+   Build(AICAN_MYSELF);
+   CanChangeStaff(AICAN_BYORDER);
+   RepairStaff(AICAN_MYSELF, 50, 0, AISF_ALL, AITRG_ALL);
+  CloseFleet();
+
+  // builder (will get assembler from map)
+  OpenFleet("BO Builder", CIV_BO, AIF_BUILD, 12);
+   // Staff
+   PutInStaff(TOBJ_ASSEMBLER, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+   Build(AICAN_MYSELF);
+   RepairStaff(AICAN_MYSELF, 20, 0, AISF_HOMEPOSITION+AISF_PAUSE, AITRG_ALL);
+  CloseFleet();
+ 
+  // metal transports (human will need more metal - so 2 transports)
+  OpenFleet("BO Metal Transport", CIV_BO, AIF_RES, 10);
+   // Staff
+   PutInStaff(TOBJ_CARGO_SUB, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 45);
+   PutInStaff(TOBJ_CARGO_SUB, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 30);
+   GatherRC(AICAN_MYSELF, TOBJ_METAL, 0);
+   RepairStaff(AICAN_MYSELF, 20, 0, AISF_ALL, AITRG_BOATCIVIL);
+  CloseFleet();
+
+  // corium transport
+  OpenFleet("BO Corium Transport", CIV_BO, AIF_MILITARY, 10);
+   PutInStaff(TOBJ_CARGO_SUB, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 45);
+   GatherRC(AICAN_MYSELF, TOBJ_CORIUM, 0);
+   RepairStaff(AICAN_MYSELF, 20, 0, AISF_ALL, AITRG_BOATCIVIL);
+  CloseFleet();
+
+  // some guardians to organize basic defence
+  OpenFleet("BO Guard",CIV_BO, AIF_RES, 10);
+   Patrol(AICAN_BYORDER, 0, 40);
+   SetPatrolPoint(23,  0, 5, 0, 15);
+   SetPatrolPoint(26, 10, 2, 0, 15);
+   SetPatrolPoint(38, 15, 4, 0, 15);
+   GuardZones(AICAN_BYORDER, AITRG_ALL, 1, 0, 120);
+   SetZone(26,0,0, 19,16,5);
+   RepairStaff(AICAN_MYSELF, 90, 0, AISF_ALL, AITRG_ALL);
+  CloseFleet();
+
+ CloseTactic();
+
+ // Events
+ OpenEvents();
+
+  // Execute Tactician
+  Event(getOwnTime() > 1) 
+  { actObjSelectM(AITRG_ALL);
+    actExecTactic("BO Base");
+  };
+
+  // Basic objects were built, so we can build second Silo and Corium mine
+  Event(getPlObjBuilt(AITRG_TLOALL) >= 4)
+  { _RT11 := getFleetNum("BO Base");
+    if(getPlObjT(TOBJ_CORIUM_MINE|AITAKE_NOEMBRYO)     == 0){ actFParPutInStaff(_RT11, TOBJ_CORIUM_MINE    , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 40);}
+    if(getPlObjT(TOBJ_SILO|AITAKE_NOEMBRYO)            <  2){ actFParPutInStaff(_RT11, TOBJ_SILO           , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 40, 25, 3, 0);}
+    if(getPlObjT(TOBJ_GOLD_SUBLIMATOR|AITAKE_NOEMBRYO) == 0){ actFParPutInStaff(_RT11, TOBJ_GOLD_SUBLIMATOR, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 35);}
+  };
+
+  // Staff from previous event were built - 
+  // can build Laboratory, Munitions Factory and Repair Dock
+  Event(getPlObjBuilt(AITRG_TLOALL) >= 7)
+  { _RT11 := getFleetNum("BO Base");
+    if(getPlObjT(TOBJ_RESEARCH_LABORATORY|AITAKE_NOEMBRYO) == 0){ actFParPutInStaff(_RT11, TOBJ_RESEARCH_LABORATORY, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 40);}
+    if(getPlObjT(TOBJ_MUNITIONS_FACTORY|AITAKE_NOEMBRYO)   == 0){ actFParPutInStaff(_RT11, TOBJ_MUNITIONS_FACTORY  , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 40);}
+    if(getPlObjT(TOBJ_REPAIR_DOCK|AITAKE_NOEMBRYO)         == 0){ actFParPutInStaff(_RT11, TOBJ_REPAIR_DOCK        , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 35);}
+    actTScenDevRun(TECH_SCENARIO_OPTIMAL);
+  };
+
+  // Building of base was complete - can build guardians
+  EventPlObjCreated(_PI0 == 0 && _PI1 == CIV_BO && _PI3 == TOBJ_MUNITIONS_FACTORY)
+  { _RT11 := getFleetNum("BO Guard");
+    actFParPutInStaff(_RT11, TOBJ_FIGHTER, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+    actFParPutInStaff(_RT11, TOBJ_FIGHTER, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+    actFParPutInStaff(_RT11, TOBJ_FIGHTER, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+    actFParPutInStaff(_RT11, TOBJ_FIGHTER, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+    actFParPutInStaff(_RT11, TOBJ_FIGHTER, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+    actFParPutInStaff(_RT11, TOBJ_FIGHTER, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+    actFParPutInStaff(_RT11, TOBJ_FIGHTER, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+    actFParPutInStaff(_RT11, TOBJ_FIGHTER, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+    actFParPutInStaff(_RT11, TOBJ_FIGHTER, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+    actFParPutInStaff(_RT11, TOBJ_FIGHTER, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 10);
+  };
+
+  // Time to build second mine
+  Event(_GL1 == 0 && getPlObjT(TOBJ_FIGHTER) >= 8)
+  { _GL1 := 1;
+    _RT11 := getFleetNum("BO Base");
+    actFParPutInStaff(_RT11, TOBJ_METAL_MINE, TOBJ_UNDEFINED,TOBJ_UNDEFINED, 40, 12,1,0);
+    _RT11 := getFleetNum("BO Guard");
+    actFParSetZone(_RT11, 0,0,0, 20,12,5);
+  }
+
+  // If assembler was killed - kill enemy forces on the way to second metal mine
+  EventPlObjKilled(_PI3 == TOBJ_ASSEMBLER && _isin3D(_PI5,_PI6,_PI7, 0,0,0, 20,12,5))
+  { _RT11 := getFleetNum("BO Guard");
+    actObjSelectM(AITRG_BOATARMED); actAddFleet(_RT11);
+    actFCmdAttackZ(_RT11, 0,0,0, 20,12,5, 0, AIATTACK_GLADE | AIADIR_STRAIGHT, 150);
+  }
+
+  // Build third and force silos and asdic 
+  EventPlObjCreated(_PI0 == 0 && _PI1 == CIV_BO && _PI3 == TOBJ_METAL_MINE && getPlObjT(TOBJ_METAL_MINE|AITAKE_NOEMBRYO) >= 2)
+  { _RT10 := getPlObjT(TOBJ_SILO);
+    if(_RT10 < 3)
+    { actFParPutInStaff(_RT11, TOBJ_SILO , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 40, 15,0,0);
+    }
+    if(_RT10 < 4)
+    { actFParPutInStaff(_RT11, TOBJ_SILO , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 20);
+    }
+    actFParPutInStaff(_RT11, TOBJ_ASDIC, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 30);
+  }
+
+ CloseEvents();
+
+CloseStrateg();

@@ -1,0 +1,24 @@
+#if(_env_var0==0)
+ append(_main_path+"\\Missions\\miss202.dkd");
+#else
+ append(_curr_path+"..\\..\\..\\out\\campaign\\miss202.dkd");
+#endif
+
+#if(_env_var1==1)
+	_DEBUG=1;
+#else
+	_DEBUG=0;
+#endif
+
+pack(1);
+
+name("AIBOSS");
+ include<[_curr_path]\Arbiter_Bo02.arb>;
+
+name("STRATEG3000");
+ include<[_curr_path]\WS_Bo02_03.stg>;
+
+name("STRATEG4000");
+ include<[_curr_path]\WS_Bo02_04.stg>;
+
+close();

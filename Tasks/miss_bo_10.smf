@@ -1,0 +1,125 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss210");
+//append(out_campaign+"MissTest");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\bo\\";
+source(in_br+"bot_1000.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Ragnorok");
+
+// text description of the mission
+initsar(40, 10);
+//- objectives  0-9
+/* 00000 */ setsar("Excellent work, General. The Beacon Complex is in our hands. Now it is necessary to keep it in our hands until all Silicons are annihilated in the area. Make no bones of them. We have enough 'material' and technology samples to continue our research and develop good means of protection from the Silicons mass intrusion.");
+setsar("Capture the Silicon Beacon Complex in less than 80 minutes.");
+setsar("Protect the Beacon Complex until all Silicons are annihilated.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- reports    10-19
+setsar("Mission Accomplished");
+setsar("Mission Failed");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar(" Commander, you have saved all of mankind and the Earth as well.  You have given the human race a chance at a new beginning, free from the mistakes and petty bindings of our past.  We can begin to write a new history and you will be on the first page of our new book.");
+setsar(" Mission Failed.");
+//- briefings 20-29
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("Sector SQ 174. South Pacific.@To the leader of the 2nd Assault Squadron.@Top secret.");
+setsar(" Commander, Your record has been impeccable and as a result we are proud to make you the highest-ranking officer. You are now the General of the elite Black Octopi marine forces.@ General, we finally understand why the Silicons were interested in Corium. They have retreated to an extinct volcano in the south and are using Corium to power a beacon that will teleport more aliens across the galaxy to earth.");
+setsar(" If they succeed they will be unstoppable, with their technology they could crush all human life on Earth.@ Take all available forces and capture that Beacon Complex. The Beacon Complex includes several Teleportation Gates, Command Hub and some internal modules.@ The world is counting on you.");
+setsar("");
+setsar("");
+//-names		35 Names-
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Capture the Silicon Beacon Complex in less than 80 minutes.");
+name("OBJECTIVES"); putsar();    
+
+name("TASKPLAY");
+inittask("DEFAULT_BO_ANIMATED", "DEFAULT_BO");
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(1, 1, 1, 1);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+ //-- heading
+ SetColor(1, 1, 1, 0);
+ SetLevel(10);
+ ShowATask(0, 50,  20, 700,  80, 1, 30, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 31, 1, 10, 10, 1); 
+ Time(900);                
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(910);
+ ShowATask(2, 100, 120, 600, 210, 1, 32, 1, 10, 30, 1); 
+ Time(1520);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(1540);
+ HideATask(2); StartWave("DEFAULT_BIP");
+ 
+ Time(1560);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 180, 550, 170); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();
+
+// script for play
+name("BRIEF_1");
+initbriefing(); 
+ Time(0); 
+ BriefingText(18, 1, 1, 1);
+	Time(1*25);
+	BriefingAni(0, 0, "BOFACE2");	// показать говорящего 
+ Time(23*25);
+	BriefingAni(0, 0, "");		// спрятать говорящего   
+	Time(27*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();

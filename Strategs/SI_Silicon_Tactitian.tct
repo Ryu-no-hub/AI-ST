@@ -1,0 +1,9 @@
+
+OpenTactic("SI Resource Base", CIV_SI, 10);
+  // Parameters
+
+  // Fleets
+  include<[_curr_path]\SI_BuildSiliconMines.flt>; 
+  include<[_curr_path]\SI_Prototypes_For_Silicon.flt>; 
+CloseTactic();
+

@@ -1,0 +1,10 @@
+
+OpenTactic("WS Resource Base", CIV_WS, 10);
+  // Parameters
+
+  // Fleets
+  include<[_curr_path]\WS_BaseRc.flt>; 
+  include<[_curr_path]\WS_Builder.flt>; 
+  include<[_curr_path]\WS_Transport_Metal.flt>;
+  include<[_curr_path]\WS_Transport_Corium.flt>; 
+CloseTactic();

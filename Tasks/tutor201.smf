@@ -1,0 +1,322 @@
+//-
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"tutor201");
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("THE START POINT");
+
+// text description of the mission
+initsar(10, 10);
+//-0
+setsar("Well done! Your training is complete. Now you are able to go to battle and take control of our forces! Good luck!");
+
+//-1
+setsar("Let's start our training program. Go to the open area on the map. Click on the ASSEMBLER (by default left click) and click on the open area (by default right click).");
+//-2
+setsar("When you organize a new base you need oxygen to build and support structures.");
+//-3
+setsar("To extract oxygen build an O2 SUBLIMATOR by clicking on the BUILD OBJECT button, then click on the SUPPLY CONSTRUCTIONS switch and choose an O2 SUBLIMATOR. Choose a place to build it with a left click (image should be green).");
+//-4
+setsar("To produce submarines you have to build a DOCKYARD. Click on the BUILD OBJECT button, then click on the BASIC CONSTRUCTIONS switch and choose a DOCKYARD. Choose a place to build it with a left click.");
+//-5
+setsar("You need to build mines to get resources (CORIUM and METAL). Click on the BUILD OBJECT button, then click on the SUPPLY CONSTRUCTIONS switch and build a CORIUM MINE and a METAL MINE.");
+//-6
+setsar("To store extracted resource you need a SILO. Build it close to a mine.");
+//-7
+setsar("To transport extracted resources you need a CARGO SUB. You can build CARGO SUBS in the DOCKYARD. Click on the DOCKYARD, then click on the BUILD SUBMARINE button, click on the SUPPLY SUBS switch, and choose a CARGO SUB. You can click on the CARGO SUB several times to build more than one submarine.");
+setsar("When you have built the CARGO SUB click on it and right click (by default) on the mine. The CARGO SUB will be loaded with the extracted resource and will bring it to the SILO.");
+//-9
+setsar("The next important structure is the RESEARCH LABORATORY. The RESEARCH LABORATORY allows you to develop new technologies and as a result get more powerful weapons, engines and stronger armor. As a result you can build new structures and produce new types of submarines. Build the RESEARCH LABORATORY now (BASIC CONSTRUCTIONS switch).");
+//-10
+setsar("To make a research the RESEARCH LABORATORY needs gold. To extract sublimated gold build a GOLD SUBLIMATOR (SUPPLY CONSTRUCTIONS switch).");
+//-11
+setsar("To trade gold for CORIUM or METAL you will need a MARKET. The MARKET will allow you to sell and buy resources or produce a CONTAINER with CORIUM or METAL.");
+//-12
+setsar("To produce weapons you will need to build a MUNITION FACTORY. Build the MUNITION FACTORY now (BASIC CONSTRUCTIONS switch).");
+//---
+//---
+//-13
+setsar("Your first stage of training is done. You will now learn how to defend your base.");
+//-14
+setsar("To build defensive structures you have to research some defensive technologies. Click on the RESEARCH LABORATORY, then click on the RESEARCH NEW TECHNOLOGY button and click on the LIGHT LASER TECHNOLOGY.");
+//-15
+setsar("Researching of the LIGHT LASER TECHNOLOGY is done. Build 2 LIGHT LASERS on the East side of your base. Build them close to each other.");
+//-16
+setsar("You can repair your structures by clicking on the SELF-REPAIR button.");
+//-17
+setsar("Another way to protect your base is to put LASER SNARES around the base. Click on the RESEARCH LABORATORY and run the LASER SNARE TECHNOLOGY.");
+//-18
+setsar("Researching of the LASER SNARE TECHNOLOGY is now complete. You can now produce DEFENDERS. Click on the DOCKYARD, then the BUILD SUBMARINE button, click on the SPECIAL SUBS switch and build a DEFENDER.");
+//-19
+setsar("Now set the LASER SNARE in front of your LIGHT LASERS. Click on the SET LASER SNARE button, click on an area where you want the LASER SNARE placed. Remember that the snare will be set on the same depth as the DEFENDER.");
+//-20
+setsar("After setting your mines move away to avoid getting blown up with your own snare.");
+//---
+//---
+//-21
+setsar("The second stage of your training is now complete. The next stage is capturing of an enemy structure. Click on the RESEARCH LABORATORY and run the RAIDER EQUIPMENT technology.");
+//-22
+setsar("Researching of the RAIDER EQUIPMENT technology is done. Now you can produce the RAIDER submarine which is able to capture enemy structures.");
+//-23
+setsar("Go to the North and capture the enemy TECHCENTER. Click on the CAPTURE OBJECT button and then left click on the structure to capture it. Note that the capturing is not always successful. Sometimes you have to repeat it several times.");
+//-24
+setsar("The next stage is to build a CONTAINER. Click on the MARKET, then click on the CARGO CONTAINER button, set the resource switch to METAL and produce a CONTAINER with 150 of METAL.");
+//-25
+setsar("Now you have to develop the MOBILE REPAIR PLATFORM technology. Go to the RESEARCH LABORATORY and run this technology there.");
+//-26
+setsar("Researching of the MOBILE REPAIR PLATFORM technology is complete. Produce a REPAIR PLATFORM in the DOCKYARD now.");
+//-27
+setsar("Load the CONTAINER on the REPAIR PLATFORM now. Click on the REPAIR PLATFORM, then click on the LOAD OBJECT button and click on the CONTAINER.");
+//-28
+setsar("Go to the captured TECHCENTER in the Northern part of the map and unload the CONTAINER there. To unload the CONTAINER click on the UNLOAD OBJECT button.");
+//-----------------------
+//-29
+setsar("The ASDIC is a structure that increases the range of sonar visibility on the sonar map. Click on the RESEARCH LABORATORY, then click on the RESEARCH NEW TECHNOLOGY button and click on the LONG RANGE ASDIC.");
+//-30
+setsar("Researching of the LONG RANGE ASDIC is done. Build an ASDIC now (BASIC CONSTRUCTIONS switch).");
+
+//--------
+// PROLOG
+//--------
+//-31
+setsar("@Sector SS 736. North Atlantic.@Order 254 4C to special basic training squadron 4ERC.@Top secret.");
+//-32
+setsar("@ The Commandment of the Black Octopi concern congratulates you with the beginning of your career and hopes that what you learn during your diligent training will become a reliable base that will lead you to numerous victories over our enemies. You will get instructions at the location. Obey and strictly follow our orders.@ @ Good luck!");
+
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar(" ");
+name("OBJECTIVES"); putsar();    
+
+// script for play
+name("TASKPLAY");
+inittask("DEFAULT_BO_ANIMATED", "DEFAULT_BO"); // инициализировать таблицу
+ Time(0);
+ SetLevel(10); SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+ SetColor(1, 1, 1, 0); SetLevel(10);
+ ShowATask(0, 210,  20, 540,  80, 1, 31, 1, 10, 10, 1);
+ 
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(100); StartWave("DEFAULT_BIP");
+ ShowATask(1, 115, 135, 580, 180, 1, 32, 1, 10, 5, 1); 
+puttask();  // добавить Task в секцию M_DAR
+
+// script for play
+name("BRIEF1");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "");
+ BriefingText(1, 1, 1, 1);   
+putbriefing();
+
+name("BRIEF2");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "");
+ BriefingText(2, 1, 1, 1);
+ Time(20*25);
+ BriefingText(3, 1, 1, 1);
+putbriefing();
+
+name("BRIEF3");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "");
+ BriefingText(4, 1, 1, 1);
+putbriefing();
+
+name("BRIEF4");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "");
+ BriefingText(5, 1, 1, 1);
+putbriefing();
+
+name("BRIEF5");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "");
+ BriefingText(6, 1, 1, 1);
+putbriefing();
+
+name("BRIEF6");
+initbriefing(); 
+ Time(0);
+ BriefingAni(50, 2, "");
+ BriefingText(7, 1, 1, 1);
+putbriefing();
+
+name("BRIEF7");
+initbriefing(); 
+ Time(0);
+ BriefingAni(20, 2, "");
+ BriefingText(8, 1, 1, 1);
+putbriefing();
+
+name("BRIEF8");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "");
+ BriefingText(9, 1, 1, 1);
+putbriefing();
+
+name("BRIEF9");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "");
+ BriefingText(10, 1, 1, 1);
+putbriefing();
+
+name("BRIEF10");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "");
+ BriefingText(11, 1, 1, 1);
+putbriefing();
+
+name("BRIEF11");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "");
+ BriefingText(12, 1, 1, 1);
+putbriefing();
+
+name("BRIEF12");
+initbriefing(); 
+ Time(0);
+ BriefingAni(53, 2, "");
+ BriefingText(29, 1, 1, 1);
+putbriefing();
+
+name("BRIEF13");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "");
+ BriefingText(30, 1, 1, 1);
+putbriefing();
+
+name("BRIEF20");
+initbriefing(); 
+ Time(0);
+ BriefingAni(53, 2, "");
+ BriefingText(13, 1, 1, 1);
+ Time(20*25);
+ BriefingText(14, 1, 1, 1);
+putbriefing();
+
+name("BRIEF21");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "");
+ BriefingText(15, 1, 1, 1);
+putbriefing();
+
+name("BRIEF22");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "");
+ BriefingText(16, 1, 1, 1);
+putbriefing();
+
+name("BRIEF23");
+initbriefing(); 
+ Time(0);
+ BriefingAni(53, 2, "");
+ BriefingText(17, 1, 1, 1);
+putbriefing();
+
+name("BRIEF24");
+initbriefing(); 
+ Time(0);
+ BriefingAni(50, 2, "");
+ BriefingText(18, 1, 1, 1);
+putbriefing();
+
+name("BRIEF25");
+initbriefing(); 
+ Time(0);
+ BriefingAni(17, 2, "");
+ BriefingText(19, 1, 1, 1);
+putbriefing();
+
+name("BRIEF26");
+initbriefing(); 
+ Time(0);
+ BriefingAni(17, 2, "");
+ BriefingText(20, 1, 1, 1);
+putbriefing();
+
+name("BRIEF27");
+initbriefing(); 
+ Time(0);
+ BriefingAni(53, 2, "");
+ BriefingText(21, 1, 1, 1);
+putbriefing();
+
+name("BRIEF28");
+initbriefing(); 
+ Time(0);
+ BriefingAni(50, 2, "");
+ BriefingText(22, 1, 1, 1);
+putbriefing();
+
+name("BRIEF29");
+initbriefing(); 
+ Time(0);
+ BriefingAni(18, 2, "");
+ BriefingText(23, 1, 1, 1);
+putbriefing();
+
+name("BRIEF30");
+initbriefing(); 
+ Time(0);
+ BriefingAni(82, 2, "");
+ BriefingText(24, 1, 1, 1);
+putbriefing();
+
+name("BRIEF31");
+initbriefing(); 
+ Time(0);
+ BriefingAni(53, 2, "");
+ BriefingText(25, 1, 1, 1);
+putbriefing();
+
+name("BRIEF32");
+initbriefing(); 
+ Time(0);
+ BriefingAni(50, 2, "");
+ BriefingText(26, 1, 1, 1);
+putbriefing();
+
+name("BRIEF33");
+initbriefing(); 
+ Time(0);
+ BriefingAni(19, 2, "");
+ BriefingText(27, 1, 1, 1);
+putbriefing();
+
+name("BRIEF34");
+initbriefing(); 
+ Time(0);
+ BriefingAni(19, 2, "");
+ BriefingText(28, 1, 1, 1);
+putbriefing();
+
+name("BRIEF100");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "");
+ BriefingText(0, 1, 1, 1);
+ Time(30*25);
+ BriefingStop();
+putbriefing();
+

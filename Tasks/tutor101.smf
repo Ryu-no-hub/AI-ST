@@ -1,0 +1,306 @@
+//-
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"tutor101");
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("THE FIRST STEP");
+
+// text description of the mission
+initsar(10, 10);
+//-0
+setsar("Well done! Your training is complete. Now you are able to go to battle and take control of our forces! Good luck!");
+
+//-1
+setsar("Let's start our training program. Go to the open area on the map. Click on the CONSTRUCTOR (by default left click) and click on the open area (by default right click).");
+//-2
+setsar("When you organize a new base you need oxygen to build and support structures.");
+//-3
+setsar("To extract oxygen build an AIR EXTRACTOR by clicking on the BUILD OBJECT button, then click on the SUPPLY CONSTRUCTIONS switch and choose an AIR EXTRACTOR. Choose a place to build it with a left click (image should be green).");
+//-4
+setsar("To produce submarines you have to build a SUBCENTER. Click on the BUILD OBJECT button, then click on the BASIC CONSTRUCTIONS switch and choose a SUBCENTER. Choose a place to build it with a left click.");
+//-5
+setsar("You need to build  extractors to get  resources (CORIUM and METAL). Click on the BUILD OBJECT button, then click on the SUPPLY CONSTRUCTIONS switch and build a CORIUM EXTRACTOR and a METAL EXTRACTOR.");
+//-6
+setsar("To store extracted resource you need a DEPOT. Build it close to an extractor.");
+//-7
+setsar("To transport extracted resources you need a TRANSUB. You can build TRANSUBS in the SUBCENTER. Click on the SUBCENTER, then click on the BUILD SUBMARINE button, click on the SUPPLY SUBS switch, and choose a TRANSUB. You can click on the TRANSUB several times to build more than one submarine.");
+setsar("When you have built the TRANSUB click on it and right click (by default) on the extractor. The TRANSUB will be loaded with the extracted resource and will bring it to the DEPOT.");
+//-9
+setsar("The next important structure is the TECHCENTER. The TECHCENTER allows you to develop new technologies and as a result get more powerful weapons, engines and stronger armor. As a result you can build new structures and produce new types of submarines. Build the TECHCENTER now (BASIC CONSTRUCTIONS switch).");
+//-10
+setsar("To make a research the TECHCENTER needs gold. To extract sublimated gold build a GOLD EXTRACTOR (SUPPLY CONSTRUCTIONS switch).");
+//-11
+setsar("To trade gold for CORIUM or METAL you will need a TRADE CENTER. The TRADE CENTER will allow you to sell and buy resources or produce a CONTAINER with CORIUM or METAL.");
+//-12
+setsar("To produce weapons you will need to build an ARMCENTER. Build an ARMCENTER now (BASIC CONSTRUCTIONS switch).");
+//---
+//---
+//-13
+setsar("Your first stage of training is done. You will now learn how to defend your base.");
+//-14
+setsar("To build defensive structures you have to research some defensive technologies. Click on the TECHCENTER then click on the RESEARCH NEW TECHNOLOGY button and click on the HYDRO-FUSION TECHNOLOGY.");
+//-15
+setsar("Researching of the HYDRO-FUSION TECHNOLOGY is done. Now you can build HF CANNONS. Build 3 HF CANNONS on the East side of your base. Build them close to each other.");
+//-16
+setsar("You can repair your structures by clicking on the SELF-REPAIR button.");
+//-17
+setsar("Another way to protect your base is to put DEPTH MINES around the base. Click on the TECHCENTER and run the DEPTH MINE TECHNOLOGY.");
+//-18
+setsar("Researching of the DEPTH MINE TECHNOLOGY is now complete. You can now produce MINE-LAYERS. Click on the SUBCENTER, then the BUILD SUBMARINE button, click on the SPECIAL SUBS switch and build a MINE-LAYER.");
+//-19
+setsar("Now set the DEPTH MINE in front of your HF CANNONS. Click on the SET DEPTH MINE button, click on an area where you want the DEPTH MINE placed. Remember that the mine will be set on the same depth as the MINE-LAYER.");
+//-20
+setsar("After setting your mines move away to avoid getting blown up with your own mine.");
+//---
+//---
+//-21
+setsar("The second stage of your training is now complete. The next stage is capturing of an enemy structure. Click on the TECHCENTER and run the MARAUDER EQUIPMENT technology.");
+//-22
+setsar("Researching of the MARAUDER EQUIPMENT technology is done. Now you can produce the MARAUDER submarine which is able to capture enemy structures.");
+//-23
+setsar("Go to the East and capture the enemy CENTCOMP. Click on the CAPTURE OBJECT button and then left click on the structure to capture it. Note that the capturing is not always successful. Sometimes you have to repeat it several times.");
+//-24
+setsar("The next stage is to build a CONTAINER. Click on the TRADE CENTER, then click on the CARGO CONTAINER button, set the resource switch to METAL and produce a CONTAINER with 100 of METAL.");
+//-25
+setsar("Now you have to develop the MOBILE REPAIR PLATFORM technology. Go to the TECHCENTER and run this technology there.");
+//-26
+setsar("Researching of the MOBILE REPAIR PLATFORM technology is complete. Produce a REPSUB in the SUBCENTER now.");
+//-27
+setsar("Load the CONTAINER on the REPSUB now. Click on the REPSUB, then click on the LOAD OBJECT button and click on the CONTAINER.");
+//-28
+setsar("Go to the captured CENTCOMP in the Eastern part of the map and unload the CONTAINER there. To unload the CONTAINER click on the UNLOAD OBJECT button.");
+//--------
+// PROLOG
+//--------
+//-29
+setsar("Sector SS 736. South Atlantic.@To the leader of rookie training squadron 345 6578.@Top secret.");
+//-30
+setsar("@ The Commandment congratulates you with the beginning of your glorious career for the White Sharks concern. The training missions you will perform will serve as the basement of our collaboration. Be diligent and attentive, strict order obedience is what we require from you at this stage of your training.@ @ To success and victory!");
+
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar(" ");
+name("OBJECTIVES"); putsar();    
+
+// script for play
+name("TASKPLAY");
+inittask("DEFAULT_WS_ANIMATED", "DEFAULT_WS"); // инициализировать таблицу
+ // set controls 
+ SetLevel(10); 
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_MENU, 20, 450, 145, 40);
+ ShowBut(TBTYPE_BACK, 50, 500, 145, 40);
+ ShowBut(TBTYPE_START,  605, 500, 145, 40);
+
+ SetColor(0, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 200,  15, 580, 90, 1, 29, 1, 15, 10, 1);
+
+ SetColor(1, 1, 0, 0);
+ SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ ShowATask(1, 110, 170, 580, 185, 1, 30, 1, 15, 10, 1); 
+
+puttask();  // добавить Task в секцию M_DAR
+
+// script for play
+name("BRIEF1");
+initbriefing(); 
+ Time(0);
+ BriefingAni(12, 1, "");
+ BriefingText(1, 1, 1, 1);   
+putbriefing();
+
+name("BRIEF2");
+initbriefing(); 
+ Time(0);
+ BriefingAni(12, 1, "");
+ BriefingText(2, 1, 1, 1);
+ Time(20*25);
+ BriefingText(3, 1, 1, 1);
+putbriefing();
+
+name("BRIEF3");
+initbriefing(); 
+ Time(0);
+ BriefingAni(12, 1, "");
+ BriefingText(4, 1, 1, 1);
+putbriefing();
+
+name("BRIEF4");
+initbriefing(); 
+ Time(0);
+ BriefingAni(12, 1, "");
+ BriefingText(5, 1, 1, 1);
+putbriefing();
+
+name("BRIEF5");
+initbriefing(); 
+ Time(0);
+ BriefingAni(12, 1, "");
+ BriefingText(6, 1, 1, 1);
+putbriefing();
+
+name("BRIEF6");
+initbriefing(); 
+ Time(0);
+ BriefingAni(50, 1, "");
+ BriefingText(7, 1, 1, 1);
+putbriefing();
+
+name("BRIEF7");
+initbriefing(); 
+ Time(0);
+ BriefingAni(8, 1, "");
+ BriefingText(8, 1, 1, 1);
+putbriefing();
+
+name("BRIEF8");
+initbriefing(); 
+ Time(0);
+ BriefingAni(12, 1, "");
+ BriefingText(9, 1, 1, 1);
+putbriefing();
+
+name("BRIEF9");
+initbriefing(); 
+ Time(0);
+ BriefingAni(12, 1, "");
+ BriefingText(10, 1, 1, 1);
+putbriefing();
+
+name("BRIEF10");
+initbriefing(); 
+ Time(0);
+ BriefingAni(12, 1, "");
+ BriefingText(11, 1, 1, 1);
+putbriefing();
+
+name("BRIEF11");
+initbriefing(); 
+ Time(0);
+ BriefingAni(12, 1, "");
+ BriefingText(12, 1, 1, 1);
+putbriefing();
+
+name("BRIEF20");
+initbriefing(); 
+ Time(0);
+ BriefingAni(53, 1, "");
+ BriefingText(13, 1, 1, 1);
+ Time(20*25);
+ BriefingText(14, 1, 1, 1);
+putbriefing();
+
+name("BRIEF21");
+initbriefing(); 
+ Time(0);
+ BriefingAni(12, 1, "");
+ BriefingText(15, 1, 1, 1);
+putbriefing();
+
+name("BRIEF22");
+initbriefing(); 
+ Time(0);
+ BriefingAni(12, 1, "");
+ BriefingText(16, 1, 1, 1);
+putbriefing();
+
+name("BRIEF23");
+initbriefing(); 
+ Time(0);
+ BriefingAni(53, 1, "");
+ BriefingText(17, 1, 1, 1);
+putbriefing();
+
+name("BRIEF24");
+initbriefing(); 
+ Time(0);
+ BriefingAni(50, 1, "");
+ BriefingText(18, 1, 1, 1);
+putbriefing();
+
+name("BRIEF25");
+initbriefing(); 
+ Time(0);
+ BriefingAni(5, 1, "");
+ BriefingText(19, 1, 1, 1);
+putbriefing();
+
+name("BRIEF26");
+initbriefing(); 
+ Time(0);
+ BriefingAni(5, 1, "");
+ BriefingText(20, 1, 1, 1);
+putbriefing();
+
+name("BRIEF27");
+initbriefing(); 
+ Time(0);
+ BriefingAni(53, 1, "");
+ BriefingText(21, 1, 1, 1);
+putbriefing();
+
+name("BRIEF28");
+initbriefing(); 
+ Time(0);
+ BriefingAni(50, 1, "");
+ BriefingText(22, 1, 1, 1);
+putbriefing();
+
+name("BRIEF29");
+initbriefing(); 
+ Time(0);
+ BriefingAni(6, 1, "");
+ BriefingText(23, 1, 1, 1);
+putbriefing();
+
+name("BRIEF30");
+initbriefing(); 
+ Time(0);
+ BriefingAni(82, 1, "");
+ BriefingText(24, 1, 1, 1);
+putbriefing();
+
+name("BRIEF31");
+initbriefing(); 
+ Time(0);
+ BriefingAni(53, 1, "");
+ BriefingText(25, 1, 1, 1);
+putbriefing();
+
+name("BRIEF32");
+initbriefing(); 
+ Time(0);
+ BriefingAni(50, 1, "");
+ BriefingText(26, 1, 1, 1);
+putbriefing();
+
+name("BRIEF33");
+initbriefing(); 
+ Time(0);
+ BriefingAni(7, 1, "");
+ BriefingText(27, 1, 1, 1);
+putbriefing();
+
+name("BRIEF34");
+initbriefing(); 
+ Time(0);
+ BriefingAni(7, 1, "");
+ BriefingText(28, 1, 1, 1);
+putbriefing();
+
+name("BRIEF100");
+initbriefing(); 
+ Time(0);
+ BriefingAni(12, 1, "");
+ BriefingText(0, 1, 1, 1);
+ Time(30*25);
+ BriefingStop();
+putbriefing();
+

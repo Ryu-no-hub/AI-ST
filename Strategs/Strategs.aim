@@ -1,0 +1,144 @@
+//====================================================================
+//      ST AiScript: Create STRATEGS.DKD
+//====================================================================
+#if(_env_var0==0)
+ create(_main_path+"\\system\\Strategs.dkd");
+ //append(_main_path+"\\System\\Strategs.dkd");
+#else
+ create(_curr_path+"out\\strategs.dkd");
+#endif
+
+pack(1);
+
+__DEMO = 0;
+
+//=== String table for all arbiters ===
+name("DESCRIPTION");       
+OpenStringTable();
+ /*000*/PutString("blue"); 
+ /*001*/PutString("green"); 
+ /*002*/PutString("yellow"); 
+ /*003*/PutString("red"); 
+ /*004*/PutString("violet"); 
+ /*005*/PutString("cyan"); 
+ /*006*/PutString("orange"); 
+ /*007*/PutString("beige"); 
+ /*008*/PutString(""); 
+ /*009*/PutString(""); 
+ /*010*/PutString(""); 
+ /*011*/PutString("White Sharks"); 
+ /*012*/PutString("Black Octopi"); 
+ /*013*/PutString("Silicons"); 
+ /*014*/PutString("%s has won"); 
+ /*015*/PutString("%s has been defeated"); 
+ /*016*/PutString("gold"); 
+ /*017*/PutString("metal"); 
+ /*018*/PutString("corium"); 
+ /*019*/PutString("silicon"); 
+ /*020*/PutString("energy"); 
+ /*021*/PutString("air"); 
+ /*022*/PutString(""); 
+ /*023*/PutString(""); 
+ /*024*/PutString(""); 
+ /*025*/PutString("You've got %d units of %s"); 
+ /*026*/PutString("The thing"); 
+CloseStringTable();
+
+
+//== Kill All
+name("AIBOSS");            
+ _full_name = "Kill All";
+ include<[_inc_path]\Strategs\Arbiter_killall.arb>;
+ //include<[_curr_path]\Arbiter_killall.arb>;
+
+name("OBJECTIVES");        
+OpenStringTable();
+ /*000*/PutString("Kill all enemies"); 
+CloseStringTable();
+
+#if(!__DEMO)
+
+//== Kill All without minerals
+
+// name("AIBOSS001");
+//  _full_name = "Kill All Without Minerals";
+//  include<[_curr_path]\Arbiter_killall_mineralless.arb>;
+
+// name("OBJECTIVES001");
+// OpenStringTable();
+//  /*000*/PutString("You have to kill all enemies."); 
+// CloseStringTable();
+
+// //== Flagship Hunt
+// name("AIBOSS002");
+//  _full_name = "The Flagship Hunt";
+//  include<[_curr_path]\Arbiter_flagshiphunt.arb>;
+
+// name("OBJECTIVES002");
+// OpenStringTable();
+//  /*000*/PutString("Find and kill all enemy flagships."); 
+// CloseStringTable();
+#endif //__DEMO
+
+//=== Assistants
+name("ASSISTANT",3,-1,0);
+
+ _full_name = "WS Resource Assistant";_short_name = "ASSISTANT 1";
+ include<[_curr_path]\WS_Assistant_00.stg>;
+ _full_name = "WS Guard Assistant";_short_name = "ASSISTANT 2";
+ include<[_curr_path]\WS_Assistant_01.stg>;
+ _full_name = "WS Full Game Assistant";_short_name = "ASSISTANT 3";
+ include<[_curr_path]\WS_Assistant_02.stg>;
+ _full_name = "WS Gold Assistant";_short_name = "ASSISTANT 4";
+ include<[_curr_path]\WS_Gold_strateg.stg>;
+ _full_name = "WS Full Game Assistant";_short_name = "ASSISTANT 5";
+ include<[_curr_path]\WS_Assistant_03.stg>;
+
+ _full_name = "BO Resource Assistant";_short_name = "ASSISTANT 1";
+ include<[_curr_path]\BO_Assistant_00.stg>;
+ _full_name = "BO Guard Assistant";_short_name = "ASSISTANT 2";
+ include<[_curr_path]\BO_Assistant_01.stg>;
+ _full_name = "BO Full Game Assistant";_short_name = "ASSISTANT 3";
+ include<[_curr_path]\BO_Assistant_02.stg>;
+ _full_name = "BO Gold Assistant";_short_name = "ASSISTANT 4";
+ include<[_curr_path]\BO_Gold_strateg.stg>;
+ _full_name = "BO Full Game Assistant";_short_name = "ASSISTANT 5";
+ include<[_curr_path]\BO_Assistant_03.stg>;
+
+ _full_name = "SI Resource Assistant";_short_name = "ASSISTANT 1";
+ include<[_curr_path]\SI_Assistant_00.stg>;
+ _full_name = "SI Guard Assistant";_short_name = "ASSISTANT 2";
+ include<[_curr_path]\SI_Assistant_01.stg>;
+ _full_name = "SI Full Game Assistant";_short_name = "ASSISTANT 3";
+ include<[_curr_path]\SI_Assistant_02.stg>;
+ _full_name = "SI Silicon Assistant";_short_name = "ASSISTANT 4";
+ include<[_curr_path]\SI_Silicon_Strateg.stg>;
+ _full_name = "SI Full Game Assistant";_short_name = "ASSISTANT 5";
+ include<[_curr_path]\SI_Assistant_03.stg>;
+
+//=== Opponents
+name("OPPONENT",3,-1,0);
+
+ _full_name = "WS Opponent Level 00";_short_name = "AI WEAK";
+ include<[_curr_path]\WS_Opponent_00.stg>;
+ _full_name = "WS Opponent Level 01";_short_name = "AI MEDIUM";
+ include<[_curr_path]\WS_Opponent_01.stg>;
+ _full_name = "WS Opponent Level 02";_short_name = "AI STRONG";
+ include<[_curr_path]\WS_Opponent_02.stg>;
+
+ _full_name = "BO Opponent Level 00";_short_name = "AI WEAK";
+ include<[_curr_path]\BO_Opponent_00.stg>;
+ _full_name = "BO Opponent Level 01";_short_name = "AI MEDIUM";
+ include<[_curr_path]\BO_Opponent_01.stg>;
+ _full_name = "BO Opponent Level 02";_short_name = "AI STRONG";
+ include<[_curr_path]\BO_Opponent_02.stg>;
+
+ _full_name = "SI Opponent Level 00";_short_name = "AI WEAK";
+ include<[_curr_path]\SI_Opponent_00.stg>;
+ _full_name = "SI Opponent Level 01";_short_name = "AI MEDIUM";
+ include<[_curr_path]\SI_Opponent_01.stg>;
+ _full_name = "SI Opponent Level 02";_short_name = "AI STRONG";
+ include<[_curr_path]\SI_Opponent_02.stg>;
+
+close();
+

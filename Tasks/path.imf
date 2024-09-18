@@ -1,0 +1,4 @@
+out_campaign = "..\\..\\Missions\\";
+//out_custom   = "h:\\Titans_dkd\\custom\\";
+//in_briefing  = "h:\\Titans_dkd\\editor\\briefing\\";
+_DEBUG = 0;

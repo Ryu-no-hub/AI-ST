@@ -1,0 +1,213 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss108");
+//append(out_campaign+"MissTest");
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Still Waters");
+
+//Speach for Briefing and Task
+
+#if(_DEBUG)
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wst_0800.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+/*
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0801.wav"); name("Briefing1");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0802.wav"); name("Briefing2");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0803.wav"); name("Briefing3");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0804.wav"); name("Briefing4");  putwav(1, _MF_PCM);
+*/
+#endif
+
+// text description of the mission
+initsar(50, 10);
+//- objectives  0-9
+setsar("Build a Teleshield next to the TranCenter \"Magic Gate\" in the southwestern part of the sector.");
+setsar("Build 7 Cargo containers with 1000 units of Corium each, load them on the ally teleported RepSubs and deliver the RepSubs back to the TranCenter \"Magic Gate\".");
+setsar("Do not destroy the Silicons base in the northwestern part of the sector.");
+setsar("Destroy the TranCenter \"Magic Gate\" before the Silicons manage to capture it.");
+setsar("Create Cargo containers with 10000 units of Metal and 5000 units of Corium, load them on your RepSubs and deliver them to the northeastern part of the sector.");
+setsar("Secure the construction of the TranCenter \"TFB 34\" built with the Constructor \"Leviathan\".");
+setsar("Protect the TranCenter \"TFB 34\" to teleport 2 RepSubs with resources.");
+setsar("Protect the flagship \"Depth Star\" and receive the order where you have to build a Psychotron.");
+setsar("Build a Psychotron within 15 minutes and let the Silicons capture it.");
+setsar("Capture all Protoplasm Generators in the sector.");
+//- reports    10-19
+setsar("Essential constructions have been destroyed.");
+setsar("You have destroyed all enemies, but your mission is not complete.");
+setsar("Build a Psychotron close to the flagship \"Depth Star\".");
+setsar("The object has been built");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("Mission Accomplished. Another victory, another step closer to the re-unification of mankind.  Your actions provide hope to the masses crying for protection. The world and we thank you.");
+setsar("Mission Failed");
+//- briefings 20-29
+setsar(" Destroy the TranCenter \"Magic Gate\" immediately! The Silicons have got access to the teleportation decoder and now they can use the TranCenter \"Magic Gate\" to invade our heartland massively. Be prepared to rep...(the connection is broken)");
+setsar(" Good job, Commander! Establish a base in the region and wait for the arrival of a special squadron of the 6th Assault brigade, which will help you in accomplishing your mission. In the first phase you will receive the Constructor \"Leviathan\" that will build the TranCenter \"TFB 34\" to teleport the main forces. You will have to defend the \"TFB 34\" before the reinforcements arrives. The RepSubs with resources that you convoyed to the region should be moved to Sector ASX 16 to develop a colony there. To carry out the teleportation it is necessary that all RepSubs be close to the ally TranCenter \"TFB 34\".");
+setsar(" The first phase of the operation has been a success. Now you and your division together with the 6th Assault brigade have to complete the operation \"Still Waters\".  Its success depends on the coordination of actions between you and your assistants. The flagship of the 6th Assault brigade \"Depth Star\" will indicate the place where you have to build a Psychotron. You will recognize the flagship by a special logo. The construction site must be under your complete control until the construction is completed. After that you will have to evacuate all your forces from that area and let the Silicons capture the Psychotron.");
+setsar(" All right, Commander. Now the alliance between the Black Octopi and Silicons is doomed. The data that the Silicons have got will not keep the Black Octopi apathetic and will spread panic among them. We must use this moment and inflict strikes on both enemies… we will talk about this later. You and the 6th Assault brigade must capture all Protoplasm Generators in that Sector. Hang tight. The victory is near.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("@Sector GSX 13. Northern Atlantic.@To the leader of the 37th special division.@Top secret.");
+setsar("@ We have no time to waste. You must immediately go with your squadron to the area neighboring the border of Sector CAG 234 to secure the operation \"Still Waters\".@ @ Your mission is to convoy cargo platforms and gathering of Corium in that resource rich area.@ @ The signal to start the operation is your construction of a Teleshield in the southwestern part of the sector next to the TranCenter \"Magic Gate\". The RepSubs, in which you will have to load Cargo containers with Corium, will be teleported into that area periodically.");
+setsar("@ The TranCenter \"Magic Gate\" will teleport the RepSubs with Corium to a secure area for its further processing.@ @ To end the first part of the operation you have to teleport a few RepSubs with Corium while simultaneously preserving the TranCenter \"Magic Gate\".");
+setsar("");
+setsar("");
+//--- names 35-----
+setsar("Magic Gate");				//nTranC
+setsar("Depth Star");				//nFlagm1
+setsar("RepSub RS1");				//nCont0
+setsar("RepSub RS2");				//nCont2
+setsar("RepSub RS3");				//nCont3
+//--- names 40-----
+setsar("RepSub RS4");		 		//nCont4
+setsar("RepSub RS5");		 		//nCont5
+setsar("RepSub RS6");		 		//nCont6
+setsar("RepSub RS7");		 		//nCont7
+setsar("Leviathan");		 		//Name of Constructor Ship
+setsar("TFB 34");				//Name of TranCenter	 Ally
+setsar("PCH 234-SS");				//Name for psychotron
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Build a Teleshield next to the TranCenter \"Magic Gate\" in the southwestern part of the sector.");
+setsar("Build 7 Cargo containers with 1000 units of Corium each, load them on the ally teleported RepSubs and deliver the RepSubs back to the TranCenter \"Magic Gate\".");
+setsar("Do not destroy the Silicons base in the northwestern part of the sector.");
+name("OBJECTIVES"); putsar();    
+
+// script for play
+name("TASKPLAY");
+inittask("DEFAULT_WS_ANIMATED", "DEFAULT_WS"); // инициализировать таблицу
+ Time(0);
+ // set controls 
+ SetLevel(10); 
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_MENU, 20, 450, 145, 40);
+ ShowBut(TBTYPE_BACK, 50, 500, 145, 40);
+ ShowBut(TBTYPE_SKIP, 605, 500, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(220, 570, 340, 570, 460, 570);
+
+ SetColor(0, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 180,  20, 590, 80, 1, 30, 1, 15, 10, 1);
+
+//-
+ SetColor(1, 1, 0, 0);
+ SetLevel(10);
+ Time(150);
+ StartWave("DEFAULT_BIP");  StartWave("TaskSpeach");
+ ShowATask(1, 110, 135, 580, 295, 1, 31, 1, 15, 20, 1); 
+
+ Time(970);
+ HideATask(1); 
+ Time(975);
+ StartWave("DEFAULT_BIP");
+ ShowATask(1, 110, 135, 580, 295, 1, 32, 1, 15, 70, 1); 
+ 
+ Time(1400);
+ HideATask(1); 
+
+ Time(1420);
+ HideATask(0); 
+
+ Time(1440);
+
+ SetColor(1, 1, 0, 1); StartWave("DEFAULT_BIP");
+ ShowObjectives(105, 230, 590, 200); 
+ HideBut(TBTYPE_SKIP);
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 635, 450, 145, 40);
+ ShowBut(TBTYPE_START,  605, 500, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+// script for play
+name("BRIEF_1");
+initbriefing(); 
+ Time(0); 
+ BriefingText(20, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing1");
+ Time(11*25);			// время проигрывания звука (с прерывающейся связью)
+ BriefingAni(0, 0, "");		// спрятать говорящего
+ Time(22*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_2");
+initbriefing(); 
+ Time(0); 
+ BriefingText(21, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing2");
+ Time(37*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(55*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_3");
+initbriefing(); 
+ Time(0); 
+ BriefingText(22, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing3");
+ Time(34*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(55*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_4");
+initbriefing(); 
+ Time(0); 
+ BriefingText(23, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего DC Bomber-leader
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing4");
+ Time(24*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(36*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_5");
+initbriefing(); 
+ Time(0); 
+ BriefingText(18, 1, 1, 1);
+	Time(1*25);
+	BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(19*25);
+	BriefingAni(0, 0, "");		// спрятать говорящего   
+	Time(20*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();

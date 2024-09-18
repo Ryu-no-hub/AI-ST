@@ -1,0 +1,565 @@
+/////////////////////////////////////////////////////////////////////////////
+//
+// Container:    Arbiter
+// Campaign:     BO Campaign
+// Mission:      02 "Layover"
+// Copyright:    2000, Ellipse Studios
+//
+//////////////////////////////////////////////////////////////////////////////
+// Players   Civ    Color     Control      Ally         Enemy
+//----------------------------------------------------------------------------
+//   0       BO     Blue      Human        -            3,4
+//   3       WS     Red       Computer     3            0
+//   4       WS     Violet    Computer     4            0
+//////////////////////////////////////////////////////////////////////////////
+// _GL10 - volume of corium in conteiners
+// _GL20 - indicator to start enemies arriving
+// _GL30 - timer 
+
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+OpenArbiter("BO Campaign Mission 02");
+  
+ // Events 
+ OpenEvents();
+
+  // Const
+  mess1 = 10;//" You have lost one of your Cargo Subs!";
+  mess2 = 11;//" Build 3 Repair Platforms and produce containers with 1000 Corium in each container.";
+  mess4 = 12;//" You don't have structures that are needed to complete the mission.";
+  mess5 = 13;//" The necessary number of Cargo containers have reached the escape plateau.";
+  mess6 = 14;//" You cannot build containers any more(resources are depleted).";
+  mess7 = 15;//" The necessary number of Cargo containers have been built. You could proceed to the escape tunnel.";
+  mess8 = 16;//" You have to build more Cargo containers.";
+  mess9 = 17;//" Well done! You have accomplished your mission!";
+
+  // 0 Init 
+  Event(TRUE, 0)
+  { // Store mission difficulty
+    _RT0:=GetMissDifficulty();
+    // Alliances
+    ActSetFriend(PLAYER_3, AIREL_MYSELF, PLAYER_4);
+    ActSetFriend(PLAYER_4, AIREL_MYSELF, PLAYER_3);
+    // Resources
+    ActInitDisGold(LEVEL_MEDIUM);
+    // Set resources to Human
+    _actSetPlRC(TOBJ_METAL,  0, 20);
+    _actSetPlRC(TOBJ_CORIUM, 0, 30);
+    _actSetPlRC(TOBJ_GOLD,   0, 10);
+    if(_RT0==DIFF_WEAK)      //-- WEAK
+    { // 3
+      ActSetPlRC(PLAYER_3,AIREL_MYSELF, TOBJ_METAL,  0, 10000);
+      ActSetPlRC(PLAYER_3,AIREL_MYSELF, TOBJ_CORIUM, 0, 2500);
+      ActSetPlRC(PLAYER_3,AIREL_MYSELF, TOBJ_GOLD,   0, 2500);
+      // 4
+      ActSetPlRC(PLAYER_4,AIREL_MYSELF, TOBJ_METAL,  0, 10000);
+      ActSetPlRC(PLAYER_4,AIREL_MYSELF, TOBJ_CORIUM, 0, 2500);
+      ActSetPlRC(PLAYER_4,AIREL_MYSELF, TOBJ_GOLD,   0, 2500);
+    }
+    else
+    { if(_RT0==DIFF_MEDIUM)  //-- MEDIUM
+      { // 3
+        ActSetPlRC(PLAYER_3,AIREL_MYSELF, TOBJ_METAL,  0, 12000);
+        ActSetPlRC(PLAYER_3,AIREL_MYSELF, TOBJ_CORIUM, 0, 3000);
+        ActSetPlRC(PLAYER_3,AIREL_MYSELF, TOBJ_GOLD,   0, 3000);
+        // 4
+        ActSetPlRC(PLAYER_4,AIREL_MYSELF, TOBJ_METAL,  0, 12000);
+        ActSetPlRC(PLAYER_4,AIREL_MYSELF, TOBJ_CORIUM, 0, 3000);
+        ActSetPlRC(PLAYER_4,AIREL_MYSELF, TOBJ_GOLD,   0, 3000);
+      }
+      else                 //-- STRONG
+      { // 3
+        ActSetPlRC(PLAYER_3,AIREL_MYSELF, TOBJ_METAL,  0, 14000);
+        ActSetPlRC(PLAYER_3,AIREL_MYSELF, TOBJ_CORIUM, 0, 3500);
+        ActSetPlRC(PLAYER_3,AIREL_MYSELF, TOBJ_GOLD,   0, 3500);
+        // 4
+        ActSetPlRC(PLAYER_4,AIREL_MYSELF, TOBJ_METAL,  0, 14000);
+        ActSetPlRC(PLAYER_4,AIREL_MYSELF, TOBJ_CORIUM, 0, 3500);
+        ActSetPlRC(PLAYER_4,AIREL_MYSELF, TOBJ_GOLD,   0, 3500);
+      }
+    }
+    // Create resources on the map
+    if(_RT0==DIFF_WEAK)      //-- WEAK
+    { ActCreateRCField(TOBJ_METAL, 64, 58, 0, 50000);
+      ActCreateRCField(TOBJ_METAL, 41, 34, 0, 40000);
+      ActCreateRCField(TOBJ_METAL, 17, 53, 2, 60000);
+      ActCreateRCField(TOBJ_METAL, 49, 14, 2, 40000);
+
+      ActCreateRCField(TOBJ_METAL,  9, 28, 0, 90000);
+      ActCreateRCField(TOBJ_METAL, 34, 15, 0, 80000);
+      ActCreateRCField(TOBJ_METAL,  9,  2, 0, 60000);
+
+      ActCreateRCField(TOBJ_CORIUM, 53, 57, 0, 6000);
+      ActCreateRCField(TOBJ_CORIUM, 28, 49, 0, 6000);
+      ActCreateRCField(TOBJ_CORIUM, 52, 21, 0, 7000);
+
+      ActCreateRCField(TOBJ_CORIUM, 17, 32, 0, 10000);
+      ActCreateRCField(TOBJ_CORIUM,  3,  7, 0, 15000);
+      ActCreateRCField(TOBJ_CORIUM, 24,  3, 0, 10000);
+    }
+    else
+    { if(_RT0==DIFF_MEDIUM)  //-- MEDIUM
+      { ActCreateRCField(TOBJ_METAL, 64, 58, 0, 40000);
+        ActCreateRCField(TOBJ_METAL, 41, 34, 0, 40000);
+        ActCreateRCField(TOBJ_METAL, 17, 53, 2, 60000);
+        ActCreateRCField(TOBJ_METAL, 49, 14, 2, 30000);
+
+        ActCreateRCField(TOBJ_METAL,  9, 28, 0, 90000);
+        ActCreateRCField(TOBJ_METAL, 34, 15, 0, 90000);
+        ActCreateRCField(TOBJ_METAL,  9,  2, 0, 90000);
+
+        ActCreateRCField(TOBJ_CORIUM, 53, 57, 0, 5000);
+        ActCreateRCField(TOBJ_CORIUM, 28, 49, 0, 5000);
+        ActCreateRCField(TOBJ_CORIUM, 52, 21, 0, 7000);
+
+        ActCreateRCField(TOBJ_CORIUM, 17, 32, 0, 12000);
+        ActCreateRCField(TOBJ_CORIUM,  3,  7, 0, 12000);
+        ActCreateRCField(TOBJ_CORIUM, 24,  3, 0, 12000);
+      }
+      else                   //-- STRONG
+      { ActCreateRCField(TOBJ_METAL, 64, 58, 0, 30000);
+        ActCreateRCField(TOBJ_METAL, 41, 34, 0, 40000);
+        ActCreateRCField(TOBJ_METAL, 17, 53, 2, 50000);
+        ActCreateRCField(TOBJ_METAL, 49, 14, 2, 20000);
+
+        ActCreateRCField(TOBJ_METAL,  9, 28, 0, 120000);
+        ActCreateRCField(TOBJ_METAL, 34, 15, 0, 110000);
+        ActCreateRCField(TOBJ_METAL,  9,  2, 0, 150000);
+
+        ActCreateRCField(TOBJ_CORIUM, 53, 57, 0, 6000);
+        ActCreateRCField(TOBJ_CORIUM, 28, 49, 0, 4000);
+        ActCreateRCField(TOBJ_CORIUM, 52, 21, 0, 10000);
+
+        ActCreateRCField(TOBJ_CORIUM, 17, 32, 0, 15000);
+        ActCreateRCField(TOBJ_CORIUM,  3,  7, 0, 15000);
+        ActCreateRCField(TOBJ_CORIUM, 24,  3, 0, 15000);
+      }
+    }
+    
+     // ---------------Tehcnologies------------
+     //Init for technologies
+    _actTechDevEnableAll();
+    ActTechDevEnableAll(PLAYER_3,AIREL_MYSELF);
+    ActTechDevEnableAll(PLAYER_4,AIREL_MYSELF);
+
+     //---PLAYER_3-----
+	    //В мисси 1       
+			  ActTechSet(PLAYER_3,AIREL_MYSELF,TTECH_WS_HYDRO_FUSION_TECHNOLOGY,TTECH_LEV1);  
+			  ActTechSet(PLAYER_3,AIREL_MYSELF,TTECH_WS_LONG_RANGE_SONAR,TTECH_LEV1);         
+			  ActTechSet(PLAYER_3,AIREL_MYSELF,TTECH_WS_ENGINE_UPGRADE,TTECH_LEV1);           
+					  //В мисси 2  
+			  //ActTechSet(PLAYER_3,AIREL_MYSELF,TTECH_WS_MEDIUM_TORPEDO_TECHNOLOGY,TTECH_LEV1);
+			  //ActTechSet(PLAYER_3,AIREL_MYSELF,TTECH_WS_LARGE_TORPEDO_TECHNOLOGY,TTECH_LEV1);	
+			  //ActTechSet(PLAYER_3,AIREL_MYSELF,TTECH_WS_RESEARCH_ENEMY_CIPHER_KEY,TTECH_LEV1);
+			  //ActTechSet(PLAYER_3,AIREL_MYSELF,TTECH_WS_MARAUDER_EQUIPMENT,TTECH_LEV1);	      
+			  //ActTechSet(PLAYER_3,AIREL_MYSELF,TTECH_WS_TORPEDO_UPGRADE,TTECH_LEV1);          
+			  //ActTechSet(PLAYER_3,AIREL_MYSELF,TTECH_WS_UPGRADE_TO_MOBILITY,TTECH_LEV1);   	  
+					  //В мисси 3  
+			  ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_ARMOR_UPGRADE,TTECH_LEV1);               
+			  ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_MOBILE_SONAR_TECHNOLOGY,TTECH_LEV1);	    
+			  ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_UPGRADE_HF_CANNON_FIRE_RATE,TTECH_LEV1); 
+			  ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_DEPTH_MINE_TECHNOLOGY,TTECH_LEV1);	      
+			  ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_UPGRADE_HACK_ABILITY,TTECH_LEV1);	       
+			  ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_ULTRASONIC_TECHNOLOGY,TTECH_LEV1);	      
+ 					//4
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_BO_TORPEDO_UPGRADE ,TTECH_LEV2);		         
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_BO_RESEARCH_ENERGY_SUPPLY,TTECH_LEV1);     
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_BO_TELEPORTATION_TECHNOLOGY,TTECH_LEV1);   
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_BO_RADIO_CLUTTER_TECHNOLOGY,TTECH_LEV1);   
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_BO_STEALTH_SCOUT_TECHNOLOGY,TTECH_LEV1);   
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_BO_CASSETTE_SHELL_TECHNOLOGY,TTECH_LEV1);  
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_BO_UPGRADE_HEAVY_LASER_RANGE,TTECH_LEV1);  
+							//5
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_IMPROVE_REPAIR_TECHNOLOGY,TTECH_LEV1);   
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_UPGRADE_SONAR_RANGE,TTECH_LEV1);         
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_TELESHIELD,TTECH_LEV1);	   	             
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_TORPEDO_SPEED_UPGRADE,TTECH_LEV1);  		   
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_UPGRADE_ULTRASONIC_GENERATOR,TTECH_LEV1);
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_ARMOR_UPGRADE,TTECH_LEV2);	          		  
+      //6
+    	ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_ENGINE_UPGRADE,TTECH_LEV3);                  
+    	ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_SHARK_CONTROL_TECHNOLOGY,TTECH_LEV1);      
+    	ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_HF_SHELL_UPGRADE,TTECH_LEV1);                   
+    	ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_DEPTH_ACOUSTIC_MINE_DETECTION,TTECH_LEV1); 
+    	ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_BO_LASER_SNARE_DETECTION,TTECH_LEV1);         
+    	ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_CYBER_TECHNOLOGY,TTECH_LEV1);              
+    	ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_PSY_TECHNOLOGY,TTECH_LEV1);                
+    	ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_TELEPORTATION_TECHNOLOGY,TTECH_LEV1);      
+     //7
+    	ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_ANTI_PHANTOM_TECHNOLOGY,TTECH_LEV1);       
+    	ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_TORPEDO_UPGRADE,TTECH_LEV3);               
+    	ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_ARMCENTER_UPGRADE,TTECH_LEV1);             
+    	ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_INCREASE_TRANCENTER_RECHARGE,TTECH_LEV1);	 
+    	ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_UPGRADE_SHARK_CONTROL,TTECH_LEV1);         
+    	ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_PLASMA_GENERATOR,TTECH_LEV1);              
+     //8
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_ANTI_LASER_SCREEN,TTECH_LEV1);            
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_PLASMA_CANNON_TECHNOLOGY,TTECH_LEV1); 	   
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_UPGRADE_MINE_PRODUCTIVITY,TTECH_LEV1);       
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_TORPEDO_UPGRADE,TTECH_LEV4);	             
+								//9
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_ARMOR_UPGRADE,TTECH_LEV3);                     
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_ANTI_MASS_WEAPONS_DEFENSE_SYSTEM,TTECH_LEV1);  
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_RESEARCH_CORIUM_296,TTECH_LEV1);               
+					ActTechDevDisable(PLAYER_3,AIREL_MYSELF,TTECH_WS_THERMO_NUCLEAR_TECHNOLOGY,TTECH_LEV1);		       
+
+     //---PLAYER_4-----
+	    //В мисси 1       
+			  ActTechSet(PLAYER_4,AIREL_MYSELF,TTECH_WS_HYDRO_FUSION_TECHNOLOGY,TTECH_LEV1);  
+			  ActTechSet(PLAYER_4,AIREL_MYSELF,TTECH_WS_LONG_RANGE_SONAR,TTECH_LEV1);         
+			  ActTechSet(PLAYER_4,AIREL_MYSELF,TTECH_WS_ENGINE_UPGRADE,TTECH_LEV1);           
+					  //В мисси 2  
+			  //ActTechSet(PLAYER_4,AIREL_MYSELF,TTECH_WS_MEDIUM_TORPEDO_TECHNOLOGY,TTECH_LEV1);
+			  //ActTechSet(PLAYER_4,AIREL_MYSELF,TTECH_WS_LARGE_TORPEDO_TECHNOLOGY,TTECH_LEV1);	
+			  //ActTechSet(PLAYER_4,AIREL_MYSELF,TTECH_WS_RESEARCH_ENEMY_CIPHER_KEY,TTECH_LEV1);
+			  //ActTechSet(PLAYER_4,AIREL_MYSELF,TTECH_WS_MARAUDER_EQUIPMENT,TTECH_LEV1);	      
+			  //ActTechSet(PLAYER_4,AIREL_MYSELF,TTECH_WS_TORPEDO_UPGRADE,TTECH_LEV1);          
+			  //ActTechSet(PLAYER_4,AIREL_MYSELF,TTECH_WS_UPGRADE_TO_MOBILITY,TTECH_LEV1);   	  
+					  //В мисси 3  
+			  ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_ARMOR_UPGRADE,TTECH_LEV1);               
+			  ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_MOBILE_SONAR_TECHNOLOGY,TTECH_LEV1);	    
+			  ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_UPGRADE_HF_CANNON_FIRE_RATE,TTECH_LEV1); 
+			  ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_DEPTH_MINE_TECHNOLOGY,TTECH_LEV1);	      
+			  ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_UPGRADE_HACK_ABILITY,TTECH_LEV1);	       
+			  ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_ULTRASONIC_TECHNOLOGY,TTECH_LEV1);	      
+ 					//4
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_BO_TORPEDO_UPGRADE ,TTECH_LEV2);		         
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_BO_RESEARCH_ENERGY_SUPPLY,TTECH_LEV1);     
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_BO_TELEPORTATION_TECHNOLOGY,TTECH_LEV1);   
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_BO_RADIO_CLUTTER_TECHNOLOGY,TTECH_LEV1);   
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_BO_STEALTH_SCOUT_TECHNOLOGY,TTECH_LEV1);   
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_BO_CASSETTE_SHELL_TECHNOLOGY,TTECH_LEV1);  
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_BO_UPGRADE_HEAVY_LASER_RANGE,TTECH_LEV1);  
+							//5
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_IMPROVE_REPAIR_TECHNOLOGY,TTECH_LEV1);   
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_UPGRADE_SONAR_RANGE,TTECH_LEV1);         
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_TELESHIELD,TTECH_LEV1);	   	             
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_TORPEDO_SPEED_UPGRADE,TTECH_LEV1);  		   
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_UPGRADE_ULTRASONIC_GENERATOR,TTECH_LEV1);
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_ARMOR_UPGRADE,TTECH_LEV2);	          		  
+      //6
+    	ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_ENGINE_UPGRADE,TTECH_LEV3);                  
+    	ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_SHARK_CONTROL_TECHNOLOGY,TTECH_LEV1);      
+    	ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_HF_SHELL_UPGRADE,TTECH_LEV1);                   
+    	ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_DEPTH_ACOUSTIC_MINE_DETECTION,TTECH_LEV1); 
+    	ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_BO_LASER_SNARE_DETECTION,TTECH_LEV1);         
+    	ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_CYBER_TECHNOLOGY,TTECH_LEV1);              
+    	ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_PSY_TECHNOLOGY,TTECH_LEV1);                
+    	ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_TELEPORTATION_TECHNOLOGY,TTECH_LEV1);      
+     //7
+    	ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_ANTI_PHANTOM_TECHNOLOGY,TTECH_LEV1);       
+    	ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_TORPEDO_UPGRADE,TTECH_LEV3);               
+    	ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_ARMCENTER_UPGRADE,TTECH_LEV1);             
+    	ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_INCREASE_TRANCENTER_RECHARGE,TTECH_LEV1);	 
+    	ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_UPGRADE_SHARK_CONTROL,TTECH_LEV1);         
+    	ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_PLASMA_GENERATOR,TTECH_LEV1);              
+     //8
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_ANTI_LASER_SCREEN,TTECH_LEV1);            
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_PLASMA_CANNON_TECHNOLOGY,TTECH_LEV1); 	   
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_UPGRADE_MINE_PRODUCTIVITY,TTECH_LEV1);       
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_TORPEDO_UPGRADE,TTECH_LEV4);	             
+								//9
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_ARMOR_UPGRADE,TTECH_LEV3);                     
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_ANTI_MASS_WEAPONS_DEFENSE_SYSTEM,TTECH_LEV1);  
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_RESEARCH_CORIUM_296,TTECH_LEV1);               
+					ActTechDevDisable(PLAYER_4,AIREL_MYSELF,TTECH_WS_THERMO_NUCLEAR_TECHNOLOGY,TTECH_LEV1);		       
+
+     //----Player 0-------------
+#if(_DEBUG)
+						  //1
+			  _actTechSet(TTECH_BO_SPLINTER_TORPEDO_TECHNOLOGY,TTECH_LEV1); 
+			  _actTechSet(TTECH_BO_LIGHT_LASER_TECHNOLOGY,TTECH_LEV1);  	   
+			  _actTechSet(TTECH_BO_LONG_RANGE_ASDIC,TTECH_LEV1);      	     
+			  _actTechSet(TTECH_BO_RESEARCH_ENEMY_CIPHER_KEY,TTECH_LEV1);   
+#endif
+
+       //3
+			  _actTechDevDisable(TTECH_BO_ARMOR_UPGRADE,TTECH_LEV1);	              
+			  _actTechDevDisable(TTECH_BO_LASER_SNARE_TECHNOLOGY,TTECH_LEV1);      
+			  _actTechDevDisable(TTECH_BO_UPGRADE_HACK_ABILITY,TTECH_LEV1);	       
+			  _actTechDevDisable(TTECH_BO_DISPERSER_SCREEN_TECHNOLOGY,TTECH_LEV1); 
+			  _actTechDevDisable(TTECH_BO_GAS_LASER_TECHNOLOGY,TTECH_LEV1);	       
+			  _actTechDevDisable(TTECH_BO_UPGRADE_TO_MOBILITY,TTECH_LEV1);	        
+       //4
+			  _actTechDevDisable(TTECH_BO_TORPEDO_UPGRADE ,TTECH_LEV2);		          
+			  _actTechDevDisable(TTECH_BO_RESEARCH_ENERGY_SUPPLY,TTECH_LEV1);      
+			  _actTechDevDisable(TTECH_BO_TELEPORTATION_TECHNOLOGY,TTECH_LEV1);    
+			  _actTechDevDisable(TTECH_BO_RADIO_CLUTTER_TECHNOLOGY,TTECH_LEV1);    
+			  _actTechDevDisable(TTECH_BO_STEALTH_SCOUT_TECHNOLOGY,TTECH_LEV1);    
+			  _actTechDevDisable(TTECH_BO_CASSETTE_SHELL_TECHNOLOGY,TTECH_LEV1);   
+			  _actTechDevDisable(TTECH_BO_UPGRADE_HEAVY_LASER_RANGE,TTECH_LEV1);   
+      //5
+			  _actTechDevDisable(TTECH_BO_ARMOR_UPGRADE,TTECH_LEV2);		          
+			  _actTechDevDisable(TTECH_BO_MAGNETIC_MINE_TECHNOLOGY,TTECH_LEV1);      
+			  _actTechDevDisable(TTECH_BO_ENGINE_UPGRADE,TTECH_LEV2);    
+			  _actTechDevDisable(TTECH_BO_TORPEDO_UPGRADE,TTECH_LEV3);    
+			  _actTechDevDisable(TTECH_BO_UPGRADE_LIGHT_LASER_RATE,TTECH_LEV1);    
+			  _actTechDevDisable(TTECH_BO_DETECT_TELEPORTATION,TTECH_LEV1);   
+			  _actTechDevDisable(TTECH_BO_DEPTH_ACOUSTIC_MINE_DETECTION,TTECH_LEV1);   
+			  _actTechDevDisable(TTECH_BO_LASER_SNARE_DETECTION,TTECH_LEV1);   
+	      //6
+			  _actTechDevDisable(TTECH_BO_ELECTRO_MAGNETIC_TORPEDOES,TTECH_LEV1); 
+			  _actTechDevDisable(TTECH_BO_CYBER_TECHNOLOGY,TTECH_LEV1);           
+			  _actTechDevDisable(TTECH_BO_UPGRADE_ENERGY_SUPPLY,TTECH_LEV1);      
+			  _actTechDevDisable(TTECH_BO_TORPEDO_UPGRADE,TTECH_LEV4);            
+			  _actTechDevDisable(TTECH_BO_ARMOR_UPGRADE,TTECH_LEV3);	             
+			  _actTechDevDisable(TTECH_BO_TORPEDO_SPEED_UPGRADE,TTECH_LEV1);      
+			  _actTechDevDisable(TTECH_BO_SPLINTER_TORPEDO_UPGRADE,TTECH_LEV1);   
+			  _actTechDevDisable(TTECH_BO_MUNITIONS_FACTORY_UPGRADE,TTECH_LEV1);  
+					  //7
+			  _actTechDevDisable(TTECH_BO_PHANTOM_EQUIPMENT,TTECH_LEV1);            
+			  _actTechDevDisable(TTECH_BO_UPGRADE_SUBS_LASER_RATE,TTECH_LEV1);      
+			  _actTechDevDisable(TTECH_BO_PROTECTIVE_SCREEN_TECHNOLOGY,TTECH_LEV1); 
+			  _actTechDevDisable(TTECH_BO_UPGRADE_HEAVY_LASER_RATE,TTECH_LEV1);     
+			  _actTechDevDisable(TTECH_BO_RAIDER_EQUIPMENT_UPGRADE,TTECH_LEV1);     
+			  _actTechDevDisable(TTECH_BO_INCREASE_INFORMATION_SECURITY,TTECH_LEV1);
+			  _actTechDevDisable(TTECH_BO_PARALYZING_RAYS_TECHNOLOGY,TTECH_LEV1);   
+			  _actTechDevDisable(TTECH_BO_ASDIC_UPGRADE,TTECH_LEV1);                
+				  //8
+			  _actTechDevDisable(TTECH_BO_UPGRADE_MINE_PRODUCTIVITY,TTECH_LEV1);    
+			  _actTechDevDisable(TTECH_BO_ENGINE_UPGRADE,TTECH_LEV3);               
+			  _actTechDevDisable(TTECH_BO_EM_TORPEDO_UPGRADE,TTECH_LEV1);	          
+			  _actTechDevDisable(TTECH_BO_ANTI_ULTRASONIC_SCREEN,TTECH_LEV1);	      
+			  _actTechDevDisable(TTECH_BO_ENERGY_SHIELD,TTECH_LEV1);                
+			  _actTechDevDisable(TTECH_BO_INCREASE_TELEPORTER_RECHARGE,TTECH_LEV1); 
+				  //9
+			  _actTechDevDisable(TTECH_BO_PHANTOM_RECHARGE_UPGRADE,TTECH_LEV1);	        
+			  _actTechDevDisable(TTECH_BO_IMPROVE_REPAIR_TECHNOLOGY,TTECH_LEV1);        
+			  _actTechDevDisable(TTECH_BO_ANTI_MASS_WEAPONS_DEFENSE_SYSTEM,TTECH_LEV1); 
+			  _actTechDevDisable(TTECH_BO_LASER_BOMB_TECHNOLOGY,TTECH_LEV1);	           
+
+     // Objects for Human 
+    _actCreatePlObj(TOBJ_CARGO_SUB, 2,63,1, LOGO_DEFAULT,"Cargo",-1,100,VEFF_NONE, 100, 0);
+    _actCreatePlObj(TOBJ_CARGO_SUB, 3,63,1, LOGO_DEFAULT,"Cargo",-1,100,VEFF_NONE, 100, 0);
+    _actCreatePlObj(TOBJ_CARGO_SUB, 4,63,1, LOGO_DEFAULT,"Cargo",-1,100,VEFF_NONE, 100, 0);
+    _actCreatePlObj(TOBJ_CARGO_SUB, 3,64,1, LOGO_DEFAULT,"Cargo",-1,100,VEFF_NONE, 0, 100);
+    _actCreatePlObj(TOBJ_CARGO_SUB, 4,64,1, LOGO_DEFAULT,"Cargo",-1,100,VEFF_NONE, 0, 100);
+    _actCreatePlObj(TOBJ_CARGO_SUB, 4,65,1, LOGO_DEFAULT,"Cargo",-1,100,VEFF_NONE, 0, 100);
+
+    _actCreatePlObj(TOBJ_FIGHTER, 6,65,2, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_FIGHTER, 5,66,2, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_FIGHTER, 5,67,2, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_FIGHTER, 6,66,2, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_FIGHTER, 7,65,2, LOGO_DEFAULT,"",-1, 100);
+
+    _actCreatePlObj(TOBJ_FIGHTER, 0,62,2, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_FIGHTER, 1,61,2, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_FIGHTER, 2,60,2, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_FIGHTER, 1,62,2, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_FIGHTER, 2,61,2, LOGO_DEFAULT,"",-1, 100);
+
+    _actCreatePlObj(TOBJ_DESTROYER, 4,61,3, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_DESTROYER, 5,61,3, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_DESTROYER, 6,61,3, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_DESTROYER, 6,62,3, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_DESTROYER, 6,63,3, LOGO_DEFAULT,"",-1, 100);
+    _actCreatePlObj(TOBJ_DESTROYER, 7,60,3, LOGO_DEFAULT,"",-1, 100);
+
+    _actCreateFleet("Silo", CIV_BO, AIF_BASE); _RT10:=_getFleetNum("Silo");
+    _actLockFleet(_RT10, LOCKOBJ_ACTIVITY | LOCKOBJ_INTERF | LOCKOBJ_AISELECT);
+    _actCreatePlObj(TOBJ_SILO       , 64,52,0, LOGO_2,"",_RT10, 80);
+    _actCreatePlObj(TOBJ_SILO       , 65,54,0, LOGO_2,"",_RT10, 60);
+    _actCreatePlObj(TOBJ_SILO       , 64,49,0, LOGO_2,"",_RT10, 70);
+    if(_RT0 < DIFF_STRONG)
+    { _actCreatePlObj(TOBJ_METAL_MINE , 64,58,0, LOGO_2,"",_RT10, 70);
+      if(_RT0 < DIFF_MEDIUM)
+      { _actCreatePlObj(TOBJ_CORIUM_MINE, 53,57,0, LOGO_2,"",_RT10, 70);
+      }
+    }
+
+    _actCreateFleet("Base", CIV_BO, AIF_BASE); _RT11:=_getFleetNum("Base");
+    _actLockFleet(_RT11, LOCKOBJ_ALL);
+    _actCreatePlObj(TOBJ_DOCKYARD           , 64,27,0, LOGO_2,"",_RT11, 80);
+    _actCreatePlObj(TOBJ_MUNITIONS_FACTORY  , 65,25,0, LOGO_2,"",_RT11, 100);
+    _actCreatePlObj(TOBJ_RESEARCH_LABORATORY, 66,30,0, LOGO_2,"",_RT11, 100);
+    _actCreatePlObj(TOBJ_O2_SUBLIMATOR      , 64,23,0, LOGO_2,"",_RT11, 100);
+    _actCreatePlObj(TOBJ_LIGHT_LASER        , 60,21,3, LOGO_2,"",_RT11, 100);
+    _actCreatePlObj(TOBJ_LIGHT_LASER        , 61,32,3, LOGO_2,"",_RT11, 100);
+    if(_RT0 > DIFF_WEAK)
+    { _actCreatePlObj(TOBJ_HEAVY_LASER   , 62,18,3, LOGO_2,"",_RT11, 100);
+    }
+    if(_RT0 > DIFF_MEDIUM)
+    { _actCreatePlObj(TOBJ_HEAVY_LASER   , 60,24,1, LOGO_2,"",_RT11, 100);
+    }
+
+    _actCreateFleet("Guardians", CIV_BO, AIF_MILITARY); _RT12:=_getFleetNum("Guardians");
+    _actLockFleet(_RT12, LOCKOBJ_ALL);
+    _actCreatePlObj(TOBJ_FIGHTER  , 56,27,2, LOGO_2,"",_RT12, 100);
+    _actCreatePlObj(TOBJ_FIGHTER  , 56,27,2, LOGO_2,"",_RT12, 100);
+    _actCreatePlObj(TOBJ_FIGHTER  , 56,27,2, LOGO_2,"",_RT12, 100);
+    _actCreatePlObj(TOBJ_FIGHTER  , 56,27,2, LOGO_2,"",_RT12, 100);
+    _actCreatePlObj(TOBJ_FIGHTER  , 58,27,2, LOGO_2,"",_RT12, 100);
+    _actCreatePlObj(TOBJ_DESTROYER, 58,28,2, LOGO_2,"",_RT12, 100);
+    _actCreatePlObj(TOBJ_DESTROYER, 58,28,2, LOGO_2,"",_RT12, 100);
+    if(_RT0 > DIFF_WEAK)
+    { _actCreatePlObj(TOBJ_FIGHTER  , 58,27,2, LOGO_2,"",_RT12, 100);
+      _actCreatePlObj(TOBJ_DESTROYER, 58,28,2, LOGO_2,"",_RT12, 100);
+    }
+    if(_RT0 > DIFF_MEDIUM)
+    { _actCreatePlObj(TOBJ_DESTROYER, 58,28,3, LOGO_2,"",_RT12, 100);
+      _actCreatePlObj(TOBJ_DESTROYER, 60,25,3, LOGO_2,"",_RT12, 100);
+      _actCreatePlObj(TOBJ_DESTROYER, 60,25,3, LOGO_2,"",_RT12, 100);
+    }
+    //_actFCmdGuardF(_RT12, _RT11, -1, 0, 0);
+    _actFParGuardZones(_RT12, AICAN_BYORDER, AITRG_ALL, 1, 0, 0);
+    _actFParSetZone(_RT12, 55,18,0, 13,17,5);
+    
+    // Off
+    actOffEvent(100);actOffEvent(101);
+
+    actOffEvent(9);
+
+    actOffEvent(10); actOffEvent(11); actOffEvent(12); 
+    actOffEvent(16); actOffEvent(17); actOffEvent(18); 
+    actOffEvent(19);
+
+    actOffEvent(60);
+    // Init
+    _GL10 := 0;
+    _GL20 := 0;
+    _GL30 := 0;
+    _RT160:=0;
+  }
+
+  // Get control over ally
+  Event((getOwnTime()>10 && _getPlObjM(AITRG_BOATALL, LOGO_DEFAULT, 61,25,0, 7,8,5)>0),55)
+   {actOnEvent(60);
+    _RT160:=1;
+   }
+
+  Event(TRUE,60)
+   { _actUnLockFleet(_RT11, LOCKOBJ_ALL);
+    _actUnLockFleet(_RT12, LOCKOBJ_ALL);
+    // give resource to player
+    if(_RT0 == DIFF_WEAK)  
+    { _actSetPlRC(TOBJ_METAL , 1, 4000);
+      _actSetPlRC(TOBJ_CORIUM, 1, 2000);
+      _actSetPlRC(TOBJ_GOLD  , 1, 200);
+    }
+    if(_RT0 == DIFF_MEDIUM)
+    { _actSetPlRC(TOBJ_METAL , 1, 3000);
+      _actSetPlRC(TOBJ_CORIUM, 1, 1500);
+      _actSetPlRC(TOBJ_GOLD  , 1, 150);
+    }
+    if(_RT0 == DIFF_STRONG)
+    { _actSetPlRC(TOBJ_METAL , 1, 2000);
+      _actSetPlRC(TOBJ_CORIUM, 1, 1000);
+      _actSetPlRC(TOBJ_GOLD  , 1, 100);
+    }
+    if(_RT160==0)
+     {actOffEvent(55);
+     }
+   }
+  // Enemies appearing
+  Event(getOwnTime()>10 && _getPlObjM(AITRG_BOATALL, LOGO_UNDEF, 24,42,0, 18,5,5)>0)
+  { _GL20 := 1; _GL30 := GetTime();
+    // ask for players help
+    _actHoleFOW(64, 27, 0, 3, 25); _actSetScreen(64, 27, SCROLL_FAST);
+    _actPlayBriefing("BRIEF1");
+  }
+
+  // First Objective - Escort Cargo Subs
+  //- Done
+  Event(getOwnTime()>10 && _getPlObjN("Cargo", LOGO_DEFAULT, 61,47,0, 7,12,5)==6, 2)
+  { _actUnLockFleet(_RT10, LOCKOBJ_ALL);
+    // close objective
+    _actPlayBriefing("BRIEF3"); 
+    _actOutString(25, GetStrRes(mess2));
+     //New Objectives
+    _actClearObjectives();
+    _actAddObjective(120, GetStrRes(1));
+    if(_RT160==0)
+     {actOnEvent(60);
+     }
+    actOffEvent(3);actOffEvent(4);
+    // run next stage
+    actOnEvent(10); actOnEvent(11); actOnEvent(12); 
+    actOnEvent(16); actOnEvent(17); actOnEvent(18);
+  }
+  // Defeat for Human
+  Event(getOwnTime()>10 && _getPlObjN("Cargo", LOGO_DEFAULT)<6, 3) 
+  { actOnEvent(9); _actStringInfo(10, ISTR_RED, GetStrRes(10)); _actStringMess(GetStrRes(10));
+  }
+  Event(getOwnTime()>10 && (_getPlObjT(TOBJ_SILO)==0 || _getPlObjT(TOBJ_DOCKYARD)==0 || _getPlObjT(TOBJ_O2_SUBLIMATOR)==0), 4) 
+  { actOnEvent(9); _actStringInfo(10, ISTR_RED,GetStrRes(mess4)); _actStringMess(GetStrRes(mess4));
+  }
+  Event(TRUE, 9) 
+  { actOffEvent(2); actOffEvent(3); actOffEvent(4);
+    // run defeat stage
+    _actOutText(7,19,19);
+    actOnEvent(100); _actOnTimer(8); _actOffFOW();
+  }
+
+  // Second Objective - Build and Transport Containers 
+  //- Done - Victory
+  Event(_getVolRCCont(TOBJ_CORIUM, "", 0,0,0, 10,11,5) >= 3000 && _getRCCont(TOBJ_CORIUM, "", 0,0,0, 10,11,5) >= 3, 10) 
+  { _actStringInfo(10, ISTR_BLUE, GetStrRes(mess5));
+    _actOutString(20, GetStrRes(mess5));
+    actOffEvent(10); actOffEvent(11); actOffEvent(12);
+    actOffEvent(16); actOffEvent(17); actOffEvent(18);
+    _actClearObjectives();
+    _actSetScreen(4, 5, SCROLL_SOFT);
+    // run victory stage
+    //_actOutText(11,18,18);
+    ActSaveMission();
+    _actPlayBriefing("BRIEF_4");
+    actOnEvent(101); _actOnTimer(19); _actOffFOW();
+  }
+  //- Count containers
+  EventRCContCreated(_PI0 == PLAYER_0 && _PI3 == TOBJ_CORIUM, 11)
+  { _GL10 += _PI8;
+    //- done building
+    if(_GL10 >= 3000 && _getRCCont(TOBJ_CORIUM) >= 3)
+    { _actStringInfo(10, ISTR_BLUE,GetStrRes(mess7));
+      _actOutString(20, GetStrRes(mess7));
+    }
+    actLockEvent();
+  }
+  EventRCContKilled(_PI0 == PLAYER_0 && _PI3 == TOBJ_CORIUM, 12)
+  { _GL10 -= _PI8;
+    //- have to build again
+    if(_GL10 < 3000 || _getRCCont(TOBJ_CORIUM) < 3)
+    { _actStringInfo(10, ISTR_RED,GetStrRes(mess8));
+    }
+    actLockEvent();
+  }
+  // Defeat - no objects to complete mission
+  Event(_getPlObjT(TOBJ_MARKET) == 0 && _getPlRes(TOBJ_METAL) == 0 && 
+        (_getPlObjM(AITRG_BOATCONSTRUCT) == 0 || _getPlObjT(TOBJ_SILO)==0 || _getPlObjT(TOBJ_METAL_MINE)==0), 17)
+  { actOnEvent(19); _actStringInfo(10, ISTR_RED, GetStrRes(mess4)); _actStringMess(GetStrRes(mess4));
+  }
+  Event(_getPlObjT(TOBJ_DOCKYARD) == 0 && _getPlObjT(TOBJ_MARKET) == 0 &&
+        _getPlObjM(AITRG_BOATCONSTRUCT) == 0 && 
+        (_getRCCont(TOBJ_CORIUM) < 3 || _getVolRCCont(TOBJ_CORIUM) < 3000), 18)
+  { actOnEvent(19); _actStringInfo(10, ISTR_RED,GetStrRes(mess4)); _actStringMess(GetStrRes(mess4));
+  }
+  // Defeat - resource is depleted
+  Event((_getVolRCCont(TOBJ_CORIUM) < 3000 && GetRes(TOBJ_CORIUM) == 0 && _getPlRes(TOBJ_CORIUM) == 0) ||
+        (_getPlObjT(TOBJ_MARKET) == 0 && GetRes(TOBJ_METAL) == 0 && _getPlRes(TOBJ_METAL) == 0), 16)
+  { actOnEvent(19); _actStringInfo(10, ISTR_RED,GetStrRes(mess6)); _actStringMess(GetStrRes(mess6));
+  }
+  Event(TRUE, 19) 
+  { actOffEvent(10); actOffEvent(11); actOffEvent(12); 
+    actOffEvent(16); actOffEvent(17); actOffEvent(18);
+    _actOutText(7,19,19);
+    actOnEvent(100); _actOnTimer(8); _actOffFOW();
+  }
+
+  // Stop Defeat
+  Event(_getTimerTime()==0, 100) 
+  { _actTotalStatistics(10); _actEndMiss(ENDMISS_FAILED);
+  }
+  // Stop Victory
+  Event(_getTimerTime()==0, 101)
+  { _actTotalStatistics(10); 
+    _actVideo(5, "BO_02.avi",MODE_RECT,MODE_640x480,MODE_24BIT,0,94,640,292,MODE_WHOLE);
+    _actEndMiss(ENDMISS_ACCOMPL);
+    _actStringInfo(10, ISTR_BLUE,GetStrRes(mess9)); _actStringMess(GetStrRes(mess9));
+    _actNextMiss("miss203");
+  } 
+
+ CloseEvents();
+
+CloseArbiter();
+

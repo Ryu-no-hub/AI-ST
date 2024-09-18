@@ -1,0 +1,121 @@
+//-
+include<path.imf>
+include<mfdef.imf>
+include<mfdef_t.imf>
+
+append(out_campaign+"miss203");
+//append(out_campaign+"MissTest");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\bo\\";
+source(in_br+"bot_0300.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+//source(in_br+"bob_0301.wav"); name("BriefSpeach"); putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Escape");
+
+// text description of the mission
+initsar(10, 10);
+//- objectives                 0-4
+setsar("Escort all Repair Platforms with Corium cargo to the eastern base and protect the Black Octopi Artifact.");
+setsar("Protect 5 Repair Platforms with Corium and the Black Octopi Artifact until they reach the north.");
+setsar("");
+setsar("");
+setsar("");
+//- victory and defeat reports 5-9
+setsar("Great job, Lieutenant!");
+setsar("You have been defeated!");
+setsar("");
+setsar("");
+setsar("");
+//- briefs                    10-19
+setsar(" Well done Lieutenant, your promotion to Captain is effective immediately.@ However the situation is very bad; the White Sharks surprised us, overrunning most of our eastern and southern bases. Our northern and western sectors are still secure and we are working around the clock to replace the losses.@ Your new mission is to escort Repair Platforms with Corium and Repair Platform with an Ion-Optical Accumulator to the northern part of the sector and to protect them from destruction and capturing by the enemy.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar(" I believe the troops have prepared a party to celebrate your victory.  Take off the rest of today and tomorrow.");
+setsar(" Mission Failed");
+//- tasks                      20-
+setsar("Sector JK16. South Atlantic.@To the leader of the 6th Strike Wing of the 17th Special Squadron.@Top secret");
+setsar(" Hello, hello, is anyone there?@ @ Our intelligence is poor, it appears that the White Sharks have attacked us all along our common border and crushed our forces.@ Most of their subs are junk but they've got five times as many as us, it looks like they've been planning this for some time.");
+setsar(" We've cobbled together a taskforce and have been heading north to where our remaining forces are gathering. As the ranking officer - get us to safety, and none of us would mind if you gave the Sharks a black eye in the process.@ We have received a Mayday signal from our Base QF13, which is in the eastern part of the sector, where you have to begin battle operations. It is required that you protect the experimental samples from an Ion-Optical Accumulator that is kept at the base.");
+
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Escort all Repair Platforms with Corium cargo to the eastern base and protect the Black Octopi Artifact.");
+name("OBJECTIVES"); putsar();
+
+// script for play
+name("TASKPLAY");
+inittask("DEFAULT_BO_ANIMATED", "DEFAULT_BO");
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(1, 1, 1, 1);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+  //-- heading
+ SetColor(1, 1, 1, 0);
+ SetLevel(10);
+ ShowATask(0, 50,  20, 700,  80, 1, 20, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 21, 1, 10, 20, 1); 
+ Time(680);                
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(690);
+ ShowATask(2, 100, 120, 600, 210, 1, 22, 1, 10, 10, 1); 
+ Time(1630);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(1650);
+ HideATask(2); StartWave("DEFAULT_BIP");
+
+ Time(1670);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 180, 550, 160); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();
+
+// script for play
+name("BRIEF1");
+initbriefing(); 
+ Time(0);
+ BriefingWave(0, "BriefSpeach");
+ BriefingText(10, 1, 1, 1);   
+ Time(35*25);
+ BriefingStop();
+putbriefing();
+
+// script for play
+name("BRIEF_2");
+initbriefing(); 
+ Time(0); 
+ BriefingText(18, 1, 1, 1);
+	Time(1*25);
+	BriefingAni(0, 0, "BOFACE2");	// показать говорящего 
+ Time(11*25);
+	BriefingAni(0, 0, "");		// спрятать говорящего   
+	Time(15*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+

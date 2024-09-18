@@ -1,0 +1,12 @@
+
+OpenFleet("SI Corium Transport2",CIV_SI, AIF_RES, 8);
+  // Staff
+  PutInStaff(TOBJ_TRANSPORT     , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 16);
+  PutInStaff(TOBJ_TRANSPORT     , TOBJ_UNDEFINED, TOBJ_UNDEFINED, 16);
+
+  // Param
+  CanChangeStaff(AICAN_MYSELF);  
+  GatherRC(AICAN_MYSELF, TOBJ_CORIUM, 0);
+  RepairStaff(AICAN_MYSELF, 10, 0, AISF_ALL , AITRG_BOATCIVIL);
+CloseFleet();
+

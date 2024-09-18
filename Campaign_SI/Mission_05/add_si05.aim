@@ -1,0 +1,28 @@
+//====================================================================
+//    ST AiScript: Add AI to Miss305.DKD
+//====================================================================
+
+#if(_env_var0==0) //-- For installed game
+ append(_main_path+"\\Missions\\miss305.dkd");
+#else             //-- For localization kit
+ append(_curr_path+"..\\..\\..\\out\\campaign\\miss305.dkd");
+#endif
+
+#if(_env_var1==1)
+	_DEBUG=1;
+#else
+	_DEBUG=0;
+#endif
+
+pack(1);
+
+name("AIBOSS");
+ include<[_curr_path]\Arbiter_Si05.arb>;
+
+name("STRATEG1000");
+ include<[_curr_path]\BO_Si05_01.stg>;
+
+name("STRATEG6000");
+ include<[_curr_path]\WS_Si05_06.stg>;
+
+close();

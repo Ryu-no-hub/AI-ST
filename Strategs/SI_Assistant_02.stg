@@ -1,0 +1,44 @@
+//====================================================================
+//      ST AiScript: SI Computer Assistant Level 02
+//====================================================================
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#if(_env_var1==0)
+ _full_name = "SI Full Game Assistant";_short_name = "ASSISTANT 3";
+#endif
+
+OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
+  
+ // Parameters
+ MainEnemy(AICAN_MYSELF, PLAYER_ALL);
+ OffensiveStroke(AICAN_MYSELF, 20, 30, 120);
+
+ // Tactics
+ include<[_curr_path]\SI_MainBase.tct>;
+
+ // Events
+ OpenEvents();
+  // Execute Tactician
+  Event(getOwnTime()>1) 
+  { actObjSelectM(AITRG_ALL);
+    actExecTactic("SI Main Base");
+    actTScenDevRun(TECH_SCENARIO_OPTIMAL);
+  };
+
+  /////// DEBUG /////////
+  /*
+  Event(_RT11<3 && getPlRes(TOBJ_CORIUM)<2000)
+  { _RT11+=1;
+    actSetPlRC(TOBJ_CORIUM, 1, 2000);
+    actLockEvent();
+  }
+  Event(_RT12<5 && getPlRes(TOBJ_SILICON)<2000)
+  { _RT12+=1;
+    actSetPlRC(TOBJ_SILICON, 1, 2000);
+    actLockEvent();
+  }
+  */
+ CloseEvents();
+
+CloseStrateg();

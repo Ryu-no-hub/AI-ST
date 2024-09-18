@@ -1,0 +1,627 @@
+// =============================================================================
+//	Technology Development
+// =============================================================================
+
+
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+//	Technology variable aliases
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+macro "UpgradeMovementLevelTechLevel"		"_GL250"
+macro "SiliconArmorUpgradeTechLevel"		"_GL249"
+macro "EnergyShellTechLevel"			"_GL248"
+macro "UpgradeIonDefensiveSheathTechLevel"	"_GL247"
+macro "UpgradeEnergyConservationTechLevel"	"_GL246"
+macro "UpgradeParalyticWeaponsTechLevel"	"_GL245"
+macro "Scenario1To5Tech"				"_GL244"
+macro "Scenario6To10Tech"				"_GL243"
+macro "IntelligenceModuleTechCount"		"_GL242"
+macro "MobilityModuleTechCount"			"_GL241"
+macro "StructureModuleTechCount"			"_GL240"
+macro "SubmarineModuleTechCount"		"_GL239"
+macro "RegenerationModuleTechCount"		"_GL238"
+macro "SuperTechModuleTechCount"		"_GL237"
+macro "EnergyModuleTechCount"			"_GL236"
+
+
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+//	Tech level flags scenario 1 to 5
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+BiosonarTechnologyFlag 			= 0x00000001;
+PolarizedPlasmaPulsarFlag 			= 0x00000002;
+IonCassetteShellsFlag 			= 0x00000004;
+HumanCipherKeyFlag				= 0x00000008;
+GasShellLauncherFlag			= 0x00000010;
+BHEShellsFlag				= 0x00000020;
+DataIntrusionFlag				= 0x00000040;
+DoublePlasmaTurretGunFlag			= 0x00000080;
+LocalTeleportationFlag			= 0x00000100;
+LocatorFlag					= 0x00000200;
+TransformCoriumToEnergyFlag		= 0x00000400;
+UpgradePPPulsarFireRateFlag		= 0x00000800;
+TorpedoEvasionFlag				= 0x00001000;
+BioAcidShellsFlag				= 0x00002000;
+BioMineLauncherFlag				= 0x00004000;
+JumpMineLauncherFlag			= 0x00008000;
+SolitonOscillatorFlag				= 0x00010000;
+EnemyCaptureFlag				= 0x00020000;
+AntiSonarDispersionScreenFlag		= 0x00040000;
+AcousticMinesFlag				= 0x00080000;
+UpgradeGSLFireRateFlag			= 0x00100000;
+TeleportationDetectionFlag			= 0x00200000;
+IonReflectorFlag				= 0x00400000;
+DataSecurityUpgradeFlag			= 0x00800000;
+TeleportationGateFlag				= 0x01000000;
+UpgradeEnergyAccumulatorFlag		= 0x02000000;
+UpgradeDPTGunRangeFlag			= 0x04000000;
+ParcherFlag					= 0x08000000;
+HighRangeExplorerFlag			= 0x10000000;
+UpgradeIonReflectorFlag			= 0x20000000;
+
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+//	Tech level flags scenario 6 to 10
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+AnnihilationTechnologyFlag			= 0x00000001;
+NeuroParalysisShellsFlag			= 0x00000002;
+UpgradeBioAcidShellsFlag			= 0x00000004;
+EnergyTransmitterFlag			= 0x00000008;
+EnemyCaptureUpgradeFlag			= 0x00000010;
+UpgradeRegenerationSpeedFlag		= 0x00000020;
+QuantumParalyzerFlag			= 0x00000040;
+AntiStealthBiosonarFlag			= 0x00000080;
+DepthAcousticMineDetectionFlag		= 0x00000100;
+LaserSnareDetectionFlag			= 0x00000200;
+MolecularRepairFacilityFlag			= 0x00000400;
+BHEShellRangeUpgradeFlag			= 0x00000800;
+IonFieldGeneratorFlag			= 0x00001000;
+LaserReplenishSheathFlag			= 0x00002000;
+IDTeleportationFlag				= 0x00004000;
+UpgradeSiliconExtractorFlag			= 0x00008000;
+AntiUltrasonicScreenFlag			= 0x00010000;
+PsyShieldFlag					= 0x00020000;
+GasLaserSatelliteFlag			= 0x00040000;
+UpgradeCoriumCollectorFlag			= 0x00080000;
+AntiMassWeaponsDefenseSystemFlag	= 0x00100000;
+VacuumBombFlag				= 0x00200000;
+UpgradeArsenalFlag				= 0x00400000;
+EnergyShieldNeutralizationFlag		= 0x00800000;
+
+
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+//	Reactivate previously researched technology
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Event( TRUE )
+
+{
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+	//	Variable level technologies
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	if( UpgradeMovementLevelTechLevel > 0 ) { 	_actTechSet( TTECH_SI_UPGRADE_MOVEMENT_LEVEL, UpgradeMovementLevelTechLevel ); }
+	if( SiliconArmorUpgradeTechLevel > 0 ) { _actTechSet( TTECH_SI_SILICON_ARMOR_UPGRADE, SiliconArmorUpgradeTechLevel ); }	
+	if( EnergyShellTechLevel > 0 ) { _actTechSet( TTECH_SI_ENERGY_SHELL, EnergyShellTechLevel ); }	
+	if( UpgradeIonDefensiveSheathTechLevel > 0 ) { _actTechSet( TTECH_SI_UPGRADE_ION_DEFENSIVE_SHEATH,  UpgradeIonDefensiveSheathTechLevel ); }
+	if( UpgradeEnergyConservationTechLevel > 0 ) { _actTechSet( TTECH_SI_UPGRADE_ENERGY_CONSERVATION,  UpgradeEnergyConservationTechLevel ); }
+	if( UpgradeParalyticWeaponsTechLevel > 0 ) { _actTechSet( TTECH_SI_UPGRADE_PARALYTIC_WEAPONS,  UpgradeParalyticWeaponsTechLevel ); }
+
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+	//	Scenario 1 to 5 technologies
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	if( Scenario1To5Tech & BiosonarTechnologyFlag ) { _actTechSet( TTECH_SI_BIOSONAR_TECHNOLOGY ); }
+	if( Scenario1To5Tech & PolarizedPlasmaPulsarFlag ) { _actTechSet( TTECH_SI_POLARIZED_PLASMA_PULSAR ); }
+	if( Scenario1To5Tech & IonCassetteShellsFlag ) { _actTechSet( TTECH_SI_ION_CASSETTE_SHELLS ); }
+	if( Scenario1To5Tech & HumanCipherKeyFlag ) { _actTechSet( TTECH_SI_HUMAN_CIPHER_KEY ); }
+	if( Scenario1To5Tech & GasShellLauncherFlag ) { _actTechSet( TTECH_SI_GAS_SHELL_LAUNCHER ); }
+	if( Scenario1To5Tech & BHEShellsFlag ) { _actTechSet( TTECH_SI_BHE_SHELLS ); }
+	if( Scenario1To5Tech & DataIntrusionFlag ) { _actTechSet( TTECH_SI_DATA_INTRUSION ); }
+	if( Scenario1To5Tech & DoublePlasmaTurretGunFlag ) { _actTechSet( TTECH_SI_DOUBLE_PLASMA_TURRET_GUN ); }
+	if( Scenario1To5Tech & LocalTeleportationFlag ) { _actTechSet( TTECH_SI_LOCAL_TELEPORTATION ); }
+	if( Scenario1To5Tech & LocatorFlag ) { _actTechSet( TTECH_SI_LOCATOR ); }
+	if( Scenario1To5Tech & TransformCoriumToEnergyFlag ) { _actTechSet( TTECH_SI_TRANSFORM_CORIUM_TO_ENERGY ); }
+	if( Scenario1To5Tech & UpgradePPPulsarFireRateFlag ) { _actTechSet( TTECH_SI_UPGRADE_PP_PULSAR_FIRE_RATE ); }
+	if( Scenario1To5Tech & TorpedoEvasionFlag ) { _actTechSet( TTECH_SI_TORPEDO_EVASION ); }
+	if( Scenario1To5Tech & BioAcidShellsFlag ) { _actTechSet( TTECH_SI_BIO_ACID_SHELLS ); }
+	if( Scenario1To5Tech & BioMineLauncherFlag ) { _actTechSet( TTECH_SI_BIO_MINE_LAUNCHER ); }
+	if( Scenario1To5Tech & JumpMineLauncherFlag ) { _actTechSet( TTECH_SI_JUMP_MINE_LAUNCHER ); }
+	if( Scenario1To5Tech & SolitonOscillatorFlag ) { _actTechSet( TTECH_SI_SOLITON_OSCILLATOR ); }
+	if( Scenario1To5Tech & EnemyCaptureFlag ) { _actTechSet( TTECH_SI_ENEMY_CAPTURE ); }
+	if( Scenario1To5Tech & AntiSonarDispersionScreenFlag ) { _actTechSet( TTECH_SI_ANTI_SONAR_DISPERSION_SCREEN ); }
+	if( Scenario1To5Tech & AcousticMinesFlag ) { _actTechSet( TTECH_SI_ACOUSTIC_MINES ); }
+	if( Scenario1To5Tech & UpgradeGSLFireRateFlag ) { _actTechSet( TTECH_SI_UPGRADE_GSL_FIRE_RATE ); }
+	if( Scenario1To5Tech & TeleportationDetectionFlag ) { _actTechSet( TTECH_SI_TELEPORTATION_DETECTION ); }
+	if( Scenario1To5Tech & IonReflectorFlag ) { _actTechSet( TTECH_SI_ION_REFLECTOR ); }
+	if( Scenario1To5Tech & DataSecurityUpgradeFlag ) { _actTechSet( TTECH_SI_DATA_SECURITY_UPGRADE ); }
+	if( Scenario1To5Tech & TeleportationGateFlag ) { _actTechSet( TTECH_SI_TELEPORTATION_GATE ); }
+	if( Scenario1To5Tech & UpgradeEnergyAccumulatorFlag ) { _actTechSet( TTECH_SI_UPGRADE_ENERGY_ACCUMULATOR ); }
+	if( Scenario1To5Tech & UpgradeDPTGunRangeFlag ) { _actTechSet( TTECH_SI_UPGRADE_DPT_GUN_RANGE ); }
+	if( Scenario1To5Tech & ParcherFlag ) { _actTechSet( TTECH_SI_PARCHER ); }
+	if( Scenario1To5Tech & HighRangeExplorerFlag ) { _actTechSet( TTECH_SI_HIGH_RANGE_EXPLORER ); }
+	if( Scenario1To5Tech & UpgradeIonReflectorFlag ) { _actTechSet( TTECH_SI_UPGRADE_ION_REFLECTOR ); }
+
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+	//	Scenario 6 to 10 technologies
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	if( Scenario6To10Tech & AnnihilationTechnologyFlag ) { _actTechSet( TTECH_SI_ANNIHILATION_TECHNOLOGY ); }
+	if( Scenario6To10Tech & NeuroParalysisShellsFlag ) { _actTechSet( TTECH_SI_NEURO_PARALYSIS_SHELLS ); }
+	if( Scenario6To10Tech & UpgradeBioAcidShellsFlag ) { _actTechSet( TTECH_SI_UPGRADE_BIO_ACID_SHELLS ); }
+	if( Scenario6To10Tech & EnergyTransmitterFlag ) { _actTechSet( TTECH_SI_ENERGY_TRANSMITTER ); }
+	if( Scenario6To10Tech & EnemyCaptureUpgradeFlag ) { _actTechSet( TTECH_SI_ENEMY_CAPTURE_UPGRADE ); }
+	if( Scenario6To10Tech & UpgradeRegenerationSpeedFlag ) { _actTechSet( TTECH_SI_UPGRADE_REGENERATION_SPEED ); }
+	if( Scenario6To10Tech & QuantumParalyzerFlag ) { _actTechSet( TTECH_SI_QUANTUM_PARALYZER ); }
+	if( Scenario6To10Tech & AntiStealthBiosonarFlag ) { _actTechSet( TTECH_SI_ANTI_STEALTH_BIOSONAR ); }
+	if( Scenario6To10Tech & DepthAcousticMineDetectionFlag ) { _actTechSet( TTECH_SI_DEPTH_ACOUSTIC_MINE_DETECTION ); }
+	if( Scenario6To10Tech & LaserSnareDetectionFlag ) { _actTechSet( TTECH_SI_LASER_SNARE_DETECTION ); }
+	if( Scenario6To10Tech & MolecularRepairFacilityFlag ) { _actTechSet( TTECH_SI_MOLECULAR_REPAIR_FACILITY ); }
+	if( Scenario6To10Tech & BHEShellRangeUpgradeFlag ) { _actTechSet( TTECH_SI_BHE_SHELL_RANGE_UPGRADE ); }
+	if( Scenario6To10Tech & IonFieldGeneratorFlag ) { _actTechSet( TTECH_SI_ION_FIELD_GENERATOR ); }
+	if( Scenario6To10Tech & LaserReplenishSheathFlag ) { _actTechSet( TTECH_SI_LASER_REPLENISH_SHEATH ); }
+	if( Scenario6To10Tech & IDTeleportationFlag ) { _actTechSet( TTECH_SI_ID_TELEPORTATION ); }
+	if( Scenario6To10Tech & UpgradeSiliconExtractorFlag ) { _actTechSet( TTECH_SI_UPGRADE_SILICON_EXTRACTOR ); }
+	if( Scenario6To10Tech & AntiUltrasonicScreenFlag ) { _actTechSet( TTECH_SI_ANTI_ULTRASONIC_SCREEN ); }
+	if( Scenario6To10Tech & PsyShieldFlag ) { _actTechSet( TTECH_SI_PSY_SHIELD ); }
+	if( Scenario6To10Tech & GasLaserSatelliteFlag ) { _actTechSet( TTECH_SI_GAS_LASER_SATELLITE ); }
+	if( Scenario6To10Tech & UpgradeCoriumCollectorFlag ) { _actTechSet( TTECH_SI_UPGRADE_CORIUM_COLLECTOR ); }
+	if( Scenario6To10Tech & AntiMassWeaponsDefenseSystemFlag ) { _actTechSet( TTECH_SI_ANTI_MASS_WEAPONS_DEFENSE_SYSTEM ); }
+	if( Scenario6To10Tech & VacuumBombFlag ) { _actTechSet( TTECH_SI_VACUUM_BOMB ); }
+	if( Scenario6To10Tech & UpgradeArsenalFlag ) { _actTechSet( TTECH_SI_UPGRADE_ARSENAL ); }
+	if( Scenario6To10Tech & EnergyShieldNeutralizationFlag ) { _actTechSet( TTECH_SI_ENERGY_SHIELD_NEUTRALIZATION ); }
+
+	ActLockEvent();
+
+}
+
+
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+//	Identify technology development
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EventTechDevStop( _PI1 == CIV_SI && _PI5 == 1 )
+
+{
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+	//	Variable level technologies
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	if( _PI3 == TTECH_SI_UPGRADE_MOVEMENT_LEVEL )
+
+	{ 
+		UpgradeMovementLevelTechLevel := _PI4;
+		MobilityModuleTechCount := MobilityModuleTechCount + 1;
+	}
+	
+	if( _PI3 == TTECH_SI_SILICON_ARMOR_UPGRADE )
+
+	{
+		SiliconArmorUpgradeTechLevel := _PI4; 
+		RegenerationModuleTechCount := RegenerationModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_ENERGY_SHELL )
+
+	{
+		EnergyShellTechLevel := _PI4; 
+		SubmarineModuleTechCount := SubmarineModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_UPGRADE_ION_DEFENSIVE_SHEATH )
+
+	{
+		UpgradeIonDefensiveSheathTechLevel := _PI4;
+		RegenerationModuleTechCount := RegenerationModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_UPGRADE_ENERGY_CONSERVATION )
+
+	{
+		UpgradeEnergyConservationTechLevel := _PI4;
+		EnergyModuleTechCount := EnergyModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_UPGRADE_PARALYTIC_WEAPONS )
+
+	{
+		UpgradeParalyticWeaponsTechLevel := _PI4; 
+		SubmarineModuleTechCount := SubmarineModuleTechCount + 1;
+	}
+
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+	//	Scenario 1 to 5 technologies
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	if( _PI3 == TTECH_SI_BIOSONAR_TECHNOLOGY ) 
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | BiosonarTechnologyFlag;
+		IntelligenceModuleTechCount := IntelligenceModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_POLARIZED_PLASMA_PULSAR )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | PolarizedPlasmaPulsarFlag;
+		StructureModuleTechCount := StructureModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_ION_CASSETTE_SHELLS )
+
+	{
+		SubmarineModuleTechCount := SubmarineModuleTechCount + 1;
+		Scenario1To5Tech := Scenario1To5Tech | IonCassetteShellsFlag;
+	}
+
+	if( _PI3 == TTECH_SI_HUMAN_CIPHER_KEY )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | HumanCipherKeyFlag;
+		IntelligenceModuleTechCount := IntelligenceModuleTechCount + 1;
+	}
+	
+
+	if( _PI3 == TTECH_SI_GAS_SHELL_LAUNCHER )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | GasShellLauncherFlag;
+		StructureModuleTechCount := StructureModuleTechCount + 1;
+	}
+
+
+	if( _PI3 == TTECH_SI_BHE_SHELLS )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | BHEShellsFlag;
+		SubmarineModuleTechCount := SubmarineModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_DATA_INTRUSION )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | DataIntrusionFlag;
+		IntelligenceModuleTechCount := IntelligenceModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_DOUBLE_PLASMA_TURRET_GUN )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | DoublePlasmaTurretGunFlag;
+		StructureModuleTechCount := StructureModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_LOCAL_TELEPORTATION )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | LocalTeleportationFlag;
+		SuperTechModuleTechCount := SuperTechModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_LOCATOR )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | LocatorFlag;
+		IntelligenceModuleTechCount := IntelligenceModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_TRANSFORM_CORIUM_TO_ENERGY )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | TransformCoriumToEnergyFlag;
+		EnergyModuleTechCount := EnergyModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_UPGRADE_PP_PULSAR_FIRE_RATE )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | UpgradePPPulsarFireRateFlag;
+		StructureModuleTechCount := StructureModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_TORPEDO_EVASION )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | TorpedoEvasionFlag;
+		MobilityModuleTechCount := MobilityModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_BIO_ACID_SHELLS )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | BioAcidShellsFlag;
+		SubmarineModuleTechCount := SubmarineModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_BIO_MINE_LAUNCHER )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | BioMineLauncherFlag;
+		StructureModuleTechCount := StructureModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_JUMP_MINE_LAUNCHER )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | JumpMineLauncherFlag;
+		StructureModuleTechCount := StructureModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_SOLITON_OSCILLATOR )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | SolitonOscillatorFlag;
+		StructureModuleTechCount := StructureModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_ENEMY_CAPTURE )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | EnemyCaptureFlag;
+		IntelligenceModuleTechCount := IntelligenceModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_ANTI_SONAR_DISPERSION_SCREEN )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | AntiSonarDispersionScreenFlag;
+		IntelligenceModuleTechCount := IntelligenceModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_ACOUSTIC_MINES )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | AcousticMinesFlag;
+		SubmarineModuleTechCount := SubmarineModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_UPGRADE_GSL_FIRE_RATE )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | UpgradeGSLFireRateFlag;
+		StructureModuleTechCount := StructureModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_TELEPORTATION_DETECTION )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | TeleportationDetectionFlag;
+		IntelligenceModuleTechCount := IntelligenceModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_ION_REFLECTOR )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | IonReflectorFlag;
+		StructureModuleTechCount := StructureModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_DATA_SECURITY_UPGRADE ) 
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | DataSecurityUpgradeFlag;
+		IntelligenceModuleTechCount := IntelligenceModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_TELEPORTATION_GATE )
+	
+	{
+		Scenario1To5Tech := Scenario1To5Tech | TeleportationGateFlag;
+		SuperTechModuleTechCount := SuperTechModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_UPGRADE_ENERGY_ACCUMULATOR )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | UpgradeEnergyAccumulatorFlag;
+		EnergyModuleTechCount := EnergyModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_UPGRADE_DPT_GUN_RANGE )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | UpgradeDPTGunRangeFlag;
+		StructureModuleTechCount := StructureModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_PARCHER )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | ParcherFlag;
+		StructureModuleTechCount := StructureModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_HIGH_RANGE_EXPLORER )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | HighRangeExplorerFlag;
+		IntelligenceModuleTechCount := IntelligenceModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_UPGRADE_ION_REFLECTOR )
+
+	{
+		Scenario1To5Tech := Scenario1To5Tech | UpgradeIonReflectorFlag;
+		StructureModuleTechCount := StructureModuleTechCount + 1;
+	}
+
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+	//	Scenario 6 to 10 technologies
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	if( _PI3 == TTECH_SI_ANNIHILATION_TECHNOLOGY )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | AnnihilationTechnologyFlag;
+		EnergyModuleTechCount := EnergyModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_NEURO_PARALYSIS_SHELLS )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | NeuroParalysisShellsFlag;
+		SubmarineModuleTechCount := SubmarineModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_UPGRADE_BIO_ACID_SHELLS )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | UpgradeBioAcidShellsFlag;
+		SubmarineModuleTechCount := SubmarineModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_ENERGY_TRANSMITTER )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | EnergyTransmitterFlag;
+		EnergyModuleTechCount := EnergyModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_ENEMY_CAPTURE_UPGRADE )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | EnemyCaptureUpgradeFlag;
+		IntelligenceModuleTechCount := IntelligenceModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_UPGRADE_REGENERATION_SPEED )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | UpgradeRegenerationSpeedFlag;
+		RegenerationModuleTechCount := RegenerationModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_QUANTUM_PARALYZER )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | QuantumParalyzerFlag;
+		SuperTechModuleTechCount := SuperTechModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_ANTI_STEALTH_BIOSONAR )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | AntiStealthBiosonarFlag;
+		IntelligenceModuleTechCount := IntelligenceModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_DEPTH_ACOUSTIC_MINE_DETECTION )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | DepthAcousticMineDetectionFlag;
+		IntelligenceModuleTechCount := IntelligenceModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_LASER_SNARE_DETECTION )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | LaserSnareDetectionFlag;
+		IntelligenceModuleTechCount := IntelligenceModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_MOLECULAR_REPAIR_FACILITY )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | MolecularRepairFacilityFlag;
+		EnergyModuleTechCount := EnergyModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_BHE_SHELL_RANGE_UPGRADE )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | BHEShellRangeUpgradeFlag;
+		SubmarineModuleTechCount := SubmarineModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_ION_FIELD_GENERATOR )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | IonFieldGeneratorFlag;
+		RegenerationModuleTechCount := RegenerationModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_LASER_REPLENISH_SHEATH )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | LaserReplenishSheathFlag;
+		RegenerationModuleTechCount := RegenerationModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_ID_TELEPORTATION )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | IDTeleportationFlag;
+		SuperTechModuleTechCount := SuperTechModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_UPGRADE_SILICON_EXTRACTOR )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | UpgradeSiliconExtractorFlag;
+		EnergyModuleTechCount := EnergyModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_ANTI_ULTRASONIC_SCREEN )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | AntiUltrasonicScreenFlag;
+		RegenerationModuleTechCount := RegenerationModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_PSY_SHIELD )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | PsyShieldFlag;
+		RegenerationModuleTechCount := RegenerationModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_GAS_LASER_SATELLITE )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | GasLaserSatelliteFlag;
+		SuperTechModuleTechCount := SuperTechModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_UPGRADE_CORIUM_COLLECTOR )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | UpgradeCoriumCollectorFlag;
+		EnergyModuleTechCount := EnergyModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_ANTI_MASS_WEAPONS_DEFENSE_SYSTEM )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | AntiMassWeaponsDefenseSystemFlag;
+		RegenerationModuleTechCount := RegenerationModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_VACUUM_BOMB )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | VacuumBombFlag;
+		SuperTechModuleTechCount := SuperTechModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_UPGRADE_ARSENAL )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | UpgradeArsenalFlag;
+		EnergyModuleTechCount := EnergyModuleTechCount + 1;
+	}
+
+	if( _PI3 == TTECH_SI_ENERGY_SHIELD_NEUTRALIZATION )
+
+	{
+		Scenario6To10Tech := Scenario6To10Tech | EnergyShieldNeutralizationFlag;
+		SubmarineModuleTechCount := SubmarineModuleTechCount + 1;
+	}
+
+	ActLockEvent();
+}
+

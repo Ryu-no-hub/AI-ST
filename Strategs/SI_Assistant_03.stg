@@ -1,0 +1,22 @@
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#if(_env_var1==0)
+ _full_name = "—ƒј“№—я";_short_name = "ASSISTANT 5";
+#endif
+
+OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
+  
+ // Events
+ OpenEvents();
+  // Execute Tactician
+  Event(getOwnTime()>1) 
+  { 
+    ActStringMess(PLAYER_ALL, AIREL_MYSELF, "»грок: " + GetPlName(PLAYER_CURR) + " сдалс€");
+    actDelPlObjEx(AITRG_ALL, TOBJ_UNDEFINED, LOGO_UNDEF, "", 0, 0, 0, -1, -1, -1, VEFF_EXPLOSION);
+    // если вдруг у какого-то объекта есть »м€
+    actDelPlObjEx(AITRG_ALL);
+  };
+ CloseEvents();
+
+CloseStrateg();

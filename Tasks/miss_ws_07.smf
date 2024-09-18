@@ -1,0 +1,209 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss107");
+//append(out_campaign+"MissTest");
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("The Vengeance");
+
+//Speach for Briefing and Task
+
+#if(_DEBUG)
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wst_0700.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+/*
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0701.wav"); name("Briefing1");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0702.wav"); name("Briefing2");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0703.wav"); name("Briefing3");  putwav(1, _MF_PCM);
+
+in_br=in_briefing+"\\ws\\";
+source(in_br+"wsb_0704.wav"); name("Briefing4");  putwav(1, _MF_PCM);
+*/
+#endif
+
+// text description of the mission
+initsar(40, 10);
+//- objectives  0-9
+setsar("Build an InfoCenter and Sonar in the southwestern part of the sector within 10 minutes.");
+setsar("Find a half-ruined ASDIC \"Big Ear 17\" in the central part of the sector and capture it.");
+setsar("Preserve the ASDIC \"Big Ear 17\" before the 2 Silicon Artifacts appear.");
+setsar("Load the 2 Silicon Artifacts on RepSubs and deliver them to the southern part of the sector.");
+setsar("Build a TranCenter and preserve it and the 2 Silicon Artifacts before a Security Forces squadron arrives.");
+setsar("Provide the opportunity for the Assembler \"Hercules\" to build a TranCenter in the southern part of the sector.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- reports    10-19
+setsar("Essential constructions have been destroyed.");
+setsar("You have destroyed all enemies, but your task is not complete.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//!@
+setsar("Time has run out, you have lost the mission.");
+setsar("A decisive victory from a decisive commander.  We hope to see you continue your winning streak.");
+setsar("Mission Failed");
+//- briefings 20-29
+setsar(" Everything goes well, Commander. In a few minutes a Black Octopi squadron will approach the captured ASDIC to welcome the Silicon Artifacts. The Silicon Artifacts will be teleported to the ASDIC \"Big Ear 17\" area a little bit later. Presumably, they will be escorted. You must preserve the ASDIC before the Silicon Artifacts arrive, load them on RepSubs and deliver them to the southern part of the sector.");
+setsar(" Excellent, Commander! Establish a base in this area and build a TranCenter in the southern part of the sector. Wait for the arrival of the special squadron of the Security Forces. Keep the enemy at a distance and do not let them destroy the Silicon Artifacts and the TranCenter.");
+setsar(" Take measures to protect colonies. The Security Forces squadron includes an Assembler, which will construct a TranCenter with a more powerful teleportation generator to teleport the Silicon Artifacts into a secure place.");
+setsar(" ...Damn it!.. The Silicons have made a sudden strike!.. Evacuation!.. Immediate evacuation!");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("@Sector TS 66. Central Atlantic.@To the leader of the 37th special division.@Top secret.");
+setsar("@ We have watched closely the events in Sector TS 66 and, unfortunately, we have to confess that we had not expected that things would turn out so badly.@ @ The betrayal of one of our high ranking officers gave us no doubt that the Black Octopi secret services stood behind it. It does not matter what motivated the Leader of the fleet of the 2nd Department of the General Security Agency, the fact that the samples of extraterrestrial technologies are going to get into the hands of the Black Octopi makes the current situation very serious.");
+setsar("@ It will be disastrous if the Black Octopi gets access to the Silicons technology and gain the strategic overbalance over us. It is necessary that you intercept the samples from the enemy.@ @ You came off the last grueling mission with honor preserving your division and that will result in your promotion.@ @ But now there is no time to rest. The outcome of this mission is of vital importance not only for this part of the Atlantic, but also for the whole course of events on this planet.");
+setsar("@ Your division must waylay the cargo platforms with the Silicons samples. You have to establish a base in Sector SFD 23 and then wait for new orders.");
+setsar("");
+//---names--
+setsar("SI X-Box 1");	//xBoxSi1
+setsar("SI X-Box 2");	//xBoxSi2
+setsar("Big Ear 17");
+setsar("Hercules");
+setsar("TC45-X");
+
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Build an InfoCenter and Sonar in the southwestern part of the sector within 10 minutes.");
+setsar("Find a half-ruined ASDIC \"Big Ear 17\" in the central part of the sector and capture it.");
+name("OBJECTIVES"); putsar();    
+
+// script for play
+name("TASKPLAY");
+inittask("DEFAULT_WS_ANIMATED", "DEFAULT_WS"); // инициализировать таблицу
+ Time(0);
+ // set controls 
+ SetLevel(10); 
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_MENU, 20, 450, 145, 40);
+ ShowBut(TBTYPE_BACK, 50, 500, 145, 40);
+ ShowBut(TBTYPE_SKIP, 605, 500, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(220, 570, 340, 570, 460, 570);
+
+ SetColor(0, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 180,  20, 590, 80, 1, 30, 1, 15, 10, 1);
+
+//-
+ SetColor(1, 1, 0, 0);
+ SetLevel(10);
+ Time(150);
+ StartWave("DEFAULT_BIP"); StartWave("TaskSpeach");
+ ShowATask(1, 110, 120, 580, 310, 1, 31, 1, 15, 30, 1); 
+ Time(950);
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(955);
+ ShowATask(1, 110, 120, 580, 310, 1, 32, 1, 15, 20, 1); 
+ Time(1720);
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(1725);
+ ShowATask(1, 110, 120, 580, 310, 1, 33, 1, 15, 110, 1); 
+ 
+ Time(2040);
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(2060);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(2080);
+
+ SetColor(1, 1, 0, 1); StartWave("DEFAULT_BIP");
+ ShowObjectives(105, 230, 590, 160); 
+ HideBut(TBTYPE_SKIP);
+ SetColor(1, 1, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 635, 450, 145, 40);
+ ShowBut(TBTYPE_START,  605, 500, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+// script for play
+name("BRIEF_1");
+initbriefing(); 
+ Time(0); 
+ BriefingText(20, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing1");
+ Time(24*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(40*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_2");
+initbriefing(); 
+ Time(0); 
+ BriefingText(21, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing2");
+ Time(16*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(25*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_3");
+initbriefing(); 
+ Time(0); 
+ BriefingText(22, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing3");
+ Time(13*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(20*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_4");
+initbriefing(); 
+ Time(0); 
+ BriefingText(23, 1, 1, 1);
+ Time(1*25);
+ BriefingAni(0, 0, "WSFACE2");	// показать говорящего DC Bomber-leader
+ Time(2*25);			// начать проигрывание звука
+ BriefingWave(0, "Briefing4");
+ Time(6*25);			// время проигрывания звука
+ BriefingAni(0, 0, "");		// спрятать говорящего   
+ Time(12*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
+
+// script for play
+name("BRIEF_5");
+initbriefing(); 
+ Time(0); 
+ BriefingText(18, 1, 1, 1);
+	Time(1*25);
+	BriefingAni(0, 0, "WSFACE2");	// показать говорящего 
+ Time(11*25);
+	BriefingAni(0, 0, "");		// спрятать говорящего   
+	Time(15*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();

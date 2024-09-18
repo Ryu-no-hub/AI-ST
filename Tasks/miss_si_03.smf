@@ -1,0 +1,210 @@
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss303");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\si\\";
+source(in_br+"sit_0300.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("Balance");
+
+// text description of the mission
+initsar(40, 10);
+/* 00000 */ setsar("7572 SRR 52.26.678.766 @1276 FD");
+/* 00001 */ setsar("Expansion of human organization Black Octopi threatens our Plan.  Our leaders have arranged a brilliant plan to get the humans to destroy each other.  @ @The White Shark faction will be manipulated into destroying our main threat, the Black Octopi.");
+/* 00002 */ setsar("Your mission is to ensure our envoy arrives safely at the White Shark base to the North East.  Escort the envoy to the base, build a Command Hub when you arrive and research \"Local Teleportation\". @ @All suppliers and artifacts must survive or your mission will be deemed a failure.  Destroy any Black Octopi forces you encounter. Do not fail us.");
+/* 00003 */ setsar("We no longer have a Protoplasm Generator or any Capsule Prototypes.  Without them, we cannot spawn a Command Hub to research Local Teleportation ... we have failed in our objectives.");
+/* 00004 */ setsar("With the Artifacts and Ambassador safely delivered, we must now build a Command Hub to research Local Teleportation.  This will allow us to transport our Artifacts unnoticed, however they must depart as soon as possible.");
+/* 00005 */ setsar("Escort the \" Ambassador \" and the \" Artifacts \" to the White Sharks base.");
+/* 00006 */ setsar("We have lost the Ambassador!  Negotiations with the White Sharks cannot proceed ... we have failed.");
+/* 00007 */ setsar("Local Teleportation Technology successfully researched. Standby for teleportation of the Ambassodor and Artifacts ...");
+/* 00008 */ setsar("We have allowed the primitive humans known as White Sharks to grant us temporary refuge within their fortified base.");
+/* 00009 */ setsar("Further negotiations are required to instruct the White Sharks that they will assist us in the extermination of all pathetic Black Octopi vermin that continue to plague us.");
+/* 00010 */ setsar("Escort the Ambassador and our treasured Artifacts to the White Shark Base in the North-East.");
+/* 00011 */ setsar("White Shark intelligence reports that the Northern corridor is heavily patrolled and leads directly to the enemy base ... their data also indicates that we should direct ourselves through the North-Eastern tunnel and to proceed with caution.");
+/* 00012 */ setsar("Teleportation complete ... Mission successful.");
+/* 00013 */ setsar("We have lost one of the Artifacts, without them we are hopeless to join our brethren and return home ... we have failed.");
+/* 00014 */ setsar("");
+/* 00015 */ setsar("Deliver the Ambassador safely to the White Shark Base.");
+/* 00016 */ setsar("Escort all 3 suppliers safely to the White Shark base.");
+/* 00017 */ setsar("Protect the Silicon representative enroute to the White Shark base.");
+/* 00018 */ setsar("Build a Command Hub in the east and research \"Local Teleportation\" technology.");
+/* 00019 */ setsar("All Suppliers with Artifacts must survive.");
+
+//- briefings 20-29
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+//- prolog    30-
+setsar("7572 SRR 52.26.678.766@1276 FD@Urgent message. 45:23:12");
+setsar(" Expansion of human organization Black Octopi threatens our Plan.@ Our leaders have arranged a brilliant plan to get the humans to destroy each other.@ The White Shark faction will be manipulated into destroying our main threat, the Black Octopi.");
+setsar(" Your mission is to ensure our envoy arrives safely at the White Shark base to the North East.@ Escort the envoy to the base, build a Command Hub when you arrive and research \"Local Teleportation\".@ All suppliers and artifacts must survive or your mission will be deemed a failure.  Destroy any Black Octopi forces you encounter. Do not fail us.");
+setsar("");
+setsar("");
+//-names		35 Names-
+setsar("");					//	
+setsar("");			   		//
+setsar("");    	        	//
+setsar("");				        	//
+setsar("");		           //
+name("DESCRIPTION"); putsar();    
+
+
+// mission objectives
+initsar(10, 10);
+setsar("Protect the Silicon representative enroute to the White Shark base.");
+//setsar("Build a Command Hub in the east and research \"Local Teleportation\" technology.");
+//setsar("All Suppliers with Artifacts must survive.");
+name("OBJECTIVES"); putsar();    
+
+name("TASKPLAY");
+inittask("DEFAULT_SI_ANIMATED", "DEFAULT_SI"); // инициализировать таблицу
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(0, 0, 0, 0);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+ //-- heading
+ SetColor(1, 0, 0, 0);
+ SetLevel(10);
+ ShowATask(0, 170,  20, 600,  80, 1, 30, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 31, 1, 10, 40, 1); 
+ Time(715);
+ HideATask(1); StartWave("DEFAULT_BIP");
+ 
+ Time(725);
+ ShowATask(2, 100, 120, 600, 210, 1, 32, 1, 10, 20, 1); 
+
+ Time(1600);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(1620);
+ HideATask(2); StartWave("DEFAULT_BIP");
+ 
+ Time(1640);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 180, 550, 170); 
+ SetColor(0, 0, 0, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+
+puttask();  // добавить Task в секцию M_DAR
+
+name("Victory");
+initbriefing();
+Time( 0 );
+BriefingText(12, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 01");
+initbriefing();
+Time( 0 );
+BriefingText(13, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 02");
+initbriefing();
+Time( 0 );
+BriefingText(6, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Failure 03");
+initbriefing();
+Time( 0 );
+BriefingText(3, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 01");
+initbriefing();
+Time( 0 );
+BriefingText(8, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingText(9, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingText(10, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 1450 );
+BriefingAni(0, 0, "");
+Time( 1500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 02");
+initbriefing();
+Time( 0 );
+BriefingText(11, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 950 );
+BriefingAni(0, 0, "");
+Time( 1000 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 03");
+initbriefing();
+Time( 0 );
+BriefingText(4, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+Time( 500 );
+BriefingStop();
+putbriefing();
+
+name("Briefing 04");
+initbriefing();
+Time( 0 );
+BriefingText(7, 1, 1, 0);
+BriefingAni(0, 0, "SIFACE1");
+Time( 450 );
+BriefingAni(0, 0, "");
+putbriefing();
+

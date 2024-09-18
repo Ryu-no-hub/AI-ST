@@ -1,0 +1,118 @@
+//-
+include<path.imf>;
+include<mfdef.imf>;
+include<mfdef_t.imf>;
+
+append(out_campaign+"miss208");
+//append(out_campaign+"MissTest");
+
+#if(_DEBUG)
+//Speach for Briefing and Task
+in_br=in_briefing+"\\bo\\";
+source(in_br+"bot_0800.wav"); name("TaskSpeach");  putwav(1, _MF_PCM);
+//source(in_br+"bob_0801.wav"); name("BriefSpeach"); putwav(1, _MF_PCM);
+#endif
+
+// title of the mission
+name("TITLE_MISSION"); putaobj("DOUBLE TIME");
+
+// text description of the mission
+initsar(10, 10);
+//- objectives                 0-4
+setsar("Protect the Research Laboratory \"Lab SH-34-17\" against the White Shark attack for 20 minutes.");
+setsar("Wipe out the Silicon presence.");
+setsar("Eliminate the White Shark forces in the sector.");
+setsar("Research Laboratory \"Lab SH-34-17\" must survive.");
+setsar("");
+//- victory and defeat reports 5-9
+setsar("Great job, commander!");
+setsar("You have been defeated!");
+setsar("");
+setsar("WSC2");
+setsar("Lab SH-34-17");
+//- briefs                    10-19
+setsar("Commander, the Silicons continue to attack the Sharks, but have also double-crossed us. They have targeted our main Corium reserves and have shipped them south for an unknown purpose.@ Your priority objective is to wipe out all Silicons in your area. Then finish the White Sharks as well.");
+setsar("Objectives were changed.");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar("");
+setsar(" No amount of advanced technology could substitute for your amazing skill.  The Black Octopi will continue to depend on your amazing abilities in the future.");
+setsar("  Mission Failed.");
+//- tasks                      20-
+setsar("Sector GH 765. South Pacific.@To the leader of the 19th Special Squadron.@Top secret.");
+setsar(" Your success is commendable. The High Command is honored to have you now as our Commander of the 19th Special Squadron.@ Commander, the Silicons have agreed to ally with us against the White Sharks. They are providing us with new technology while we are shipping them Corium.@ You will command the Black Octopi forces in our first joint operation. You are to attack a Shark fortress that threatens our southern border with the Silicons.");
+setsar(" The Silicons are preparing their forces south of your position. Once you attack the fortress they will support you. You do not have direct control over their forces; their leaders don't trust us that much.@ Ensure the Silicons do the brunt of the fighting. There's no need to lose Octopi subs while our allies have spares.");
+name("DESCRIPTION"); putsar();    
+
+// mission objectives
+initsar(10, 10);
+setsar("Protect the Research Laboratory \"Lab SH-34-17\" against the White Shark attack for 20 minutes.");
+name("OBJECTIVES"); putsar();    
+
+// script for play
+name("TASKPLAY");
+inittask("DEFAULT_BO_ANIMATED", "DEFAULT_BO"); // инициализировать таблицу
+ Time(0);
+ // set controls SetColor([fnt, glass, border, ctrl]);
+ SetLevel(10); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_MENU, 55, 365, 145, 40);
+ ShowBut(TBTYPE_BACK, 15, 415, 145, 40);
+ ShowBut(TBTYPE_SKIP, 640, 415, 145, 40);
+ SetColor(1, 1, 1, 1);
+ ShowSwitch(30, 515, 50, 540, 70, 565);
+ 
+ //-- heading
+ SetColor(1, 1, 1, 0);
+ SetLevel(10);
+ ShowATask(0, 50,  20, 700,  80, 1, 20, 1, 15, 5, 1);
+
+ SetColor(1, 0, 0, 0); SetLevel(10);
+ Time(150); StartWave("DEFAULT_BIP");
+ StartWave("TaskSpeach");
+ ShowATask(1, 100, 120, 600, 210, 1, 21, 1, 10, 10, 1); 
+ Time(990);                
+ HideATask(1); StartWave("DEFAULT_BIP");
+
+ Time(1000);
+ ShowATask(2, 100, 120, 600, 210, 1, 22, 1, 10, 30, 1); 
+ Time(1670);
+ HideATask(0); StartWave("DEFAULT_BIP");
+ Time(1690);
+ HideATask(2); StartWave("DEFAULT_BIP");
+ 
+ Time(1710);
+ StartWave("DEFAULT_BIP");
+ SetColor(0, 0, 0, 0); 
+ HideBut(TBTYPE_SKIP);
+ ShowObjectives(125, 180, 550, 170); 
+ SetColor(1, 1, 1, 0);
+ ShowBut(TBTYPE_REPLAY, 600, 365, 145, 40);
+ ShowBut(TBTYPE_START, 640, 415, 145, 40);
+puttask();  // добавить Task в секцию M_DAR
+
+// script for play
+name("BRIEF_1");
+initbriefing(); 
+ Time(0);
+ BriefingAni(24, 2, "BOFACE1");
+ BriefingText(10, 1, 1, 0);   
+ Time(20*25);
+ BriefingStop();
+putbriefing();
+
+// script for play
+name("BRIEF_2");
+initbriefing(); 
+ Time(0); 
+ BriefingText(18, 1, 1, 1);
+	Time(1*25);
+	BriefingAni(0, 0, "BOFACE2");	// показать говорящего 
+ Time(14*25);
+	BriefingAni(0, 0, "");		// спрятать говорящего   
+	Time(17*25);
+ BriefingStop();		// завершить показ бриффинга и спрятать его
+putbriefing();
