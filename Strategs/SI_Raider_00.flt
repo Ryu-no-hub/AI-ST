@@ -1,27 +1,27 @@
 
 OpenFleet("SI Raider 00", CIV_SI, AIF_MILITARY, 9);
   // Staff
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 16);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 16);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 16);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 16);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 16);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 16);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 16);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 16);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 16);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 16);
 
-  PutInStaff(TOBJ_USURPER            , TOBJ_SHS_SUB     , TOBJ_UNDEFINED, 16);
-  PutInStaff(TOBJ_USURPER            , TOBJ_SHS_SUB     , TOBJ_UNDEFINED, 16);
+  PutInStaff(USURPER            , SHS_SUB     , UNDEFINED, 16);
+  PutInStaff(USURPER            , SHS_SUB     , UNDEFINED, 16);
 
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB     , TOBJ_UNDEFINED, 16);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB     , TOBJ_UNDEFINED, 16);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB     , TOBJ_UNDEFINED, 16);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB     , TOBJ_UNDEFINED, 16);
+  PutInStaff(ESCORT             , SHS_SUB     , UNDEFINED, 16);
+  PutInStaff(ESCORT             , SHS_SUB     , UNDEFINED, 16);
+  PutInStaff(ESCORT             , SHS_SUB     , UNDEFINED, 16);
+  PutInStaff(ESCORT             , SHS_SUB     , UNDEFINED, 16);
 
-  PutInStaff(TOBJ_PARALYSIS_PROBE    , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 5);
-  PutInStaff(TOBJ_VERMIN          , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 5);
-  PutInStaff(TOBJ_REPLENISHER        , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 4);
+  PutInStaff(PARALYSIS_PROBE    , UNDEFINED  ,  UNDEFINED, 5);
+  PutInStaff(VERMIN          , UNDEFINED  ,  UNDEFINED, 5);
+  PutInStaff(REPLENISHER        , UNDEFINED  ,  UNDEFINED, 4);
 
   // Param  
   CanChangeStaff(AICAN_MYSELF); 

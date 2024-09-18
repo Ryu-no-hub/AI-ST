@@ -34,42 +34,42 @@ OpenArbiter(_full_name, 0x00000002);
     //ActCreateStartSet(PLAYER_ALL,AIREL_MYSELF, LEVEL_DEFINED);
     _ploop_begin
       if(GetPlCiv(_pl_)==CIV_WS)     //--WS--
-      { ActCreatePlObj(_plmyself, TOBJ_CONSTRUCTOR); 
+      { ActCreatePlObj(_plmyself, CONSTRUCTOR); 
         if(GetStartSetLevel()>LEVEL_LOW)        
-        { ActCreatePlObj(_plmyself, TOBJ_SENTINEL); 
-          ActCreatePlObj(_plmyself, TOBJ_SENTINEL); 
-          ActCreatePlObj(_plmyself, TOBJ_HUNTER); 
+        { ActCreatePlObj(_plmyself, SENTINEL); 
+          ActCreatePlObj(_plmyself, SENTINEL); 
+          ActCreatePlObj(_plmyself, HUNTER); 
         }
         if(GetStartSetLevel()>LEVEL_MEDIUM)  
-        { ActCreatePlObj(_plmyself, TOBJ_CRUISER); 
-          ActCreatePlObj(_plmyself, TOBJ_MARAUDER); 
+        { ActCreatePlObj(_plmyself, CRUISER); 
+          ActCreatePlObj(_plmyself, MARAUDER); 
         }
       }
       else
       { if(GetPlCiv(_pl_)==CIV_BO)   //--BO--
-        { ActCreatePlObj(_plmyself, TOBJ_ASSEMBLER); 
+        { ActCreatePlObj(_plmyself, ASSEMBLER); 
           if(GetStartSetLevel()>LEVEL_LOW)        
-          { ActCreatePlObj(_plmyself, TOBJ_FIGHTER); 
-            ActCreatePlObj(_plmyself, TOBJ_FIGHTER); 
-            ActCreatePlObj(_plmyself, TOBJ_DESTROYER); 
+          { ActCreatePlObj(_plmyself, FIGHTER); 
+            ActCreatePlObj(_plmyself, FIGHTER); 
+            ActCreatePlObj(_plmyself, DESTROYER); 
           }
           if(GetStartSetLevel()>LEVEL_MEDIUM)  
-          { ActCreatePlObj(_plmyself, TOBJ_HEAVY_CRUISER); 
-            ActCreatePlObj(_plmyself, TOBJ_RAIDER); 
+          { ActCreatePlObj(_plmyself, HEAVY_CRUISER); 
+            ActCreatePlObj(_plmyself, RAIDER); 
           }
         }
         else                         //--SI--
-        { ActCreatePlObj(_plmyself, TOBJ_CAPSULE_PROTOTYPE); 
-          ActCreatePlObj(_plmyself, TOBJ_CAPSULE_PROTOTYPE); 
-          ActCreatePlObj(_plmyself, TOBJ_CAPSULE_PROTOTYPE); 
+        { ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
+          ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
+          ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
           if(GetStartSetLevel()>LEVEL_LOW)        
-          { ActCreatePlObj(_plmyself, TOBJ_SHS_SUB); 
-            ActCreatePlObj(_plmyself, TOBJ_SHS_SUB); 
-            ActCreatePlObj(_plmyself, TOBJ_SHS_SUB); 
+          { ActCreatePlObj(_plmyself, SHS_SUB); 
+            ActCreatePlObj(_plmyself, SHS_SUB); 
+            ActCreatePlObj(_plmyself, SHS_SUB); 
           }
           if(GetStartSetLevel()>LEVEL_MEDIUM)  
-          { ActCreatePlObj(_plmyself, TOBJ_ESCORT); 
-            ActCreatePlObj(_plmyself, TOBJ_USURPER); 
+          { ActCreatePlObj(_plmyself, ESCORT); 
+            ActCreatePlObj(_plmyself, USURPER); 
           }
         }
       }
@@ -104,26 +104,26 @@ OpenArbiter(_full_name, 0x00000002);
     //  Disable some objects
     _ploop_begin
       if(GetPlCiv(_pl_)==CIV_WS)
-      { ActBldObj(_plmyself, TOBJ_GOLD_EXTRACTOR, FALSE);
-        ActBldObj(_plmyself, TOBJ_TRANSUB, FALSE);
-        ActBldObj(_plmyself, TOBJ_DEPOT, FALSE);
-        ActBldObj(_plmyself, TOBJ_CORIUM_EXTRACTOR, FALSE);
-        ActBldObj(_plmyself, TOBJ_METAL_EXTRACTOR, FALSE);
+      { ActBldObj(_plmyself, GOLD_EXTRACTOR, FALSE);
+        ActBldObj(_plmyself, TRANSUB, FALSE);
+        ActBldObj(_plmyself, DEPOT, FALSE);
+        ActBldObj(_plmyself, CORIUM_EXTRACTOR, FALSE);
+        ActBldObj(_plmyself, METAL_EXTRACTOR, FALSE);
       }
       else
       { if(GetPlCiv(_pl_)==CIV_BO)
-        { ActBldObj(_plmyself, TOBJ_GOLD_SUBLIMATOR, FALSE);
-          ActBldObj(_plmyself, TOBJ_CARGO_SUB, FALSE);
-          ActBldObj(_plmyself, TOBJ_SILO, FALSE);
-          ActBldObj(_plmyself, TOBJ_CORIUM_MINE, FALSE);
-          ActBldObj(_plmyself, TOBJ_METAL_MINE, FALSE);
+        { ActBldObj(_plmyself, GOLD_SUBLIMATOR, FALSE);
+          ActBldObj(_plmyself, CARGO_SUB, FALSE);
+          ActBldObj(_plmyself, SILO, FALSE);
+          ActBldObj(_plmyself, CORIUM_MINE, FALSE);
+          ActBldObj(_plmyself, METAL_MINE, FALSE);
         }
         else
-        { ActBldObj(_plmyself, TOBJ_SILICON_EXTRACTOR, FALSE);
-          ActBldObj(_plmyself, TOBJ_TRANSPORT, FALSE);
-          ActBldObj(_plmyself, TOBJ_CORIUM_SILO, FALSE);
-          ActBldObj(_plmyself, TOBJ_CORIUM_COLLECTOR, FALSE);
-          ActBldObj(_plmyself, TOBJ_ENERGY_ACCUMULATOR, FALSE);
+        { ActBldObj(_plmyself, SILICON_EXTRACTOR, FALSE);
+          ActBldObj(_plmyself, TRANSPORT, FALSE);
+          ActBldObj(_plmyself, CORIUM_SILO, FALSE);
+          ActBldObj(_plmyself, CORIUM_COLLECTOR, FALSE);
+          ActBldObj(_plmyself, ENERGY_ACCUMULATOR, FALSE);
         }
       }
     _ploop_end
@@ -184,7 +184,7 @@ OpenArbiter(_full_name, 0x00000002);
   Event(_PI32%_RT160==0, 110)
   { _ploop_begin
      if(GetPlCiv(_pl_)!=CIV_SI)
-     { ActSetPlRC(_plmyself, TOBJ_GOLD, 1, _RT150);
+     { ActSetPlRC(_plmyself, GOLD, 1, _RT150);
        if(_pl_==GetCurrPl())
        { _actStringMess(_strf(GetStrRes(s_resget), _RT150, GetStrRes(s_gold)));
        }
@@ -196,7 +196,7 @@ OpenArbiter(_full_name, 0x00000002);
   Event(_PI32%_RT161==0, 111)
   { _ploop_begin
      if(GetPlCiv(_pl_)!=CIV_SI)
-     { ActSetPlRC(_plmyself, TOBJ_METAL, 1, _RT151);
+     { ActSetPlRC(_plmyself, METAL, 1, _RT151);
        if(_pl_==GetCurrPl())
        { _actStringMess(_strf(GetStrRes(s_resget), _RT151, GetStrRes(s_metal)));
        }
@@ -208,7 +208,7 @@ OpenArbiter(_full_name, 0x00000002);
   Event(_PI32%_RT162==0, 112)
   { _ploop_begin
      if(GetPlCiv(_pl_)!=CIV_SI)
-     { ActSetPlRC(_plmyself, TOBJ_CORIUM, 1, _RT152);
+     { ActSetPlRC(_plmyself, CORIUM, 1, _RT152);
        if(_pl_==GetCurrPl())
        { _actStringMess(_strf(GetStrRes(s_resget), _RT152, GetStrRes(s_corium)));
        }
@@ -220,7 +220,7 @@ OpenArbiter(_full_name, 0x00000002);
   Event(_PI32%_RT163==0, 113)
   { _ploop_begin
      if(GetPlCiv(_pl_)==CIV_SI)
-     { ActSetPlRC(_plmyself, TOBJ_CORIUM, 1, _RT153);
+     { ActSetPlRC(_plmyself, CORIUM, 1, _RT153);
        if(_pl_==GetCurrPl())
        { _actStringMess(_strf(GetStrRes(s_resget), _RT153, GetStrRes(s_corium)));
        }
@@ -232,7 +232,7 @@ OpenArbiter(_full_name, 0x00000002);
   Event(_PI32%_RT164==0, 114)
   { _ploop_begin
      if(GetPlCiv(_pl_)==CIV_SI)
-     { ActSetPlRC(_plmyself, TOBJ_SILICON, 1, _RT154);
+     { ActSetPlRC(_plmyself, SILICON, 1, _RT154);
        if(_pl_==GetCurrPl())
        { _actStringMess(_strf(GetStrRes(s_resget), _RT154, GetStrRes(s_silicon)));
        }
@@ -244,7 +244,7 @@ OpenArbiter(_full_name, 0x00000002);
   Event(_PI32%_RT165==0, 115)
   { _ploop_begin
      if(GetPlCiv(_pl_)==CIV_SI)
-     { ActSetPlRC(_plmyself, TOBJ_ENERGY, 1, _RT155);
+     { ActSetPlRC(_plmyself, ENERGY, 1, _RT155);
        if(_pl_==GetCurrPl())
        { _actStringMess(_strf(GetStrRes(s_resget), _RT155, GetStrRes(s_energy)));
        }
@@ -269,9 +269,9 @@ EventInput(_PI0==6){ActDelPlObjEx(PLAYER_7, AIREL_MYSELF, AITRG_ALL);actLockEven
 /* 
 enem_boats = GetPlObjM(PLAYER_CURR, AIREL_ENEMYS, AITRG_BOATALL);
 enem_tlo   = GetPlObjM(PLAYER_CURR, AIREL_ENEMYS, AITRG_TLOALL);
-enem_gold  = GetPlRes(PLAYER_CURR, AIREL_ENEMYS, TOBJ_GOLD);
-enem_cor   = GetPlRes(PLAYER_CURR, AIREL_ENEMYS, TOBJ_CORIUM);
-enem_metal = GetPlRes(PLAYER_CURR, AIREL_ENEMYS, TOBJ_METAL, );
+enem_gold  = GetPlRes(PLAYER_CURR, AIREL_ENEMYS, GOLD);
+enem_cor   = GetPlRes(PLAYER_CURR, AIREL_ENEMYS, CORIUM);
+enem_metal = GetPlRes(PLAYER_CURR, AIREL_ENEMYS, METAL, );
 */
 
  CloseEvents();

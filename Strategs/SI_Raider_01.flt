@@ -1,54 +1,54 @@
 
 OpenFleet("SI Raider 01", CIV_SI, AIF_MILITARY, 8);
   // Staff
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 10);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 10);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 10);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 10);
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_DREADNOUGHT        , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_DREADNOUGHT        , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_DREADNOUGHT        , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_DREADNOUGHT        , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_DREADNOUGHT        , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_DREADNOUGHT        , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_DREADNOUGHT        , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
-  PutInStaff(TOBJ_DREADNOUGHT        , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 10);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 10);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 10);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 10);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 10);
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(DREADNOUGHT        , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(DREADNOUGHT        , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(DREADNOUGHT        , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(DREADNOUGHT        , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(DREADNOUGHT        , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(DREADNOUGHT        , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(DREADNOUGHT        , ESCORT     ,  SHS_SUB  , 10);
+  PutInStaff(DREADNOUGHT        , ESCORT     ,  SHS_SUB  , 10);
  
-  PutInStaff(TOBJ_PARALYSIS_PROBE    , TOBJ_USURPER    ,  TOBJ_ESCORT, 10); 
-  PutInStaff(TOBJ_PARALYSIS_PROBE    , TOBJ_USURPER    ,  TOBJ_ESCORT, 10); 
-  PutInStaff(TOBJ_PARALYSIS_PROBE    , TOBJ_USURPER    ,  TOBJ_ESCORT, 10); 
-  PutInStaff(TOBJ_PARALYSIS_PROBE    , TOBJ_USURPER    ,  TOBJ_ESCORT, 10);
+  PutInStaff(PARALYSIS_PROBE    , USURPER    ,  ESCORT, 10); 
+  PutInStaff(PARALYSIS_PROBE    , USURPER    ,  ESCORT, 10); 
+  PutInStaff(PARALYSIS_PROBE    , USURPER    ,  ESCORT, 10); 
+  PutInStaff(PARALYSIS_PROBE    , USURPER    ,  ESCORT, 10);
 
-  PutInStaff(TOBJ_VERMIN          , TOBJ_ESCORT     ,  TOBJ_UNDEFINED, 10);
-  PutInStaff(TOBJ_VERMIN          , TOBJ_ESCORT     ,  TOBJ_UNDEFINED, 10);
-  PutInStaff(TOBJ_VERMIN          , TOBJ_ESCORT     ,  TOBJ_UNDEFINED, 5);
-  PutInStaff(TOBJ_VERMIN          , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 5);
+  PutInStaff(VERMIN          , ESCORT     ,  UNDEFINED, 10);
+  PutInStaff(VERMIN          , ESCORT     ,  UNDEFINED, 10);
+  PutInStaff(VERMIN          , ESCORT     ,  UNDEFINED, 5);
+  PutInStaff(VERMIN          , UNDEFINED  ,  UNDEFINED, 5);
 
-  PutInStaff(TOBJ_REPLENISHER        , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 8);
-  PutInStaff(TOBJ_REPLENISHER        , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 8);
+  PutInStaff(REPLENISHER        , UNDEFINED  ,  UNDEFINED, 8);
+  PutInStaff(REPLENISHER        , UNDEFINED  ,  UNDEFINED, 8);
  
-  PutInStaff(TOBJ_DREADNOUGHT        , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 4); 
-  PutInStaff(TOBJ_DREADNOUGHT        , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 4); 
-  PutInStaff(TOBJ_DREADNOUGHT        , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 4); 
-  PutInStaff(TOBJ_DREADNOUGHT        , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 4); 
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 4); 
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 4); 
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 4); 
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 4); 
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 4); 
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 4);
+  PutInStaff(DREADNOUGHT        , ESCORT     ,  SHS_SUB  , 4); 
+  PutInStaff(DREADNOUGHT        , ESCORT     ,  SHS_SUB  , 4); 
+  PutInStaff(DREADNOUGHT        , ESCORT     ,  SHS_SUB  , 4); 
+  PutInStaff(DREADNOUGHT        , ESCORT     ,  SHS_SUB  , 4); 
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 4); 
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 4); 
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 4); 
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 4); 
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 4); 
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 4);
 
 
   // Param 

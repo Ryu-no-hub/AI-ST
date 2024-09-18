@@ -25,22 +25,24 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
     actOffEvent(12);
     actOffEvent(11);
   }
+
   // 1 Execute Tactician  & Technologies
   Event(getOwnTime()>1, 1) 
   {
-    //actTechSetAll();
+    //actTechSetAll(); // открыть все технологии
     actObjSelectM(AITRG_ALL);
     actExecTactic("SI Main Base");
     actTScenDevRun(TECH_SCENARIO_OPTIMAL);
+
     // Store fleets numbers
-    _RT20:=getFleetNum("SI Guard 00", "SI Main Base");
-    _RT21:=getFleetNum("SI Guard 01", "SI Main Base");
-    _RT22:=getFleetNum("SI Raider 00", "SI Main Base");
-    _RT23:=getFleetNum("SI Raider 01", "SI Main Base");
-    _RT30:=getFleetNum("SI Base", "SI Main Base");
-    _RT31:=getFleetNum("SI Corium Transport", "SI Main Base");
-    _RT62:=0; // satellite weapons amount
-    _RT63:=0; // vacuum bombs amount
+    _RT20 := getFleetNum("SI Guard 00", "SI Main Base");
+    _RT21 := getFleetNum("SI Guard 01", "SI Main Base");
+    _RT22 := getFleetNum("SI Raider 00", "SI Main Base");
+    _RT23 := getFleetNum("SI Raider 01", "SI Main Base");
+    _RT30 := getFleetNum("SI Base", "SI Main Base");
+    _RT31 := getFleetNum("SI Corium Transport", "SI Main Base");
+    _RT62 := 0; // satellite weapons amount
+    _RT63 := 0; // vacuum bombs amount
   };
 /*
   //
@@ -70,32 +72,34 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
   }
 */
 
-  //Event(_RT11<3 && getPlRes(TOBJ_CORIUM)<2000)
-  //Event(getOwnTime()>(1800+(_RT11*120)) && getPlRes(TOBJ_CORIUM)<100)
-  Event(getPlRes(TOBJ_CORIUM)<100)
-  { _RT11+=1;
-    actSetPlRC(TOBJ_CORIUM, 1, 2000);
-    actFParGatherRC(_RT31, AICAN_MYSELF, TOBJ_CORIUM, 0)
-    actLockEvent();
-  }
-
-  //Event(_RT12<5 && getPlRes(TOBJ_SILICON)<2000)
-  Event(getOwnTime()>(1800+(_RT12*60)) && getPlRes(TOBJ_SILICON)<100)
-  { _RT12+=1;
-    actSetPlRC(TOBJ_SILICON, 1, 4000);
+  //Event(getPlRes(CORIUM)<100)
+  Event(getOwnTime() > (1200 + (_RT11 * 120)) && getPlRes(CORIUM) < 100) // давать через 20 мин + 2 мин * кол-во подачек
+  { 
+    _RT11+=1; // N подачек кориума
+    actSetPlRC(CORIUM, 1, 2000);
+    actFParGatherRC(_RT31, AICAN_MYSELF, CORIUM, 0)
     actLockEvent();
   }
   
-  Event(getOwnTime()>300 && _RT30>0 && isTechDev(TTECH_SI_ION_CASSETTE_SHELLS, TTECH_LEV1))
-  { actFParPutInStaff(_RT30, TOBJ_PROTOPLASM_GENERATOR, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 35);
+  Event(getOwnTime() > (1200 + (_RT12 * 60)) && getPlRes(SILICON) < 100)
+  { 
+    _RT12 += 1; // N подачек кремния
+    actSetPlRC(SILICON, 1, 4000);
+    actLockEvent();
+  }
+  
+  Event(getOwnTime() > 300 && _RT30 > 0 && isTechDev(TTECH_SI_ION_CASSETTE_SHELLS, TTECH_LEV1))
+  { 
+    actFParPutInStaff(_RT30, PROTOPLASM_GENERATOR, UNDEFINED, UNDEFINED, 35);
     actOnEvent(20);
   }
   Event(isTechDev(TTECH_SI_ENEMY_CAPTURE, TTECH_LEV1), 20)
-  { actFParPutInStaff(_RT30, TOBJ_PROTOPLASM_GENERATOR, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 30);
+  { 
+    actFParPutInStaff(_RT30, PROTOPLASM_GENERATOR, UNDEFINED, UNDEFINED, 30);
   }
 
-// Produce missile
-  EventPlObjCreated(_PI3 == TOBJ_VACUUM_BOMB_LAUNCHER || _PI3 == TOBJ_GAS_LASER_SATELLITE_LAUNCHER)
+  // Produce missile
+  EventPlObjCreated(_PI3 == VACUUM_BOMB_LAUNCHER || _PI3 == GAS_LASER_SATELLITE_LAUNCHER)
   { 
      //_actStringMess("MASS DESTRUCTION WEAPON BUILT by player " + GetPlName(_PI10))
      actOnEvent(11);
@@ -111,10 +115,10 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 
 
   // Check destroyed
-  EventPlObjKilled(_PI3 == TOBJ_VACUUM_BOMB_LAUNCHER || _PI3 == TOBJ_GAS_LASER_SATELLITE_LAUNCHER)
+  EventPlObjKilled(_PI3 == VACUUM_BOMB_LAUNCHER || _PI3 == GAS_LASER_SATELLITE_LAUNCHER)
   { 
      //_actStringMess("MASS DESTRUCTION WEAPON destroyed of player " + GetPlName(_PI0))
-     if(!getFleetObjT(_RT30, TOBJ_GAS_LASER_SATELLITE_LAUNCHER) && !getFleetObjT(_RT30, TOBJ_VACUUM_BOMB_LAUNCHER))
+     if(!getFleetObjT(_RT30, GAS_LASER_SATELLITE_LAUNCHER) && !getFleetObjT(_RT30, VACUUM_BOMB_LAUNCHER))
      {
        //_actStringMess("All MASS DESTRUCTION WEAPONS destroyed of player " + GetPlName(_PI0))
        actOffEvent(11);
@@ -168,7 +172,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
         
         if(_RT63) // vacuum bombs amount
         {
-          _RT59 := 100/_RT63; // percentage of vacuum bombs to launch
+          _RT59 := 100 / _RT63; // percentage of vacuum bombs to launch
           actFCmdMassWeaponHit(_RT30, WEAPON_VACUUM_BOMB, _RT24, _RT25, _RT26, _RT59);
           //_actStringMess("LAUNCHING VACUUM BOMB")
           _RT63 -= 1;
@@ -179,7 +183,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
         else
         { if (_RT62) // satelites amount
           {
-            _RT60 := 100/_RT62; // percentage of satelites to launch
+            _RT60 := 100 / _RT62; // percentage of satelites to launch
             actFCmdMassWeaponHit(_RT30, WEAPON_SATELLITE_GAS_LASER, _RT24, _RT25, _RT26, _RT60);
             //_actStringMess("LAUNCHING SATELLITE")
             _RT62 -= 1;

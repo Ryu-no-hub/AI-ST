@@ -26,14 +26,14 @@ OpenStrateg(_full_name, CIV_BO, _short_name, 0x00000003);
     actTScenDevRun(TECH_SCENARIO_OPTIMAL);
     /////// DEBUG /////////
     /*
-    actCreatePlObj(TOBJ_TELEPORTER, 65, 1, 0);
+    actCreatePlObj(TELEPORTER, 65, 1, 0);
     actObjSelectM(AITRG_BOATMILITARY);
     actCreateFleet("RC", CIV_BO, AIF_MILITARY , 10);
     _RT5:=getFleetNum("RC");
     actFCmdTeleport(_RT5, 10,10,2, 65,1,0);
 
-    //actFCmdAttackT(_RT5, PLAYER_0, AITRG_BOATALL, TOBJ_UNDEFINED, LOGO_UNDEF, "", 0, AIATTACK_GLADE | AIADIR_STRAIGHT);
-    //actFCmdGatherRC(_RT5, TOBJ_METAL, 0,0,0,0,0,0, 0, 180);
+    //actFCmdAttackT(_RT5, PLAYER_0, AITRG_BOATALL, UNDEFINED, LOGO_UNDEF, "", 0, AIATTACK_GLADE | AIADIR_STRAIGHT);
+    //actFCmdGatherRC(_RT5, METAL, 0,0,0,0,0,0, 0, 180);
     //actTechSet(1);
     */
   };

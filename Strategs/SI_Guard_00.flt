@@ -1,24 +1,24 @@
 
 OpenFleet("SI Guard 00", CIV_SI, AIF_MILITARY, 9);
   // Staff
-  PutInStaff(TOBJ_SHS_SUB            , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 20);
-  PutInStaff(TOBJ_SHS_SUB            , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 20);
-  PutInStaff(TOBJ_SHS_SUB            , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 20);
+  PutInStaff(SHS_SUB            , UNDEFINED  ,  UNDEFINED, 20);
+  PutInStaff(SHS_SUB            , UNDEFINED  ,  UNDEFINED, 20);
+  PutInStaff(SHS_SUB            , UNDEFINED  ,  UNDEFINED, 20);
 
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 15);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 15);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 15);
-  PutInStaff(TOBJ_ESCORT             , TOBJ_SHS_SUB    ,  TOBJ_UNDEFINED, 15);
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 15);
-  PutInStaff(TOBJ_BIO_ACID_ASSAULTER , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 15);
-  PutInStaff(TOBJ_DREADNOUGHT        , TOBJ_ESCORT     ,  TOBJ_SHS_SUB  , 15);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 15);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 15);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 15);
+  PutInStaff(ESCORT             , SHS_SUB    ,  UNDEFINED, 15);
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 15);
+  PutInStaff(BIO_ACID_ASSAULTER , ESCORT     ,  SHS_SUB  , 15);
+  PutInStaff(DREADNOUGHT        , ESCORT     ,  SHS_SUB  , 15);
 
-  PutInStaff(TOBJ_PARALYSIS_PROBE    , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 10);
-  PutInStaff(TOBJ_VERMIN          , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 10);
-  PutInStaff(TOBJ_PARALYSIS_PROBE    , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 5);
-  PutInStaff(TOBJ_VERMIN          , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 5);
+  PutInStaff(PARALYSIS_PROBE    , UNDEFINED  ,  UNDEFINED, 10);
+  PutInStaff(VERMIN          , UNDEFINED  ,  UNDEFINED, 10);
+  PutInStaff(PARALYSIS_PROBE    , UNDEFINED  ,  UNDEFINED, 5);
+  PutInStaff(VERMIN          , UNDEFINED  ,  UNDEFINED, 5);
 
-  PutInStaff(TOBJ_REPLENISHER        , TOBJ_UNDEFINED  ,  TOBJ_UNDEFINED, 4);
+  PutInStaff(REPLENISHER        , UNDEFINED  ,  UNDEFINED, 4);
   
   // Param
   CanChangeStaff(AICAN_MYSELF);

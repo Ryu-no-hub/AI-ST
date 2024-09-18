@@ -21,45 +21,45 @@ OpenArbiter(_full_name, 0x00000004);
     //ActCreateStartSet(PLAYER_ALL,AIREL_MYSELF, LEVEL_DEFINED);
     _ploop_begin
       if(GetPlCiv(_pl_)==CIV_WS)     //--WS--
-      { ActCreatePlObj(_plmyself, TOBJ_WS_FLAGSHIP); 
-        ActCreatePlObj(_plmyself, TOBJ_CONSTRUCTOR); 
+      { ActCreatePlObj(_plmyself, WS_FLAGSHIP); 
+        ActCreatePlObj(_plmyself, CONSTRUCTOR); 
         if(GetStartSetLevel()>LEVEL_LOW)        
-        { ActCreatePlObj(_plmyself, TOBJ_SENTINEL); 
-          ActCreatePlObj(_plmyself, TOBJ_SENTINEL); 
-          ActCreatePlObj(_plmyself, TOBJ_HUNTER); 
+        { ActCreatePlObj(_plmyself, SENTINEL); 
+          ActCreatePlObj(_plmyself, SENTINEL); 
+          ActCreatePlObj(_plmyself, HUNTER); 
         }
         if(GetStartSetLevel()>LEVEL_MEDIUM)  
-        { ActCreatePlObj(_plmyself, TOBJ_CRUISER); 
-          ActCreatePlObj(_plmyself, TOBJ_MARAUDER); 
+        { ActCreatePlObj(_plmyself, CRUISER); 
+          ActCreatePlObj(_plmyself, MARAUDER); 
         }
       }
       else
       { if(GetPlCiv(_pl_)==CIV_BO)   //--BO--
-        { ActCreatePlObj(_plmyself, TOBJ_BO_FLAGSHIP); 
-          ActCreatePlObj(_plmyself, TOBJ_ASSEMBLER); 
+        { ActCreatePlObj(_plmyself, BO_FLAGSHIP); 
+          ActCreatePlObj(_plmyself, ASSEMBLER); 
           if(GetStartSetLevel()>LEVEL_LOW)        
-          { ActCreatePlObj(_plmyself, TOBJ_FIGHTER); 
-            ActCreatePlObj(_plmyself, TOBJ_FIGHTER); 
-            ActCreatePlObj(_plmyself, TOBJ_DESTROYER); 
+          { ActCreatePlObj(_plmyself, FIGHTER); 
+            ActCreatePlObj(_plmyself, FIGHTER); 
+            ActCreatePlObj(_plmyself, DESTROYER); 
           }
           if(GetStartSetLevel()>LEVEL_MEDIUM)  
-          { ActCreatePlObj(_plmyself, TOBJ_HEAVY_CRUISER); 
-            ActCreatePlObj(_plmyself, TOBJ_RAIDER); 
+          { ActCreatePlObj(_plmyself, HEAVY_CRUISER); 
+            ActCreatePlObj(_plmyself, RAIDER); 
           }
         }
         else                         //--SI--
-        { ActCreatePlObj(_plmyself, TOBJ_SI_FLAGSHIP); 
-          ActCreatePlObj(_plmyself, TOBJ_CAPSULE_PROTOTYPE); 
-          ActCreatePlObj(_plmyself, TOBJ_CAPSULE_PROTOTYPE); 
-          ActCreatePlObj(_plmyself, TOBJ_CAPSULE_PROTOTYPE); 
+        { ActCreatePlObj(_plmyself, SI_FLAGSHIP); 
+          ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
+          ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
+          ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
           if(GetStartSetLevel()>LEVEL_LOW)        
-          { ActCreatePlObj(_plmyself, TOBJ_SHS_SUB); 
-            ActCreatePlObj(_plmyself, TOBJ_SHS_SUB); 
-            ActCreatePlObj(_plmyself, TOBJ_SHS_SUB); 
+          { ActCreatePlObj(_plmyself, SHS_SUB); 
+            ActCreatePlObj(_plmyself, SHS_SUB); 
+            ActCreatePlObj(_plmyself, SHS_SUB); 
           }
           if(GetStartSetLevel()>LEVEL_MEDIUM)  
-          { ActCreatePlObj(_plmyself, TOBJ_ESCORT); 
-            ActCreatePlObj(_plmyself, TOBJ_USURPER); 
+          { ActCreatePlObj(_plmyself, ESCORT); 
+            ActCreatePlObj(_plmyself, USURPER); 
           }
         }
       }
@@ -80,7 +80,7 @@ OpenArbiter(_full_name, 0x00000004);
      if(!getVar(100+_pl_) && GetPlObjM(_plmyself, AITRG_BOATINTELLIGENCE)==0)
      { actSetVar(100+_pl_, ENDMISS_FAILED);ActOnTimer(_plmyself,10);ActOffFOW(_plmyself);                                 
        _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
-       ActDelPlObjEx(_plmyself, AITRG_ALL, TOBJ_UNDEFINED, LOGO_UNDEF, "", 0,0,0,-1,-1,-1, VEFF_EXPLOSION);
+       ActDelPlObjEx(_plmyself, AITRG_ALL, UNDEFINED, LOGO_UNDEF, "", 0,0,0,-1,-1,-1, VEFF_EXPLOSION);
      }
     _ploop_end
     actLockEvent();
@@ -91,7 +91,7 @@ OpenArbiter(_full_name, 0x00000004);
      if(!getVar(100+_pl_) && GetPlObjM(_plunion, AITRG_BOATINTELLIGENCE)==0)
      { actSetVar(100+_pl_, ENDMISS_FAILED);ActOnTimer(_plmyself,10);ActOffFOW(_plmyself);                                 
        _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
-       ActDelPlObjEx(_plmyself, AITRG_ALL, TOBJ_UNDEFINED, LOGO_UNDEF, "", 0,0,0,-1,-1,-1, VEFF_EXPLOSION);
+       ActDelPlObjEx(_plmyself, AITRG_ALL, UNDEFINED, LOGO_UNDEF, "", 0,0,0,-1,-1,-1, VEFF_EXPLOSION);
      }
     _ploop_end
     actLockEvent();
@@ -130,9 +130,9 @@ EventInput(_PI0==6){ActDelPlObjEx(PLAYER_7, AIREL_MYSELF, AITRG_BOATINTELLIGENCE
 /* 
 enem_boats = GetPlObjM(PLAYER_CURR, AIREL_ENEMYS, AITRG_BOATALL);
 enem_tlo   = GetPlObjM(PLAYER_CURR, AIREL_ENEMYS, AITRG_TLOALL);
-enem_gold  = GetPlRes(PLAYER_CURR, AIREL_ENEMYS, TOBJ_GOLD);
-enem_cor   = GetPlRes(PLAYER_CURR, AIREL_ENEMYS, TOBJ_CORIUM);
-enem_metal = GetPlRes(PLAYER_CURR, AIREL_ENEMYS, TOBJ_METAL, );
+enem_gold  = GetPlRes(PLAYER_CURR, AIREL_ENEMYS, GOLD);
+enem_cor   = GetPlRes(PLAYER_CURR, AIREL_ENEMYS, CORIUM);
+enem_metal = GetPlRes(PLAYER_CURR, AIREL_ENEMYS, METAL, );
 */
 
  CloseEvents();

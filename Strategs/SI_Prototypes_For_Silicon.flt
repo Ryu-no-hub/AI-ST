@@ -1,7 +1,7 @@
 
 OpenFleet("SI Builder",CIV_SI, AIF_BUILD, 12);
   // Staff
-  PutInStaff(TOBJ_CAPSULE_PROTOTYPE , TOBJ_UNDEFINED , TOBJ_UNDEFINED, 10);
+  PutInStaff(CAPSULE_PROTOTYPE , UNDEFINED , UNDEFINED, 10);
 
 
   // Param

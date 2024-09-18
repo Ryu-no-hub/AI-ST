@@ -13,7 +13,7 @@ OpenStrateg(_full_name, CIV_WS, _short_name, 0x00000003);
   Event(getOwnTime()>1) 
   { 
     ActStringMess(PLAYER_ALL, AIREL_MYSELF, "Игрок: " + GetPlName(PLAYER_CURR) + " сдался");
-    actDelPlObjEx(AITRG_ALL, TOBJ_UNDEFINED, LOGO_UNDEF, "", 0, 0, 0, -1, -1, -1, VEFF_EXPLOSION);
+    actDelPlObjEx(AITRG_ALL, UNDEFINED, LOGO_UNDEF, "", 0, 0, 0, -1, -1, -1, VEFF_EXPLOSION);
     // если вдруг у какого-то объекта есть Имя
     actDelPlObjEx(AITRG_ALL);
   };

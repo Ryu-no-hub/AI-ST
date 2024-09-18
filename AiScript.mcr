@@ -361,9 +361,9 @@ macro "getTechMaxLevel("   "GetTechMaxLevel("
 _curr_boats = _getPlObjM(AITRG_BOATALL);
 _curr_tlo   = _getPlObjM(AITRG_TLOALL);
 _curr_all   = _getPlObjM(AITRG_ALL);
-_curr_gold  = _getPlRes(TOBJ_GOLD);
-_curr_cor   = _getPlRes(TOBJ_CORIUM);
-_curr_metal = _getPlRes(TOBJ_METAL);
+_curr_gold  = _getPlRes(GOLD);
+_curr_cor   = _getPlRes(CORIUM);
+_curr_metal = _getPlRes(METAL);
 
 _curr_enem_all   = GetPlObjM(PLAYER_CURR, AIREL_ENEMYS, AITRG_ALL);
 _curr_enem_boat  = GetPlObjM(PLAYER_CURR, AIREL_ENEMYS, AITRG_BOATALL);

@@ -1,7 +1,7 @@
 
 OpenFleet("WS Builder",CIV_WS, AIF_BUILD, 12);
   // Staff
-  PutInStaff(TOBJ_CONSTRUCTOR, TOBJ_UNDEFINED , TOBJ_UNDEFINED, 10);
+  PutInStaff(CONSTRUCTOR, UNDEFINED , UNDEFINED, 10);
 
   // Param
   CanChangeStaff(AICAN_NOT);

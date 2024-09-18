@@ -28,14 +28,14 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 
   /////// DEBUG /////////
   /*
-  Event(_RT11<3 && getPlRes(TOBJ_CORIUM)<2000)
+  Event(_RT11<3 && getPlRes(CORIUM)<2000)
   { _RT11+=1;
-    actSetPlRC(TOBJ_CORIUM, 1, 2000);
+    actSetPlRC(CORIUM, 1, 2000);
     actLockEvent();
   }
-  Event(_RT12<5 && getPlRes(TOBJ_SILICON)<2000)
+  Event(_RT12<5 && getPlRes(SILICON)<2000)
   { _RT12+=1;
-    actSetPlRC(TOBJ_SILICON, 1, 2000);
+    actSetPlRC(SILICON, 1, 2000);
     actLockEvent();
   }
   */

@@ -269,154 +269,154 @@ AIASET_GENERATOR = 0x00080000;
 //---
 ////// Objects /////
 //-- Common objects--
-TOBJ_UNDEFINED = 0; 
+UNDEFINED = 0; 
 //---
 //-- WS Boats --
-TOBJ_SENTINEL                       = 1; 
-TOBJ_HUNTER                         = 2; 
-TOBJ_CRUISER                        = 3; 
-TOBJ_DC_BOMBER                      = 4; 
-TOBJ_MINE_LAYER                     = 5; 
-TOBJ_MARAUDER                       = 6; 
-TOBJ_REPSUB                         = 7; 
-TOBJ_TRANSUB                        = 8; 
-TOBJ_CYBERWORM                      = 9; 
-TOBJ_TERMINATOR                     = 10; 
-TOBJ_LIBERATOR                      = 11; 
-TOBJ_CONSTRUCTOR                    = 12; 
-TOBJ_WS_FLAGSHIP                    = 38; 
+SENTINEL                       = 1; 
+HUNTER                         = 2; 
+CRUISER                        = 3; 
+DC_BOMBER                      = 4; 
+MINE_LAYER                     = 5; 
+MARAUDER                       = 6; 
+REPSUB                         = 7; 
+TRANSUB                        = 8; 
+CYBERWORM                      = 9; 
+TERMINATOR                     = 10; 
+LIBERATOR                      = 11; 
+CONSTRUCTOR                    = 12; 
+WS_FLAGSHIP                    = 38; 
 //---
 //-- WS Land objects
-TOBJ_SUBCENTER                      = 50; 
-TOBJ_REPCENTER                      = 51; 
-TOBJ_ARMCENTER                      = 52; 
-TOBJ_TECHCENTER                     = 53; 
-TOBJ_SONAR                          = 54; 
-TOBJ_TRANCENTER                     = 55; 
-TOBJ_CORIUM_EXTRACTOR               = 57; 
-TOBJ_GOLD_EXTRACTOR                 = 58; 
-TOBJ_DEPOT                          = 59; 
-TOBJ_INFOCENTER                     = 60; 
-TOBJ_DISPERSER                      = 61; 
-TOBJ_HF_CANNON                      = 62; 
-TOBJ_STOLP                          = 63; 
-TOBJ_CYBERCENTER                    = 64; 
-TOBJ_SHARK_CONTROL                  = 65; 
-TOBJ_ULTRASONIC_GENERATOR           = 66; 
-TOBJ_PSYCHOTRON                     = 67; 
-TOBJ_PLASMATRON                     = 68; 
-TOBJ_TLS                            = 69; 
-TOBJ_METAL_EXTRACTOR                = 79; 
-TOBJ_AIR_EXTRACTOR                  = 80; 
-TOBJ_PLASMA_CANNON                  = 81; 
-TOBJ_TRADECENTER                    = 82; 
-TOBJ_TELESHIELD                     = 111; 
+SUBCENTER                      = 50; 
+REPCENTER                      = 51; 
+ARMCENTER                      = 52; 
+TECHCENTER                     = 53; 
+SONAR                          = 54; 
+TRANCENTER                     = 55; 
+CORIUM_EXTRACTOR               = 57; 
+GOLD_EXTRACTOR                 = 58; 
+DEPOT                          = 59; 
+INFOCENTER                     = 60; 
+DISPERSER                      = 61; 
+HF_CANNON                      = 62; 
+STOLP                          = 63; 
+CYBERCENTER                    = 64; 
+SHARK_CONTROL                  = 65; 
+ULTRASONIC_GENERATOR           = 66; 
+PSYCHOTRON                     = 67; 
+PLASMATRON                     = 68; 
+TLS                            = 69; 
+METAL_EXTRACTOR                = 79; 
+AIR_EXTRACTOR                  = 80; 
+PLASMA_CANNON                  = 81; 
+TRADECENTER                    = 82; 
+TELESHIELD                     = 111; 
 //---
 //-- BO Boats --
-TOBJ_FIGHTER                        = 13; 
-TOBJ_DESTROYER                      = 14; 
-TOBJ_HEAVY_CRUISER                  = 15; 
-TOBJ_INVADER                        = 16; 
-TOBJ_DEFENDER                       = 17; 
-TOBJ_RAIDER                         = 18; 
-TOBJ_REPAIR_PLATFORM                = 19; 
-TOBJ_CARGO_SUB                      = 20; 
-TOBJ_CYBERDOLPHIN                   = 21; 
-TOBJ_PHANTOM                        = 22; 
-TOBJ_AVENGER                        = 23; 
-TOBJ_ASSEMBLER                      = 24; 
-TOBJ_STEALTH_SCOUT                  = 37; 
-TOBJ_BO_FLAGSHIP                    = 39; 
+FIGHTER                        = 13; 
+DESTROYER                      = 14; 
+HEAVY_CRUISER                  = 15; 
+INVADER                        = 16; 
+DEFENDER                       = 17; 
+RAIDER                         = 18; 
+REPAIR_PLATFORM                = 19; 
+CARGO_SUB                      = 20; 
+CYBERDOLPHIN                   = 21; 
+PHANTOM                        = 22; 
+AVENGER                        = 23; 
+ASSEMBLER                      = 24; 
+STEALTH_SCOUT                  = 37; 
+BO_FLAGSHIP                    = 39; 
 //---
 //-- BO Land objects --
-TOBJ_DOCKYARD                       = 50; 
-TOBJ_REPAIR_DOCK                    = 51; 
-TOBJ_MUNITIONS_FACTORY              = 52; 
-TOBJ_RESEARCH_LABORATORY            = 53; 
-TOBJ_ASDIC                          = 54; 
-TOBJ_TELEPORTER                     = 55; 
-TOBJ_CORIUM_MINE                    = 57; 
-TOBJ_GOLD_SUBLIMATOR                = 58; 
-TOBJ_SILO                           = 59; 
-TOBJ_CENTCOMP                       = 60; 
-TOBJ_ANTI_SONAR_SHIELD              = 61; 
-TOBJ_LIGHT_LASER                    = 70; 
-TOBJ_MAGNETIC_MINE_LAUNCHER         = 71; 
-TOBJ_POWER_STATION                  = 72; 
-TOBJ_CYBER_LABORATORY               = 73; 
-TOBJ_HEAVY_LASER                    = 74; 
-TOBJ_ELECTRO_MAGNETIC_LAUNCHER      = 75; 
-TOBJ_PROTECTIVE_SHIELD_GENERATOR    = 76; 
-TOBJ_POWER_PROTECTOR                = 77; 
-TOBJ_LASER_BOMB_LAUNCHER            = 78; 
-TOBJ_METAL_MINE                     = 79; 
-TOBJ_O2_SUBLIMATOR                  = 80; 
-TOBJ_MARKET                         = 82; 
+DOCKYARD                       = 50; 
+REPAIR_DOCK                    = 51; 
+MUNITIONS_FACTORY              = 52; 
+RESEARCH_LABORATORY            = 53; 
+ASDIC                          = 54; 
+TELEPORTER                     = 55; 
+CORIUM_MINE                    = 57; 
+GOLD_SUBLIMATOR                = 58; 
+SILO                           = 59; 
+CENTCOMP                       = 60; 
+ANTI_SONAR_SHIELD              = 61; 
+LIGHT_LASER                    = 70; 
+MAGNETIC_MINE_LAUNCHER         = 71; 
+POWER_STATION                  = 72; 
+CYBER_LABORATORY               = 73; 
+HEAVY_LASER                    = 74; 
+ELECTRO_MAGNETIC_LAUNCHER      = 75; 
+PROTECTIVE_SHIELD_GENERATOR    = 76; 
+POWER_PROTECTOR                = 77; 
+LASER_BOMB_LAUNCHER            = 78; 
+METAL_MINE                     = 79; 
+O2_SUBLIMATOR                  = 80; 
+MARKET                         = 82; 
 //---
 //-- SI Boats --
-TOBJ_CAPSULE_PROTOTYPE              = 25; 
-TOBJ_TRANSPORT                      = 26; 
-TOBJ_SUPPLIER                       = 27; 
-TOBJ_PARALYSIS_PROBE                = 28; 
-TOBJ_REPLENISHER                    = 29; 
-TOBJ_SHS_SUB                        = 30; 
-TOBJ_DREADNOUGHT                    = 31; 
-TOBJ_ESCORT                         = 32; 
-TOBJ_BIO_ACID_ASSAULTER             = 33; 
-TOBJ_USURPER                        = 34; 
-TOBJ_VERMIN                         = 35; 
-TOBJ_EXPLORER                       = 36; 
-TOBJ_SI_FLAGSHIP                    = 40; 
+CAPSULE_PROTOTYPE              = 25; 
+TRANSPORT                      = 26; 
+SUPPLIER                       = 27; 
+PARALYSIS_PROBE                = 28; 
+REPLENISHER                    = 29; 
+SHS_SUB                        = 30; 
+DREADNOUGHT                    = 31; 
+ESCORT                         = 32; 
+BIO_ACID_ASSAULTER             = 33; 
+USURPER                        = 34; 
+VERMIN                         = 35; 
+EXPLORER                       = 36; 
+SI_FLAGSHIP                    = 40; 
 //---
 //-- SI Land objects --
-TOBJ_COMMAND_HUB                    = 83; 
-TOBJ_MOBILITY_HUB_MODULE            = 84; 
-TOBJ_SUBMARINE_HUB_MODULE           = 85; 
-TOBJ_ENERGY_HUB_MODULE              = 86; 
-TOBJ_REGENERATION_HUB_MODULE        = 87; 
-TOBJ_STRUCTURE_HUB_MODULE           = 88; 
-TOBJ_INTELLIGENCE_HUB_MODULE        = 89; 
-TOBJ_SUPER_TECH_HUB_MODULE          = 90; 
-TOBJ_ARSENAL                        = 91; 
-TOBJ_PROTOPLASM_GENERATOR           = 92; 
-TOBJ_BIOSONAR_STATION               = 93; 
-TOBJ_CORIUM_COLLECTOR               = 94; 
-TOBJ_ENERGY_CONVERTER               = 95; 
-TOBJ_CORIUM_SILO                    = 96; 
-TOBJ_ENERGY_ACCUMULATOR             = 97; 
-TOBJ_REPLENISH_POD                  = 98; 
-TOBJ_RECYCLOTRON                    = 99; 
-TOBJ_SILICON_EXTRACTOR              = 100; 
-TOBJ_SOLITON_OSCILLATOR             = 101; 
-TOBJ_GAS_SHELL_LAUNCHER             = 102; 
-TOBJ_DPT_GUN                        = 103; 
-TOBJ_ION_REFLECTOR                  = 104; 
-TOBJ_JUMP_MINE_LAUNCHER             = 105; 
-TOBJ_BIO_MINE_LAUNCHER              = 106; 
-TOBJ_PP_PULSAR                      = 107; 
-TOBJ_GATE                           = 108; 
-TOBJ_ION_FIELD_GENERATOR            = 109; 
-TOBJ_MOLECULAR_REPAIR_FACILITY      = 110; 
-TOBJ_GAS_LASER_SATELLITE_LAUNCHER   = 112; 
-TOBJ_PARCHER                        = 113; 
-TOBJ_VACUUM_BOMB_LAUNCHER           = 114; 
-TOBJ_QUANTUM_PARALYZER              = 115; 
+COMMAND_HUB                    = 83; 
+MOBILITY_HUB_MODULE            = 84; 
+SUBMARINE_HUB_MODULE           = 85; 
+ENERGY_HUB_MODULE              = 86; 
+REGENERATION_HUB_MODULE        = 87; 
+STRUCTURE_HUB_MODULE           = 88; 
+INTELLIGENCE_HUB_MODULE        = 89; 
+SUPER_TECH_HUB_MODULE          = 90; 
+ARSENAL                        = 91; 
+PROTOPLASM_GENERATOR           = 92; 
+BIOSONAR_STATION               = 93; 
+CORIUM_COLLECTOR               = 94; 
+ENERGY_CONVERTER               = 95; 
+CORIUM_SILO                    = 96; 
+ENERGY_ACCUMULATOR             = 97; 
+REPLENISH_POD                  = 98; 
+RECYCLOTRON                    = 99; 
+SILICON_EXTRACTOR              = 100; 
+SOLITON_OSCILLATOR             = 101; 
+GAS_SHELL_LAUNCHER             = 102; 
+DPT_GUN                        = 103; 
+ION_REFLECTOR                  = 104; 
+JUMP_MINE_LAUNCHER             = 105; 
+BIO_MINE_LAUNCHER              = 106; 
+PP_PULSAR                      = 107; 
+GATE                           = 108; 
+ION_FIELD_GENERATOR            = 109; 
+MOLECULAR_REPAIR_FACILITY      = 110; 
+GAS_LASER_SATELLITE_LAUNCHER   = 112; 
+PARCHER                        = 113; 
+VACUUM_BOMB_LAUNCHER           = 114; 
+QUANTUM_PARALYZER              = 115; 
 //---
 //-- Resources --
-TOBJ_GOLD      = 220; 
-TOBJ_CORIUM    = 221; 
-TOBJ_METAL     = 222; 
-TOBJ_AIR       = 223; 
-TOBJ_TERMO     = 224; 
-TOBJ_WATERGOLD = 225; 
-TOBJ_SILICON   = 226; 
-TOBJ_ENERGY    = 227; 
+GOLD      = 220; 
+CORIUM    = 221; 
+METAL     = 222; 
+AIR       = 223; 
+TERMO     = 224; 
+WATERGOLD = 225; 
+SILICON   = 226; 
+ENERGY    = 227; 
 //---
 //-- Creatures --
-TOBJ_SHARK = 230; 
-TOBJ_FISH  = 231; 
-TOBJ_RAY   = 234; 
-TOBJ_SNAKE = 235; 
+SHARK = 230; 
+FISH  = 231; 
+RAY   = 234; 
+SNAKE = 235; 
 //---
 //-- Artefactes --
 TART_UNDEFINED                           = 0; 
@@ -678,72 +678,72 @@ MODE_24BIT = 2;
 /*=================== Groups of object types ================= 
 
  - AITRG_TLODEFENSECOMMON - 
-    WS : TOBJ_HF_CANNON, TOBJ_STOLP, 
-    BO : TOBJ_LIGHT_LASER, TOBJ_HEAVY_LASER, 
-    SI : TOBJ_GAS_SHELL_LAUNCHER, TOBJ_PP_PULSAR, 
+    WS : HF_CANNON, STOLP, 
+    BO : LIGHT_LASER, HEAVY_LASER, 
+    SI : GAS_SHELL_LAUNCHER, PP_PULSAR, 
  - AITRG_TLODEFENSESPEC   - 
-    WS : TOBJ_ULTRASONIC_GENERATOR, TOBJ_PLASMA_CANNON, 
-    BO : TOBJ_MAGNETIC_MINE_LAUNCHER, TOBJ_ELECTRO_MAGNETIC_LAUNCHER, 
-    SI : TOBJ_SOLITON_OSCILLATOR, TOBJ_DPT_GUN, TOBJ_ION_REFLECTOR, TOBJ_JUMP_MINE_LAUNCHER, TOBJ_BIO_MINE_LAUNCHER, TOBJ_PARCHER, 
+    WS : ULTRASONIC_GENERATOR, PLASMA_CANNON, 
+    BO : MAGNETIC_MINE_LAUNCHER, ELECTRO_MAGNETIC_LAUNCHER, 
+    SI : SOLITON_OSCILLATOR, DPT_GUN, ION_REFLECTOR, JUMP_MINE_LAUNCHER, BIO_MINE_LAUNCHER, PARCHER, 
  - AITRG_TLOPROTECTIVE    - 
-    WS : TOBJ_DISPERSER, TOBJ_SHARK_CONTROL, TOBJ_TELESHIELD, 
-    BO : TOBJ_ANTI_SONAR_SHIELD, TOBJ_PROTECTIVE_SHIELD_GENERATOR, TOBJ_POWER_PROTECTOR, 
-    SI : TOBJ_ION_FIELD_GENERATOR, 
+    WS : DISPERSER, SHARK_CONTROL, TELESHIELD, 
+    BO : ANTI_SONAR_SHIELD, PROTECTIVE_SHIELD_GENERATOR, POWER_PROTECTOR, 
+    SI : ION_FIELD_GENERATOR, 
  - AITRG_TLOPRODUCTIVE    - 
-    WS : TOBJ_SUBCENTER, TOBJ_TECHCENTER, TOBJ_CYBERCENTER, 
-    BO : TOBJ_DOCKYARD, TOBJ_RESEARCH_LABORATORY, TOBJ_CYBER_LABORATORY, 
-    SI : TOBJ_COMMAND_HUB, TOBJ_MOBILITY_HUB_MODULE, TOBJ_SUBMARINE_HUB_MODULE, TOBJ_ENERGY_HUB_MODULE, TOBJ_REGENERATION_HUB_MODULE, TOBJ_STRUCTURE_HUB_MODULE, TOBJ_INTELLIGENCE_HUB_MODULE, TOBJ_SUPER_TECH_HUB_MODULE, TOBJ_PROTOPLASM_GENERATOR, 
+    WS : SUBCENTER, TECHCENTER, CYBERCENTER, 
+    BO : DOCKYARD, RESEARCH_LABORATORY, CYBER_LABORATORY, 
+    SI : COMMAND_HUB, MOBILITY_HUB_MODULE, SUBMARINE_HUB_MODULE, ENERGY_HUB_MODULE, REGENERATION_HUB_MODULE, STRUCTURE_HUB_MODULE, INTELLIGENCE_HUB_MODULE, SUPER_TECH_HUB_MODULE, PROTOPLASM_GENERATOR, 
  - AITRG_TLOSUPPLY        - 
-    WS : TOBJ_REPCENTER, TOBJ_ARMCENTER, 
-    BO : TOBJ_REPAIR_DOCK, TOBJ_MUNITIONS_FACTORY, TOBJ_POWER_STATION, 
-    SI : TOBJ_ARSENAL, TOBJ_REPLENISH_POD, 
+    WS : REPCENTER, ARMCENTER, 
+    BO : REPAIR_DOCK, MUNITIONS_FACTORY, POWER_STATION, 
+    SI : ARSENAL, REPLENISH_POD, 
  - AITRG_TLORCCONVERT     - 
-    WS : TOBJ_TRADECENTER, 
-    BO : TOBJ_MARKET, 
-    SI : TOBJ_ENERGY_CONVERTER, TOBJ_RECYCLOTRON, 
+    WS : TRADECENTER, 
+    BO : MARKET, 
+    SI : ENERGY_CONVERTER, RECYCLOTRON, 
  - AITRG_TLORCEXTRACT     - 
-    WS : TOBJ_CORIUM_EXTRACTOR, TOBJ_GOLD_EXTRACTOR, TOBJ_DEPOT, TOBJ_METAL_EXTRACTOR, TOBJ_AIR_EXTRACTOR, 
-    BO : TOBJ_CORIUM_MINE, TOBJ_GOLD_SUBLIMATOR, TOBJ_SILO, TOBJ_METAL_MINE, TOBJ_O2_SUBLIMATOR, 
-    SI : TOBJ_CORIUM_COLLECTOR, TOBJ_CORIUM_SILO, TOBJ_ENERGY_ACCUMULATOR, TOBJ_SILICON_EXTRACTOR, 
+    WS : CORIUM_EXTRACTOR, GOLD_EXTRACTOR, DEPOT, METAL_EXTRACTOR, AIR_EXTRACTOR, 
+    BO : CORIUM_MINE, GOLD_SUBLIMATOR, SILO, METAL_MINE, O2_SUBLIMATOR, 
+    SI : CORIUM_COLLECTOR, CORIUM_SILO, ENERGY_ACCUMULATOR, SILICON_EXTRACTOR, 
  - AITRG_TLOHIGHTECH      - 
-    WS : TOBJ_TRANCENTER, TOBJ_PSYCHOTRON, TOBJ_PLASMATRON, TOBJ_TLS, 
-    BO : TOBJ_TELEPORTER, TOBJ_LASER_BOMB_LAUNCHER, 
-    SI : TOBJ_GATE, TOBJ_MOLECULAR_REPAIR_FACILITY, TOBJ_GAS_LASER_SATELLITE_LAUNCHER, TOBJ_VACUUM_BOMB_LAUNCHER, TOBJ_QUANTUM_PARALYZER, 
+    WS : TRANCENTER, PSYCHOTRON, PLASMATRON, TLS, 
+    BO : TELEPORTER, LASER_BOMB_LAUNCHER, 
+    SI : GATE, MOLECULAR_REPAIR_FACILITY, GAS_LASER_SATELLITE_LAUNCHER, VACUUM_BOMB_LAUNCHER, QUANTUM_PARALYZER, 
  - AITRG_TLOINTELLIGENCE  - 
-    WS : TOBJ_SONAR, TOBJ_INFOCENTER, 
-    BO : TOBJ_ASDIC, TOBJ_CENTCOMP, 
-    SI : TOBJ_BIOSONAR_STATION, 
+    WS : SONAR, INFOCENTER, 
+    BO : ASDIC, CENTCOMP, 
+    SI : BIOSONAR_STATION, 
 
  - AITRG_BOATMILITARYCOMMON  - 
-    WS : TOBJ_SENTINEL, TOBJ_HUNTER, TOBJ_CRUISER, TOBJ_TERMINATOR, 
-    BO : TOBJ_FIGHTER, TOBJ_DESTROYER, TOBJ_HEAVY_CRUISER, TOBJ_INVADER, 
-    SI : TOBJ_SHS_SUB, TOBJ_DREADNOUGHT, TOBJ_ESCORT, 
+    WS : SENTINEL, HUNTER, CRUISER, TERMINATOR, 
+    BO : FIGHTER, DESTROYER, HEAVY_CRUISER, INVADER, 
+    SI : SHS_SUB, DREADNOUGHT, ESCORT, 
  - AITRG_BOATMILITARYSPEC    - 
-    WS : TOBJ_DC_BOMBER, TOBJ_MINE_LAYER, TOBJ_MARAUDER, 
-    BO : TOBJ_DEFENDER, TOBJ_RAIDER, 
-    SI : TOBJ_BIO_ACID_ASSAULTER, TOBJ_USURPER, TOBJ_EXPLORER, 
+    WS : DC_BOMBER, MINE_LAYER, MARAUDER, 
+    BO : DEFENDER, RAIDER, 
+    SI : BIO_ACID_ASSAULTER, USURPER, EXPLORER, 
  - AITRG_BOATRCEXTRACT       - 
-    WS : TOBJ_TRANSUB, 
-    BO : TOBJ_CARGO_SUB, 
-    SI : TOBJ_TRANSPORT, 
+    WS : TRANSUB, 
+    BO : CARGO_SUB, 
+    SI : TRANSPORT, 
  - AITRG_BOATCONSTRUCT       - 
-    WS : TOBJ_CONSTRUCTOR, 
-    BO : TOBJ_ASSEMBLER, 
-    SI : TOBJ_CAPSULE_PROTOTYPE, 
+    WS : CONSTRUCTOR, 
+    BO : ASSEMBLER, 
+    SI : CAPSULE_PROTOTYPE, 
  - AITRG_BOATSUPPLY          - 
-    WS : TOBJ_REPSUB, 
-    BO : TOBJ_REPAIR_PLATFORM, 
-    SI : TOBJ_SUPPLIER, TOBJ_REPLENISHER, 
+    WS : REPSUB, 
+    BO : REPAIR_PLATFORM, 
+    SI : SUPPLIER, REPLENISHER, 
  - AITRG_BOATHIGHTECH        - 
-    WS : TOBJ_LIBERATOR, 
-    BO : TOBJ_PHANTOM, TOBJ_AVENGER, TOBJ_STEALTH_SCOUT, 
-    SI : TOBJ_PARALYSIS_PROBE, TOBJ_VERMIN, 
+    WS : LIBERATOR, 
+    BO : PHANTOM, AVENGER, STEALTH_SCOUT, 
+    SI : PARALYSIS_PROBE, VERMIN, 
  - AITRG_BOATCYBERS          - 
-    WS : TOBJ_CYBERWORM, 
-    BO : TOBJ_CYBERDOLPHIN, 
+    WS : CYBERWORM, 
+    BO : CYBERDOLPHIN, 
     SI : 
  - AITRG_BOATINTELLIGENCE    - 
-    WS : TOBJ_WS_FLAGSHIP, 
-    BO : TOBJ_BO_FLAGSHIP, 
-    SI : TOBJ_SI_FLAGSHIP, 
+    WS : WS_FLAGSHIP, 
+    BO : BO_FLAGSHIP, 
+    SI : SI_FLAGSHIP, 
 =============================================================*/ 

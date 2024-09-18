@@ -59,6 +59,8 @@ OpenFleet("SI Base Guard", CIV_SI, AIF_BASE, 15);
   PutInStaff(ION_FIELD_GENERATOR          , UNDEFINED, UNDEFINED, 5);
   PutInStaff(BIOSONAR_STATION             , UNDEFINED, UNDEFINED, 5);
   PutInStaff(VACUUM_BOMB_LAUNCHER         , UNDEFINED, UNDEFINED, 3);
+
+  
   // Param 
   Build(AICAN_MYSELF);
   CanChangeStaff(AICAN_MYSELF);

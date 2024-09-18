@@ -1,7 +1,7 @@
 
 OpenFleet("BO Builder",CIV_BO, AIF_BUILD, 12);
   // Staff
-  PutInStaff(TOBJ_ASSEMBLER, TOBJ_UNDEFINED , TOBJ_UNDEFINED, 10);
+  PutInStaff(ASSEMBLER, UNDEFINED , UNDEFINED, 10);
 
   // Param
   CanChangeStaff(AICAN_NOT);

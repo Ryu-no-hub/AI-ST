@@ -61,28 +61,28 @@ OpenStrateg(_full_name, CIV_BO, _short_name, 0x00000003);
   { actOnEvent(4);
   }
 */
-  Event(_RT10<2 && getPlRes(TOBJ_GOLD)<1000)
+  Event(_RT10<2 && getPlRes(GOLD)<1000)
   { _RT10+=1;
-    actSetPlRC(TOBJ_GOLD, 1, 1000);
+    actSetPlRC(GOLD, 1, 1000);
     actLockEvent();
   }
-  Event(_RT11<3 && getPlRes(TOBJ_CORIUM)<2000)
+  Event(_RT11<3 && getPlRes(CORIUM)<2000)
   { _RT11+=1;
-    actSetPlRC(TOBJ_CORIUM, 1, 2000);
+    actSetPlRC(CORIUM, 1, 2000);
     actLockEvent();
   }
-  Event(_RT12<5 && getPlRes(TOBJ_METAL)<2000)
+  Event(_RT12<5 && getPlRes(METAL)<2000)
   { _RT12+=1;
-    actSetPlRC(TOBJ_METAL, 1, 2000);
+    actSetPlRC(METAL, 1, 2000);
     actLockEvent();
   }
   // 
   Event(getOwnTime()>300 && _RT30>0 && isTechDev(TTECH_BO_RUBY_LASER_TECHNOLOGY, TTECH_LEV1))
-  { actFParPutInStaff(_RT30, TOBJ_DOCKYARD, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 25);
+  { actFParPutInStaff(_RT30, DOCKYARD, UNDEFINED, UNDEFINED, 25);
     actOnEvent(20);
   }
   Event(isTechDev(TTECH_BO_RAIDER_EQUIPMENT, TTECH_LEV1), 20)
-  { actFParPutInStaff(_RT30, TOBJ_DOCKYARD, TOBJ_UNDEFINED, TOBJ_UNDEFINED, 25);
+  { actFParPutInStaff(_RT30, DOCKYARD, UNDEFINED, UNDEFINED, 25);
   }
 
  CloseEvents();
