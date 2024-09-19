@@ -42,6 +42,7 @@ OpenStringTable();
  /*024*/PutString(""); 
  /*025*/PutString("You've got %d units of %s"); 
  /*026*/PutString("The thing"); 
+ /*027*/PutString("The thing");
 CloseStringTable();
 
 
