@@ -42,7 +42,58 @@ OpenStringTable();
  /*024*/PutString(""); 
  /*025*/PutString("You've got %d units of %s"); 
  /*026*/PutString("The thing"); 
- /*027*/PutString("The thing");
+
+ /*027 L1_X*/PutString("1");
+ /*028 L1_Y*/PutString("1");
+ /*029 L2_X*/PutString("98");
+ /*030 L2_Y*/PutString("1");
+ /*031 L3_X*/PutString("1");
+ /*032 L3_Y*/PutString("98");
+ /*033 L4_X*/PutString("98");
+ /*034 L4_Y*/PutString("98");
+
+ /*035 M1_X*/PutString("6");
+ /*036 M1_Y*/PutString("6");
+ /*037 M2_X*/PutString("12");
+ /*038 M2_Y*/PutString("12");
+ /*039 M3_X*/PutString("93");
+ /*040 M3_Y*/PutString("6");
+ /*041 M4_X*/PutString("87");
+ /*042 M4_Y*/PutString("12");
+ /*043 M5_X*/PutString("6");
+ /*044 M5_Y*/PutString("87");
+ /*045 M6_X*/PutString("12");
+ /*046 M6_Y*/PutString("93");
+ /*047 M7_X*/PutString("93");
+ /*048 M7_Y*/PutString("87");
+ /*049 M8_X*/PutString("87");
+ /*050 M8_Y*/PutString("93");
+
+ /*051 S1_X*/PutString("25");
+ /*052 S1_Y*/PutString("18");
+ /*053 S2_X*/PutString("18");
+ /*054 S2_Y*/PutString("33");
+ /*055 S3_X*/PutString("33");
+ /*056 S3_Y*/PutString("33");
+ /*057 S4_X*/PutString("73");
+ /*058 S4_Y*/PutString("18");
+ /*059 S5_X*/PutString("66");
+ /*060 S5_Y*/PutString("33");
+ /*061 S6_X*/PutString("81");
+ /*062 S6_Y*/PutString("33");
+ /*063 S7_X*/PutString("25");
+ /*064 S7_Y*/PutString("66");
+ /*065 S8_X*/PutString("18");
+ /*066 S8_Y*/PutString("81");
+ /*067 S9_X*/PutString("33");
+ /*068 S9_Y*/PutString("81");
+ /*069 S10_X*/PutString("74");
+ /*070 S10_Y*/PutString("66");
+ /*071 S11_X*/PutString("66");
+ /*072 S11_Y*/PutString("81");
+ /*073 S12_X*/PutString("81");
+ /*074 S12_Y*/PutString("81");
+
 CloseStringTable();
 
 
@@ -55,6 +106,15 @@ name("AIBOSS");
 name("OBJECTIVES");        
 OpenStringTable();
  /*000*/PutString("Kill all enemies"); 
+CloseStringTable();
+
+name("AIBOSS001");            
+ _full_name = "LastSubmariner";
+ include<[_curr_path]\Arbiter_LastSubmariner.arb>;
+
+name("OBJECTIVES001");
+OpenStringTable();
+ /*000*/PutString("LastSubmariner. See #custom-maps"); 
 CloseStringTable();
 
 #if(!__DEMO)
@@ -140,6 +200,9 @@ name("OPPONENT",3,-1,0);
  include<[_curr_path]\SI_Opponent_01.stg>;
  _full_name = "SI Opponent Level 02";_short_name = "AI STRONG";
  include<[_curr_path]\SI_Opponent_02.stg>;
+
+ _full_name = "AI NEUTRAL";_short_name = "AI NEUTRAL";
+ include<[_curr_path]\AI_NEUTRAL.stg>;
 
 close();
 

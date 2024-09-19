@@ -1,0 +1,29 @@
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#if(_env_var1==0)
+ _full_name = "AI NEUTRAL";_short_name = "AI NEUTRAL";
+#endif
+
+OpenStrateg(_full_name, CIV_WS, _short_name, 0x00000003);
+  
+ // Parameters
+ MainEnemy(AICAN_MYSELF, PLAYER_ALL);
+
+ // Tactics
+ //include<[_curr_path]\BO_GuardBase.tct>;
+
+ // Events
+ OpenEvents();
+  // Execute Tactician & Technologies
+  Event(getOwnTime()>5) 
+  { //actObjSelectM(AITRG_ALL);
+    //actExecTactic("BO Guard Base");
+    //actTScenDevRun(TECH_SCENARIO_OPTIMAL);
+    ActDelPlObjEx(PLAYER_0, AIREL_MYSELF, AITRG_ALL, CONSTRUCTOR);
+    ActDelPlObjEx(PLAYER_0, AIREL_MYSELF, AITRG_ALL, CAPSULE_PROTOTYPE);
+    ActTechSetAll(PLAYER_0, AIREL_MYSELF);
+  };
+ CloseEvents();
+
+CloseStrateg();

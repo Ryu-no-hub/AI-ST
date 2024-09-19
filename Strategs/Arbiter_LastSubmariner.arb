@@ -1,0 +1,522 @@
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+include<[_inc_path]\Strategs\CONST_LastSubmariner.dfn>;
+/*
+    _RT100 - начальный индекс чтения из String Table
+    _RT101 - тип артефакта M, L, S, XL
+    _RT102 - value артефакта
+    _RT103 - расса - WS, BO, SI
+    _RT104, _RT106 - счетчики генерируемых субмарин
+    _RT105 - ИД субмариный
+    _RT107 - флаг награды: 1 - ресурсы 2 - субмарина 3 - технология
+    _RT108 - кол-во ресурсов награды
+    _RT109 - ИД субмарины WS в награде
+    _RT110 - ИД субмарины BO в награде
+    _RT111 - ИД субмарины SI в награде
+*/
+OpenArbiter("LastSubmariner100");
+ 
+    // Events 
+    OpenEvents();
+
+        s_win    = 14;
+        s_defeat = 15;
+
+        Event(TRUE) 
+        {
+            _ploop_begin
+                if(GetPlCiv(_pl_)==CIV_WS)//--WS--
+                {
+                    ActCreatePlObj(_plmyself, CONSTRUCTOR);
+                }
+                else
+                { 
+                    if(GetPlCiv(_pl_)==CIV_BO)//--BO--
+                    {
+                        ActCreatePlObj(_plmyself, ASSEMBLER);
+                    }
+                }
+                if(GetPlCiv(_pl_)==CIV_SI)//--SI--
+                {
+                    ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
+                    ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
+                    ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE);
+                    ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
+                    ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE);
+                }
+            _ploop_end
+
+            // Green
+            if(GetCurrPl() == 1)
+            {
+                if(GetPlCiv( GetCurrPl() ) == CIV_WS)
+                {
+                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SENTINEL);
+                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SENTINEL);
+                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SENTINEL);
+                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SENTINEL);
+                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SENTINEL);
+                }
+                if(GetPlCiv( GetCurrPl() ) == CIV_BO)
+                {
+                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, FIGHTER);
+                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, FIGHTER);
+                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, FIGHTER);
+                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, FIGHTER);
+                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, FIGHTER);
+                }
+                if(GetPlCiv( GetCurrPl() ) == CIV_SI)
+                {
+                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SHS_SUB);
+                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SHS_SUB);
+                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SHS_SUB);
+                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SHS_SUB);
+                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SHS_SUB);
+                }
+            }
+            // Yellow
+            if(GetCurrPl() == 1)
+            {}
+            // Red
+            if(GetCurrPl() == 1)
+            {}
+            // violet
+            if(GetCurrPl() == 1)
+            {}
+            // cyan
+            if(GetCurrPl() == 1)
+            {}
+            // orange
+            if(GetCurrPl() == 1)
+            {}
+            // beige
+            if(GetCurrPl() == 1)
+            {}
+
+            // Off
+            //actOffEvent(10);
+            //actOffEvent(20);
+            //actOffEvent(30); 
+            //actOffEvent(100);
+
+            //actStringMess("text");
+            ActCreateDest(0, LOGO_0, 27, 87, 0, "name", "text", VEFF_TELEPORT);
+
+            if(IsDestExist("name"))
+            {
+                actStringMess("Dest with name exist");
+            }
+
+            actStringMess("Dest cont = " + _inttostr(GetDest()));
+        }
+        /*
+        Event(getOwnTime()>10)
+        { 
+            actOnEvent(IsTeamGame() ? 20 : 10);
+            actOnEvent(30);
+            actOnEvent(100);
+        }
+
+        Event(getOwnTime()%3==1, 10)
+        {
+            _ploop_begin
+                if(!getVar(100+_pl_) && GetPlObjM(_plmyself, AITRG_ALL)==0)
+                { 
+                    actSetVar(100+_pl_, ENDMISS_FAILED);
+                    ActOnTimer(_plmyself,10);
+                    ActOffFOW(_plmyself);                                 
+                    _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
+                }
+            _ploop_end
+            actLockEvent();
+        }
+  
+        Event(getOwnTime()%3==1, 20)
+        {
+            _ploop_begin
+                if(!getVar(100+_pl_) && GetPlObjM(_plunion, AITRG_ALL)==0)
+                { 
+                    actSetVar(100+_pl_, ENDMISS_FAILED);
+                    ActOnTimer(_plmyself,10);
+                    ActOffFOW(_plmyself);                                 
+                    _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
+                }
+            _ploop_end
+            actLockEvent();
+        }
+
+        Event(getOwnTime()%3==1, 30)
+        {
+            _ploop_begin
+                if(!getVar(100+_pl_) && GetPlObjM(_plnotally, AITRG_ALL)==0)
+                {
+                    actSetVar(100+_pl_, ENDMISS_ACCOMPL);
+                    ActOnTimer(_plmyself,10);
+                    ActOffFOW(_plmyself);                                 
+                    _actStringMess(_strf(GetStrRes(s_win), GetPlName(_pl_)));
+                }
+            _ploop_end
+            actLockEvent();
+        }
+  
+        Event(TRUE, 100)
+        {
+            _ploop_begin
+                if(getVar(100+_pl_)>0 && GetTimerTime(_pl_)==0)
+                {
+                    ActOffTimer(_plmyself);
+                    ActTotalStatistics(_plmyself, 10);
+                    ActEndMiss(_plmyself, getVar(100+_pl_));
+                    actSetVar(100+_pl_, -1);
+                }
+            _ploop_end
+            actLockEvent();
+        }/**/
+
+        // создание на карте сундуков с кориумом
+        Event(getOwnTime()>1)
+        {
+            if(GetRCCont(PLAYER_0, AIREL_MYSELF, CORIUM) < COUNT_CHEST)
+            {
+                //actStringMess("RC cont = " + _inttostr(GetRCCont(PLAYER_0, AIREL_MYSELF,CORIUM)));
+                ActCreateRCCont(PLAYER_0, AIREL_MYSELF, CORIUM, GetRnd(5,95), GetRnd(5,95), GetRnd(1,3), GetRnd(500,2000), "", VEFF_TELEPORT);
+                actLockEvent();
+            }
+        }
+
+        // генерирует артефакты и субмарины ИИ в определнных координатах из String Table
+        Event(getOwnTime()>1)
+        {
+            // 26 - 73
+            _RT100:= 26;
+            while(_RT100 <= 73)
+            {
+                // Type Art - L, M, S, XL
+                _RT101:= GetRnd(1,4);
+                // Value Art
+                _RT102:= GetRnd(1,6)*1000;
+                // Count Guard Art
+                _RT104:= 0;
+                // L
+                if(GetArt(TART_X_BOX, "V " + _inttostr(_RT102)) <= 4 && _RT101 == 1)
+                {
+                    ActCreateArt( TART_X_BOX, 
+                                  GetRnd(1,3), 
+                                  _strtoint(GetStrRes(_RT100)), 
+                                  _strtoint(GetStrRes(_RT100+1)), 
+                                  GetRnd(1,3), 
+                                  "V " + _inttostr(_RT102), 
+                                  "Art Val " + _inttostr(_RT102), 
+                                  VEFF_TELEPORT);
+                    
+                    //ActCreatePlObj(who, who_rel, tobj[, x, y, z, logo, name, nflt, life, eff, par0, par1, ...]);
+                }
+                // M
+                if(GetArt(TART_X_BOX, "V " + _inttostr(_RT102)) <= 8 && _RT101 == 2)
+                {
+                    ActCreateArt( TART_X_BOX, 
+                                  GetRnd(1,3), 
+                                  _strtoint(GetStrRes(_RT100)), 
+                                  _strtoint(GetStrRes(_RT100+1)), 
+                                  GetRnd(1,3), 
+                                  "V " + _inttostr(_RT102), 
+                                  "Art Val " + _inttostr(_RT102), 
+                                  VEFF_TELEPORT);
+                }
+                // S
+                if(GetArt(TART_X_BOX, "V " + _inttostr(_RT102)) <= 12 && _RT101 == 3)
+                {
+                    ActCreateArt( TART_X_BOX, 
+                                  GetRnd(1,3), 
+                                  _strtoint(GetStrRes(_RT100)), 
+                                  _strtoint(GetStrRes(_RT100+1)), 
+                                  GetRnd(1,3), 
+                                  "V " + _inttostr(_RT102), 
+                                  "Art Val " + _inttostr(_RT102), 
+                                  VEFF_TELEPORT);
+                }
+                // XL
+                if(GetArt(TART_X_BOX, "V " + _inttostr(_RT102)) <= 16 && _RT101 == 4)
+                {
+                    ActCreateArt( TART_X_BOX, 
+                                  GetRnd(1,3), 
+                                  _strtoint(GetStrRes(_RT100)), 
+                                  _strtoint(GetStrRes(_RT100+1)), 
+                                  GetRnd(1,3), 
+                                  "V " + _inttostr(_RT102), 
+                                  "Art Val " + _inttostr(_RT102), 
+                                  VEFF_TELEPORT);
+                }
+
+                // Random CIV
+                _RT103:= GetRnd(1,3);
+
+                // ID Submarine
+                _RT105:= 1;
+                // Count Submarine Guard
+                _RT106:= 1;
+                if(_RT102 == 1000)
+                {
+                    _RT106:= GetRnd(4,5);
+                    if(_RT103 == CIV_WS) {_RT105:= 1;}
+                    if(_RT103 == CIV_BO) {_RT105:= 13;}
+                    if(_RT103 == CIV_SI) {_RT105:= 30;}
+                }
+
+                if(_RT102 == 2000)
+                {
+                    _RT106:= GetRnd(5,6);
+                    if(_RT103 == CIV_WS && _RT102 == 2000) {_RT105:= 2;}
+                    if(_RT103 == CIV_BO && _RT102 == 2000) {_RT105:= 14;}
+                    if(_RT103 == CIV_SI && _RT102 == 2000) {_RT105:= 32;}
+                }
+                if(_RT102 == 3000)
+                {
+                    _RT106:= GetRnd(3,4);
+                    if(_RT103 == CIV_WS && _RT102 == 3000) {_RT105:= 3;}
+                    if(_RT103 == CIV_BO && _RT102 == 3000) {_RT105:= 15;}
+                    if(_RT103 == CIV_SI && _RT102 == 3000) {_RT105:= 31;}
+                }
+                if(_RT102 == 4000)
+                {
+                    _RT106:= GetRnd(4,5);
+                    if(_RT103 == CIV_WS && _RT102 == 4000) {_RT105:= 4;}
+                    if(_RT103 == CIV_BO && _RT102 == 4000) {_RT105:= 22;}
+                    if(_RT103 == CIV_SI && _RT102 == 4000) {_RT105:= 28;}
+                }
+                if(_RT102 == 5000)
+                {
+                    _RT106:= GetRnd(5,6);
+                    if(_RT103 == CIV_WS && _RT102 == 5000) {_RT105:= 10;}
+                    if(_RT103 == CIV_BO && _RT102 == 5000) {_RT105:= 23;}
+                    if(_RT103 == CIV_SI && _RT102 == 5000) {_RT105:= 33;}
+                }
+                if(_RT102 == 6000)
+                {
+                    _RT106:= GetRnd(6,7);
+                    if(_RT103 == CIV_WS && _RT102 == 6000) {_RT105:= 38;}
+                    if(_RT103 == CIV_BO && _RT102 == 6000) {_RT105:= 39;}
+                    if(_RT103 == CIV_SI && _RT102 == 6000) {_RT105:= 40;}
+                }
+
+                while(_RT104 < _RT106)
+                {
+                    ActCreatePlObj(PLAYER_0, AIREL_MYSELF, _RT105, _strtoint(GetStrRes(_RT100)), _strtoint(GetStrRes(_RT100+1)), GetRnd(1,3),LOGO_0);
+                    _RT104+=1;
+                }
+
+                _RT100+=2;
+            }
+        }/**/
+
+        EventArtLoaded(TRUE)
+        {
+            // 1 - get Res, 2 - get submarine
+            _RT107:= GetRnd(1,2);
+            
+            // T1
+            if(_PS0 == "V 1000")
+            {
+                // count resource
+                _RT108:= GetRnd(500,900);
+                _RT103:= GetRnd(1,3);
+                _RT104:= 0;
+                _RT106:= GetRnd(3,10);
+
+                // ID submarine WS
+                _RT109:= 1;
+                // BO
+                _RT110:= 13;
+                // SI
+                _RT111:= 30;
+            }
+
+            if(_PS0 == "V 2000")
+            {
+                // count resource
+                _RT108:= GetRnd(1000,1500);
+                _RT103:= GetRnd(1,3);
+                _RT104:= 0;
+                _RT106:= GetRnd(3,7);
+
+                // ID submarine WS
+                _RT109:= 2;
+                // BO
+                _RT110:= 14;
+                // SI
+                _RT111:= 32;
+            }
+
+            if(_PS0 == "V 3000")
+            {
+                // count resource
+                _RT108:= GetRnd(1000,1500);
+                _RT103:= GetRnd(1,3);
+                _RT104:= 0;
+                _RT106:= GetRnd(3,5);
+
+                // ID submarine WS
+                _RT109:= 3;
+                // BO
+                _RT110:= 15;
+                // SI
+                _RT111:= 31;
+            }
+
+            if(_PS0 == "V 4000")
+            {
+                // 2 - get submarine, 3 - tecnology
+                _RT107:= GetRnd(2,3);
+                _RT103:= GetRnd(1,3);
+                _RT104:= 0;
+                _RT106:= GetRnd(3,5);
+
+                // ID submarine WS
+                _RT109:= 4;
+                // BO
+                _RT110:= 16;
+                // SI
+                _RT111:= 28;
+            }
+
+            if(_PS0 == "V 5000")
+            {
+                // 2 - get submarine, 3 - tecnology
+                _RT107:= GetRnd(2,3);
+                _RT103:= GetRnd(1,3);
+                _RT104:= 0;
+                _RT106:= GetRnd(2,4);
+
+                // ID submarine WS
+                _RT109:= 10;
+                // BO
+                _RT110:= 23;
+                // SI
+                _RT111:= 33;
+            }
+
+            if(_PS0 == "V 6000")
+            {
+                // 2 - get submarine, 3 - tecnology
+                _RT107:= GetRnd(2,3);
+                _RT103:= GetRnd(1,3);
+                _RT104:= 0;
+                _RT106:= GetRnd(1,2);
+
+                // ID submarine WS
+                _RT109:= 38;
+                // BO
+                _RT110:= 39;
+                // SI
+                _RT111:= 40;
+            }
+
+            if(_RT107 == 1)
+            {
+                actStringMess("Few resources have been received " + _inttostr(_RT108));
+                if(_PI11 == CIV_SI)
+                {
+                    ActSetPlRC(_PI10, AIREL_MYSELF, SILICON, 1, _RT108);
+                }
+                else
+                {
+                    ActSetPlRC(_PI10, AIREL_MYSELF, METAL, 1, _RT108);
+                }
+            }
+            if(_RT107 == 2)
+            {
+                // Random CIV
+                actStringMess("Few submarine have been received " + _inttostr(_RT106));
+
+                _RT103:= GetRnd(1,3);
+                if(_RT103 == CIV_WS)
+                {
+                    while(_RT104 < _RT106)
+                    {
+                        ActCreatePlObj(_PI10, AIREL_MYSELF, _RT109, _PI5, _PI6, _PI7, _PI14);
+                        _RT104+=1;
+                    }
+                }
+                if(_RT103 == CIV_BO)
+                {
+                    while(_RT104 < _RT106)
+                    {
+                        ActCreatePlObj(_PI10, AIREL_MYSELF, _RT110, _PI5, _PI6, _PI7, _PI14);
+                        _RT104+=1;
+                    }
+                }
+                if(_RT103 == CIV_SI)
+                {
+                    while(_RT104 < _RT106)
+                    {
+                        ActCreatePlObj(_PI10, AIREL_MYSELF, _RT111, _PI5, _PI6, _PI7, _PI14);
+                        _RT104+=1;
+                    }
+                }
+            }
+
+            if(_RT107 == 3)
+            {
+                if(_PI1 == CIV_WS)
+                {
+                    ActTechSet(_PI10, AIREL_MYSELF, TTECH_WS_TELEPORTATION_TECHNOLOGY);
+                }
+                if(_PI1 == CIV_BO)
+                {
+                    ActTechSet(_PI10, AIREL_MYSELF, TTECH_BO_TELEPORTATION_TECHNOLOGY);
+                }
+                if(_PI1 == CIV_SI)
+                {
+                    ActTechSet(_PI10, AIREL_MYSELF, TTECH_SI_TELEPORTATION_GATE);
+                }
+            }
+
+            actLockEvent();
+        }
+
+        // Del artefact after Unloaded
+        EventArtUnLoaded(TRUE)
+        {
+            ActSetName("Art Del2", _PI15, _PI16, _PI17);
+            ActDelArt(TART_X_BOX, "Art Del2");
+            actLockEvent();
+        }
+
+        Event(getOwnTime()>2)
+        {
+            
+
+            // if(GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_1)>0) 
+            // {
+            //     actStringMess("YOUR LOGO = GREEN");
+            // }
+
+            // if(GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_0)>0){actStringMess("YOUR LOGO = YELLOW");} 
+            // if(GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_3)>0) {actStringMess("YOUR LOGO = RED");}
+            // if(GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_4)>0) {actStringMess("YOUR LOGO = VIOLET");}
+            // if(GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_5)>0) {actStringMess("YOUR LOGO = CYAN");}
+            // if(GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_6)>0) {actStringMess("YOUR LOGO = ORANGE");}
+            // if(GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_7)>0) {actStringMess("YOUR LOGO = BEIGE");}
+
+            // if(GetPlObjT(PLAYER_1, AIREL_MYSELF, CONSTRUCTOR, LOGO_1)>0) {actStringMess("YOUR LOGO = GREEN");}
+            // if(GetPlObjT(PLAYER_1, AIREL_MYSELF, CONSTRUCTOR, LOGO_0)>0) {actStringMess("YOUR LOGO = YELLOW");}
+            // if(GetPlObjT(PLAYER_1, AIREL_MYSELF, CONSTRUCTOR, LOGO_3)>0) {actStringMess("YOUR LOGO = RED");}
+            // if(GetPlObjT(PLAYER_1, AIREL_MYSELF, CONSTRUCTOR, LOGO_4)>0) {actStringMess("YOUR LOGO = VIOLET");}
+            // if(GetPlObjT(PLAYER_1, AIREL_MYSELF, CONSTRUCTOR, LOGO_5)>0) {actStringMess("YOUR LOGO = CYAN");}
+            // if(GetPlObjT(PLAYER_1, AIREL_MYSELF, CONSTRUCTOR, LOGO_6)>0) {actStringMess("YOUR LOGO = ORANGE");}
+            // if(GetPlObjT(PLAYER_1, AIREL_MYSELF, CONSTRUCTOR, LOGO_7)>0) {actStringMess("YOUR LOGO = BEIGE");}
+
+            // actStringMess("LOGO 0 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_0) ));
+            // actStringMess("LOGO 1 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_1) ));
+            // actStringMess("LOGO 2 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_0) ));
+            // actStringMess("LOGO 3 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_3) ));
+            // actStringMess("LOGO 4 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_4) ));
+            // actStringMess("LOGO 5 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_5) ));
+            // actStringMess("LOGO 6 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_6) ));
+            // actStringMess("LOGO 7 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_7) ));
+
+        }
+
+    CloseEvents();
+
+CloseArbiter();
