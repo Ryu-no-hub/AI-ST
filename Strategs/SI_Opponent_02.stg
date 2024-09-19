@@ -113,6 +113,17 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
      ActLockEvent();
   };
 
+  // Gate
+  EventPlObjCreated(_PI3 == GATE)
+  { 
+     _actStringMess("Gate BUILT by player " + GetPlName(_PI10) + " at " + _inttostr(_PI5) + _inttostr(_PI6) + _inttostr(_PI7))
+     //actOnEvent(16);
+
+    actFCmdTeleport(_RT20, 1, 1, 1, _PI5, _PI6, _PI7)
+
+    ActLockEvent();
+  };
+
 
   // Check destroyed
   EventPlObjKilled(_PI3 == VACUUM_BOMB_LAUNCHER || _PI3 == GAS_LASER_SATELLITE_LAUNCHER)
