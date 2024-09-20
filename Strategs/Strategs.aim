@@ -102,6 +102,33 @@ OpenStringTable();
  /*080 S15_Y*/PutString("50");
  /*081 S16_X*/PutString("86");
  /*082 S16_Y*/PutString("50");
+ // WS technology
+ /*083*/PutString("6");
+ /*084*/PutString("17");
+ /*085*/PutString("13");
+ /*086*/PutString("29");
+ /*087*/PutString("5");
+ /*088*/PutString("3");
+ /*089*/PutString("30");
+ /*090*/PutString("22");
+ // BO technology
+ /*091*/PutString("34");
+ /*092*/PutString("42");
+ /*093*/PutString("132");
+ /*094*/PutString("137");
+ /*095*/PutString("130");
+ /*096*/PutString("128");
+ /*097*/PutString("138");
+ /*098*/PutString("53");
+ // SI technology
+ /*099*/PutString("71");
+ /*100*/PutString("69");
+ /*101*/PutString("70");
+ /*102*/PutString("109");
+ /*103*/PutString("108");
+ /*104*/PutString("122");
+ /*105*/PutString("84");
+ /*106*/PutString("91");
 
 CloseStringTable();
 

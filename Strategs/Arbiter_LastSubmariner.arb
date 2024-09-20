@@ -24,6 +24,7 @@ OpenArbiter("LastSubmariner100");
 
         Event(TRUE) 
         {
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, TELESHIELD, 50,50,0);
             _ploop_begin
                 if(GetPlCiv(_pl_)==CIV_WS)//--WS--
                 {
@@ -46,140 +47,24 @@ OpenArbiter("LastSubmariner100");
                 }
             _ploop_end
 
-            // Green
-            if(GetCurrPl() == 1)
+            if(GetPlCiv( GetCurrPl() ) == CIV_WS)
             {
-                if(GetPlCiv( GetCurrPl() ) == CIV_WS)
-                {
-                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SENTINEL);
-                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SENTINEL);
-                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SENTINEL);
-                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SENTINEL);
-                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SENTINEL);
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_WS_ENGINE_UPGRADE, 1);
-
-                }
-                if(GetPlCiv( GetCurrPl() ) == CIV_BO)
-                {
-                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, FIGHTER);
-                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, FIGHTER);
-                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, FIGHTER);
-                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, FIGHTER);
-                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, FIGHTER);
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_BO_ENGINE_UPGRADE, 1);
-                }
-                if(GetPlCiv( GetCurrPl() ) == CIV_SI)
-                {
-                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SHS_SUB);
-                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SHS_SUB);
-                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SHS_SUB);
-                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SHS_SUB);
-                    ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SHS_SUB);
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_SI_UPGRADE_MOVEMENT_LEVEL, 1);
-                }
+                ActTechSet(GetCurrPl(), AIREL_MYSELF, _strtoint(GetStrRes(GetRnd(83,90))), 1);
             }
-            // Yellow
-            if(GetCurrPl() == 2)
+            if(GetPlCiv( GetCurrPl() ) == CIV_BO)
             {
-                if(GetPlCiv( GetCurrPl() ) == CIV_WS)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_WS_MOBILE_REPSUB);
-                }
-                if(GetPlCiv( GetCurrPl() ) == CIV_BO)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_BO_MOBILE_REPAIR_PLATFORM);
-                }
-                if(GetPlCiv( GetCurrPl() ) == CIV_SI)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_SI_MOLECULAR_REPAIR_FACILITY);
-                }
+                ActTechSet(GetCurrPl(), AIREL_MYSELF, _strtoint(GetStrRes(GetRnd(91,98))), 1);
             }
-            // Red
-            if(GetCurrPl() == 3)
+            if(GetPlCiv( GetCurrPl() ) == CIV_SI)
             {
-                if(GetPlCiv( GetCurrPl() ) == CIV_WS)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_WS_TORPEDO_UPGRADE, 1 );
-                }
-                if(GetPlCiv( GetCurrPl() ) == CIV_BO)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_BO_SPLINTER_TORPEDO_TECHNOLOGY );
-                }
-                if(GetPlCiv( GetCurrPl() ) == CIV_SI)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_SI_ENERGY_SHELL, 1 );
-                }
+                ActTechSet(GetCurrPl(), AIREL_MYSELF, _strtoint(GetStrRes(GetRnd(99,106))), 1);
             }
-            // violet
-            if(GetCurrPl() == 4)
-            {
-                if(GetPlCiv( GetCurrPl() ) == CIV_WS)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, );
-                }
-                if(GetPlCiv( GetCurrPl() ) == CIV_BO)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_BO_STEALTH_SCOUT_TECHNOLOGY);
-                }
-                if(GetPlCiv( GetCurrPl() ) == CIV_SI)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_SI_HIGH_RANGE_EXPLORER);
-                }
-            }
-            // cyan
-            if(GetCurrPl() == 5)
-            {
-                if(GetPlCiv( GetCurrPl() ) == CIV_WS)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_WS_DISPERSER_SCREEN_TECHNOLOGY);
-                }
-                if(GetPlCiv( GetCurrPl() ) == CIV_BO)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_BO_RESEARCH_ENERGY_SUPPLY);
-                }
-                if(GetPlCiv( GetCurrPl() ) == CIV_SI)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_SI_UPGRADE_REGENERATION_SPEED);
-                }
-            }
-            // orange
-            if(GetCurrPl() == 6)
-            {
-                if(GetPlCiv( GetCurrPl() ) == CIV_WS)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_WS_UPGRADE_MINE_PRODUCTIVITY);
-                }
-                if(GetPlCiv( GetCurrPl() ) == CIV_BO)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_BO_UPGRADE_MINE_PRODUCTIVITY);
-                }
-                if(GetPlCiv( GetCurrPl() ) == CIV_SI)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_SI_UPGRADE_CORIUM_COLLECTOR);
-                }
-            }
-            // beige
-            if(GetCurrPl() == 7)
-            {
-                if(GetPlCiv( GetCurrPl() ) == CIV_WS)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_WS_UPGRADE_SONAR_RANGE);
-                }
-                if(GetPlCiv( GetCurrPl() ) == CIV_BO)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_BO_LONG_RANGE_ASDIC);
-                }
-                if(GetPlCiv( GetCurrPl() ) == CIV_SI)
-                {
-                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_SI_LOCATOR);
-                }
-            }
-
+ 
             // Off
-            actOffEvent(10);
-            actOffEvent(20);
-            actOffEvent(30); 
-            actOffEvent(100);
+            //actOffEvent(10);
+            //actOffEvent(20);
+            //actOffEvent(30); 
+            //actOffEvent(100);
             /*
             ActCreateDest(0, LOGO_0, 27, 87, 0, "name", "text", VEFF_TELEPORT);
             if(IsDestExist("name"))
@@ -189,7 +74,7 @@ OpenArbiter("LastSubmariner100");
             actStringMess("Dest cont = " + _inttostr(GetDest()));
             */
         }
-
+/*
         Event(getOwnTime()>10)
         { 
             actOnEvent(IsTeamGame() ? 20 : 10);
@@ -268,7 +153,7 @@ OpenArbiter("LastSubmariner100");
         Event(getOwnTime()>1)
         {
             _RT100:= 27;
-            while(_RT100 <= 74)
+            while(_RT100 <= 82)
             {
                 // Type Art - L, M, S, XL
                 _RT101:= GetRnd(1,4);
@@ -385,6 +270,45 @@ OpenArbiter("LastSubmariner100");
                 _RT100+=2;
             }
         }/**/
+
+        // Охрана центра
+        Event(getOwnTime()> 30)
+        {
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, PARALYSIS_PROBE, 48,62,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, PARALYSIS_PROBE, 49,62,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, PARALYSIS_PROBE, 50,62,1, LOGO_0);
+
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, PARALYSIS_PROBE, 51,62,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, PARALYSIS_PROBE, 52,62,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, PARALYSIS_PROBE, 53,62,1, LOGO_0);
+
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, WS_FLAGSHIP, 48,63,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, WS_FLAGSHIP, 49,63,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, WS_FLAGSHIP, 50,63,1, LOGO_0);
+
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, WS_FLAGSHIP, 51,62,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, WS_FLAGSHIP, 52,62,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, WS_FLAGSHIP, 53,62,1, LOGO_0);
+
+            //
+
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, AVENGER, 48,37,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, AVENGER, 49,37,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, AVENGER, 50,37,1, LOGO_0);
+
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, AVENGER, 51,37,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, AVENGER, 52,37,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, AVENGER, 53,37,1, LOGO_0);
+
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, SI_FLAGSHIP, 48,36,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, SI_FLAGSHIP, 49,36,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, SI_FLAGSHIP, 50,36,1, LOGO_0);
+
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, SI_FLAGSHIP, 51,36,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, SI_FLAGSHIP, 52,36,1, LOGO_0);
+            ActCreatePlObj(PLAYER_0, AIREL_MYSELF, SI_FLAGSHIP, 53,36,1, LOGO_0);
+
+        }
 
         EventArtLoaded(TRUE)
         {

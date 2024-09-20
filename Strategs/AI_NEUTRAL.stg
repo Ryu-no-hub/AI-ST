@@ -25,14 +25,14 @@ OpenStrateg(_full_name, CIV_WS, _short_name, 0x00000003);
     ActTechSetAll(PLAYER_0, AIREL_MYSELF);
   };
 
-  Event(getOwnTime()%15 == 0)
-  {
-    if(GetPlObjT(PLAYER_1, AIREL_MYSELF, TOBJ_UNDEFINED) == 0 || GetPlObjT(PLAYER_2, AIREL_MYSELF, TOBJ_UNDEFINED) == 0)
-    {
-      ActDelPlObjEx(PLAYER_0, AIREL_MYSELF, AITRG_ALL);
-    }
-    actLockEvent();
-  }
+  // Event(getOwnTime()%15 == 0)
+  // {
+  //   if(GetPlObjT(PLAYER_1, AIREL_MYSELF, UNDEFINED) == 0 || GetPlObjT(PLAYER_2, AIREL_MYSELF, UNDEFINED) == 0)
+  //   {
+  //     ActDelPlObjEx(PLAYER_0, AIREL_MYSELF, AITRG_ALL);
+  //   }
+  //   actLockEvent();
+  // }
 
  CloseEvents();
 
