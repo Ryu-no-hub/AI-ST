@@ -56,6 +56,8 @@ OpenArbiter("LastSubmariner100");
                     ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SENTINEL);
                     ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SENTINEL);
                     ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SENTINEL);
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_WS_ENGINE_UPGRADE, 1);
+
                 }
                 if(GetPlCiv( GetCurrPl() ) == CIV_BO)
                 {
@@ -64,6 +66,7 @@ OpenArbiter("LastSubmariner100");
                     ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, FIGHTER);
                     ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, FIGHTER);
                     ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, FIGHTER);
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_BO_ENGINE_UPGRADE, 1);
                 }
                 if(GetPlCiv( GetCurrPl() ) == CIV_SI)
                 {
@@ -72,44 +75,121 @@ OpenArbiter("LastSubmariner100");
                     ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SHS_SUB);
                     ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SHS_SUB);
                     ActCreatePlObj(GetCurrPl(), AIREL_MYSELF, SHS_SUB);
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_SI_UPGRADE_MOVEMENT_LEVEL, 1);
                 }
             }
             // Yellow
-            if(GetCurrPl() == 1)
-            {}
+            if(GetCurrPl() == 2)
+            {
+                if(GetPlCiv( GetCurrPl() ) == CIV_WS)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_WS_MOBILE_REPSUB);
+                }
+                if(GetPlCiv( GetCurrPl() ) == CIV_BO)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_BO_MOBILE_REPAIR_PLATFORM);
+                }
+                if(GetPlCiv( GetCurrPl() ) == CIV_SI)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_SI_MOLECULAR_REPAIR_FACILITY);
+                }
+            }
             // Red
-            if(GetCurrPl() == 1)
-            {}
+            if(GetCurrPl() == 3)
+            {
+                if(GetPlCiv( GetCurrPl() ) == CIV_WS)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_WS_TORPEDO_UPGRADE, 1 );
+                }
+                if(GetPlCiv( GetCurrPl() ) == CIV_BO)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_BO_SPLINTER_TORPEDO_TECHNOLOGY );
+                }
+                if(GetPlCiv( GetCurrPl() ) == CIV_SI)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_SI_ENERGY_SHELL, 1 );
+                }
+            }
             // violet
-            if(GetCurrPl() == 1)
-            {}
+            if(GetCurrPl() == 4)
+            {
+                if(GetPlCiv( GetCurrPl() ) == CIV_WS)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, );
+                }
+                if(GetPlCiv( GetCurrPl() ) == CIV_BO)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_BO_STEALTH_SCOUT_TECHNOLOGY);
+                }
+                if(GetPlCiv( GetCurrPl() ) == CIV_SI)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_SI_HIGH_RANGE_EXPLORER);
+                }
+            }
             // cyan
-            if(GetCurrPl() == 1)
-            {}
+            if(GetCurrPl() == 5)
+            {
+                if(GetPlCiv( GetCurrPl() ) == CIV_WS)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_WS_DISPERSER_SCREEN_TECHNOLOGY);
+                }
+                if(GetPlCiv( GetCurrPl() ) == CIV_BO)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_BO_RESEARCH_ENERGY_SUPPLY);
+                }
+                if(GetPlCiv( GetCurrPl() ) == CIV_SI)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_SI_UPGRADE_REGENERATION_SPEED);
+                }
+            }
             // orange
-            if(GetCurrPl() == 1)
-            {}
+            if(GetCurrPl() == 6)
+            {
+                if(GetPlCiv( GetCurrPl() ) == CIV_WS)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_WS_UPGRADE_MINE_PRODUCTIVITY);
+                }
+                if(GetPlCiv( GetCurrPl() ) == CIV_BO)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_BO_UPGRADE_MINE_PRODUCTIVITY);
+                }
+                if(GetPlCiv( GetCurrPl() ) == CIV_SI)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_SI_UPGRADE_CORIUM_COLLECTOR);
+                }
+            }
             // beige
-            if(GetCurrPl() == 1)
-            {}
+            if(GetCurrPl() == 7)
+            {
+                if(GetPlCiv( GetCurrPl() ) == CIV_WS)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_WS_UPGRADE_SONAR_RANGE);
+                }
+                if(GetPlCiv( GetCurrPl() ) == CIV_BO)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_BO_LONG_RANGE_ASDIC);
+                }
+                if(GetPlCiv( GetCurrPl() ) == CIV_SI)
+                {
+                    ActTechSet(GetCurrPl(), AIREL_MYSELF, TTECH_SI_LOCATOR);
+                }
+            }
 
             // Off
-            //actOffEvent(10);
-            //actOffEvent(20);
-            //actOffEvent(30); 
-            //actOffEvent(100);
-
-            //actStringMess("text");
+            actOffEvent(10);
+            actOffEvent(20);
+            actOffEvent(30); 
+            actOffEvent(100);
+            /*
             ActCreateDest(0, LOGO_0, 27, 87, 0, "name", "text", VEFF_TELEPORT);
-
             if(IsDestExist("name"))
             {
                 actStringMess("Dest with name exist");
             }
-
             actStringMess("Dest cont = " + _inttostr(GetDest()));
+            */
         }
-        /*
+
         Event(getOwnTime()>10)
         { 
             actOnEvent(IsTeamGame() ? 20 : 10);
@@ -174,7 +254,7 @@ OpenArbiter("LastSubmariner100");
         }/**/
 
         // создание на карте сундуков с кориумом
-        Event(getOwnTime()>1)
+        Event(getOwnTime()>5)
         {
             if(GetRCCont(PLAYER_0, AIREL_MYSELF, CORIUM) < COUNT_CHEST)
             {
@@ -187,9 +267,8 @@ OpenArbiter("LastSubmariner100");
         // генерирует артефакты и субмарины ИИ в определнных координатах из String Table
         Event(getOwnTime()>1)
         {
-            // 26 - 73
-            _RT100:= 26;
-            while(_RT100 <= 73)
+            _RT100:= 27;
+            while(_RT100 <= 74)
             {
                 // Type Art - L, M, S, XL
                 _RT101:= GetRnd(1,4);
@@ -208,8 +287,6 @@ OpenArbiter("LastSubmariner100");
                                   "V " + _inttostr(_RT102), 
                                   "Art Val " + _inttostr(_RT102), 
                                   VEFF_TELEPORT);
-                    
-                    //ActCreatePlObj(who, who_rel, tobj[, x, y, z, logo, name, nflt, life, eff, par0, par1, ...]);
                 }
                 // M
                 if(GetArt(TART_X_BOX, "V " + _inttostr(_RT102)) <= 8 && _RT101 == 2)
@@ -411,6 +488,12 @@ OpenArbiter("LastSubmariner100");
                 _RT111:= 40;
             }
 
+            if(_PS0 == "ALL_TTECH")
+            {
+                _RT107:= 0;
+                ActTechSetAll(_PI10, AIREL_MYSELF);
+            }
+
             if(_RT107 == 1)
             {
                 actStringMess("Few resources have been received " + _inttostr(_RT108));
@@ -457,15 +540,15 @@ OpenArbiter("LastSubmariner100");
 
             if(_RT107 == 3)
             {
-                if(_PI1 == CIV_WS)
+                if(_PI11 == CIV_WS)
                 {
                     ActTechSet(_PI10, AIREL_MYSELF, TTECH_WS_TELEPORTATION_TECHNOLOGY);
                 }
-                if(_PI1 == CIV_BO)
+                if(_PI11 == CIV_BO)
                 {
                     ActTechSet(_PI10, AIREL_MYSELF, TTECH_BO_TELEPORTATION_TECHNOLOGY);
                 }
-                if(_PI1 == CIV_SI)
+                if(_PI11 == CIV_SI)
                 {
                     ActTechSet(_PI10, AIREL_MYSELF, TTECH_SI_TELEPORTATION_GATE);
                 }
@@ -480,41 +563,6 @@ OpenArbiter("LastSubmariner100");
             ActSetName("Art Del2", _PI15, _PI16, _PI17);
             ActDelArt(TART_X_BOX, "Art Del2");
             actLockEvent();
-        }
-
-        Event(getOwnTime()>2)
-        {
-            
-
-            // if(GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_1)>0) 
-            // {
-            //     actStringMess("YOUR LOGO = GREEN");
-            // }
-
-            // if(GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_0)>0){actStringMess("YOUR LOGO = YELLOW");} 
-            // if(GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_3)>0) {actStringMess("YOUR LOGO = RED");}
-            // if(GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_4)>0) {actStringMess("YOUR LOGO = VIOLET");}
-            // if(GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_5)>0) {actStringMess("YOUR LOGO = CYAN");}
-            // if(GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_6)>0) {actStringMess("YOUR LOGO = ORANGE");}
-            // if(GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_7)>0) {actStringMess("YOUR LOGO = BEIGE");}
-
-            // if(GetPlObjT(PLAYER_1, AIREL_MYSELF, CONSTRUCTOR, LOGO_1)>0) {actStringMess("YOUR LOGO = GREEN");}
-            // if(GetPlObjT(PLAYER_1, AIREL_MYSELF, CONSTRUCTOR, LOGO_0)>0) {actStringMess("YOUR LOGO = YELLOW");}
-            // if(GetPlObjT(PLAYER_1, AIREL_MYSELF, CONSTRUCTOR, LOGO_3)>0) {actStringMess("YOUR LOGO = RED");}
-            // if(GetPlObjT(PLAYER_1, AIREL_MYSELF, CONSTRUCTOR, LOGO_4)>0) {actStringMess("YOUR LOGO = VIOLET");}
-            // if(GetPlObjT(PLAYER_1, AIREL_MYSELF, CONSTRUCTOR, LOGO_5)>0) {actStringMess("YOUR LOGO = CYAN");}
-            // if(GetPlObjT(PLAYER_1, AIREL_MYSELF, CONSTRUCTOR, LOGO_6)>0) {actStringMess("YOUR LOGO = ORANGE");}
-            // if(GetPlObjT(PLAYER_1, AIREL_MYSELF, CONSTRUCTOR, LOGO_7)>0) {actStringMess("YOUR LOGO = BEIGE");}
-
-            // actStringMess("LOGO 0 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_0) ));
-            // actStringMess("LOGO 1 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_1) ));
-            // actStringMess("LOGO 2 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_0) ));
-            // actStringMess("LOGO 3 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_3) ));
-            // actStringMess("LOGO 4 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_4) ));
-            // actStringMess("LOGO 5 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_5) ));
-            // actStringMess("LOGO 6 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_6) ));
-            // actStringMess("LOGO 7 = " + _inttostr( GetPlObjT(PLAYER_0, AIREL_MYSELF, CONSTRUCTOR, LOGO_7) ));
-
         }
 
     CloseEvents();

@@ -94,6 +94,15 @@ OpenStringTable();
  /*073 S12_X*/PutString("81");
  /*074 S12_Y*/PutString("81");
 
+ /*075 S13_X*/PutString("12");
+ /*076 S13_Y*/PutString("50");
+ /*077 S14_X*/PutString("25");
+ /*078 S14_Y*/PutString("50");
+ /*079 S15_X*/PutString("73");
+ /*080 S15_Y*/PutString("50");
+ /*081 S16_X*/PutString("86");
+ /*082 S16_Y*/PutString("50");
+
 CloseStringTable();
 
 
