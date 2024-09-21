@@ -16,6 +16,7 @@ include<[_inc_path]\Strategs\CONST_LastSubmariner.dfn>;
 */
 OpenArbiter("LastSubmariner100");
 //test 11111
+//test2
  
     // Events 
     OpenEvents();
