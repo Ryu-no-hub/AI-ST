@@ -15,7 +15,7 @@ include<[_inc_path]\Strategs\CONST_LastSubmariner.dfn>;
     _RT111 - ИД субмарины SI в награде
 */
 OpenArbiter("LastSubmariner100");
-//test
+//test 11111
  
     // Events 
     OpenEvents();
