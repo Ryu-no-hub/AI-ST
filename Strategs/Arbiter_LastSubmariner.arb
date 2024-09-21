@@ -15,10 +15,6 @@ include<[_inc_path]\Strategs\CONST_LastSubmariner.dfn>;
     _RT111 - ИД субмарины SI в награде
 */
 OpenArbiter("LastSubmariner100");
-//test 11111
-//test2
- 
-    // Events 
     OpenEvents();
 
         s_win    = 14;
@@ -151,9 +147,20 @@ OpenArbiter("LastSubmariner100");
             }
         }
 
+        EventPlObjCreated(TRUE){
+            _actStringMess('created')
+        }
+
         // генерирует артефакты и субмарины ИИ в определнных координатах из String Table
-        Event(getOwnTime()>1)
+        Event(TRUE)
         {
+            //_ploop_begin
+                //if(IsPlObjExist(_pl_, GetStrRes(26), 24, 25, 26, 27))
+                //{
+//
+                //}
+            //_ploop_end
+
             _RT100:= 27;
             while(_RT100 <= 82)
             {
@@ -492,5 +499,4 @@ OpenArbiter("LastSubmariner100");
         }
 
     CloseEvents();
-
 CloseArbiter();
