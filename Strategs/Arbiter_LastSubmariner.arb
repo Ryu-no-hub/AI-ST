@@ -125,32 +125,45 @@ OpenArbiter("LastSubmariner100");
             actLockEvent();
         }
 
-        //EventPlObjCreated(TRUE)
-        //{
-            //if(IsPlObjExist(_PI10, "Research", 24, 25, 26, 27)){
-            //_actStringMess("Research center found")}
-            //else {_actStringMess("Research center not found")}
-            //actLockEvent();
-        //}
+        EventPlObjCreated(_PI3==TRADECENTER || _PI3==MARKET || _PI3==ENERGY_CONVERTER)
+        {
+            ActSetName("Market", _PI5, _PI6, _PI7);
+            actLockEvent();
+        }
 
         EventArtLoaded(TRUE)
         {
-            _actStringMess("Artefact loaded")
+            //ActSetName("Active platf", _PI15, _PI16, _PI17);
+            //_actStringMess("Artefact loaded")
+
+            //if(IsPlObjExist(_PI10, "Market", 24, 25, 26, 27))
             if(IsPlObjExist(_PI10, "Research", 24, 25, 26, 27))
             {
-                ActObjSelectM(_PI10, AIREL_MYSELF, AITRG_BOATSUPPLY, _PI15, _PI16, _PI17, _PI15, _PI16, _PI17);
+                ActObjSelectM(_PI10, AIREL_MYSELF, AITRG_BOATSUPPLY, _PI14, _PI15, _PI16, _PI17, _PI15, _PI16, _PI17);
                 ActCreateFleet(_PI10, AIREL_MYSELF, "platform", _PI11, AISF_NONE);
-                ActFCmdMove(_PI10, AIREL_MYSELF, GetFleetNum(_PI10, "platform"), _RT24, _RT25, _RT26 + 1);
+                //ActFCmdMove(_PI10, AIREL_MYSELF, GetFleetNum(_PI10, "platform"), _RT24, _RT25, _RT26 + 1);
+                ActFCmdUnLoad(_PI10, AIREL_MYSELF, GetFleetNum(_PI10, "platform"), _RT24, _RT25, _RT26 + 1);
+
+                //ActFCmdUnLoad(_PI10, AIREL_MYSELF, GetFleetNum(_PI10, "platform"), _RT24, _RT25, _RT26, 1);
             }
+            actLockEvent();
+        }
+
+        EventFCmdDone(TRUE)
+        {
+            //_actStringMess("cmd done: " + _inttostr(_PI0) + " " + _inttostr(_PI3) + " " + _inttostr(_PI4) + " " + _PS0)
+            //ActFCmdUnLoad(_PI0, AIREL_MYSELF, GetFleetNum(_PI10, "platform"), x, y, z[, mode, time]);
             actLockEvent();
         }
 
         // Del artefact after Unloaded
         EventArtUnLoaded(TRUE)
         {
-            //ActSetName("Art Del", _PI15, _PI16, _PI17); - неправильно, координаты выгрузившего объекта
-            ActSetName("Art Del", _PI5, _PI6, _PI7);
-            ActDelArt(TART_UNDEFINED, "Art Del", 0, 0, 0, -1, -1, -1, VEFF_TELEPORT);
+            //ActSetName("Art Del", _PI5, _PI6, _PI7);
+            //ActDelArt(TART_UNDEFINED, "Art Del");
+            //ActDelArt(TART_UNDEFINED, "", _PI5, _PI6, _PI7, _PI5, _PI6, _PI7, VEFF_TELEPORT);
+            //ActDelArt(TART_X_BOX, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_TELEPORT);
+            ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_DISSOLVE);
             actLockEvent();
         }
 
