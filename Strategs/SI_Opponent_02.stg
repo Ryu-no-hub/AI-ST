@@ -41,8 +41,19 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
     _RT23 := getFleetNum("SI Raider 01", "SI Main Base");
     _RT30 := getFleetNum("SI Base", "SI Main Base");
     _RT31 := getFleetNum("SI Corium Transport", "SI Main Base");
+    _RT40 := getFleetNum("SI Base Factory", "SI Main Base");
     _RT62 := 0; // satellite weapons amount
     _RT63 := 0; // vacuum bombs amount
+
+    if(GetPlObjCost(SILICON, PROTOPLASM_GENERATOR, CIV_SI) < 3000)
+    {actFParPutInStaff(_RT40, PROTOPLASM_GENERATOR, UNDEFINED, UNDEFINED, 47);}
+    if(GetPlObjCost(SILICON, MOBILITY_HUB_MODULE, CIV_SI) < 3000)
+    {actFParPutInStaff(_RT30, MOBILITY_HUB_MODULE, UNDEFINED, UNDEFINED, 45);}
+
+    _RT129 := GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80;
+    _RT132 := (_RT129 - 70) / 10
+    if (_RT129)
+
   };
 /*
   //
@@ -103,26 +114,22 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
   { 
      //_actStringMess("MASS DESTRUCTION WEAPON BUILT by player " + GetPlName(_PI10))
      actOnEvent(11);
-
     if(isFleetCanProduce(_RT30, WEAPON_VACUUM_BOMB))
       {
         //_actStringMess("Start vacuum bomb production")
         actFCmdProduction(_RT30, WEAPON_VACUUM_BOMB);
       }
-
      ActLockEvent();
   };
 
   // Gate
-  EventPlObjCreated(_PI3 == GATE)
-  { 
-     _actStringMess("Gate BUILT by player " + GetPlName(_PI10) + " at " + _inttostr(_PI5) + _inttostr(_PI6) + _inttostr(_PI7))
-     //actOnEvent(16);
-
-    actFCmdTeleport(_RT20, 1, 1, 1, _PI5, _PI6, _PI7)
-
-    ActLockEvent();
-  };
+  //EventPlObjCreated(_PI3 == GATE)
+  //{ 
+     //_actStringMess("Gate BUILT by player " + GetPlName(_PI10) + " at " + _inttostr(_PI5) + _inttostr(_PI6) + _inttostr(_PI7))
+     ////actOnEvent(16);
+    //actFCmdTeleport(_RT20, 1, 1, 1, _PI5, _PI6, _PI7)
+    //ActLockEvent();
+  //};
 
 
   // Check destroyed
@@ -166,7 +173,6 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 
 
   // Search and launch
-  //Event(getOwnTime()%2 == 1, 12)
   Event(TRUE, 12)
   {
     _RT44 := GetRnd(PLAYER_0, PLAYER_7);
