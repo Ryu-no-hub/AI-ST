@@ -119,17 +119,38 @@ OpenArbiter("LastSubmariner100");
             _actStringMess("Artefacts on map: " + _inttostr(GetArt()))
         }
 
+        EventPlObjCreated(_PI3==TECHCENTER || _PI3==RESEARCH_LABORATORY || _PI3==COMMAND_HUB)
+        {
+            ActSetName("Research", _PI5, _PI6, _PI7);
+            actLockEvent();
+        }
+
+        //EventPlObjCreated(TRUE)
+        //{
+            //if(IsPlObjExist(_PI10, "Research", 24, 25, 26, 27)){
+            //_actStringMess("Research center found")}
+            //else {_actStringMess("Research center not found")}
+            //actLockEvent();
+        //}
 
         EventArtLoaded(TRUE)
         {
+            _actStringMess("Artefact loaded")
+            if(IsPlObjExist(_PI10, "Research", 24, 25, 26, 27))
+            {
+                ActObjSelectM(_PI10, AIREL_MYSELF, AITRG_BOATSUPPLY, _PI15, _PI16, _PI17, _PI15, _PI16, _PI17);
+                ActCreateFleet(_PI10, AIREL_MYSELF, "platform", _PI11, AISF_NONE);
+                ActFCmdMove(_PI10, AIREL_MYSELF, GetFleetNum(_PI10, "platform"), _RT24, _RT25, _RT26 + 1);
+            }
             actLockEvent();
         }
 
         // Del artefact after Unloaded
         EventArtUnLoaded(TRUE)
         {
-            ActSetName("Art Del", _PI15, _PI16, _PI17);
-            ActDelArt(TART_X_BOX, "Art Del", 0, 0, 0, -1, -1, -1, VEFF_TELEPORT);
+            //ActSetName("Art Del", _PI15, _PI16, _PI17); - неправильно, координаты выгрузившего объекта
+            ActSetName("Art Del", _PI5, _PI6, _PI7);
+            ActDelArt(TART_UNDEFINED, "Art Del", 0, 0, 0, -1, -1, -1, VEFF_TELEPORT);
             actLockEvent();
         }
 
