@@ -339,7 +339,7 @@ OpenArbiter("LastSubmariner100");
 //
 //                _RT100+=2;
 //            }
-        }
+//        }
 
         // Охрана центра
         Event(getOwnTime()> 30)
