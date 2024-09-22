@@ -116,18 +116,20 @@ OpenArbiter("LastSubmariner100");
             _actStringMess("Artefacts on map: " + _inttostr(GetArt()))
         }
 
+        // Rename
         EventPlObjCreated(_PI3==TECHCENTER || _PI3==RESEARCH_LABORATORY || _PI3==COMMAND_HUB)
         {
             ActSetName("Research", _PI5, _PI6, _PI7);
             actLockEvent();
         }
-
         EventPlObjCreated(_PI3==TRADECENTER || _PI3==MARKET || _PI3==ENERGY_CONVERTER)
         {
             ActSetName("Market", _PI5, _PI6, _PI7);
             actLockEvent();
         }
 
+
+        // Loaded, automate delivery
         EventArtLoaded(TRUE)
         {
             if(IsPlObjExist(_PI10, "Research", 24, 25, 26, 27))
@@ -139,7 +141,7 @@ OpenArbiter("LastSubmariner100");
             actLockEvent();
         }
 
-        // Del artefact after Unloaded
+        // Dissolve unloaded artefact
         EventArtUnLoaded(TRUE)
         {
             ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_DISSOLVE);
