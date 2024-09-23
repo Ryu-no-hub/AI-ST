@@ -51,8 +51,8 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
     {actFParPutInStaff(_RT30, MOBILITY_HUB_MODULE, UNDEFINED, UNDEFINED, 45);}
 
     _RT129 := GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80;
-    _RT132 := (_RT129 - 70) / 10
-    if (_RT129)
+    _RT132 := (_RT129 - 70) / 10;
+    //if (_RT129)
 
   };
 /*

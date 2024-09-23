@@ -22,6 +22,7 @@ OpenArbiter("LastSubmariner100");
 
         s_win    = 14;
         s_defeat = 15;
+        artefacts_per_player = 10;
         ofst = 20;
 
         Event(TRUE) 
@@ -47,6 +48,7 @@ OpenArbiter("LastSubmariner100");
                     }
                 }
             _ploop_end
+            actOffEvent(20);
         }
 
         // создание артефактов
@@ -64,9 +66,9 @@ OpenArbiter("LastSubmariner100");
                     if(_pl_==PLAYER_5){_RT122:=_RT24; _RT123:=_RT25;}
                     if(_pl_==PLAYER_6){_RT124:=_RT24; _RT125:=_RT25;}
                     if(_pl_==PLAYER_7){_RT126:=_RT24; _RT127:=_RT25;}
-                    _actStringMess(_inttostr(_RT24) + " " + _inttostr(_RT25))
+                    //_actStringMess(_inttostr(_RT24) + " " + _inttostr(_RT25))
                 }
-                _RT128 += 4;
+                _RT128 += artefacts_per_player;
             _ploop_end
 
 
@@ -141,12 +143,41 @@ OpenArbiter("LastSubmariner100");
             actLockEvent();
         }
 
-        // Dissolve unloaded artefact
+        // Dissolve unloaded artefact near RC
         EventArtUnLoaded(TRUE)
         {
-            ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_DISSOLVE);
+            if(IsPlObjExist(_PI10, "Research", 24, 25, 26, 27))
+            {
+                _RT27 := _PI15 + _PI16 + _PI17 - _RT24 - _RT25 - _RT26;
+                if((_RT27 < 0 && _RT27 > -5) || (_RT27 > 0 && _RT27 < 5))
+                {
+                    if(_PI1==CIV_SI) {
+                        _RT66 := VEFF_TELEPORT;
+                        _RT67 := 1;
+                        ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_DISSOLVE);
+                    }
+                    else {_RT66 := VEFF_DISSOLVE; _RT67 := 2;}
+                    
+                    ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, _RT66);
+                    
+                    _RT50 := GetTime();
+                    _RT55 := _PI5;
+                    _RT56 := _PI6;
+                    _RT57 := _PI7;
+                    actOnEvent(20);
+                }
+            }
             actLockEvent();
         }
+
+        // Really delete artefact
+        Event(GetTime() - _RT50 > _RT67, 20)
+        {
+            ActDelArt(TART_UNDEFINED, "", _RT55, _RT56, _RT57, _RT55, _RT56, _RT57, VEFF_NONE);
+            actStringMess("Artefacts remaining: " + _inttostr(GetArt()-1))
+        }
+
+        // краш в случае одновременной доставки
 
     CloseEvents();
 CloseArbiter();
