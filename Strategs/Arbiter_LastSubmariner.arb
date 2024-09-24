@@ -23,6 +23,7 @@ OpenArbiter("LastSubmariner100");
         s_win    = 14;
         s_defeat = 15;
         ofst = 20;
+        Research_Build = "Research";
 
         Event(TRUE) 
         {
@@ -117,7 +118,7 @@ OpenArbiter("LastSubmariner100");
 
         EventPlObjCreated(_PI3==TECHCENTER || _PI3==RESEARCH_LABORATORY || _PI3==COMMAND_HUB)
         {
-            ActSetName("Research", _PI5, _PI6, _PI7);
+            ActSetName(Research_Build, _PI5, _PI6, _PI7);
             actLockEvent();
         }
 
@@ -129,7 +130,7 @@ OpenArbiter("LastSubmariner100");
 
         EventArtLoaded(TRUE)
         {
-            if(IsPlObjExist(_PI10, "Research", 24, 25, 26, 27))
+            if(IsPlObjExist(_PI10, Research_Build, 24, 25, 26, 27))
             {
                 ActObjSelectM(_PI10, AIREL_MYSELF, AITRG_BOATSUPPLY, _PI14, _PI15, _PI16, _PI17, _PI15, _PI16, _PI17);
                 ActCreateFleet(_PI10, AIREL_MYSELF, "platform", _PI11, AISF_NONE);
@@ -141,100 +142,66 @@ OpenArbiter("LastSubmariner100");
         // Del artefact after Unloaded
         EventArtUnLoaded(TRUE)
         {
-
-            _actStringMess("Coord Art " + _inttostr(_PI5) + "-" + _inttostr(_PI6) + "-" + _inttostr(_PI7));
-            _actStringMess("Coord Plat " + _inttostr(_PI15) + "-" + _inttostr(_PI16) + "-" + _inttostr(_PI17));
-
-            // 1 сравнить координаты артефакта с координатами тех центор игрока
-
             // перебираем у каждого игрока все построенные лаборатории
             /**/
             _ploop_begin
                 _RT130:= 1;
-                while(_RT130 <= GetPlObjT( _pl_, AIREL_MYSELF, TECHCENTER))
+            
+                if(GetPlCiv(_pl_)==CIV_WS){ _RT131:=  GetPlObjT( _pl_, AIREL_MYSELF, TECHCENTER); }
+                if(GetPlCiv(_pl_)==CIV_BO){ _RT131:=  GetPlObjT( _pl_, AIREL_MYSELF, RESEARCH_LABORATORY); }
+                if(GetPlCiv(_pl_)==CIV_SI){ _RT131:=  GetPlObjT( _pl_, AIREL_MYSELF, COMMAND_HUB); }
+
+                while( _RT130 <= _RT131 )
                 {
-                    if(IsPlObjExist(_pl_, "TECHCENTER"+_inttostr(_RT130), 24, 25, 26, 27))
+                    if(IsPlObjExist(_pl_, Research_Build+_inttostr(_RT130), 24, 25, 26, 27))
                     {
                         if( GetArt(TART_X_BOX, "", _RT24-1, _RT25-1, _RT26, 5, 5, 4) > 0 )
                         {
-                            _actStringMess("Art recive");
+                            // выдаем случайный грейд
+                            _actStringMess("Art delivery");
+                            if(GetPlCiv(_pl_)==CIV_WS)
+                            {
+                                ActTechSet(_pl_, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(27,34) )) );
+                            }
+                            if(GetPlCiv(_pl_)==CIV_BO)
+                            {
+                                ActTechSet(_pl_, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(35,43) )) );
+                            }
+                            if(GetPlCiv(_pl_)==CIV_SI)
+                            {
+                                ActTechSet(_pl_, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(44,51) )) );
+                            }
+                            ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_DISSOLVE);
                         }
                     }
                     _RT130+=1;
                 }
-
-                while(_RT130 <= GetPlObjT( _pl_, AIREL_MYSELF, RESEARCH_LABORATORY))
-                {
-                    if(IsPlObjExist(_pl_, "LABORATORY"+_inttostr(_RT130), 24, 25, 26, 27))
-                    {
-                        if( GetArt(TART_X_BOX, "", _RT24-1, _RT25-1, _RT26, 5, 5, 4) > 0 )
-                        {
-                            _actStringMess("Art recive");
-                        }
-                    }
-                    _RT130+=1;
-                }                
-
-                while(_RT130 <= GetPlObjT( _pl_, AIREL_MYSELF, COMMAND_HUB))
-                {
-                    if(IsPlObjExist(_pl_, "COMMAND_HUB"+_inttostr(_RT130), 24, 25, 26, 27))
-                    {
-                        if( GetArt(TART_X_BOX, "", _RT24-1, _RT25-1, _RT26, 5, 5, 4) > 0 )
-                        {
-                            _actStringMess("Art recive");
-                        }
-                    }
-                    _RT130+=1;
-                } 
             _ploop_end
-
-            ActSetName("Art Del1", _PI5, _PI6, _PI7);
-            ActSetName("Art Del2", _PI15, _PI16, _PI17);
-            ActDelArt(TART_X_BOX, "Art Del2", _PI5, _PI6, _PI7, 1, 1, 1, VEFF_TELEPORT);
-            ActDelArt(TART_X_BOX, "Art Del2", _PI15, _PI16, _PI17, 1, 1, 2, VEFF_TELEPORT);
             actLockEvent();
         }
 
-        // Даем имя для иссл. центов Акул
-        EventPlObjCreated(_PI3 == TECHCENTER && _PI1 == CIV_WS)
-        {
-            ActSetName("TECHCENTER", _PI5, _PI6, _PI7);
-            actLockEvent();
-        }
-        // Даем имя для иссл. центов Осьминогов
-        EventPlObjCreated(_PI3 == RESEARCH_LABORATORY && _PI1 == CIV_BO)
-        {
-            ActSetName("LABORATORY", _PI5, _PI6, _PI7);
-            actLockEvent();
-        }
-        // Даем имя для иссл. центов Силикойдов
-        EventPlObjCreated(_PI3 == COMMAND_HUB)
-        {
-            ActSetName("COMMAND_HUB", _PI5, _PI6, _PI7);
-            actLockEvent();
-        }
         // для переименовывания исс. центров
         Event(getOwnTime()%45 == 0)
         {
             _ploop_begin
-                if(GetPlObjN(_pl_, AIREL_MYSELF, "TECHCENTER") > 0)
+                if(GetPlObjN(_pl_, AIREL_MYSELF, Research_Build) > 0)
                 {
                     _RT130:= 0;
-                    while(_RT130 <= GetPlObjT(_pl_ , AIREL_MYSELF, TECHCENTER)-1)
+                    while(_RT130 <= GetPlObjT(_pl_ , AIREL_MYSELF, TECHCENTER|COMMAND_HUB))
                     {
                         // тут получаем координаты тех центра
-                        if( IsPlObjExist(_pl_, "TECHCENTER", 24, 25, 26) )
+                        if( IsPlObjExist(_pl_, Research_Build, 24, 25, 26) )
                         {
                             _RT131:= 0;
                             // этот цикл для формирования имени тех. центра
                             while(_RT131>=0)
                             {
                                 _RT131+=1;
-                                // если у игрока нет тех. центра с именем TECHCENTERN, где N кол-во
+                                // если у игрока нет тех. центра с именем Research, где N кол-во
                                 // то ставим это имя и выходим из цикла
-                                if(!IsPlObjExist(_pl_, "TECHCENTER" + _inttostr(_RT131)))
+                                if(!IsPlObjExist(_pl_, Research_Build + _inttostr(_RT131)))
                                 {
-                                    ActSetName("TECHCENTER" + _inttostr(_RT131), _RT24, _RT25, _RT26);
+                                    ActSetName(Research_Build + _inttostr(_RT131), _RT24, _RT25, _RT26);
                                     _RT131:=-1;
                                 }
                             }
@@ -242,53 +209,8 @@ OpenArbiter("LastSubmariner100");
                         _RT130+=1;
                     }
                 }
-
-                if(GetPlObjN(_pl_, AIREL_MYSELF, "LABORATORY") > 0)
-                {
-                    _RT130:= 0;
-                    while(_RT130 <= GetPlObjT(_pl_ , AIREL_MYSELF, RESEARCH_LABORATORY)-1)
-                    {
-                        if( IsPlObjExist(_pl_, "LABORATORY", 24, 25, 26) )
-                        {
-                            _RT131:= 0;
-                            while(_RT131>=0)
-                            {
-                                _RT131+=1;
-                                if(!IsPlObjExist(PLAYER_1, "LABORATORY" + _inttostr(_RT131)))
-                                {
-                                    ActSetName("LABORATORY" + _inttostr(_RT131), _RT24, _RT25, _RT26);
-                                    _RT131:=-1;
-                                }
-                            }
-                        }
-                        _RT130+=1;
-                    }
-                }
-
-                if(GetPlObjN(_pl_, AIREL_MYSELF, "COMMAND_HUB") > 0)
-                {
-                    _RT130:= 0;
-                    while(_RT130 <= GetPlObjT(_pl_ , AIREL_MYSELF, COMMAND_HUB)-1)
-                    {
-                        if( IsPlObjExist(_pl_, "COMMAND_HUB", 24, 25, 26) )
-                        {
-                            _RT131:= 0;
-                            while(_RT131>=0)
-                            {
-                                _RT131+=1;
-                                if(!IsPlObjExist(PLAYER_1, "COMMAND_HUB" + _inttostr(_RT131)))
-                                {
-                                    ActSetName("COMMAND_HUB" + _inttostr(_RT131), _RT24, _RT25, _RT26);
-                                    _RT131:=-1;
-                                }
-                            }
-                        }
-                        _RT130+=1;
-                    }
-                }
-
             _ploop_end
-            ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_DISSOLVE);
+            
             actLockEvent();
         }
 
