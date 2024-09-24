@@ -49,9 +49,9 @@ OpenArbiter("LastSubmariner100");
                 }
             _ploop_end
             actOffEvent(20);
-            actAddStrRes(_RT61, "TECHCENTER");
-            actAddStrRes(_RT62, "LABORATORY");
-            actAddStrRes(_RT63, "COMMAND_HUB");
+            actAddStrRes(61, "TECHCENTER");
+            actAddStrRes(62, "LABORATORY");
+            actAddStrRes(63, "COMMAND_HUB");
         }
 
         // создание артефактов
