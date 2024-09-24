@@ -27,6 +27,7 @@ OpenArbiter("LastSubmariner100");
 
         Event(TRUE) 
         {
+            actStringMess("LastSubmariner debug version" + "\n")
             _ploop_begin
                 if(GetPlCiv(_pl_)==CIV_WS) //--WS--
                 {
@@ -143,7 +144,7 @@ OpenArbiter("LastSubmariner100");
         {
             actStringMess("player: " + _inttostr(_PI10))
             actStringMess("civ: " + _inttostr(_PI1))
-            actStringMess("tobj: " + _inttostr(_PI3))
+            actStringMess("tobj: " + _inttostr(_PI3) + "\n")
 
             if(_PI1==CIV_WS){_RT64 := 52;}
             else
