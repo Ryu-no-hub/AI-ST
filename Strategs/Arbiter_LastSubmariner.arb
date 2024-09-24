@@ -132,7 +132,7 @@ OpenArbiter("LastSubmariner100");
 
 
         // Loaded, automate delivery
-        EventArtLoaded(TRUE)
+        EventArtLoaded(IsTechDev(_PI10, TTECH_WS_IMPROVE_REPAIR_TECHNOLOGY))
         {
             if(IsPlObjExist(_PI10, "Research", 24, 25, 26, 27))
             {
