@@ -226,7 +226,7 @@ OpenArbiter("LastSubmariner100");
                 if(IsPlObjExist(_PI10, GetStrRes(_RT64) + _inttostr(_RT130), 24, 25, 26, 27))
                 {
                     _RT27 := _PI15 + _PI16 + _PI17 - _RT24 - _RT25 - _RT26;
-                    if((_RT27 < 0 && _RT27 > -5) || (_RT27 > 0 && _RT27 < 5))
+                    if((_RT27 < 0 && _RT27 > -7) || (_RT27 > 0 && _RT27 < 7))
                     {
                         if(_PI1==CIV_SI) {
                             _RT66 := VEFF_TELEPORT;
