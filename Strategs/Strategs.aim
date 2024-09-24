@@ -130,6 +130,10 @@ OpenStringTable();
  /*105*/PutString("84");
  /*106*/PutString("91");
 
+ /*107*/PutString("TECHCENTER");
+ /*108*/PutString("LABORATORY");
+ /*109*/PutString("COMMAND_HUB");
+
 CloseStringTable();
 
 
