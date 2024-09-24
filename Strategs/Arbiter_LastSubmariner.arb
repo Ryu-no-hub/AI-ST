@@ -124,6 +124,7 @@ OpenArbiter("LastSubmariner100");
         EventPlObjCreated(_PI3 == TECHCENTER || _PI3 == RESEARCH_LABORATORY || _PI3 == COMMAND_HUB)
         {
             ActSetName(Research_Build, _PI5, _PI6, _PI7);
+            actStringMess("Set name to: " + Research_Build)
             actLockEvent();
         }
 
@@ -146,7 +147,7 @@ OpenArbiter("LastSubmariner100");
             while(_RT130 <= GetPlObjN(_PI10, AIREL_MYSELF, Research_Build))
             {
                 // тут получаем координаты тех центра
-                if( IsPlObjExist(_PI10, Research_Build, 24, 25, 26) )
+                if(IsPlObjExist(_PI10, Research_Build, 24, 25, 26) )
                 {
                     _RT131:= 0;
                     // этот цикл для формирования имени тех. центра
@@ -158,13 +159,13 @@ OpenArbiter("LastSubmariner100");
                         if(!IsPlObjExist(_PI10, Research_Build + _inttostr(_RT131)))
                         {
                             ActSetName(Research_Build + _inttostr(_RT131), _RT24, _RT25, _RT26);
+                            actStringMess("Renamed to: " + Research_Build + _inttostr(_RT131))
                             _RT131:=-1;
                         }
                     }
                 }
                 _RT130+=1;
             }
-            else {actStringMess("no lab");}
 
             actLockEvent();
         }
@@ -199,13 +200,30 @@ OpenArbiter("LastSubmariner100");
         {
             // 1 сравнить координаты артефакта с координатами тех центров игрока
             _RT130 := 1;
+            actStringMess("Research amount: " + _inttostr(GetPlObjT(_PI10, AIREL_MYSELF, TECHCENTER|RESEARCH_LABORATORY|COMMAND_HUB)));
             while(_RT130 <= GetPlObjT(_PI10, AIREL_MYSELF, TECHCENTER|RESEARCH_LABORATORY|COMMAND_HUB))
             {
+                actStringMess("Disapear search cycle");
                 if(IsPlObjExist(_PI10, Research_Build + _inttostr(_RT130), 24, 25, 26, 27))
                 {
                     _RT27 := _PI15 + _PI16 + _PI17 - _RT24 - _RT25 - _RT26;
                     if((_RT27 < 0 && _RT27 > -7) || (_RT27 > 0 && _RT27 < 7))
                     {
+                        // выдаем случайный грейд
+                        actStringMess("Art delivered");
+                        if(_PI1==CIV_WS)
+                        {
+                            ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(27,34) )) );
+                        }
+                        if(_PI1==CIV_BO)
+                        {
+                            ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(35,43) )) );
+                        }
+                        if(_PI1==CIV_SI)
+                        {
+                            ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(44,51) )) );
+                        }
+
                         if(_PI1==CIV_SI) {
                             _RT66 := VEFF_TELEPORT;
                             _RT67 := 1;
@@ -234,44 +252,44 @@ OpenArbiter("LastSubmariner100");
         }
 
         // Tech activate
-        EventArtUnLoaded(TRUE)
-        {
-            // перебираем у каждого игрока все построенные лаборатории
-            /**/
-//            if(_PI1==CIV_WS){_RT58 := TECHCENTER;}
-//            else
-//            {if(_PI1==CIV_BO){_RT58 := RESEARCH_LABORATORY;}
-//                else{_RT58 := COMMAND_HUB;}
+//        EventArtUnLoaded(TRUE)
+//        {
+//            // перебираем у каждого игрока все построенные лаборатории
+//            /**/
+////            if(_PI1==CIV_WS){_RT58 := TECHCENTER;}
+////            else
+////            {if(_PI1==CIV_BO){_RT58 := RESEARCH_LABORATORY;}
+////                else{_RT58 := COMMAND_HUB;}
+////            }
+//            _RT130 := 1;
+//
+//            while( _RT130 <= GetPlObjT(_PI10, AIREL_MYSELF, TECHCENTER|RESEARCH_LABORATORY|COMMAND_HUB))
+//            {
+//                if(IsPlObjExist(_PI10, Research_Build + _inttostr(_RT130), 24, 25, 26, 27))
+//                {
+//                    if(GetArt(TART_X_BOX, "", _RT24-1, _RT25-1, _RT26, 5, 5, 4) > 0 )
+//                    {
+//                        // выдаем случайный грейд
+//                        _actStringMess("Art delivery");
+//                        if(GetPlCiv(_PI10)==CIV_WS)
+//                        {
+//                            ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(27,34) )) );
+//                        }
+//                        if(GetPlCiv(_PI10)==CIV_BO)
+//                        {
+//                            ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(35,43) )) );
+//                        }
+//                        if(GetPlCiv(_PI10)==CIV_SI)
+//                        {
+//                            ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(44,51) )) );
+//                        }
+//                        ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_DISSOLVE);
+//                    }
+//                }
+//                _RT130+=1;
 //            }
-            _RT130 := 1;
-
-            while( _RT130 <= GetPlObjT(_PI10, AIREL_MYSELF, TECHCENTER|RESEARCH_LABORATORY|COMMAND_HUB))
-            {
-                if(IsPlObjExist(_PI10, Research_Build+_inttostr(_RT130), 24, 25, 26, 27))
-                {
-                    if( GetArt(TART_X_BOX, "", _RT24-1, _RT25-1, _RT26, 5, 5, 4) > 0 )
-                    {
-                        // выдаем случайный грейд
-                        _actStringMess("Art delivery");
-                        if(GetPlCiv(_PI10)==CIV_WS)
-                        {
-                            ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(27,34) )) );
-                        }
-                        if(GetPlCiv(_PI10)==CIV_BO)
-                        {
-                            ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(35,43) )) );
-                        }
-                        if(GetPlCiv(_PI10)==CIV_SI)
-                        {
-                            ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(44,51) )) );
-                        }
-                        ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_DISSOLVE);
-                    }
-                }
-                _RT130+=1;
-            }
-            actLockEvent();
-        }
+//            actLockEvent();
+//        }
 
 
     CloseEvents();
