@@ -49,6 +49,9 @@ OpenArbiter("LastSubmariner100");
                 }
             _ploop_end
             actOffEvent(20);
+            actAddStrRes(_RT61, "TECHCENTER");
+            actAddStrRes(_RT62, "LABORATORY");
+            actAddStrRes(_RT63, "COMMAND_HUB");
         }
 
         // создание артефактов
@@ -183,15 +186,15 @@ OpenArbiter("LastSubmariner100");
             // 1 сравнить координаты артефакта с координатами тех центров игрока
 
             _RT130:= 1;
-            if(_PI11==CIV_WS){tech_name="TECHCENTER";_RT58:=TECHCENTER;}
+            if(_PI11==CIV_WS){RT64 := _RT61;_RT58:=TECHCENTER;}
             else{
-                if(_PI11==CIV_BO){tech_name="LABORATORY";_RT58:=RESEARCH_LABORATORY;}
-                else{tech_name="COMMAND_HUB";_RT58:=COMMAND_HUB;}
+                if(_PI11==CIV_BO){RT64 := _RT62;_RT58:=RESEARCH_LABORATORY;}
+                else{RT64 := _RT63;_RT58:=COMMAND_HUB;}
             }
 
             while(_RT130 <= GetPlObjT(_PI10, AIREL_MYSELF, _RT58))
             {
-                if(IsPlObjExist(_PI10, tech_name + _inttostr(_RT130), 24, 25, 26, 27))
+                if(IsPlObjExist(_PI10, GetStrRes(_RT64) + _inttostr(_RT130), 24, 25, 26, 27))
                 {
                     _RT27 := _PI15 + _PI16 + _PI17 - _RT24 - _RT25 - _RT26;
                     if((_RT27 < 0 && _RT27 > -5) || (_RT27 > 0 && _RT27 < 5))
@@ -239,30 +242,35 @@ OpenArbiter("LastSubmariner100");
         // для переименовывания исс. центров
         EventPlObjCreated(_PI3 == TECHCENTER || _PI3 == RESEARCH_LABORATORY || _PI3 == COMMAND_HUB)
         {
-            if(_PI1==CIV_WS){tech_name="TECHCENTER";_RT58:=TECHCENTER;}
-            else{
-                if(_PI1==CIV_BO){tech_name="LABORATORY";_RT58:=RESEARCH_LABORATORY;}
-                else{tech_name="COMMAND_HUB";_RT58:=COMMAND_HUB;}
+            actStringMess("player: " + _inttostr(_PI10))
+            actStringMess("civ: " + _inttostr(_PI1))
+            actStringMess("tobj: " + _inttostr(_PI3))
+
+            if(_PI1==CIV_WS){RT64 := _RT61;}
+            else
+            {if(_PI1==CIV_BO){RT64 := _RT62;}
+                else{RT64 := _RT63;}
             }
 
-            if(GetPlObjN(_PI1, AIREL_MYSELF, tech_name))
+            actStringMess("name: " + GetStrRes(_RT64);)
+            if(GetPlObjN(_PI10, AIREL_MYSELF, GetStrRes(_RT64)))
             {
                 _RT130:= 0;
-                while(_RT130 <= GetPlObjT(_PI1 , AIREL_MYSELF, _RT58)-1)
+                while(_RT130 <= GetPlObjT(_PI10 , AIREL_MYSELF, _RT58) - 1)
                 {
                     // тут получаем координаты тех центра
-                    if( IsPlObjExist(_PI1, tech_name, 24, 25, 26) )
+                    if( IsPlObjExist(_PI10, GetStrRes(_RT64), 24, 25, 26) )
                     {
                         _RT131:= 0;
                         // этот цикл для формирования имени тех. центра
                         while(_RT131>=0)
                         {
                             _RT131+=1;
-                            // если у игрока нет тех. центра с именем tech_name, где N кол-во
+                            // если у игрока нет тех. центра с именем GetStrRes(_RT64), где N кол-во
                             // то ставим это имя и выходим из цикла
-                            if(!IsPlObjExist(_PI1, tech_name + _inttostr(_RT131)))
+                            if(!IsPlObjExist(_PI10, GetStrRes(_RT64) + _inttostr(_RT131)))
                             {
-                                ActSetName(tech_name + _inttostr(_RT131), _RT24, _RT25, _RT26);
+                                ActSetName(GetStrRes(_RT64) + _inttostr(_RT131), _RT24, _RT25, _RT26);
                                 _RT131:=-1;
                             }
                         }
