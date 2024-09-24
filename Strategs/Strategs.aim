@@ -43,18 +43,38 @@ OpenStringTable();
  /*025*/PutString("You've got %d units of %s"); 
  /*026*/PutString("The thing"); 
 
- /*027 L1_X*/PutString("9");
- /*028 L1_Y*/PutString("13");
- /*029 L2_X*/PutString("17");
- /*030 L2_Y*/PutString("20");
- /*031 L3_X*/PutString("21");
- /*032 L3_Y*/PutString("22");
- /*033 L4_X*/PutString("29");
- /*034 L4_Y*/PutString("30");
+ // WS technology
+ /*027*/PutString("9");
+ /*028*/PutString("13");
+ /*029*/PutString("17");
+ /*030*/PutString("20");
+ /*031*/PutString("21");
+ /*032*/PutString("22");
+ /*033*/PutString("29");
+ /*034*/PutString("30");
+ // BO technology
+ /*035*/PutString("37");
+ /*036*/PutString("39");
+ /*037*/PutString("48");
+ /*038*/PutString("53");
+ /*039*/PutString("132");
+ /*040*/PutString("134");
+ /*041*/PutString("135");
+ /*042*/PutString("137");
+ /*043*/PutString("138");
+ // SI technology
+ /*044*/PutString("70");
+ /*045*/PutString("72");
+ /*046*/PutString("84");
+ /*047*/PutString("88");
+ /*048*/PutString("96");
+ /*049*/PutString("102");
+ /*050*/PutString("107");
+ /*051*/PutString("108");
 
- /*35*/PutString("TECHCENTER");
- /*36*/PutString("LABORATORY");
- /*37*/PutString("COMMAND_HUB");
+ /*052*/PutString("TECHCENTER");
+ /*053*/PutString("LABORATORY");
+ /*054*/PutString("COMMAND_HUB");
 
 CloseStringTable();
 

@@ -145,10 +145,10 @@ OpenArbiter("LastSubmariner100");
             actStringMess("civ: " + _inttostr(_PI1))
             actStringMess("tobj: " + _inttostr(_PI3))
 
-            if(_PI1==CIV_WS){_RT64 := 35;}
+            if(_PI1==CIV_WS){_RT64 := 52;}
             else
-            {if(_PI1==CIV_BO){_RT64 := 36;}
-                else{_RT64 := 37;}
+            {if(_PI1==CIV_BO){_RT64 := 53;}
+                else{_RT64 := 54;}
             }
 
             actStringMess("name: " + GetStrRes(_RT64))
@@ -186,10 +186,10 @@ OpenArbiter("LastSubmariner100");
         // Loaded, automate delivery
         EventArtLoaded(TRUE)
         {
-            if(_PI11==CIV_WS){_RT64 := 35;_RT58:=TECHCENTER;}
+            if(_PI11==CIV_WS){_RT64 := 52;_RT58:=TECHCENTER;}
             else{
-                if(_PI11==CIV_BO){_RT64 := 36;_RT58:=RESEARCH_LABORATORY;}
-                else{_RT64 := 37;_RT58:=COMMAND_HUB;}
+                if(_PI11==CIV_BO){_RT64 := 53;_RT58:=RESEARCH_LABORATORY;}
+                else{_RT64 := 54;_RT58:=COMMAND_HUB;}
             }
 
             if(IsTechDev(_PI10, TTECH_WS_IMPROVE_REPAIR_TECHNOLOGY))
@@ -214,10 +214,10 @@ OpenArbiter("LastSubmariner100");
             // 1 сравнить координаты артефакта с координатами тех центров игрока
 
             _RT130:= 1;
-            if(_PI11==CIV_WS){_RT64 := 35;_RT58:=TECHCENTER;}
+            if(_PI11==CIV_WS){_RT64 := 52;_RT58:=TECHCENTER;}
             else{
-                if(_PI11==CIV_BO){_RT64 := 36;_RT58:=RESEARCH_LABORATORY;}
-                else{_RT64 := 37;_RT58:=COMMAND_HUB;}
+                if(_PI11==CIV_BO){_RT64 := 53;_RT58:=RESEARCH_LABORATORY;}
+                else{_RT64 := 54;_RT58:=COMMAND_HUB;}
             }
 
             while(_RT130 <= GetPlObjT(_PI10, AIREL_MYSELF, _RT58))
