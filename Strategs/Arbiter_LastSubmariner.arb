@@ -210,7 +210,7 @@ OpenArbiter("LastSubmariner100");
                     if((_RT27 < 0 && _RT27 > -5) || (_RT27 > 0 && _RT27 < 5))
                     {
                         // выдаем случайный грейд
-                        actStringMess("Art delivered");
+                        actStringMess("Art delivered, CIV = " + _PI1);
                         if(_PI1==CIV_WS)
                         {
                             ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(27,34) )) );
