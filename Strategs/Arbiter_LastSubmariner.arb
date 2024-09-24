@@ -118,107 +118,9 @@ OpenArbiter("LastSubmariner100");
                 }
             }
 
-            _actStringMess("Artefacts on map: " + _inttostr(GetArt()))
+            actStringMess("Artefacts on map: " + _inttostr(GetArt()))
         }
 
-        // Rename
-//        EventPlObjCreated(_PI3==TECHCENTER || _PI3==RESEARCH_LABORATORY || _PI3==COMMAND_HUB)
-//        {
-//            ActSetName("Research", _PI5, _PI6, _PI7);
-//            actLockEvent();
-//        }
-//        EventPlObjCreated(_PI3==TRADECENTER || _PI3==MARKET || _PI3==ENERGY_CONVERTER)
-//        {
-//            ActSetName("Market", _PI5, _PI6, _PI7);
-//            actLockEvent();
-//        }
-
-
-        // Loaded, automate delivery
-        EventArtLoaded(IsTechDev(_PI10, TTECH_WS_IMPROVE_REPAIR_TECHNOLOGY))
-        {
-            if(IsPlObjExist(_PI10, "Research", 24, 25, 26, 27))
-            {
-                ActObjSelectM(_PI10, AIREL_MYSELF, AITRG_BOATSUPPLY, _PI14, _PI15, _PI16, _PI17, _PI15, _PI16, _PI17);
-                ActCreateFleet(_PI10, AIREL_MYSELF, "platform", _PI11, AISF_NONE);
-                ActFCmdUnLoad(_PI10, AIREL_MYSELF, GetFleetNum(_PI10, "platform"), _RT24, _RT25, _RT26 + 1);
-            }
-            actLockEvent();
-        }
-
-        // Dissolve unloaded artefact near RC
-//        EventArtUnLoaded(TRUE)
-//        {
-//            if(IsPlObjExist(_PI10, "Research", 24, 25, 26, 27))
-//            {
-//                _RT27 := _PI15 + _PI16 + _PI17 - _RT24 - _RT25 - _RT26;
-//                if((_RT27 < 0 && _RT27 > -5) || (_RT27 > 0 && _RT27 < 5))
-//                {
-//                    if(_PI1==CIV_SI) {
-//                        _RT66 := VEFF_TELEPORT;
-//                        _RT67 := 1;
-//                        ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_DISSOLVE);
-//                    }
-//                    else {_RT66 := VEFF_DISSOLVE; _RT67 := 2;}
-                    //
-//                    ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, _RT66);
-                    //
-//                    _RT50 := GetTime();
-//                    _RT55 := _PI5;
-//                    _RT56 := _PI6;
-//                    _RT57 := _PI7;
-//                    actOnEvent(20);
-//                }
-//            }
-//            actLockEvent();
-//        }
-
-        // Really delete artefact
-        Event(GetTime() - _RT50 > _RT67, 20)
-        {
-            ActDelArt(TART_UNDEFINED, "", _RT55, _RT56, _RT57, _RT55, _RT56, _RT57, VEFF_NONE);
-            actStringMess("Artefacts remaining: " + _inttostr(GetArt()-1))
-        }
-
-        // Del artefact after Unloaded
-        EventArtUnLoaded(TRUE)
-        {
-            // 1 сравнить координаты артефакта с координатами тех центров игрока
-
-            _RT130:= 1;
-            if(_PI11==CIV_WS){_RT64 := 107;_RT58:=TECHCENTER;}
-            else{
-                if(_PI11==CIV_BO){_RT64 := 108;_RT58:=RESEARCH_LABORATORY;}
-                else{_RT64 := 109;_RT58:=COMMAND_HUB;}
-            }
-
-            while(_RT130 <= GetPlObjT(_PI10, AIREL_MYSELF, _RT58))
-            {
-                if(IsPlObjExist(_PI10, GetStrRes(_RT64) + _inttostr(_RT130), 24, 25, 26, 27))
-                {
-                    _RT27 := _PI15 + _PI16 + _PI17 - _RT24 - _RT25 - _RT26;
-                    if((_RT27 < 0 && _RT27 > -5) || (_RT27 > 0 && _RT27 < 5))
-                    {
-                        if(_PI1==CIV_SI) {
-                            _RT66 := VEFF_TELEPORT;
-                            _RT67 := 1;
-                            ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_DISSOLVE);
-                        }
-                        else {_RT66 := VEFF_DISSOLVE; _RT67 := 2;}
-                        
-                        ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, _RT66);
-                        
-                        _RT50 := GetTime();
-                        _RT55 := _PI5;
-                        _RT56 := _PI6;
-                        _RT57 := _PI7;
-                        actOnEvent(20);
-                    }
-                }
-                _RT130+=1;
-            }
-            actLockEvent();
-        }
 
         // Даем имя для иссл. центов Акул
         EventPlObjCreated(_PI3 == TECHCENTER && _PI1 == CIV_WS)
@@ -282,6 +184,80 @@ OpenArbiter("LastSubmariner100");
 
             actLockEvent();
         }
+
+
+        // Loaded, automate delivery
+        EventArtLoaded(TRUE)
+        {
+            if(_PI11==CIV_WS){_RT64 := 107;_RT58:=TECHCENTER;}
+            else{
+                if(_PI11==CIV_BO){_RT64 := 108;_RT58:=RESEARCH_LABORATORY;}
+                else{_RT64 := 109;_RT58:=COMMAND_HUB;}
+            }
+
+            if(IsTechDev(_PI10, TTECH_WS_IMPROVE_REPAIR_TECHNOLOGY))
+            {
+                _RT68 := 0;
+                while (_RT68 < 20 && !IsPlObjExist(_PI10, GetStrRes(_RT64) + _inttostr(_RT68), 24, 25, 26, 27))
+                {
+                    actStringMess("searching " + GetStrRes(_RT64) + _inttostr(_RT68));
+                    _RT68 += 1;
+                }
+                ActObjSelectM(_PI10, AIREL_MYSELF, AITRG_BOATSUPPLY, _PI14, _PI15, _PI16, _PI17, _PI15, _PI16, _PI17);
+                ActCreateFleet(_PI10, AIREL_MYSELF, "platform", _PI11, AISF_NONE);
+                ActFCmdUnLoad(_PI10, AIREL_MYSELF, GetFleetNum(_PI10, "platform"), _RT24, _RT25, _RT26 + 1);
+            }
+            actLockEvent();
+        }
+
+
+        // Disappear effect on unloaded artefact near RC
+        EventArtUnLoaded(TRUE)
+        {
+            // 1 сравнить координаты артефакта с координатами тех центров игрока
+
+            _RT130:= 1;
+            if(_PI11==CIV_WS){_RT64 := 107;_RT58:=TECHCENTER;}
+            else{
+                if(_PI11==CIV_BO){_RT64 := 108;_RT58:=RESEARCH_LABORATORY;}
+                else{_RT64 := 109;_RT58:=COMMAND_HUB;}
+            }
+
+            while(_RT130 <= GetPlObjT(_PI10, AIREL_MYSELF, _RT58))
+            {
+                if(IsPlObjExist(_PI10, GetStrRes(_RT64) + _inttostr(_RT130), 24, 25, 26, 27))
+                {
+                    _RT27 := _PI15 + _PI16 + _PI17 - _RT24 - _RT25 - _RT26;
+                    if((_RT27 < 0 && _RT27 > -5) || (_RT27 > 0 && _RT27 < 5))
+                    {
+                        if(_PI1==CIV_SI) {
+                            _RT66 := VEFF_TELEPORT;
+                            _RT67 := 1;
+                            ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_DISSOLVE);
+                        }
+                        else {_RT66 := VEFF_DISSOLVE; _RT67 := 2;}
+                        
+                        ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, _RT66);
+                        
+                        _RT50 := GetTime();
+                        _RT55 := _PI5;
+                        _RT56 := _PI6;
+                        _RT57 := _PI7;
+                        actOnEvent(20);
+                    }
+                }
+                _RT130+=1;
+            }
+            actLockEvent();
+        }
+
+        // Delete artefact
+        Event(GetTime() - _RT50 > _RT67, 20)
+        {
+            ActDelArt(TART_UNDEFINED, "", _RT55, _RT56, _RT57, _RT55, _RT56, _RT57, VEFF_NONE);
+            actStringMess("Artefacts remaining: " + _inttostr(GetArt()-1))
+        }
+
 
     CloseEvents();
 CloseArbiter();
