@@ -24,6 +24,7 @@ OpenArbiter("LastSubmariner100");
         s_defeat = 15;
         artefacts_per_player = 10;
         ofst = 20;
+        Research_Build = "Research";
 
         Event(TRUE) 
         {
@@ -72,7 +73,6 @@ OpenArbiter("LastSubmariner100");
                 _RT128 += artefacts_per_player;
             _ploop_end
 
-
             _RT129 := GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80;
 
             while (_RT128 > 0)
@@ -120,22 +120,10 @@ OpenArbiter("LastSubmariner100");
         }
 
 
-        // Даем имя для иссл. центов Акул
-        EventPlObjCreated(_PI3 == TECHCENTER && _PI1 == CIV_WS)
+        // Даем имя для иссл. центов
+        EventPlObjCreated(_PI3 == TECHCENTER || _PI3 == RESEARCH_LABORATORY || _PI3 == COMMAND_HUB)
         {
-            ActSetName("TECHCENTER", _PI5, _PI6, _PI7);
-            actLockEvent();
-        }
-        // Даем имя для иссл. центов Осьминогов
-        EventPlObjCreated(_PI3 == RESEARCH_LABORATORY && _PI1 == CIV_BO)
-        {
-            ActSetName("LABORATORY", _PI5, _PI6, _PI7);
-            actLockEvent();
-        }
-        // Даем имя для иссл. центов Силикойдов
-        EventPlObjCreated(_PI3 == COMMAND_HUB)
-        {
-            ActSetName("COMMAND_HUB", _PI5, _PI6, _PI7);
+            ActSetName(Research_Build, _PI5, _PI6, _PI7);
             actLockEvent();
         }
 
@@ -145,60 +133,57 @@ OpenArbiter("LastSubmariner100");
             actStringMess("player: " + _inttostr(_PI10))
             actStringMess("civ: " + _inttostr(_PI1))
             actStringMess("tobj: " + _inttostr(_PI3) + "\n")
+//
+//            if(_PI1==CIV_WS){_RT64 := 52;}
+//            else
+//            {if(_PI1==CIV_BO){_RT64 := 53;}
+//                else{_RT64 := 54;}
+//            }
 
-            if(_PI1==CIV_WS){_RT64 := 52;}
-            else
-            {if(_PI1==CIV_BO){_RT64 := 53;}
-                else{_RT64 := 54;}
-            }
+            actStringMess("name: " + Research_Build)
 
-            actStringMess("name: " + GetStrRes(_RT64))
-            if(GetPlObjN(_PI10, AIREL_MYSELF, GetStrRes(_RT64)))
+            _RT130 := 1;
+            while(_RT130 <= GetPlObjN(_PI10, AIREL_MYSELF, Research_Build))
             {
-                _RT130:= 0;
-                while(_RT130 <= GetPlObjT(_PI10 , AIREL_MYSELF, _RT58) - 1)
+                // тут получаем координаты тех центра
+                if( IsPlObjExist(_PI10, Research_Build, 24, 25, 26) )
                 {
-                    // тут получаем координаты тех центра
-                    if( IsPlObjExist(_PI10, GetStrRes(_RT64), 24, 25, 26) )
+                    _RT131:= 0;
+                    // этот цикл для формирования имени тех. центра
+                    while(_RT131>=0)
                     {
-                        _RT131:= 0;
-                        // этот цикл для формирования имени тех. центра
-                        while(_RT131>=0)
+                        _RT131+=1;
+                        // если у игрока нет тех. центра с именем Research_Build, где N кол-во
+                        // то ставим это имя и выходим из цикла
+                        if(!IsPlObjExist(_PI10, Research_Build + _inttostr(_RT131)))
                         {
-                            _RT131+=1;
-                            // если у игрока нет тех. центра с именем GetStrRes(_RT64), где N кол-во
-                            // то ставим это имя и выходим из цикла
-                            if(!IsPlObjExist(_PI10, GetStrRes(_RT64) + _inttostr(_RT131)))
-                            {
-                                ActSetName(GetStrRes(_RT64) + _inttostr(_RT131), _RT24, _RT25, _RT26);
-                                _RT131:=-1;
-                            }
+                            ActSetName(Research_Build + _inttostr(_RT131), _RT24, _RT25, _RT26);
+                            _RT131:=-1;
                         }
                     }
-                    _RT130+=1;
                 }
+                _RT130+=1;
             }
             else {actStringMess("no lab");}
 
             actLockEvent();
         }
 
-
         // Loaded, automate delivery
         EventArtLoaded(TRUE)
         {
-            if(_PI11==CIV_WS){_RT64 := 52;_RT58:=TECHCENTER;}
+            if(_PI11==CIV_WS){_RT64 := TTECH_WS_IMPROVE_REPAIR_TECHNOLOGY;}
             else{
-                if(_PI11==CIV_BO){_RT64 := 53;_RT58:=RESEARCH_LABORATORY;}
-                else{_RT64 := 54;_RT58:=COMMAND_HUB;}
+                if(_PI11==CIV_BO){_RT64 := TTECH_BO_IMPROVE_REPAIR_TECHNOLOGY;}
+                else{_RT64 := TTECH_SI_LOCAL_TELEPORTATION;}
             }
-
-            if(IsTechDev(_PI10, TTECH_WS_IMPROVE_REPAIR_TECHNOLOGY))
+            // add teleportation for si
+            if(IsTechDev(_PI10, _RT64))
             {
                 _RT68 := 0;
-                while (_RT68 < 20 && !IsPlObjExist(_PI10, GetStrRes(_RT64) + _inttostr(_RT68), 24, 25, 26, 27))
+                while (_RT68 < 20 && !IsPlObjExist(_PI10, Research_Build + _inttostr(_RT68), 24, 25, 26, 27))
                 {
-                    actStringMess("searching " + GetStrRes(_RT64) + _inttostr(_RT68));
+                    actStringMess("searching " + Research_Build + _inttostr(_RT68));
                     _RT68 += 1;
                 }
                 ActObjSelectM(_PI10, AIREL_MYSELF, AITRG_BOATSUPPLY, _PI14, _PI15, _PI16, _PI17, _PI15, _PI16, _PI17);
@@ -213,17 +198,10 @@ OpenArbiter("LastSubmariner100");
         EventArtUnLoaded(TRUE)
         {
             // 1 сравнить координаты артефакта с координатами тех центров игрока
-
-            _RT130:= 1;
-            if(_PI11==CIV_WS){_RT64 := 52;_RT58:=TECHCENTER;}
-            else{
-                if(_PI11==CIV_BO){_RT64 := 53;_RT58:=RESEARCH_LABORATORY;}
-                else{_RT64 := 54;_RT58:=COMMAND_HUB;}
-            }
-
-            while(_RT130 <= GetPlObjT(_PI10, AIREL_MYSELF, _RT58))
+            _RT130 := 1;
+            while(_RT130 <= GetPlObjT(_PI10, AIREL_MYSELF, TECHCENTER|RESEARCH_LABORATORY|COMMAND_HUB))
             {
-                if(IsPlObjExist(_PI10, GetStrRes(_RT64) + _inttostr(_RT130), 24, 25, 26, 27))
+                if(IsPlObjExist(_PI10, Research_Build + _inttostr(_RT130), 24, 25, 26, 27))
                 {
                     _RT27 := _PI15 + _PI16 + _PI17 - _RT24 - _RT25 - _RT26;
                     if((_RT27 < 0 && _RT27 > -7) || (_RT27 > 0 && _RT27 < 7))
@@ -244,16 +222,55 @@ OpenArbiter("LastSubmariner100");
                         actOnEvent(20);
                     }
                 }
-                _RT130+=1;
+                _RT130 += 1;
             }
-            actLockEvent();
         }
 
-        // Delete artefact
+        // Delete artifact
         Event(GetTime() - _RT50 > _RT67, 20)
         {
             ActDelArt(TART_UNDEFINED, "", _RT55, _RT56, _RT57, _RT55, _RT56, _RT57, VEFF_NONE);
             actStringMess("Artefacts remaining: " + _inttostr(GetArt()-1))
+        }
+
+        // Tech activate
+        EventArtUnLoaded(TRUE)
+        {
+            // перебираем у каждого игрока все построенные лаборатории
+            /**/
+//            if(_PI1==CIV_WS){_RT58 := TECHCENTER;}
+//            else
+//            {if(_PI1==CIV_BO){_RT58 := RESEARCH_LABORATORY;}
+//                else{_RT58 := COMMAND_HUB;}
+//            }
+            _RT130 := 1;
+
+            while( _RT130 <= GetPlObjT(_PI10, AIREL_MYSELF, TECHCENTER|RESEARCH_LABORATORY|COMMAND_HUB))
+            {
+                if(IsPlObjExist(_PI10, Research_Build+_inttostr(_RT130), 24, 25, 26, 27))
+                {
+                    if( GetArt(TART_X_BOX, "", _RT24-1, _RT25-1, _RT26, 5, 5, 4) > 0 )
+                    {
+                        // выдаем случайный грейд
+                        _actStringMess("Art delivery");
+                        if(GetPlCiv(_PI10)==CIV_WS)
+                        {
+                            ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(27,34) )) );
+                        }
+                        if(GetPlCiv(_PI10)==CIV_BO)
+                        {
+                            ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(35,43) )) );
+                        }
+                        if(GetPlCiv(_PI10)==CIV_SI)
+                        {
+                            ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(44,51) )) );
+                        }
+                        ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_DISSOLVE);
+                    }
+                }
+                _RT130+=1;
+            }
+            actLockEvent();
         }
 
 
