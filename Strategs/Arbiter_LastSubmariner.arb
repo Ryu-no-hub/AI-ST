@@ -70,11 +70,9 @@ OpenArbiter("LastSubmariner100");
             _ploop_end
 
             _RT129 := GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80;
-            //_actStringMess("Silicon in line / 80 " + _inttostr(GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80))
 
             while (_RT128 > 0)
             {
-                //_RT132 := 5; offset
                 _RT130 := GetRnd(0, _RT129);
                 _RT131 := GetRnd(0, _RT129);
                 if(
@@ -117,9 +115,26 @@ OpenArbiter("LastSubmariner100");
             _actStringMess("Artefacts on map: " + _inttostr(GetArt()))
         }
 
+        EventPlObjCreated(_PI3==TECHCENTER || _PI3==RESEARCH_LABORATORY || _PI3==COMMAND_HUB)
+        {
+            ActSetName("Research", _PI5, _PI6, _PI7);
+            actLockEvent();
+        }
+
+        EventPlObjCreated(_PI3==TRADECENTER || _PI3==MARKET || _PI3==ENERGY_CONVERTER)
+        {
+            ActSetName("Market", _PI5, _PI6, _PI7);
+            actLockEvent();
+        }
 
         EventArtLoaded(TRUE)
         {
+            if(IsPlObjExist(_PI10, "Research", 24, 25, 26, 27))
+            {
+                ActObjSelectM(_PI10, AIREL_MYSELF, AITRG_BOATSUPPLY, _PI14, _PI15, _PI16, _PI17, _PI15, _PI16, _PI17);
+                ActCreateFleet(_PI10, AIREL_MYSELF, "platform", _PI11, AISF_NONE);
+                ActFCmdUnLoad(_PI10, AIREL_MYSELF, GetFleetNum(_PI10, "platform"), _RT24, _RT25, _RT26 + 1);
+            }
             actLockEvent();
         }
 
@@ -273,6 +288,7 @@ OpenArbiter("LastSubmariner100");
                 }
 
             _ploop_end
+            ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_DISSOLVE);
             actLockEvent();
         }
 
