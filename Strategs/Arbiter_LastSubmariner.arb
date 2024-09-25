@@ -28,7 +28,7 @@ OpenArbiter("LastSubmariner100");
 
         Event(TRUE) 
         {
-            actStringMess("LastSubmariner debug version" + "\n")
+            //actStringMess("LastSubmariner debug version" + "\n")
             _ploop_begin
                 if(GetPlCiv(_pl_)==CIV_WS) //--WS--
                 {
@@ -209,7 +209,7 @@ OpenArbiter("LastSubmariner100");
                 // 1 сравнить координаты артефакта с координатами тех. центров игрока
                 _RT130 := 1;
                 _RT132 := GetPlObjT(_PI10, AIREL_MYSELF, TECHCENTER) + GetPlObjT(_PI10, AIREL_MYSELF, RESEARCH_LABORATORY) + GetPlObjT(_PI10, AIREL_MYSELF, COMMAND_HUB);
-                actStringMess("Research buildings to scan: " + _inttostr(_RT132));
+                //actStringMess("Research buildings to scan: " + _inttostr(_RT132));
                 while(_RT130 <= _RT132)
                 {
                     if(IsPlObjExist(_PI10, Research_Build + _inttostr(_RT130), 24, 25, 26, 27))
@@ -226,9 +226,9 @@ OpenArbiter("LastSubmariner100");
                             if(_PI11==CIV_SI){_RT133 := GetRnd(44,51);
                                 //_RT67 := 1;
                             }
-                            actStringMess("String number: "  + _inttostr(_RT133));
+                            //actStringMess("String number: "  + _inttostr(_RT133));
                             _RT136 := _strtoint(GetStrRes(_RT133));
-                            actStringMess("Tech number: "  + _inttostr(_RT136));
+                            //actStringMess("Tech number: "  + _inttostr(_RT136));
 
                             // выдаём случайный грейд (или нет)
                             //actStringMess("Tech id: " + _inttostr(_RT133));
