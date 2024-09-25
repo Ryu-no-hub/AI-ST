@@ -211,25 +211,32 @@ OpenArbiter("LastSubmariner100");
                     {
                         // выдаем случайный грейд
                         actStringMess("Art delivered, CIV = " + _PI1);
-                        if(_PI1==CIV_WS)
+                        if(_PI10==CIV_WS)
                         {
                             ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(27,34) )) );
                         }
-                        if(_PI1==CIV_BO)
+                        if(_PI10==CIV_BO)
                         {
                             ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(35,43) )) );
                         }
-                        if(_PI1==CIV_SI)
+                        if(_PI10==CIV_SI)
                         {
                             ActTechSet(_PI10, AIREL_MYSELF, _strtoint(GetStrRes( GetRnd(44,51) )) );
-                        }
 
-                        if(_PI1==CIV_SI) {
                             _RT66 := VEFF_TELEPORT;
                             _RT67 := 1;
                             ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_DISSOLVE);
+
                         }
                         else {_RT66 := VEFF_DISSOLVE; _RT67 := 2;}
+
+                        // мне кажется это можно все в одно условие поместить
+                        // if(_PI10==CIV_SI) {
+                        //     _RT66 := VEFF_TELEPORT;
+                        //     _RT67 := 1;
+                        //     ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, VEFF_DISSOLVE);
+                        // }
+                        // else {_RT66 := VEFF_DISSOLVE; _RT67 := 2;}
                         
                         ActDelArt(TART_UNDEFINED, "", _PI15, _PI16, _PI17, _PI15, _PI16, _PI17, _RT66);
                         
