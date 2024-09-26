@@ -22,7 +22,7 @@ OpenArbiter("LastSubmariner100");
 
         s_win    = 14;
         s_defeat = 15;
-        artefacts_per_player = 10;
+        artefacts_per_player = 3;
         ofst = 20;
         Research_Build = "Research";
 
@@ -199,7 +199,7 @@ OpenArbiter("LastSubmariner100");
         EventArtUnLoaded(TRUE)
         {
             _RT134 := 0;// to delete flag
-            _RT135 := getTechDevG();
+            _RT135 := GetTechDevG(_PI10);
             if(_RT135==100)
             {
                 actStringMess("All research is already done! Nothing to discover");
