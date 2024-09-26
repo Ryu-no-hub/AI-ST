@@ -2,20 +2,20 @@ include<[_inc_path]\AiScript.dfn>;
 include<[_inc_path]\AiScript.mcr>;
 include<[_inc_path]\Strategs\CONST_LastSubmariner.dfn>;
 /*
-    _RT100 - РЅР°С‡Р°Р»СЊРЅС‹Р№ РёРЅРґРµРєСЃ С‡С‚РµРЅРёСЏ РёР· String Table
-    _RT101 - С‚РёРї Р°СЂС‚РµС„Р°РєС‚Р° M, L, S, XL
-    _RT102 - value Р°СЂС‚РµС„Р°РєС‚Р°
-    _RT103 - СЂР°СЃСЃР° - WS, BO, SI
-    _RT104, _RT106 - СЃС‡РµС‚С‡РёРєРё РіРµРЅРµСЂРёСЂСѓРµРјС‹С… СЃСѓР±РјР°СЂРёРЅ
-    _RT105 - РР” СЃСѓР±РјР°СЂРёРЅС‹Р№
-    _RT107 - С„Р»Р°Рі РЅР°РіСЂР°РґС‹: 1 - СЂРµСЃСѓСЂСЃС‹ 2 - СЃСѓР±РјР°СЂРёРЅР° 3 - С‚РµС…РЅРѕР»РѕРіРёСЏ
-    _RT108 - РєРѕР»-РІРѕ СЂРµСЃСѓСЂСЃРѕРІ РЅР°РіСЂР°РґС‹
-    _RT109 - РР” СЃСѓР±РјР°СЂРёРЅС‹ WS РІ РЅР°РіСЂР°РґРµ
-    _RT110 - РР” СЃСѓР±РјР°СЂРёРЅС‹ BO РІ РЅР°РіСЂР°РґРµ
-    _RT111 - РР” СЃСѓР±РјР°СЂРёРЅС‹ SI РІ РЅР°РіСЂР°РґРµ
-    _RT112-127 - x,y РїРµСЂРІРѕРіРѕ РѕР±СЉРµРєС‚Р° РєР°Р¶РґРѕРіРѕ РёРіСЂРѕРєР°
-    _RT128 - РєРѕР»-РІРѕ РёРіСЂРѕРєРѕРІ
-    _RT129 - СЂР°Р·РјРµСЂ РєР°СЂС‚С‹
+    _RT100 - начальный индекс чтения из String Table
+    _RT101 - тип артефакта M, L, S, XL
+    _RT102 - value артефакта
+    _RT103 - расса - WS, BO, SI
+    _RT104, _RT106 - счетчики генерируемых субмарин
+    _RT105 - ИД субмариный
+    _RT107 - флаг награды: 1 - ресурсы 2 - субмарина 3 - технология
+    _RT108 - кол-во ресурсов награды
+    _RT109 - ИД субмарины WS в награде
+    _RT110 - ИД субмарины BO в награде
+    _RT111 - ИД субмарины SI в награде
+    _RT112-127 - x,y первого объекта каждого игрока
+    _RT128 - кол-во игроков
+    _RT129 - размер карты
 */
 OpenArbiter("LastSubmariner100");
     OpenEvents();
@@ -43,17 +43,17 @@ OpenArbiter("LastSubmariner100");
                     else // --SI--
                     {
                         ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "Start object"); 
-                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "Start object"); 
-                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "Start object");
-                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "Start object"); 
-                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "Start object");
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE);
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE);
                     }
                 }
             _ploop_end
             actOffEvent(20);
         }
 
-        // СЃРѕР·РґР°РЅРёРµ Р°СЂС‚РµС„Р°РєС‚РѕРІ
+        // создание артефактов
         Event(TRUE)
         {
             _ploop_begin
@@ -68,6 +68,7 @@ OpenArbiter("LastSubmariner100");
                     if(_pl_==PLAYER_5){_RT122:=_RT24; _RT123:=_RT25;}
                     if(_pl_==PLAYER_6){_RT124:=_RT24; _RT125:=_RT25;}
                     if(_pl_==PLAYER_7){_RT126:=_RT24; _RT127:=_RT25;}
+                    ActSetName("", _RT24, _RT25, _RT26);
                     //_actStringMess(_inttostr(_RT24) + " " + _inttostr(_RT25))
                 }
                 _RT128 += artefacts_per_player;
@@ -120,14 +121,14 @@ OpenArbiter("LastSubmariner100");
         }
 
 
-        // Р”Р°РµРј РёРјСЏ РґР»СЏ РёСЃСЃР». С†РµРЅС‚РѕРІ
+        // Даем имя для иссл. центов
         EventPlObjCreated(_PI3 == TECHCENTER || _PI3 == RESEARCH_LABORATORY || _PI3 == COMMAND_HUB)
         {
             ActSetName(Research_Build, _PI5, _PI6, _PI7);
             actLockEvent();
         }
 
-        // РґР»СЏ РїРµСЂРµРёРјРµРЅРѕРІС‹РІР°РЅРёСЏ РёСЃСЃ. С†РµРЅС‚СЂРѕРІ
+        // для переименовывания исс. центров
         EventPlObjCreated(_PI3 == TECHCENTER || _PI3 == RESEARCH_LABORATORY || _PI3 == COMMAND_HUB)
         {
             //actStringMess("player: " + _inttostr(_PI10))
@@ -145,16 +146,16 @@ OpenArbiter("LastSubmariner100");
             _RT130 := 1;
             while(_RT130 <= GetPlObjN(_PI10, AIREL_MYSELF, Research_Build))
             {
-                // С‚СѓС‚ РїРѕР»СѓС‡Р°РµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ С‚РµС… С†РµРЅС‚СЂР°
+                // тут получаем координаты тех центра
                 if(IsPlObjExist(_PI10, Research_Build, 24, 25, 26) )
                 {
                     _RT131:= 0;
-                    // СЌС‚РѕС‚ С†РёРєР» РґР»СЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РёРјРµРЅРё С‚РµС…. С†РµРЅС‚СЂР°
+                    // этот цикл для формирования имени тех. центра
                     while(_RT131>=0)
                     {
                         _RT131+=1;
-                        // РµСЃР»Рё Сѓ РёРіСЂРѕРєР° РЅРµС‚ С‚РµС…. С†РµРЅС‚СЂР° СЃ РёРјРµРЅРµРј Research_Build, РіРґРµ N РєРѕР»-РІРѕ
-                        // С‚Рѕ СЃС‚Р°РІРёРј СЌС‚Рѕ РёРјСЏ Рё РІС‹С…РѕРґРёРј РёР· С†РёРєР»Р°
+                        // если у игрока нет тех. центра с именем Research_Build, где N кол-во
+                        // то ставим это имя и выходим из цикла
                         if(!IsPlObjExist(_PI10, Research_Build + _inttostr(_RT131)))
                         {
                             ActSetName(Research_Build + _inttostr(_RT131), _RT24, _RT25, _RT26);
@@ -206,7 +207,7 @@ OpenArbiter("LastSubmariner100");
             }
             else
             {
-                // 1 СЃСЂР°РІРЅРёС‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹ Р°СЂС‚РµС„Р°РєС‚Р° СЃ РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё С‚РµС…. С†РµРЅС‚СЂРѕРІ РёРіСЂРѕРєР°
+                // 1 сравнить координаты артефакта с координатами тех. центров игрока
                 _RT130 := 1;
                 _RT132 := GetPlObjT(_PI10, AIREL_MYSELF, TECHCENTER) + GetPlObjT(_PI10, AIREL_MYSELF, RESEARCH_LABORATORY) + GetPlObjT(_PI10, AIREL_MYSELF, COMMAND_HUB);
                 //actStringMess("Research buildings to scan: " + _inttostr(_RT132));
@@ -219,7 +220,7 @@ OpenArbiter("LastSubmariner100");
                         {
                             actStringMess("Artifact delivered");
 
-                            // СЃС‡РёС‚Р°РµРј СЃР»СѓС‡Р°Р№РЅС‹Р№ РіСЂРµР№Рґ
+                            // считаем случайный грейд
                             _RT133 := 0;
                             if(_PI11==CIV_WS){_RT133 := GetRnd(27,34);}
                             if(_PI11==CIV_BO){_RT133 := GetRnd(35,43);}
@@ -230,7 +231,7 @@ OpenArbiter("LastSubmariner100");
                             _RT136 := _strtoint(GetStrRes(_RT133));
                             //actStringMess("Tech number: "  + _inttostr(_RT136));
 
-                            // РІС‹РґР°С‘Рј СЃР»СѓС‡Р°Р№РЅС‹Р№ РіСЂРµР№Рґ (РёР»Рё РЅРµС‚)
+                            // выдаём случайный грейд (или нет)
                             //actStringMess("Tech id: " + _inttostr(_RT133));
                             if(!IsTechDev(_PI10, _RT136)){
                                 ActTechSet(_PI10, AIREL_MYSELF, _RT136);
@@ -239,7 +240,7 @@ OpenArbiter("LastSubmariner100");
                                 actStringMess("This artifact technology was already developed");
                             }
                             _RT134 := 1;
-                            _RT130 := _RT132; // С‡С‚РѕР±С‹ РІС‹Р№С‚Рё РёР· С†РёРєР»Р°
+                            _RT130 := _RT132; // чтобы выйти из цикла
                         }
                     }
                     _RT130 += 1;
