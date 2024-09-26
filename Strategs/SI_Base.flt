@@ -3,32 +3,31 @@ OpenFleet("SI Base", CIV_SI, AIF_BASE, 13);
   // Staff
   PutInStaff(PROTOPLASM_GENERATOR         , UNDEFINED,UNDEFINED, 49);
   PutInStaff(COMMAND_HUB                  , UNDEFINED,UNDEFINED, 47);
-  PutInStaff(MOBILITY_HUB_MODULE          , UNDEFINED,UNDEFINED, 47);
+  PutInStaff(MOBILITY_HUB_MODULE          , UNDEFINED,UNDEFINED, 46);
+  PutInStaff(MOBILITY_HUB_MODULE          , UNDEFINED,UNDEFINED, 46);
+
   PutInStaff(ENERGY_ACCUMULATOR           , UNDEFINED,UNDEFINED, 46);
-  PutInStaff(MOBILITY_HUB_MODULE          , UNDEFINED,UNDEFINED, 45);
-  PutInStaff(MOBILITY_HUB_MODULE          , UNDEFINED,UNDEFINED, 45);
-  PutInStaff(GATE                         , UNDEFINED,UNDEFINED, 10);
-  PutInStaff(GATE                         , UNDEFINED,UNDEFINED, 10);
-  PutInStaff(SILICON_EXTRACTOR            , UNDEFINED,UNDEFINED, 10);
-  PutInStaff(SILICON_EXTRACTOR            , UNDEFINED,UNDEFINED, 10);
-  PutInStaff(SILICON_EXTRACTOR            , UNDEFINED,UNDEFINED, 10);
+  //PutInStaff(MOBILITY_HUB_MODULE          , UNDEFINED,UNDEFINED, 45);
+  PutInStaff(SILICON_EXTRACTOR            , UNDEFINED,UNDEFINED, 44);
+  PutInStaff(PP_PULSAR                    , UNDEFINED,UNDEFINED, 42);
+  PutInStaff(PP_PULSAR                    , UNDEFINED,UNDEFINED, 42);
 
   PutInStaff(GAS_LASER_SATELLITE_LAUNCHER , UNDEFINED,UNDEFINED, 10);
-  PutInStaff(VACUUM_BOMB_LAUNCHER         , UNDEFINED,UNDEFINED, 10);
 
   PutInStaff(CORIUM_SILO                  , UNDEFINED,UNDEFINED, 10);
   PutInStaff(CORIUM_COLLECTOR             , UNDEFINED,UNDEFINED, 10);
   PutInStaff(BIOSONAR_STATION             , UNDEFINED,UNDEFINED, 10);
+
+  PutInStaff(SILICON_EXTRACTOR            , UNDEFINED,UNDEFINED, 10);
+  PutInStaff(SILICON_EXTRACTOR            , UNDEFINED,UNDEFINED, 10);
+  PutInStaff(VACUUM_BOMB_LAUNCHER         , UNDEFINED,UNDEFINED, 10);
   PutInStaff(PROTOPLASM_GENERATOR         , UNDEFINED,UNDEFINED, 10);
   PutInStaff(MOBILITY_HUB_MODULE          , UNDEFINED,UNDEFINED, 10);
+  PutInStaff(DPT_GUN                      , UNDEFINED,UNDEFINED, 10);
+  PutInStaff(ENERGY_CONVERTER             , UNDEFINED,UNDEFINED, 10);
 
   PutInStaff(GAS_LASER_SATELLITE_LAUNCHER , UNDEFINED,UNDEFINED, 10);
 
-  PutInStaff(DPT_GUN                      , UNDEFINED,UNDEFINED, 10);
-  PutInStaff(ENERGY_CONVERTER             , UNDEFINED,UNDEFINED, 10);
-  PutInStaff(PP_PULSAR                    , UNDEFINED,UNDEFINED, 10);
-
-  PutInStaff(VACUUM_BOMB_LAUNCHER         , UNDEFINED,UNDEFINED, 10);
   
   PutInStaff(PP_PULSAR                    , UNDEFINED,UNDEFINED, 10);
   PutInStaff(GAS_SHELL_LAUNCHER           , UNDEFINED,UNDEFINED, 10);
@@ -36,6 +35,7 @@ OpenFleet("SI Base", CIV_SI, AIF_BASE, 13);
   PutInStaff(SOLITON_OSCILLATOR           , UNDEFINED,UNDEFINED, 10);
   PutInStaff(BIO_MINE_LAUNCHER            , UNDEFINED,UNDEFINED, 10);
   PutInStaff(REPLENISH_POD                , UNDEFINED,UNDEFINED, 10);
+  PutInStaff(VACUUM_BOMB_LAUNCHER         , UNDEFINED,UNDEFINED, 10);
   PutInStaff(RECYCLOTRON                  , UNDEFINED,UNDEFINED, 10);
   PutInStaff(PROTOPLASM_GENERATOR         , UNDEFINED,UNDEFINED, 10);
   PutInStaff(ENERGY_ACCUMULATOR           , UNDEFINED,UNDEFINED, 10);
@@ -43,8 +43,6 @@ OpenFleet("SI Base", CIV_SI, AIF_BASE, 13);
   PutInStaff(GAS_SHELL_LAUNCHER           , UNDEFINED,UNDEFINED, 10);
   PutInStaff(COMMAND_HUB                  , UNDEFINED,UNDEFINED, 10);
   PutInStaff(ION_REFLECTOR                , UNDEFINED,UNDEFINED, 10);
-  PutInStaff(SILICON_EXTRACTOR            , UNDEFINED,UNDEFINED, 10);
-  PutInStaff(SILICON_EXTRACTOR            , UNDEFINED,UNDEFINED, 10);
   PutInStaff(PROTOPLASM_GENERATOR         , UNDEFINED,UNDEFINED, 10);
   PutInStaff(PROTOPLASM_GENERATOR         , UNDEFINED,UNDEFINED, 10);
   PutInStaff(CORIUM_SILO                  , UNDEFINED,UNDEFINED, 10);
@@ -113,21 +111,21 @@ MOLECULAR_REPAIR_FACILITY      = 110;
 // now
 CAPSULE                        = 25; 
 TRANSPORT                      = 26; 
-SUPPLY_SUB                     = 27; //  REP_PLATFORM - не для компьютера
-REPLINISHER                    = 29; //  только заряжает (1 во флотилию)
+SUPPLY_SUB                     = 27; //  REP_PLATFORM - Г­ГҐ Г¤Г«Гї ГЄГ®Г¬ГЇГјГѕГІГҐГ°Г 
+REPLINISHER                    = 29; //  ГІГ®Г«ГјГЄГ® Г§Г Г°ГїГ¦Г ГҐГІ (1 ГўГ® ГґГ«Г®ГІГЁГ«ГЁГѕ)
 
 SHS_SUB                        = 30; //  SENTINEL
-ESCORT                         = 32; //  больше DESTROYER но меньше HEAVY_CRUISER
-DREADNOUGHT                    = 31; //  для нападения на наземные сооружения          
+ESCORT                         = 32; //  ГЎГ®Г«ГјГёГҐ DESTROYER Г­Г® Г¬ГҐГ­ГјГёГҐ HEAVY_CRUISER
+DREADNOUGHT                    = 31; //  Г¤Г«Гї Г­Г ГЇГ Г¤ГҐГ­ГЁГї Г­Г  Г­Г Г§ГҐГ¬Г­Г»ГҐ Г±Г®Г®Г°ГіГ¦ГҐГ­ГЁГї          
 
-USURPER                        = 34; //  захватчик ( SHS_SUB с большей броней)
-BIO_ACID_ASSAULTER             = 33; //  HEAVY_CRUISER (для нападения лучше)
-PARALISIS_PROBE                = 28; //  SHS_SUB + парализация (1 во флотилию)
+USURPER                        = 34; //  Г§Г ГµГўГ ГІГ·ГЁГЄ ( SHS_SUB Г± ГЎГ®Г«ГјГёГҐГ© ГЎГ°Г®Г­ГҐГ©)
+BIO_ACID_ASSAULTER             = 33; //  HEAVY_CRUISER (Г¤Г«Гї Г­Г ГЇГ Г¤ГҐГ­ГЁГї Г«ГіГ·ГёГҐ)
+PARALISIS_PROBE                = 28; //  SHS_SUB + ГЇГ Г°Г Г«ГЁГ§Г Г¶ГЁГї (1 ГўГ® ГґГ«Г®ГІГЁГ«ГЁГѕ)
 
-GM_VERMIN                      = 35; //  SHS_SUB, но против психо поля и фантомом (1 во флотилию)
-DEVASTATOR                     = 37; //  нет
+GM_VERMIN                      = 35; //  SHS_SUB, Г­Г® ГЇГ°Г®ГІГЁГў ГЇГ±ГЁГµГ® ГЇГ®Г«Гї ГЁ ГґГ Г­ГІГ®Г¬Г®Г¬ (1 ГўГ® ГґГ«Г®ГІГЁГ«ГЁГѕ)
+DEVASTATOR                     = 37; //  Г­ГҐГІ
 
-EXPLORER                       = 36; //  не для компьютера
+EXPLORER                       = 36; //  Г­ГҐ Г¤Г«Гї ГЄГ®Г¬ГЇГјГѕГІГҐГ°Г 
 
 */
 

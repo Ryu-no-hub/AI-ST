@@ -42,6 +42,40 @@ OpenStringTable();
  /*024*/PutString(""); 
  /*025*/PutString("You've got %d units of %s"); 
  /*026*/PutString("The thing"); 
+
+ // WS technology
+ /*027*/PutString("9");
+ /*028*/PutString("13");
+ /*029*/PutString("17");
+ /*030*/PutString("20");
+ /*031*/PutString("21");
+ /*032*/PutString("22");
+ /*033*/PutString("29");
+ /*034*/PutString("30");
+ // BO technology
+ /*035*/PutString("37");
+ /*036*/PutString("39");
+ /*037*/PutString("48");
+ /*038*/PutString("53");
+ /*039*/PutString("132");
+ /*040*/PutString("134");
+ /*041*/PutString("135");
+ /*042*/PutString("137");
+ /*043*/PutString("138");
+ // SI technology
+ /*044*/PutString("70");
+ /*045*/PutString("72");
+ /*046*/PutString("84");
+ /*047*/PutString("88");
+ /*048*/PutString("96");
+ /*049*/PutString("102");
+ /*050*/PutString("107");
+ /*051*/PutString("108");
+
+ /*052*/PutString("TECHCENTER");
+ /*053*/PutString("LABORATORY");
+ /*054*/PutString("COMMAND_HUB");
+
 CloseStringTable();
 
 
@@ -54,6 +88,15 @@ name("AIBOSS");
 name("OBJECTIVES");        
 OpenStringTable();
  /*000*/PutString("Kill all enemies"); 
+CloseStringTable();
+
+name("AIBOSS001");            
+ _full_name = "LastSubmariner";
+ include<[_curr_path]\Arbiter_LastSubmariner.arb>;
+
+name("OBJECTIVES001");
+OpenStringTable();
+ /*000*/PutString("LastSubmariner. See #custom-maps"); 
 CloseStringTable();
 
 #if(!__DEMO)
@@ -139,6 +182,9 @@ name("OPPONENT",3,-1,0);
  include<[_curr_path]\SI_Opponent_01.stg>;
  _full_name = "SI Opponent Level 02";_short_name = "AI STRONG";
  include<[_curr_path]\SI_Opponent_02.stg>;
+
+ _full_name = "AI NEUTRAL";_short_name = "AI NEUTRAL";
+ include<[_curr_path]\AI_NEUTRAL.stg>;
 
 close();
 
