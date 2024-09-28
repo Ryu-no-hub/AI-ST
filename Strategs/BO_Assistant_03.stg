@@ -15,8 +15,8 @@ OpenStrateg(_full_name, CIV_BO, _short_name, 0x00000003);
     ActStringMess(PLAYER_ALL, AIREL_MYSELF, "Игрок: " + GetPlName(PLAYER_ME) + " сдался!");
 
     actDelPlObjEx(AITRG_ALL, UNDEFINED, LOGO_UNDEF, "", 0, 0, 0, -1, -1, -1, VEFF_EXPLOSION);
-    
-    // åñëè âäðóã ó êàêîãî-òî îáúåêòà åñòü Èìÿ
+
+    // для строящихся объектов
     actDelPlObjEx(AITRG_ALL);
   };
  CloseEvents();
