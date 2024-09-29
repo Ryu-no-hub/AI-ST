@@ -43,10 +43,11 @@ OpenArbiter("LastSubmariner100");
                     else // --SI--
                     {
                         ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "Start object"); 
-                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
-                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE);
-                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
-                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE);
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "The thing"); 
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "The thing");
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "The thing"); 
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "The thing");
+                        actStringMess("AAAAAAAAA" + "\n")
                     }
                 }
             _ploop_end
@@ -121,6 +122,19 @@ OpenArbiter("LastSubmariner100");
         }
 
 
+        EventPlObjCreated(_PI3 != SILICON_EXTRACTOR)
+        {
+            ActSetName("The thing", _PI5,_PI6,_PI7);
+            ActLockEvent();
+        }
+
+        EventPlObjCreated(_PI3 == SILICON_EXTRACTOR)
+        {
+            ActSetName("SM", _PI5,_PI6,_PI7);
+            ActLockEvent();
+        }
+
+
         // Даем имя для иссл. центов
         EventPlObjCreated(_PI3 == TECHCENTER || _PI3 == RESEARCH_LABORATORY || _PI3 == COMMAND_HUB)
         {
@@ -131,16 +145,6 @@ OpenArbiter("LastSubmariner100");
         // для переименовывания исс. центров
         EventPlObjCreated(_PI3 == TECHCENTER || _PI3 == RESEARCH_LABORATORY || _PI3 == COMMAND_HUB)
         {
-            //actStringMess("player: " + _inttostr(_PI10))
-            //actStringMess("civ: " + _inttostr(_PI1))
-            //actStringMess("tobj: " + _inttostr(_PI3) + "\n")
-//
-//            if(_PI1==CIV_WS){_RT64 := 52;}
-//            else
-//            {if(_PI1==CIV_BO){_RT64 := 53;}
-//                else{_RT64 := 54;}
-//            }
-
             //actStringMess("name: " + Research_Build)
 
             _RT130 := 1;

@@ -24,7 +24,7 @@ OpenArbiter(_full_name, 0x00000001);
     //ActCreateStartSet(PLAYER_ALL,AIREL_MYSELF, LEVEL_DEFINED);
     _ploop_begin
       if(GetPlCiv(_pl_)==CIV_WS)     //--WS--
-      { ActCreatePlObj(_plmyself, CONSTRUCTOR); 
+      { ActCreatePlObj(_plmyself, CONSTRUCTOR, -1, -1, -1, LOGO_UNDEF, "The thing"); 
         if(GetStartSetLevel()>LEVEL_LOW)        
         { ActCreatePlObj(_plmyself, SENTINEL); 
           ActCreatePlObj(_plmyself, SENTINEL); 
@@ -37,7 +37,7 @@ OpenArbiter(_full_name, 0x00000001);
       }
       else
       { if(GetPlCiv(_pl_)==CIV_BO)   //--BO--
-        { ActCreatePlObj(_plmyself, ASSEMBLER); 
+        { ActCreatePlObj(_plmyself, ASSEMBLER, -1, -1, -1, LOGO_UNDEF, "The thing"); 
           if(GetStartSetLevel()>LEVEL_LOW)        
           { ActCreatePlObj(_plmyself, FIGHTER); 
             ActCreatePlObj(_plmyself, FIGHTER); 
@@ -49,9 +49,9 @@ OpenArbiter(_full_name, 0x00000001);
           }
         }
         else                         //--SI--
-        { ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
-          ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
-          ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE); 
+        { ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "The thing"); 
+          ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "The thing"); 
+          ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "The thing"); 
           if(GetRCLevel() == LEVEL_MEDIUM)
           {
             ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE);
@@ -130,6 +130,12 @@ OpenArbiter(_full_name, 0x00000001);
   EventPlObjCreated(TRUE)
   {
     ActSetName("The thing", _PI5,_PI6,_PI7);
+    ActLockEvent();
+  }
+
+  EventPlObjCreated(_PI3 == SILICON_EXTRACTOR)
+  {
+    ActSetName("SM", _PI5,_PI6,_PI7);
     ActLockEvent();
   }
 
