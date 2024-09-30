@@ -50,7 +50,10 @@ OpenArbiter("LastSubmariner100");
                     }
                 }
             _ploop_end
+            actOffEvent(10);
             actOffEvent(20);
+            actOffEvent(30);
+            actOffEvent(100);
         }
 
         // создание артефактов
@@ -268,5 +271,71 @@ OpenArbiter("LastSubmariner100");
             actStringMess("Artifacts remaining on map: " + _inttostr(GetArt()-1))
         }
 
+        // Event for end game sessions
+        // BEGIN
+        Event(getOwnTime()>10)
+        { 
+            actOnEvent(IsTeamGame() ? 20 : 10);
+            actOnEvent(30);
+            actOnEvent(100);
+        }
+
+        // Player has been killed
+        Event(getOwnTime()%3==1, 10)
+        { 
+            _ploop_begin
+                if(!getVar(100+_pl_) && GetPlObjM(_plmyself, AITRG_ALL)==0)
+                { 
+                    actSetVar(100+_pl_, ENDMISS_FAILED);
+                    ActOnTimer(_plmyself,10);
+                    ActOffFOW(_plmyself);                                 
+                    _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
+                }
+            _ploop_end
+            actLockEvent();
+        }
+        // Player's team has been killed
+        Event(getOwnTime()%3==1, 20)
+        { 
+            _ploop_begin
+                if(!getVar(100+_pl_) && GetPlObjM(_plunion, AITRG_ALL)==0)
+                { 
+                    actSetVar(100+_pl_, ENDMISS_FAILED);
+                    ActOnTimer(_plmyself,10);
+                    ActOffFOW(_plmyself);                                 
+                    _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
+                }
+            _ploop_end
+            actLockEvent();
+        }
+        // Player's enemies have been killed
+        Event(getOwnTime()%3==1, 30)
+        { 
+            _ploop_begin
+                if(!getVar(100+_pl_) && GetPlObjM(_plnotally, AITRG_ALL)==0)
+                {
+                    actSetVar(100+_pl_, ENDMISS_ACCOMPL);
+                    ActOnTimer(_plmyself,10);
+                    ActOffFOW(_plmyself);                                 
+                    _actStringMess(_strf(GetStrRes(s_win), GetPlName(_pl_)));
+                }
+            _ploop_end
+            actLockEvent();
+        }
+        // The final phase 
+        Event(TRUE, 100)
+        { 
+            _ploop_begin
+                if(getVar(100+_pl_)>0 && GetTimerTime(_pl_)==0)
+                { 
+                    ActOffTimer(_plmyself);
+                    ActTotalStatistics(_plmyself, 10);
+                    ActEndMiss(_plmyself, getVar(100+_pl_));
+                    actSetVar(100+_pl_, -1);
+                }
+            _ploop_end
+            actLockEvent();
+        }
+        // END
     CloseEvents();
 CloseArbiter();
