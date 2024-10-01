@@ -9,19 +9,26 @@ include<[_inc_path]\AiScript.mcr>;
 #endif
 
 OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
- 
- // Parameters
- MainEnemy(AICAN_MYSELF, PLAYER_ALL);
 
  // Tactics
  include<[_curr_path]\SI_Silicon_Tactitian.tct>;
 
  // Events
  OpenEvents();
-  // Execute Tactician
+
+	BUILDER_NAME = "Builder";
+
+	// Execute Tactician
 	Event(getOwnTime()>1) 
 	{ 
-		actObjSelectM(AITRG_ALL);
+		//actObjSelectM(AITRG_ALL);
+
+		// Выбрать только 1 пробку
+		if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
+		{
+			actObjSelectT(UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
+		}
+
 		actExecTactic("SI Silicon tactitian");
 		_RT22 := getFleetNum("SI Silicon mines", "SI Silicon tactitian");
 		_RT10 := GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80;
@@ -29,10 +36,10 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		actOffEvent(20);
 
 		_ploop_begin
-		  if(GetPlCiv(_pl_) == CIV_SI && (GetTeam(_pl_) == GetTeam(PLAYER_ME)) )
-		  {
-		    _RT11 += 1;
-		  }
+		if(GetPlCiv(_pl_) == CIV_SI && (GetTeam(_pl_) == GetTeam(PLAYER_ME)) )
+		{
+			_RT11 += 1;
+		}
 		_ploop_end
 
 
@@ -161,8 +168,8 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 
 	EventPlObjCreated(_PI3 == SILICON_EXTRACTOR && (_RT13 > 0), 10)
 	{
-        //ActSetName("SM", _PI5, _PI6, _PI7);
-        if(IsPlObjExist(PLAYER_ME, "SM", 24, 25, 26, 27)) 
+	    //ActSetName("SM", _PI5, _PI6, _PI7);
+	    if(IsPlObjExist(PLAYER_ME, "SM", 24, 25, 26, 27)) 
 			{
 				_actStringMess("SI mine finished at: " + _inttostr(_RT24) + " " + _inttostr(_RT25) + " " + _inttostr(_RT26) + ", searching optimal place for next");
 				_RT30 := _RT24;
@@ -234,10 +241,10 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 					}
 			}
 			else {_actStringMess("Cant find object SM");}
-        actLockEvent();
+	    actLockEvent();
 	}
 
- CloseEvents();
+	CloseEvents();
 
 CloseStrateg();
 

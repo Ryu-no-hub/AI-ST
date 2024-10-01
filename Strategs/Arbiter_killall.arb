@@ -15,6 +15,8 @@ OpenArbiter(_full_name, 0x00000001);
   // Const
   s_win    = 14;
   s_defeat = 15;
+  BASIC_NAME = "The thing";
+  SILICON_MINE_NAME = "SM";
   // Used variables :
   //   _RT100-_RT107 - mission conditions
 
@@ -24,53 +26,54 @@ OpenArbiter(_full_name, 0x00000001);
     //ActCreateStartSet(PLAYER_ALL,AIREL_MYSELF, LEVEL_DEFINED);
     _ploop_begin
       if(GetPlCiv(_pl_)==CIV_WS)     //--WS--
-      { ActCreatePlObj(_plmyself, CONSTRUCTOR, -1, -1, -1, LOGO_UNDEF, "The thing"); 
+      { ActCreatePlObj(_plmyself, CONSTRUCTOR, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
         if(GetStartSetLevel()>LEVEL_LOW)        
-        { ActCreatePlObj(_plmyself, SENTINEL); 
-          ActCreatePlObj(_plmyself, SENTINEL); 
-          ActCreatePlObj(_plmyself, HUNTER); 
+        { ActCreatePlObj(_plmyself, SENTINEL, -1, -1, -1, LOGO_UNDEF, BASIC_NAME);  
+          ActCreatePlObj(_plmyself, SENTINEL, -1, -1, -1, LOGO_UNDEF, BASIC_NAME);  
+          ActCreatePlObj(_plmyself, HUNTER, -1, -1, -1, LOGO_UNDEF, BASIC_NAME);  
         }
         if(GetStartSetLevel()>LEVEL_MEDIUM)  
-        { ActCreatePlObj(_plmyself, CRUISER); 
-          ActCreatePlObj(_plmyself, MARAUDER); 
+        { ActCreatePlObj(_plmyself, CRUISER, -1, -1, -1, LOGO_UNDEF, BASIC_NAME);  
+          ActCreatePlObj(_plmyself, MARAUDER, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
         }
       }
       else
       { if(GetPlCiv(_pl_)==CIV_BO)   //--BO--
-        { ActCreatePlObj(_plmyself, ASSEMBLER, -1, -1, -1, LOGO_UNDEF, "The thing"); 
+        { ActCreatePlObj(_plmyself, ASSEMBLER, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
           if(GetStartSetLevel()>LEVEL_LOW)        
-          { ActCreatePlObj(_plmyself, FIGHTER); 
-            ActCreatePlObj(_plmyself, FIGHTER); 
-            ActCreatePlObj(_plmyself, DESTROYER); 
+          { ActCreatePlObj(_plmyself, FIGHTER, -1, -1, -1, LOGO_UNDEF, BASIC_NAME);  
+            ActCreatePlObj(_plmyself, FIGHTER, -1, -1, -1, LOGO_UNDEF, BASIC_NAME);  
+            ActCreatePlObj(_plmyself, DESTROYER, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
           }
           if(GetStartSetLevel()>LEVEL_MEDIUM)  
-          { ActCreatePlObj(_plmyself, HEAVY_CRUISER); 
-            ActCreatePlObj(_plmyself, RAIDER); 
+          { ActCreatePlObj(_plmyself, HEAVY_CRUISER, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
+            ActCreatePlObj(_plmyself, RAIDER, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
           }
         }
         else                         //--SI--
-        { ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "The thing"); 
-          ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "The thing"); 
-          ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, "The thing"); 
+        { ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
+          ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
+          ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
           if(GetRCLevel() == LEVEL_MEDIUM)
           {
-            ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE);
-            ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE);
+            ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
+            ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
           }
           if(GetRCLevel() == LEVEL_HIGH)
           {
-            ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE);
-            ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE);
-            ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE);
+            ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
+            ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
+            ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
           }
           if(GetStartSetLevel()>LEVEL_LOW)        
-          { ActCreatePlObj(_plmyself, SHS_SUB); 
-            ActCreatePlObj(_plmyself, SHS_SUB); 
-            ActCreatePlObj(_plmyself, SHS_SUB); 
+          { 
+            ActCreatePlObj(_plmyself, SHS_SUB, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
+            ActCreatePlObj(_plmyself, SHS_SUB, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
+            ActCreatePlObj(_plmyself, SHS_SUB, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
           }
           if(GetStartSetLevel()>LEVEL_MEDIUM)  
-          { ActCreatePlObj(_plmyself, ESCORT); 
-            ActCreatePlObj(_plmyself, USURPER); 
+          { ActCreatePlObj(_plmyself, ESCORT, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
+            ActCreatePlObj(_plmyself, USURPER, -1, -1, -1, LOGO_UNDEF, BASIC_NAME); 
           }
         }
       }
@@ -129,13 +132,13 @@ OpenArbiter(_full_name, 0x00000001);
 
   EventPlObjCreated(TRUE)
   {
-    ActSetName("The thing", _PI5,_PI6,_PI7);
+    ActSetName(BASIC_NAME, _PI5,_PI6,_PI7);
     ActLockEvent();
   }
 
   EventPlObjCreated(_PI3 == SILICON_EXTRACTOR)
   {
-    ActSetName("SM", _PI5,_PI6,_PI7);
+    ActSetName(SILICON_MINE_NAME, _PI5,_PI6,_PI7);
     ActLockEvent();
   }
 

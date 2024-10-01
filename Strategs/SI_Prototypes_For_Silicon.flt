@@ -5,8 +5,8 @@ OpenFleet("SI Builder",CIV_SI, AIF_BUILD, 12);
 
 
   // Param
-  CanChangeStaff(AICAN_MYSELF);
+  CanChangeStaff(AICAN_NOT);
   Build(AICAN_MYSELF);
-  RepairStaff(AICAN_MYSELF, 20, 0, AISF_HOMEPOSITION+AISF_PAUSE , AITRG_BOATMILITARY);
+  RepairStaff(AICAN_NOT);
 CloseFleet();
 
