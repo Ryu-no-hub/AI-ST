@@ -45,6 +45,7 @@ OpenArbiter("Last Submariner");
             _ploop_end
             actOffEvent(10);
             actOffEvent(20);
+            actOffEvent(21);
             actOffEvent(30);
             actOffEvent(100);
         }
@@ -113,7 +114,7 @@ OpenArbiter("Last Submariner");
                 }
             }
 
-            actStringMess("В секторе обнаружено " + _inttostr(GetArt()) + " артефактов с неизвестными технологиями")
+            actStringMess("В секторе обнаружены артефакты:" + _inttostr(GetArt()))
         }
 
 
@@ -261,13 +262,13 @@ OpenArbiter("Last Submariner");
                 _RT55 := _PI5;
                 _RT56 := _PI6;
                 _RT57 := _PI7;
-                actOnEvent(20);
+                actOnEvent(21);
             }
             actLockEvent();
         }
 
         // Delete artifact
-        Event(GetTime() - _RT50 > 1, 20)
+        Event(GetTime() - _RT50 > 1, 21)
         {
             ActDelArt(TART_UNDEFINED, "", _RT55, _RT56, _RT57, _RT55, _RT56, _RT57, VEFF_NONE);
             actStringMess("Осталось артефактов: " + _inttostr(GetArt()-1));
