@@ -24,11 +24,11 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 	Event(getOwnTime()>1) 
 	{ 
 		// Выбрать только 1 пробку
-//		if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
-//		{
-//			actObjSelectT(UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
-//			//ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
-//		}
+		if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
+		{
+			actObjSelectT(UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
+			//ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
+		}
 		actObjSelectT(SILICON_EXTRACTOR);
 
 		actExecTactic("SI Silicon tactitian");
@@ -76,17 +76,27 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		if(_RT21)
 		{
 			//actFParCleanStaff(_RT23);
+//			if(IsPlObjExist(_PI10, BUILDER_NAME, 24, 25, 26, 27))
+//			{
+//				_RT71 := 1;
+//				_actStringMess("Builder found");
+//				ActObjSelectT(_PI10, AIREL_MYSELF, UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26+1);
+//				ActAddFleet(_PI10, AIREL_MYSELF, _RT23);
+//			}
+//			else
+//			{
+//				_RT71 := 0;
+//				//_RT24:=0; _RT25:=0;; _RT26:=0;
+//				ActStringMess(_PI10, AIREL_MYSELF, "Нет свободных подлодок-строителей для следующей шахты");
+//			}
 			if(IsPlObjExist(_PI10, BUILDER_NAME, 24, 25, 26, 27))
 			{
 				_RT71 := 1;
 				_actStringMess("Builder found");
-				ActObjSelectT(_PI10, AIREL_MYSELF, UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26+1);
-				ActAddFleet(_PI10, AIREL_MYSELF, _RT23);
 			}
 			else
 			{
 				_RT71 := 0;
-				//_RT24:=0; _RT25:=0;; _RT26:=0;
 				ActStringMess(_PI10, AIREL_MYSELF, "Нет свободных подлодок-строителей для следующей шахты");
 			}
 
@@ -169,8 +179,8 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 			{
 				_RT71 := 1;
 				_actStringMess("Builder found");
-				ActObjSelectT(_PI10, AIREL_MYSELF, UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
-				ActAddFleet(_PI10, AIREL_MYSELF, _RT23);
+				//ActObjSelectT(_PI10, AIREL_MYSELF, UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
+				//ActAddFleet(_PI10, AIREL_MYSELF, _RT23);
 			}
 			else
 			{
