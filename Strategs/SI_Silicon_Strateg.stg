@@ -23,18 +23,22 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 	// Execute Tactician
 	Event(getOwnTime()>1) 
 	{ 
+		// Выбрать только 1 пробку
+		if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
+		{
+			actObjSelectT(UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
+			//ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
+		}
+		actObjSelectT(SILICON_EXTRACTOR);
+
 		actExecTactic("SI Silicon tactitian");
+
 		_RT22 := getFleetNum("SI Silicon mines", "SI Silicon tactitian");
 		_RT23 := getFleetNum("SI Builder", "SI Silicon tactitian");
 		_RT10 := GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80;
 		//actOffEvent(20);
 
-		// Выбрать только 1 пробку
-		if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
-		{
-			actObjSelectT(UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
-			ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
-		}
+		
 
 		_ploop_begin
 		if(GetPlCiv(_pl_) == CIV_SI && (GetTeam(_pl_) == GetTeam(PLAYER_ME)) )
@@ -48,8 +52,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		_RT13 := (_RT12 * _RT12) / 2 / _RT11;
 
 		_RT21 := getPlObjT(SILICON_EXTRACTOR);
-		actObjSelectT(SILICON_EXTRACTOR);
-		actAddFleet(_RT22);
+		//actAddFleet(_RT22);
 		_RT13 := _RT13 - _RT21;
 
 
@@ -72,20 +75,35 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 
 		if(_RT21)
 		{
-			if(_RT13 > 0 && IsPlObjExist(PLAYER_ME, SILICON_MINE_NAME, 24, 25, 26, 27)) 
+			actFParCleanStaff(_RT23);
+			if(IsPlObjExist(_PI10, BUILDER_NAME, 24, 25, 26, 27))
+			{
+				_RT71 := 1;
+				_actStringMess("Builder found");
+				ActObjSelectT(_PI10, AIREL_MYSELF, UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
+				ActAddFleet(_PI10, AIREL_MYSELF, _RT23);
+			}
+			else
+			{
+				_RT71 := 0;
+				//_RT24:=0; _RT25:=0;; _RT26:=0;
+				ActStringMess(_PI10, AIREL_MYSELF, "Нет свободных подлодок-строителей для следующей шахты");
+			}
+
+			if(_RT13 > 0 && IsPlObjExist(PLAYER_ME, SILICON_MINE_NAME, 24, 25, 26, 27) && _RT71) 
 			{
 				_actStringMess("Found SI mine: " + _inttostr(_RT24) + " " + _inttostr(_RT25) + " " + _inttostr(_RT26));
 				_RT30 := _RT24;
 				_RT31 := _RT25;
 				_RT32 := _RT26;
 				_RT46 := 1;
+				_actStringMess("Start spiral point: " + _inttostr(_RT30) + " " + _inttostr(_RT31) + " " + _inttostr(_RT32) + ", searching optimal place for next");	
+
 
 				_RT41 := 1; // indicator of direction (+/-) and steps amount
+				_RT42 := 0; // indicator of axis: 0 - x, 1 - y
 				while((_RT41 <= _RT12) && _RT46) // кол-во шагов <= макс. шахт в линии
 					{
-						_RT42 := 0; // indicator of axis: 0 - x, 1 - y
-
-
 						_RT43 := _RT41;
 					  	while(_RT43 && _RT46)
 					  	{
@@ -104,18 +122,33 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 					  		_RT40 += 1;
 
 					  		_actStringMess("Next point: " + _inttostr(_RT30) + " " + _inttostr(_RT31));
-					  		if(_RT30 > 0 && _RT30 < _RT10 && _RT31 > 0 && _RT31 < _RT10)
+					  		if(_RT30 >= 0 && _RT30 < _RT10 && _RT31 >= 0 && _RT31 < _RT10)
 					  		{
 						  		//--- Check any SI mines in area around (_RT30, _RT31), then build and break out OR continue steps
+						  		_RT48 := _RT30 - STEP_SIZE + 2;
+						  		_RT49 := _RT30 + STEP_SIZE - 2;
+						  		_RT50 := _RT31 - STEP_SIZE + 2;
+						  		_RT51 := _RT31 + STEP_SIZE - 2;
+						  		if(_RT48 < 0) {_RT48 := 0;}
+						  		if(_RT49 >= _RT10) {_RT49 := _RT10 - 1;}
+
+						  		if(_RT50 < 0) {_RT50 := 0;}
+						  		if(_RT51 >= _RT10) {_RT51 := _RT10 - 1;}
+
+							  	_actStringMess("Borders: " + _inttostr(_RT48) + " " + _inttostr(_RT49) + " " + _inttostr(_RT50) + " " + _inttostr(_RT51));
+							  	_RT45 := 0;
 						  		_RT45 := GetPlObjT(PLAYER_ALL, AIREL_MYSELF, SILICON_EXTRACTOR, LOGO_UNDEF,
-						  		 		_RT30 - STEP_SIZE + 1, _RT31 - STEP_SIZE + 1, 0,
-						  		 		_RT30 + STEP_SIZE - 1, _RT31 + STEP_SIZE - 1, 4);
-						  		_actStringMess("Zone: " + _inttostr(_RT45));
+						  		 		_RT48, _RT50, 0,
+						  		 		_RT49, _RT51, 4);
 						  		_actStringMess("Inside map, SI mines near: " + _inttostr(_RT45));
 						  		if(!_RT45) 
 						  		{
 						  			_actStringMess("Putting in point in grid: " + _inttostr(_RT30) + " " + _inttostr(_RT31));
 						  			actFParPutInStaff(_RT22, SILICON_EXTRACTOR, UNDEFINED, UNDEFINED, 10, _RT30, _RT31, 0); _RT46 := 0; _RT13 -= 1;
+						  			ActCreateArt( TART_X_BOX, GetRnd(1,3), _RT30, _RT31,  4,
+		                                  "", 
+		                                  "Unknown technology", 
+		                                  VEFF_NONE);
 						  		}
 					  		}
 					  	}
@@ -127,14 +160,14 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 					  	}
 					}
 			}
-			else {_actStringMess("Cant find object SM, or !_RT13: " + _inttostr(_RT13));}
+			else {_actStringMess("Cant find object SM, or _RT13=0: " + _inttostr(_RT13));}
 		}
 		else
 		{
 			if(_RT13)
 			{
 				if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27)) {}
-				else {_actStringMess("No Builder");}
+				else {_actStringMess("No Builder"); _RT24:=0; _RT25:=0; _RT26:=0;}
 
 				_actStringMess("No SI mines found, taking any object coords: " + _inttostr(_RT24) + " " + _inttostr(_RT25) + " " + _inttostr(_RT26) + " to search closest grid point");
 
@@ -174,70 +207,75 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 //		- Если есть строящаяся шахта --> ничего не делать
 //		- Иначе если _RT13 > 0 --> строить
 
-	EventPlObjCreated(_PI3 == SILICON_EXTRACTOR && (_RT13 > 0), 10)
+
+	EventPlObjCreated((_PI3 == SILICON_EXTRACTOR) && (_RT13 > 0))
 	{
 	    ActSetName(SILICON_MINE_NAME, _PI5, _PI6, _PI7);
-	    _actStringMess("SILICON_EXTRACTOR created");
+	    _actStringMess("SI mine finished at: " + _inttostr(_PI5) + " " + _inttostr(_PI6) + " " + _inttostr(_PI7) + ", searching optimal place for next");				
 
-	    if(IsPlObjExist(_PI10, BUILDER_NAME, 24, 25, 26, 27))
+		actFParCleanStaff(_RT23);
+		if(IsPlObjExist(_PI10, BUILDER_NAME, 24, 25, 26, 27))
 		{
+			_RT71 := 1;
 			_actStringMess("Builder found");
-			//ActObjSelectT(_PI10, AIREL_MYSELF, UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
-			//ActAddFleet(_PI10, AIREL_MYSELF, _RT23);
+			ActObjSelectT(_PI10, AIREL_MYSELF, UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
+			ActAddFleet(_PI10, AIREL_MYSELF, _RT23);
 		}
 		else
 		{
-			_RT20 := 1; // hold status
+			_RT71 := 0;
+			//_RT24:=0; _RT25:=0;; _RT26:=0;
 			ActStringMess(_PI10, AIREL_MYSELF, "Нет свободных подлодок-строителей для следующей шахты");
 		}
 
-	    if(IsPlObjExist(_PI10, SILICON_MINE_NAME, 24, 25, 26, 27))
+		_RT40 := 0;
+	    if(IsPlObjExist(_PI10, SILICON_MINE_NAME, 52, 53, 54, 55)  && _RT71)
 			{
-				_actStringMess("SI mine finished at: " + _inttostr(_RT24) + " " + _inttostr(_RT25) + " " + _inttostr(_RT26) + ", searching optimal place for next");
-				_RT30 := _RT24;
-				_RT31 := _RT25;
-				_RT32 := _RT26;
-				_RT46 := 1;
+				_RT30 := _RT52;
+				_RT31 := _RT53;
+				_RT32 := _RT54;
+				_RT46 := 1; // break flag
+				_actStringMess("Start spiral point: " + _inttostr(_RT30) + " " + _inttostr(_RT31) + " " + _inttostr(_RT32) + ", searching optimal place for next");	
 
 				_RT41 := 1; // indicator of direction (+/-) and steps amount
-				while((_RT41 <= _RT12) && _RT46) // кол-во шагов <= макс. шахт в линии
+				_RT42 := 0; // indicator of axis: 0 - x, 1 - y
+				//_actStringMess("_RT41: " + _inttostr(_RT41) + " <= " + "_RT12: " + _inttostr(_RT12) + " " + "_RT46: " + _inttostr(_RT46) + " " + );
+				while((_RT41 <= _RT12) && _RT46 && _RT40 < 20) // кол-во шагов <= макс. шахт в линии
 					{
-						_RT42 := 0; // indicator of axis: 0 - x, 1 - y
-
-
-						_RT43 := _RT41;
+						_RT43 := _RT41; // current indicator of direction (+/-) and steps amount
 					  	while(_RT43 && _RT46)
 					  	{
 					  		if(_RT43 > 0)
 					  		{
-					  			if(_RT42) {_RT31 += STEP_SIZE; _actStringMess("step in positive y");} // step in positive y
-					  			else {_RT30 += STEP_SIZE; _actStringMess("step in positive x");} // step in positive x
+					  			if(_RT42) {_RT31 += STEP_SIZE; _actStringMess("y + step: " + _inttostr(_RT31));} // step in positive y
+					  			else {_RT30 += STEP_SIZE; _actStringMess("x + step: " + _inttostr(_RT30));} // step in positive x
 					  			_RT43 -= 1;
 					  		}
 					  		else // _RT43 < 0
 					  		{
-					  			if(_RT42) {_RT31 -= STEP_SIZE; _actStringMess("step in negative y");} // step in negative y
-					  			else {_RT30 -= STEP_SIZE; _actStringMess("step in negative x");} // step in negative x
+					  			if(_RT42) {_RT31 -= STEP_SIZE; _actStringMess("y - step:: " + _inttostr(_RT31));} // step in negative y
+					  			else {_RT30 -= STEP_SIZE; _actStringMess("x - step: " + _inttostr(_RT30));} // step in negative x
 					  			_RT43 += 1;
 					  		}
 					  		//_RT43 += _RT43 > 0 ? -1 : 1;
 					  		_RT40 += 1;
 
 						  	_actStringMess("Next point: " + _inttostr(_RT30) + " " + _inttostr(_RT31));
-					  		if(_RT30 > 0 && _RT30 < _RT10 && _RT31 > 0 && _RT31 < _RT10)
+					  		if(_RT30 >= 0 && _RT30 < _RT10 && _RT31 >= 0 && _RT31 < _RT10)
 					  		{
 						  		//--- Check any SI mines in area around (_RT30, _RT31), then build and break out OR continue steps
-						  		_RT48 := _RT30 - STEP_SIZE + 1;
-						  		_RT49 := _RT30 + STEP_SIZE - 1;
-						  		_RT50 := _RT31 - STEP_SIZE + 1;
-						  		_RT51 := _RT31 + STEP_SIZE - 1;
+						  		_RT48 := _RT30 - STEP_SIZE + 2;
+						  		_RT49 := _RT30 + STEP_SIZE - 2;
+						  		_RT50 := _RT31 - STEP_SIZE + 2;
+						  		_RT51 := _RT31 + STEP_SIZE - 2;
 						  		if(_RT48 < 0) {_RT48 := 0;}
-						  		if(_RT49 > _RT10) {_RT49 := _RT10;}
+						  		if(_RT49 >= _RT10) {_RT49 := _RT10 - 1;}
 
 						  		if(_RT50 < 0) {_RT50 := 0;}
-						  		if(_RT51 > _RT10) {_RT51 := _RT10;}
+						  		if(_RT51 >= _RT10) {_RT51 := _RT10 - 1;}
 
 							  	_actStringMess("Borders: " + _inttostr(_RT48) + " " + _inttostr(_RT49) + " " + _inttostr(_RT50) + " " + _inttostr(_RT51));
+							  	_RT45 := 0;
 						  		_RT45 := GetPlObjT(PLAYER_ALL, AIREL_MYSELF, SILICON_EXTRACTOR, LOGO_UNDEF,
 						  		 		_RT48, _RT50, 0,
 						  		 		_RT49, _RT51, 4);
@@ -245,7 +283,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 						  		if(!_RT45) 
 						  		{
 						  			_actStringMess("Putting in point in grid: " + _inttostr(_RT30) + " " + _inttostr(_RT31));
-									//actFParHomePosition(_RT22, AICAN_BYORDER, _RT30, _RT31, 0, 0, 0, FORMATION_DEFAULT, 0, 0);
+									actFParHomePosition(_RT22, AICAN_BYORDER, _RT30, _RT31, 0, 0, 0, FORMATION_DEFAULT, 0, 0);
 						  			actFParPutInStaff(_RT22, SILICON_EXTRACTOR, UNDEFINED, UNDEFINED, 10, _RT30, _RT31, 0); _RT46 := 0; _RT13 -= 1;
 						  			ActCreateArt( TART_X_BOX, GetRnd(1,3), _RT30, _RT31,  4,
 		                                  "", 
@@ -254,11 +292,11 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 						  		}
 					  		}
 					  	}
-					  	
 					  	_RT42 := !_RT42;
 					  	if(!_RT42) 
 					  	{
-					  		_RT41 := -(_RT41 + 1);
+					  		_RT41 := _RT41 < 0 ? -(_RT41 - 1) : -(_RT41 + 1);
+					  		_actStringMess("_RT41: " + _inttostr(_RT41));
 					  	}
 					}
 			}
