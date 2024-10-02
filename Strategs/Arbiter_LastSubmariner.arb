@@ -115,7 +115,7 @@ OpenArbiter("LastSubmariner100");
                 }
             }
 
-            actStringMess("В секторе обнаружены артефакты:" + _inttostr(GetArt()))
+            actStringMess("В секторе обнаружены артефакты: " + _inttostr(GetArt()))
         }
 
 
