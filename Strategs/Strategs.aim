@@ -91,12 +91,14 @@ OpenStringTable();
 CloseStringTable();
 
 name("AIBOSS001");            
- _full_name = "LastSubmariner";
+ _full_name = "Last Submariner";
  include<[_curr_path]\Arbiter_LastSubmariner.arb>;
 
 name("OBJECTIVES001");
 OpenStringTable();
- /*000*/PutString("LastSubmariner. See #custom-maps"); 
+ /*000*/PutString("В секторе обнаружены артефакты\n"); 
+ /*001*/PutString("Они позволяют открыть новые технологии, при доставке к научным центрам"); 
+ ///*001*/PutString("Ускорение ремонта "); 
 CloseStringTable();
 
 #if(!__DEMO)
