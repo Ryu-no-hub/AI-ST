@@ -26,13 +26,8 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		// Выбрать только 1 пробку
 		if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
 		{
-			//actObjSelectT(UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26+1);
-			//ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
-
 			ActSetName("Auto-builder", _RT24, _RT25, _RT26);
 			ActObjSelectN(PLAYER_ME, AIREL_MYSELF, "Auto-builder", LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
-			//ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
-
 		}
 		actObjSelectT(SILICON_EXTRACTOR);
 
@@ -41,7 +36,6 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		_RT22 := getFleetNum("SI Silicon mines", "SI Silicon tactitian");
 		_RT23 := getFleetNum("SI Builder", "SI Silicon tactitian");
 		_RT10 := GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80;
-		//actOffEvent(20);
 
 		
 
@@ -57,9 +51,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		_RT13 := (_RT12 * _RT12) / 2 / _RT11;
 
 		_RT21 := getPlObjT(SILICON_EXTRACTOR);
-		//actAddFleet(_RT22);
 		_RT13 := _RT13 - _RT21;
-
 
 		_actStringMess("Сторона карты = " + _inttostr(_RT10))
 		_actStringMess("Максимум шахт в линии = " + _inttostr(_RT12))
@@ -69,32 +61,9 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		_actStringMess("Шахт к постройке = " + _inttostr(_RT13))
 
 
-		//	while(_RT13 > 0)
-		//	{
-		//		//_actStringMess("добавлено в х y z: " +  _inttostr(_RT30) + " " + _inttostr(_RT31) + " " + _inttostr(_RT32))
-		//		actFParPutInStaff(_RT22, SILICON_EXTRACTOR, UNDEFINED, UNDEFINED, 10, _RT30, _RT31, _RT32);
-		//		_RT13 -= 1;
-		//	}
-
-
-
 		if(_RT21)
 		{
-			//actFParCleanStaff(_RT23);
-//			if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
-//			{
-//				_RT71 := 1;
-//				_actStringMess("Builder found");
-//				//ActObjSelectT(PLAYER_ME, AIREL_MYSELF, UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26+1);
-//				//ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
-//			}
-//			else
-//			{
-//				_RT71 := 0;
-//				ActStringMess(PLAYER_ME, AIREL_MYSELF, "Нет свободных подлодок-строителей для следующей шахты");
-//			}
 			_RT71 := 1;
-
 
 			if(_RT13 > 0 && IsPlObjExist(PLAYER_ME, SILICON_MINE_NAME, 24, 25, 26, 27) && _RT71) 
 			{
@@ -125,10 +94,9 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 					  			else {_RT30 -= STEP_SIZE;} // step in negative x
 					  			_RT43 += 1;
 					  		}
-					  		_RT40 += 1;
 
 					  		_actStringMess("Next point: " + _inttostr(_RT30) + " " + _inttostr(_RT31));
-					  		if(_RT30 >= 0 && _RT30 < _RT10 && _RT31 >= 0 && _RT31 < _RT10)
+					  		if(_isin2D(_RT30, _RT31, 0, 0, _RT10 - 1, _RT10 - 1))
 					  		{
 						  		//--- Check any SI mines in area around (_RT30, _RT31), then build and break out OR continue steps
 						  		_RT48 := _RT30 - STEP_SIZE + 2;
@@ -170,24 +138,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		}
 		else
 		{
-			//actFParCleanStaff(_RT23);
 			_actStringMess("PLAYER_ME: " + _inttostr(PLAYER_ME));
-//			if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
-//			{
-//				_RT71 := 1;
-//				_actStringMess("Builder found");
-//				//ActObjSelectT(PLAYER_ME, AIREL_MYSELF, UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
-//				//ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
-//
-//				ActSetName("Auto-builder", _RT24, _RT25, _RT26);
-//				ActObjSelectN(PLAYER_ME, AIREL_MYSELF, "Auto-builder", LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
-//				ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
-//			}
-//			else
-//			{
-//				_RT71 := 0;
-//				ActStringMess(PLAYER_ME, AIREL_MYSELF, "Нет свободных подлодок-строителей для следующей шахты");
-//			}
 			_RT71 := 1;
 
 			if(_RT13 && _RT71)
@@ -258,7 +209,6 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		{
 			_RT71 := 1;
 			_actStringMess("Builder found at: " + _inttostr(_RT24) + " " + _inttostr(_RT25) + " " + _inttostr(_RT26));
-			//ActObjSelectT(_PI10, AIREL_MYSELF, UNDEFINED, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26+1);
 			ActSetName("Auto-builder", _RT24, _RT25, _RT26);
 			ActObjSelectN(_PI10, AIREL_MYSELF, "Auto-builder", LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
 			ActAddFleet(_PI10, AIREL_MYSELF, _RT23);
@@ -266,7 +216,6 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		else
 		{
 			_RT71 := 0;
-			//_RT24:=0; _RT25:=0;; _RT26:=0;
 			ActStringMess(_PI10, AIREL_MYSELF, "Нет свободных подлодок-строителей для постройки шахты. Конец работы.");
 		}
 
@@ -298,12 +247,10 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 					  			else {_RT30 -= STEP_SIZE; _actStringMess("x - step: " + _inttostr(_RT30));} // step in negative x
 					  			_RT43 += 1;
 					  		}
-					  		//_RT43 += _RT43 > 0 ? -1 : 1;
 					  		_RT40 += 1;
 
 						  	_actStringMess("Next point: " + _inttostr(_RT30) + " " + _inttostr(_RT31));
-					  		//if(_RT30 >= 0 && _RT30 < _RT10 && _RT31 >= 0 && _RT31 < _RT10)
-					  		if(_isin2D(_RT30, _RT30, 0, 0, _RT10 - 1, _RT10 - 1))
+					  		if(_isin2D(_RT30, _RT31, 0, 0, _RT10 - 1, _RT10 - 1))
 					  		{
 						  		//--- Check any SI mines in area around (_RT30, _RT31), then build and break out OR continue steps
 						  		_RT48 := _RT30 - STEP_SIZE + 2;
@@ -313,14 +260,9 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 
 						  		_RT48 := _RT48 < 0 ? 0 : _RT48 >= _RT10 ? _RT10 - 1 : _RT48;
 						  		_RT49 := _RT49 < 0 ? 0 : _RT49 >= _RT10 ? _RT10 - 1 : _RT49;
-						  		//if(_RT48 < 0) {_RT48 := 0;}
-						  		//if(_RT49 >= _RT10) {_RT49 := _RT10 - 1;}
 
 						  		_RT50 := _RT50 < 0 ? 0 : _RT50 >= _RT10 ? _RT10 - 1 : _RT50;
-						  		//if(_RT50 < 0) {_RT50 := 0;}
 						  		_RT51 := _RT51 < 0 ? 0 : _RT51 >= _RT10 ? _RT10 - 1 : _RT51;
-						  		//if(_RT51 < 0) {_RT51 := 0;}
-						  		//if(_RT51 >= _RT10) {_RT51 := _RT10 - 1;}
 
 							  	_actStringMess("Borders: " + _inttostr(_RT48) + " " + _inttostr(_RT49) + " " + _inttostr(_RT50) + " " + _inttostr(_RT51));
 							  	_RT45 := 0;
@@ -358,16 +300,3 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 	CloseEvents();
 
 CloseStrateg();
-
-/*
-составить набор координат по сетке карты для установки шахт
-вначале определить какая из точек ближе всех
-начать строить от неё
-
-
-определяю ближайшую точку к респу из сетки
-назначаю туда шахту
-цикл:
-  считаю точку для шахты в сетке так, чтобы они распространялить наружу по кругу
-  если (нет шахт союзного SI в области радиусом 15 вокруг этой точки (isIn2d))
-    назначаю туда шахту
