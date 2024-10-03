@@ -132,6 +132,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 						  		{
 						  			_actStringMess("Putting in point in grid: " + _inttostr(_RT30) + " " + _inttostr(_RT31));
 						  			actFParPutInStaff(_RT22, SILICON_EXTRACTOR, UNDEFINED, UNDEFINED, 10, _RT30, _RT31, 0); _RT46 := 0; _RT13 -= 1;
+									_RT80 := 1;
 						  			ActCreateArt( TART_X_BOX, GetRnd(1,3), _RT30, _RT31,  4,
 		                                  "", 
 		                                  "Unknown technology", 
@@ -199,6 +200,8 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 				_actStringMess("Putting in closest point in grid: " + _inttostr(_RT38) + " " + _inttostr(_RT39));
 				actFParHomePosition(_RT22, AICAN_BYORDER, _RT38, _RT39, 0, 0, 0, FORMATION_DEFAULT, 0, 0);
 				actFParPutInStaff(_RT22, SILICON_EXTRACTOR, UNDEFINED, UNDEFINED, 10, _RT38, _RT39, 0); _RT13 -= 1;
+				actLockFleet(_RT23, LOCKOBJ_INTERF);
+				_RT80 := 1;
 				ActCreateArt( TART_X_BOX, GetRnd(1,3), _RT38, _RT39,  4,
 		                                  "", 
 		                                  "Unknown technology", 
@@ -210,7 +213,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 
 
 	//EventPlObjCreated((_PI3 == SILICON_EXTRACTOR) && (_RT13 > 0) && (_PS1 == BUILDER_NAME || _PS1 == USED_BUILDER_NAME))
-	EventPlObjCreated((_PI3 == SILICON_EXTRACTOR) && (_RT13 > 0) /*&& _PI10 == PLAYER_ME*/)
+	EventPlObjCreated((_PI3 == SILICON_EXTRACTOR) && (_RT13 > 0) /*&& _PI10 == PLAYER_ME*/ && _RT80)
 	{
 		_actStringMess("PLAYER_ME: " + _inttostr(PLAYER_ME));
 		_actStringMess("_PI10: " + _inttostr(_PI10));
@@ -231,7 +234,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		else
 		{
 			_RT71 := 0;
-			ActStringMess(_PI10, AIREL_MYSELF, "Нет свободных подлодок-строителей для постройки шахты. Конец работы.");
+			ActStringMess(_PI10, AIREL_MYSELF, "Нет свободных подлодок-строителей для постройки шахты.");
 		}
 
 		_RT40 := 0;
@@ -293,6 +296,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 									actFParHomePosition(_RT22, AICAN_BYORDER, _RT30, _RT31, 0, 0, 0, FORMATION_DEFAULT, 0, 0);
 						  			actFParPutInStaff(_RT22, SILICON_EXTRACTOR, UNDEFINED, UNDEFINED, 10, _RT30, _RT31, 0); _RT46 := 0; _RT13 -= 1;
 						  			actLockFleet(_RT23, LOCKOBJ_INTERF);
+						  			_RT80 := 1;
 						  			ActCreateArt( TART_X_BOX, GetRnd(1,3), _RT30, _RT31,  4,
 		                                  "", 
 		                                  "Unknown technology", 
