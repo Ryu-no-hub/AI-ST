@@ -2,7 +2,7 @@ include<[_inc_path]\AiScript.dfn>;
 include<[_inc_path]\AiScript.mcr>;
 include<[_inc_path]\Strategs\CONST_LastSubmariner.dfn>;
 /*
-    _RT100-107 - занято событиями для конца игры (100+_pl_)
+    _RT100-_RT107 - mission conditions
     _RT112-127 - x,y первого объекта каждого игрока
     _RT128 - кол-во игроков
     _RT129 - размер карты
@@ -36,6 +36,14 @@ OpenArbiter("LastSubmariner100");
                     }
                     else // --SI--
                     {
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
                         ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
                         ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
                         ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
@@ -119,7 +127,7 @@ OpenArbiter("LastSubmariner100");
         }
 
 
-        EventPlObjCreated(_PI3 != SILICON_EXTRACTOR)
+        EventPlObjCreated(_PI3 != SILICON_EXTRACTOR && _PI3 != CAPSULE_PROTOTYPE && _PI3 == ASSEMBLER && _PI3 == CONSTRUCTOR)
         {
             ActSetName(BASIC_NAME, _PI5,_PI6,_PI7);
             ActLockEvent();

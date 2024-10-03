@@ -17,6 +17,8 @@ OpenArbiter(_full_name, 0x00000001);
   s_defeat = 15;
   BASIC_NAME = "The thing";
   SILICON_MINE_NAME = "SM";
+  BUILDER_NAME = "Builder";
+  
   // Used variables :
   //   _RT100-_RT107 - mission conditions
 
@@ -130,7 +132,7 @@ OpenArbiter(_full_name, 0x00000001);
     actLockEvent();
   }
 
-  EventPlObjCreated(TRUE)
+  EventPlObjCreated(_PI3 != SILICON_EXTRACTOR && _PI3 != CAPSULE_PROTOTYPE && _PI3 == ASSEMBLER && _PI3 == CONSTRUCTOR)
   {
     ActSetName(BASIC_NAME, _PI5,_PI6,_PI7);
     ActLockEvent();
@@ -140,6 +142,12 @@ OpenArbiter(_full_name, 0x00000001);
   {
     ActSetName(SILICON_MINE_NAME, _PI5,_PI6,_PI7);
     ActLockEvent();
+  }
+
+  EventPlObjCreated(_PI3 == CAPSULE_PROTOTYPE || _PI3 == ASSEMBLER || _PI3 == CONSTRUCTOR)
+  {
+      ActSetName(BUILDER_NAME, _PI5,_PI6,_PI7);
+      ActLockEvent();
   }
 
 //  EventPlObjKilled(TRUE)
