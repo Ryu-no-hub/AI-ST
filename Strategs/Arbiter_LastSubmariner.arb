@@ -224,7 +224,7 @@ OpenArbiter("Last Submariner");
                         _RT27 := _PI15 + _PI16 + _PI17 - _RT24 - _RT25 - _RT26;
                         if((_RT27 < 0 && _RT27 > -6) || (_RT27 > 0 && _RT27 < 6))
                         {
-                            actStringMess("Игрок " + GetPlName(_PI10) + " активировал артефакт");
+                            actStringMess(GetPlName(_PI10) + " активировал артефакт");
 
                             // считаем случайный грейд
                             _RT133 := 0;
@@ -241,6 +241,7 @@ OpenArbiter("Last Submariner");
                             //actStringMess("Tech id: " + _inttostr(_RT133));
                             if(!IsTechDev(_PI10, _RT136)){
                                 ActTechSet(_PI10, AIREL_MYSELF, _RT136);
+                                ActStringMess(_PI10, AIREL_MYSELF, "Активация технологии № "  + _inttostr(_RT136));
                             }
                             else{
                                 ActStringMess(_PI10, AIREL_MYSELF, "Найденная технология уже исследована...");
