@@ -117,10 +117,10 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 						  		_RT50 := _RT31 - STEP_SIZE + 2;
 						  		_RT51 := _RT31 + STEP_SIZE - 2;
 						  		if(_RT48 < 0) {_RT48 := 0;}
-						  		if(_RT49 >= _RT10) {_RT49 := _RT10 - 1;}
+						  		if(_RT49 >= _RT10) {_RT49 := _RT10 - 2;}
 
 						  		if(_RT50 < 0) {_RT50 := 0;}
-						  		if(_RT51 >= _RT10) {_RT51 := _RT10 - 1;}
+						  		if(_RT51 >= _RT10) {_RT51 := _RT10 - 2;}
 
 							  	_actStringMess("Borders: " + _inttostr(_RT48) + " " + _inttostr(_RT49) + " " + _inttostr(_RT50) + " " + _inttostr(_RT51));
 							  	_RT45 := 0;
@@ -156,21 +156,29 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 			{
 				_actStringMess("No SI mines found, taking builder coords: " + _inttostr(_RT24) + " " + _inttostr(_RT25) + " " + _inttostr(_RT26) + " to search closest grid point");
 
-				_RT30 := 0;
-				_RT31 := 0;
+				_RT30 := _RT10 / _RT24 >= 1 ? _RT10 - 2 : 0;
+				_RT31 := _RT10 / _RT25 >= 1 ? _RT10 - 2 : 0;
 				_RT32 := 0;
+
+				_RT56 := _RT30;
+				_RT57 := _RT31;
+
+				_RT38 := _RT30;
+				_RT39 := _RT31;
+
+				_actStringMess("Start spiral point: " + _inttostr(_RT30) + " " + _inttostr(_RT31));	
 
 				_RT36 := 1000;
 				_RT37 := 1000;
 				_RT46 := 1;
 
-				while(_RT30 < _RT10 && _RT46) // x
+				while(_RT30 < _RT10 && _RT30 >= 0 && _RT46) // x
 				{
 				  	_RT34 := _RT30 > _RT24 ? _RT30 - _RT24 : _RT24 - _RT30;
 				  	if(_RT34 < _RT36) 
 				  	{
 				  		if(
-				  			((_RT38 == 0 && _RT24 < 20) || (_RT38 == _RT10 && (_RT10 - _RT24 < 20)))
+				  			((_RT38 == 0 && _RT24 < 20) || (_RT38 == _RT56 && (_RT10 - _RT24 < 20)))
 				  			)
 				  		{
 				  			_actStringMess("edge point better - keep last X")
@@ -179,13 +187,13 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 				  		else {_RT36 := _RT34; _RT38 := _RT30;}
 				  	}
 
-				  	while(_RT31 < _RT10) // y
+				  	while(_RT31 < _RT10 && _RT31 >= 0) // y
 				  	{
 						_RT35 := _RT31 > _RT25 ? _RT31 - _RT25 : _RT25 - _RT31;
 						if(_RT35 < _RT37) 
 							{
 								if(
-						  			((_RT39 == 0 && _RT25 < 20) || (_RT39 == _RT10 && (_RT10 - _RT25 < 20)))
+						  			((_RT39 == 0 && _RT25 < 20) || (_RT39 == _RT57 && (_RT10 - _RT25 < 20)))
 						  			)
 								{
 									_actStringMess("edge point better - keep last Y")
@@ -193,9 +201,11 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 								else {_RT37 := _RT35; _RT39 := _RT31;}
 							}
 
-						_RT31 += STEP_SIZE;
+						//_RT31 += STEP_SIZE;
+						_RT31 += _RT57 == (_RT10 - 2) ? -STEP_SIZE : STEP_SIZE;
 				  	}
-				  	_RT30 += STEP_SIZE;
+				  	//_RT30 += STEP_SIZE;
+				  	_RT30 += _RT56 == (_RT10 - 2) ? -STEP_SIZE : STEP_SIZE;
 				}
 				_actStringMess("Putting in closest point in grid: " + _inttostr(_RT38) + " " + _inttostr(_RT39));
 				actFParHomePosition(_RT22, AICAN_BYORDER, _RT38, _RT39, 0, 0, 0, FORMATION_DEFAULT, 0, 0);
@@ -244,7 +254,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 				_RT31 := _RT53;
 				_RT32 := _RT54;
 				_RT46 := 1; // break flag
-				//_actStringMess("Start spiral point: " + _inttostr(_RT30) + " " + _inttostr(_RT31) + " " + _inttostr(_RT32) + ", searching optimal place for next");	
+				_actStringMess("Start spiral point: " + _inttostr(_RT30) + " " + _inttostr(_RT31) + " " + _inttostr(_RT32) + ", searching optimal place for next");	
 
 				_RT41 := 1; // indicator of direction (+/-) and steps amount
 				_RT42 := 0; // indicator of axis: 0 - x, 1 - y
@@ -276,11 +286,11 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 						  		_RT50 := _RT31 - STEP_SIZE + 2;
 						  		_RT51 := _RT31 + STEP_SIZE - 2;
 
-						  		_RT48 := _RT48 < 0 ? 0 : _RT48 >= _RT10 ? _RT10 - 1 : _RT48;
-						  		_RT49 := _RT49 < 0 ? 0 : _RT49 >= _RT10 ? _RT10 - 1 : _RT49;
+						  		_RT48 := _RT48 < 0 ? 0 : _RT48 >= _RT10 ? _RT10 - 2 : _RT48;
+						  		_RT49 := _RT49 < 0 ? 0 : _RT49 >= _RT10 ? _RT10 - 2 : _RT49;
 
-						  		_RT50 := _RT50 < 0 ? 0 : _RT50 >= _RT10 ? _RT10 - 1 : _RT50;
-						  		_RT51 := _RT51 < 0 ? 0 : _RT51 >= _RT10 ? _RT10 - 1 : _RT51;
+						  		_RT50 := _RT50 < 0 ? 0 : _RT50 >= _RT10 ? _RT10 - 2 : _RT50;
+						  		_RT51 := _RT51 < 0 ? 0 : _RT51 >= _RT10 ? _RT10 - 2 : _RT51;
 
 							  	_actStringMess("Borders: " + _inttostr(_RT48) + " " + _inttostr(_RT49) + " " + _inttostr(_RT50) + " " + _inttostr(_RT51));
 							  	_RT45 := 0;
