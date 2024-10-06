@@ -79,26 +79,26 @@ OpenStringTable();
 CloseStringTable();
 
 
-//== Kill All
 name("AIBOSS");            
- _full_name = "Kill All";
- include<[_inc_path]\Strategs\Arbiter_killall.arb>;
- //include<[_curr_path]\Arbiter_killall.arb>;
-
-name("OBJECTIVES");        
-OpenStringTable();
- /*000*/PutString("Kill all enemies"); 
-CloseStringTable();
-
-name("AIBOSS001");            
  _full_name = "Last Submariner";
  include<[_curr_path]\Arbiter_LastSubmariner.arb>;
 
-name("OBJECTIVES001");
+name("OBJECTIVES");
 OpenStringTable();
  /*000*/PutString("В секторе обнаружены артефакты\n"); 
  /*001*/PutString("Они позволяют открыть новые технологии, при доставке к научным центрам"); 
  ///*001*/PutString("Ускорение ремонта "); 
+CloseStringTable();
+
+//== Kill All
+name("AIBOSS001");            
+ _full_name = "Kill All";
+ include<[_inc_path]\Strategs\Arbiter_killall.arb>;
+ //include<[_curr_path]\Arbiter_killall.arb>;
+
+name("OBJECTIVES001");        
+OpenStringTable();
+ /*000*/PutString("Kill all enemies"); 
 CloseStringTable();
 
 #if(!__DEMO)
