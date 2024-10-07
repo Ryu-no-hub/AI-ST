@@ -250,6 +250,7 @@ OpenArbiter("LastSubmariner100");
                             //actStringMess("Tech id: " + _inttostr(_RT133));
                             if(!IsTechDev(_PI10, _RT136)){
                                 ActTechSet(_PI10, AIREL_MYSELF, _RT136);
+                                ActStringMess(_PI10, AIREL_MYSELF, "Активация технологии № "  + _inttostr(_RT136));
                             }
                             else{
                                 ActStringMess(_PI10, AIREL_MYSELF, "Найденная технология уже исследована...");
