@@ -29,9 +29,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 
 		_RT22 := getFleetNum("SI Silicon mines", "SI Silicon tactitian");
 		_RT23 := getFleetNum("SI Builder", "SI Silicon tactitian");
-		_RT10 := GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80;
-
-		actLockFleet(_RT23, LOCKOBJ_INTERF);
+		_RT10 := _GL0;
 
 		_ploop_begin
 			if(GetPlCiv(_pl_) == CIV_SI && (GetTeam(_pl_) == GetTeam(PLAYER_ME)) )
@@ -69,7 +67,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		}
 
 
-		_RT38 := 1; _RT39 := 1;
+		_RT38 := 1; _RT39 := 1; _RT115 := 0;
 		if(_RT21)
 		{
 			if(_RT13 > 0 && IsPlObjExist(PLAYER_ME, SILICON_MINE_NAME, 24, 25, 26, 27) && _RT71) 
@@ -82,7 +80,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 
 				_RT41 := 1; // indicator of direction (+/-) and steps amount
 				_RT42 := 0; // indicator of axis: 0 - x, 1 - y
-				while((_RT41 <= _RT12) && _RT46) // кол-во шагов <= макс. шахт в линии
+				while((_RT41 <= _RT12) && _RT46 && (_RT115 < 1000)) // кол-во шагов <= макс. шахт в линии
 					{
 						_RT43 := _RT41;
 					  	while(_RT43 && _RT46)
@@ -99,6 +97,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 					  			else {_RT30 -= STEP_SIZE;} // step in negative x
 					  			_RT43 += 1;
 					  		}
+					  		_RT115 += 1;
 
 					  		//_actStringMess("Next point: " + _inttostr(_RT30) + " " + _inttostr(_RT31));
 					  		if(_isin2D(_RT30, _RT31, 0, 0, _RT10 - 1, _RT10 - 1))
@@ -201,7 +200,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 				//_actStringMess("Putting in closest point in grid: " + _inttostr(_RT38) + " " + _inttostr(_RT39));
 				actFParPutInStaff(_RT22, SILICON_EXTRACTOR, UNDEFINED, UNDEFINED, 10, _RT38, _RT39, 0); _RT13 -= 1;
 				actLockFleet(_RT23, LOCKOBJ_INTERF);
-				ActCreateArt( TART_X_BOX, GetRnd(1,3), _RT38, _RT39,  4, "", "Unknown technology", VEFF_NONE);
+				//ActCreateArt( TART_X_BOX, GetRnd(1,3), _RT38, _RT39,  4, "", "Unknown technology", VEFF_NONE);
 				_RT40 := 1;
 			}
 			//else {_actStringMess("No builder or mine vacancies fullfilled");}
@@ -249,6 +248,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		}
 
 		if(_RT80 && _RT71){
+			ActStringMess(_PI10, AIREL_MYSELF, "Заказ шахты, осталось " + _inttostr(_RT13));
 			actFParPutInStaff(_RT22, SILICON_EXTRACTOR, UNDEFINED, UNDEFINED, 10); _RT13 -= 1;
   			actLockFleet(_RT23, LOCKOBJ_INTERF);
   			//ActCreateArt( TART_X_BOX, GetRnd(1,3), _RT30, _RT31,  4, "", "Unknown technology", VEFF_NONE);
@@ -334,11 +334,10 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 								  	//_actStringMess("Inside map, SI mines near: " + _inttostr(_RT67));
 							  		if(!_RT67) 
 							  		{
-							  			ActStringMess(_PI10, AIREL_MYSELF, "Заказ шахты, осталось " + _inttostr(_RT13-1));
+							  			ActStringMess(_PI10, AIREL_MYSELF, "Заказ шахты, осталось " + _inttostr(_RT13));
 							  			//_actStringMess("Steps made: " + _inttostr(_RT40));
-							  			//_actStringMess("Mines left to place: " + _inttostr(_RT13-1));
-							  			if(_RT80) {actFParPutInStaff(_RT22, SILICON_EXTRACTOR, UNDEFINED, UNDEFINED, 10, _RT52, _RT53, 0);}
-							  			else {actFParPutInStaff(_RT22, SILICON_EXTRACTOR, UNDEFINED, UNDEFINED, 10, _RT30, _RT31, 0);}
+							  			//_actStringMess("Mines left to place: " + _inttostr(_RT13));
+							  			actFParPutInStaff(_RT22, SILICON_EXTRACTOR, UNDEFINED, UNDEFINED, 10, _RT30, _RT31, 0);
 							  			_RT46 := 0; _RT13 -= 1;
 							  			actLockFleet(_RT23, LOCKOBJ_INTERF);
 							  			ActCreateArt( TART_X_BOX, GetRnd(1,3), _RT30, _RT31,  4, "", "Unknown technology", VEFF_NONE);

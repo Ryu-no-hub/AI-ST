@@ -71,7 +71,9 @@ OpenArbiter("Last Submariner");
                 _RT128 += ARTS_PER_PLAYER;
             _ploop_end
 
-            _RT129 := GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80;
+            //_RT129 := GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80;
+            _GL0 := GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80;
+            _RT129 := _GL0;
 
             while (_RT128 > 0)
             {
