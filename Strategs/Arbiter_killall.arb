@@ -81,6 +81,7 @@ OpenArbiter(_full_name, 0x00000001);
       }
     _ploop_end
     // Off
+    _GL0 := GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80;
     actOffEvent(10);actOffEvent(20);actOffEvent(30); actOffEvent(100);
   }
   // On
