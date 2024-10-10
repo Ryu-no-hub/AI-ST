@@ -10,22 +10,81 @@ include<[_inc_path]\AiScript.mcr>;
 
 OpenStrateg(_full_name, CIV_WS, _short_name, 0x00000003);
  
- // Parameters
- MainEnemy(AICAN_MYSELF, PLAYER_ALL);
-
  // Tactics
- include<[_curr_path]\WS_Gold_tactic.tct>;
+ include<[_curr_path]\WS_Gold.tct>;
 
  // Events
  OpenEvents();
+
+    BUILDER_NAME = "Builder";
+    STEP_SIZE = 13;
+    GOLD_MINE_NAME = "GM";
+
   // Execute Tactician
   Event(getOwnTime()>1) 
-  { actObjSelectM(AITRG_ALL);
-    actExecTactic("WS Resource");
+  { 
+    actObjSelectT(AITRG_ALL);
+    actExecTactic("WS Gold Base");
+
+    _RT22 := getFleetNum("WS Gold Mines", "WS Gold Base");
+    _RT23 := getFleetNum("WS Gold Builder", "WS Gold Base");
+    _RT10 := _GL0;
+
+    _ploop_begin
+      if((GetPlCiv(_pl_) == CIV_WS || (GetPlCiv(_pl_) == CIV_BO)) && (GetTeam(_pl_) == GetTeam(PLAYER_ME)))
+      {
+        _RT11 += 1;
+      }
+    _ploop_end
+
+
+    _RT12 := _RT10 / STEP_SIZE + 1;
+    _RT13 := (_RT12 * _RT12) / 2 / _RT11;
+
+    _RT21 := getPlObjT(GOLD_EXTRACTOR);
+    _RT13 := _RT13 - _RT21;
+    _RT14 := _RT13;
+
+    actStringMess("Сторона карты = " + _inttostr(_RT10))
+    actStringMess("Максимум шахт в линии = " + _inttostr(_RT12))
+    actStringMess("Поместится на 1/2 карты = " + _inttostr((_RT12 * _RT12 / 2)))
+    actStringMess("Человеческих рас в команде = " + _inttostr(_RT11))
+    actStringMess("Шахт найдено = " + _inttostr(_RT21))
+    actStringMess("Шахт к постройке = " + _inttostr(_RT13))
+
+
+    if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
+    {
+      _RT71 := 1;
+      ActObjSelectN(PLAYER_ME, AIREL_MYSELF, BUILDER_NAME, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
+      ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
+      actLockFleet(_RT23, LOCKOBJ_INTERF);
+      actStringMess("Строитель найден");
+    }
+    else
+    {
+      _RT71 := 0;
+      actStringMess("Нет свободных строителей для постройки шахты.");
+    }
+
+    while(_RT13 && _RT71){
+      actFParPutInStaff(_RT22, GOLD_EXTRACTOR, UNDEFINED, UNDEFINED, 20);
+      _RT13 -= 1;
+    }
+
   };
+
+  EventPlObjCreated(_PI3 == GOLD_EXTRACTOR & (_PI0 == GetCurrPl()))
+  {
+    _RT14 -= 1;
+    _actStringMess("Шахт построено " + _inttostr(getPlObjT(GOLD_EXTRACTOR+AITAKE_NOEMBRYO)) + ", осталось " + _inttostr(_RT14));
+    if(!_RT14) {actUnLockFleet(_RT23, LOCKOBJ_INTERF); actStringMess("Программа завершена. Строитель разблокирован");}
+
+    actLockEvent();
+  }
+
  CloseEvents();
 
 CloseStrateg();
-
 
 

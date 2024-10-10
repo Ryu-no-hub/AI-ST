@@ -39,7 +39,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		_ploop_end
 
 
-		_RT12 := _RT10 / 16 + 1;
+		_RT12 := _RT10 / STEP_SIZE + 1;
 		_RT13 := (_RT12 * _RT12) / 2 / _RT11;
 
 		_RT21 := getPlObjT(SILICON_EXTRACTOR);
@@ -208,7 +208,6 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 	};
 
 
-	//EventPlObjCreated((_PI3 == SILICON_EXTRACTOR) && (_RT13 > 0) && (_PS1 == BUILDER_NAME || _PS1 == USED_BUILDER_NAME))
 	EventPlObjCreated((_PI3 == SILICON_EXTRACTOR) && (_RT13 > 0) && (getPlObjT(SILICON_EXTRACTOR+AITAKE_NOOBJ) <= 1) && (!IsPlObjExist(_PI10, USED_BUILDER_NAME)))
 	{
 	    ActSetName(SILICON_MINE_NAME, _PI5, _PI6, _PI7);
@@ -334,7 +333,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 								  	//_actStringMess("Inside map, SI mines near: " + _inttostr(_RT67));
 							  		if(!_RT67) 
 							  		{
-							  			ActStringMess(_PI10, AIREL_MYSELF, "Заказ шахты, осталось " + _inttostr(_RT13));
+							  			ActStringMess(_PI10, AIREL_MYSELF, "Заказ шахты, всего " + _inttostr(getPlObjT(SILICON_EXTRACTOR)) + ", осталось " + _inttostr(_RT13));
 							  			//_actStringMess("Steps made: " + _inttostr(_RT40));
 							  			//_actStringMess("Mines left to place: " + _inttostr(_RT13));
 							  			actFParPutInStaff(_RT22, SILICON_EXTRACTOR, UNDEFINED, UNDEFINED, 10, _RT30, _RT31, 0);
