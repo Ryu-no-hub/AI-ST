@@ -77,7 +77,7 @@ OpenStrateg(_full_name, CIV_WS, _short_name, 0x00000003);
   EventPlObjCreated(_PI3 == GOLD_EXTRACTOR & (_PI0 == GetCurrPl()))
   {
     _RT14 -= 1;
-    _actStringMess("Шахт построено " + _inttostr(getPlObjT(GOLD_EXTRACTOR+AITAKE_NOEMBRYO)) + ", осталось " + _inttostr(_RT14));
+    actStringMess("Шахт построено " + _inttostr(getPlObjT(GOLD_EXTRACTOR+AITAKE_NOEMBRYO)) + ", осталось " + _inttostr(_RT14));
     if(!_RT14) {actUnLockFleet(_RT23, LOCKOBJ_INTERF); actStringMess("Программа завершена. Строитель разблокирован");}
 
     actLockEvent();

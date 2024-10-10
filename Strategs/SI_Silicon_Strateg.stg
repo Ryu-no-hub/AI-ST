@@ -208,7 +208,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 	};
 
 
-	EventPlObjCreated((_PI3 == SILICON_EXTRACTOR) && (_RT13 > 0) && (getPlObjT(SILICON_EXTRACTOR+AITAKE_NOOBJ) <= 1) && (!IsPlObjExist(_PI10, USED_BUILDER_NAME)))
+	EventPlObjCreated((_PI3 == SILICON_EXTRACTOR) & (_PI0 == GetCurrPl()) & (_RT13 > 0) & (getPlObjT(SILICON_EXTRACTOR+AITAKE_NOOBJ) <= 1) & (!IsPlObjExist(_PI10, USED_BUILDER_NAME)))
 	{
 	    ActSetName(SILICON_MINE_NAME, _PI5, _PI6, _PI7);
 	    //_actStringMess("SI mine finished at: " + _inttostr(_PI5) + " " + _inttostr(_PI6) + " " + _inttostr(_PI7) + ", searching optimal place for next");
@@ -358,7 +358,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 	    actLockEvent();
 	}
 
-	EventPlObjKilled(_PI3 == CAPSULE_PROTOTYPE)
+	EventPlObjKilled(_PI3 == CAPSULE_PROTOTYPE & (_PI0 == GetCurrPl()))
 	{
 		//_actStringMess("Name: " + _PS0 + ", USED_BUILDER_NAME: " + USED_BUILDER_NAME + ", fleet number: " + _inttostr(_PI18));
 		if(_PS0 == USED_BUILDER_NAME)
