@@ -1,12 +1,12 @@
 
-OpenFleet("WS Builder",CIV_WS, AIF_BUILD, 12);
+OpenFleet("WS Gold Builder",CIV_WS, AIF_BUILD, 12);
   // Staff
   PutInStaff(CONSTRUCTOR, UNDEFINED , UNDEFINED, 10);
 
   // Param
   CanChangeStaff(AICAN_NOT);
   Build(AICAN_MYSELF);
-  RepairStaff(AICAN_MYSELF, 20, 0, AISF_HOMEPOSITION+AISF_PAUSE , AITRG_BOATMILITARY);
+  RepairStaff(AICAN_NOT);
 CloseFleet();
 
 
