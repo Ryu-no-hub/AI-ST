@@ -13,7 +13,7 @@ OpenArbiter("LastSubmariner100");
 
         s_win    = 14;
         s_defeat = 15;
-        ARTS_PER_PLAYER = 2;
+        ARTS_PER_PLAYER = 2; // Кол-во артефактов = (сторона карты - 50) / 10
         NO_ART_ZONE_SIZE = 25;
         BASIC_NAME = "The thing";
         RESEARCH_BLD_NAME = "Research";

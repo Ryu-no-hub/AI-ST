@@ -1,12 +1,12 @@
 
-OpenFleet("BO Builder",CIV_BO, AIF_BUILD, 12);
+OpenFleet("BO Gold Builder",CIV_BO, AIF_BUILD, 12);
   // Staff
   PutInStaff(ASSEMBLER, UNDEFINED , UNDEFINED, 10);
 
   // Param
   CanChangeStaff(AICAN_NOT);
-  Build(AICAN_NOT);
-  RepairStaff(AICAN_MYSELF, 20, 0, AISF_HOMEPOSITION+AISF_PAUSE , AITRG_BOATMILITARY);
+  Build(AICAN_MYSELF);
+  RepairStaff(AICAN_NOT);
 CloseFleet();
 
 
