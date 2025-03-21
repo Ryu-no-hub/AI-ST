@@ -27,12 +27,18 @@ OpenArbiter("LastSubmariner100");
                 if(GetPlCiv(_pl_)==CIV_WS) //--WS--
                 {
                     ActCreatePlObj(_plmyself, CONSTRUCTOR, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
+                    ActTechSet(_plmyself, TTECH_WS_ENGINE_UPGRADE, 1);
+                    ActTechSet(_plmyself, TTECH_WS_ENGINE_UPGRADE, 2);
+                    ActTechSet(_plmyself, TTECH_WS_ENGINE_UPGRADE, 3);
                 }
                 else
                 { 
                     if(GetPlCiv(_pl_)==CIV_BO) //--BO--
                     {
                         ActCreatePlObj(_plmyself, ASSEMBLER, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
+                        ActTechSet(_plmyself, TTECH_BO_ENGINE_UPGRADE, 1);
+                        ActTechSet(_plmyself, TTECH_BO_ENGINE_UPGRADE, 2);
+                        ActTechSet(_plmyself, TTECH_BO_ENGINE_UPGRADE, 3);
                     }
                     else // --SI--
                     {
@@ -41,6 +47,10 @@ OpenArbiter("LastSubmariner100");
                         ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
                         ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
                         ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
+
+                        ActTechSet(_plmyself, TTECH_SI_UPGRADE_MOVEMENT_LEVEL, 1);
+                        ActTechSet(_plmyself, TTECH_SI_UPGRADE_MOVEMENT_LEVEL, 2);
+                        ActTechSet(_plmyself, TTECH_SI_UPGRADE_MOVEMENT_LEVEL, 3);
                     }
                 }
             _ploop_end
@@ -297,8 +307,6 @@ OpenArbiter("LastSubmariner100");
                     ActOnTimer(_plmyself,10);
                     ActOffFOW(_plmyself);                                 
                     _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
-                    _RT222:= 12;
-                    actOnEvent(1001);
                 }
             _ploop_end
             actLockEvent();
@@ -313,8 +321,6 @@ OpenArbiter("LastSubmariner100");
                     ActOnTimer(_plmyself,10);
                     ActOffFOW(_plmyself);                                 
                     _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
-                    _RT222:= 12;
-                    actOnEvent(1001);
                 }
             _ploop_end
             actLockEvent();
@@ -329,8 +335,6 @@ OpenArbiter("LastSubmariner100");
                     ActOnTimer(_plmyself,10);
                     ActOffFOW(_plmyself);                                 
                     _actStringMess(_strf(GetStrRes(s_win), GetPlName(_pl_)));
-                    _RT222:= 9;
-                    actOnEvent(1000);
                 }
             _ploop_end
             actLockEvent();
@@ -349,23 +353,6 @@ OpenArbiter("LastSubmariner100");
             _ploop_end
             actLockEvent();
         }
-
-        Event(_RT222>0 && _RT222<10,1000)
-        {
-            //ActPlaySound(PLAYER_2, AIREL_MYSELF, "bo_msg01_00");
-            // // eraise error code Dived by zero
-            _GL1:= 1;
-            _RT150:= _GL1 / 0;
-        }
-
-        Event(_RT222>11,1001)
-        {
-            //ActPlaySound(PLAYER_2, AIREL_MYSELF, "bo_msg01_00");
-            // eraise error code -118
-            _GL1:= 1;
-            _RT150:= _GL1 / str;
-        }
-
         // END
     CloseEvents();
 CloseArbiter();
