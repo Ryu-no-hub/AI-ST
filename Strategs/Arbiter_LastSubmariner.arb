@@ -3,11 +3,12 @@ include<[_inc_path]\AiScript.mcr>;
 include<[_inc_path]\Strategs\CONST_LastSubmariner.dfn>;
 /*
     _RT100-_RT107 - mission conditions
-    _RT112-127 - x,y первого объекта каждого игрока
-    _RT128 - кол-во игроков
-    _RT129 - размер карты
+    _RT112-127 - x,y РїРµСЂРІРѕРіРѕ РѕР±СЉРµРєС‚Р° РєР°Р¶РґРѕРіРѕ РёРіСЂРѕРєР°
+    _RT128 - РєРѕР»-РІРѕ РёРіСЂРѕРєРѕРІ
+    _RT129 - СЂР°Р·РјРµСЂ РєР°СЂС‚С‹
 */
 OpenArbiter("Last Submariner");
+    //include<[_inc_path]\Strategs\arbTEST.arb>
     OpenEvents();
 
         s_win    = 14;
@@ -21,17 +22,32 @@ OpenArbiter("Last Submariner");
 
         Event(TRUE) 
         {
-            actStringMess("Last Submariner v2" + "\n")
+            actStringMess("Last Submariner" + "\n")
             _ploop_begin
                 if(GetPlCiv(_pl_)==CIV_WS) //--WS--
                 {
                     ActCreatePlObj(_plmyself, CONSTRUCTOR, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
+                    //ActTechSet(_plmyself, TTECH_WS_ENGINE_UPGRADE, 1);
+                    //ActTechSet(_plmyself, TTECH_WS_ENGINE_UPGRADE, 2);
+                    //ActTechSet(_plmyself, TTECH_WS_ENGINE_UPGRADE, 3);
                 }
                 else
                 { 
                     if(GetPlCiv(_pl_)==CIV_BO) //--BO--
                     {
                         ActCreatePlObj(_plmyself, ASSEMBLER, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
+                        //ActTechSet(_plmyself, TTECH_BO_ENGINE_UPGRADE, 1);
+                        //ActTechSet(_plmyself, TTECH_BO_ENGINE_UPGRADE, 2);
+                        //ActTechSet(_plmyself, TTECH_BO_ENGINE_UPGRADE, 3);
+                        /*
+                        if(GetPlName(_pl_) == "Dirty Octopo")
+                        {
+                            ActSetPlRC(_plmyself, METAL, 0, 20000 );
+                            ActSetPlRC(_plmyself, CORIUM, 0, 4000 );
+                            ActSetPlRC(_plmyself, GOLD, 0, 1000 );
+                            ActCreatePlObj(_plmyself, ASSEMBLER, -1, -1, -1, LOGO_UNDEF, "Build_Res");
+                        }
+                        */
                     }
                     else // --SI--
                     {
@@ -40,6 +56,10 @@ OpenArbiter("Last Submariner");
                         ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
                         ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
                         ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
+
+                        //ActTechSet(_plmyself, TTECH_SI_UPGRADE_MOVEMENT_LEVEL, 1);
+                        //ActTechSet(_plmyself, TTECH_SI_UPGRADE_MOVEMENT_LEVEL, 2);
+                        //ActTechSet(_plmyself, TTECH_SI_UPGRADE_MOVEMENT_LEVEL, 3);
                     }
                 }
             _ploop_end
@@ -50,7 +70,7 @@ OpenArbiter("Last Submariner");
             actOffEvent(100);
         }
 
-        // создание артефактов
+        // СЃРѕР·РґР°РЅРёРµ Р°СЂС‚РµС„Р°РєС‚РѕРІ
         Event(TRUE)
         {
             _ploop_begin
@@ -116,7 +136,7 @@ OpenArbiter("Last Submariner");
                 }
             }
 
-            actStringMess("В секторе обнаружены артефакты: " + _inttostr(GetArt()))
+            actStringMess("Р’ СЃРµРєС‚РѕСЂРµ РѕР±РЅР°СЂСѓР¶РµРЅС‹ Р°СЂС‚РµС„Р°РєС‚С‹: " + _inttostr(GetArt()))
         }
 
 
@@ -139,14 +159,14 @@ OpenArbiter("Last Submariner");
         }
 
 
-        // Даем имя для иссл. центов
+        // Р”Р°РµРј РёРјСЏ РґР»СЏ РёСЃСЃР». С†РµРЅС‚РѕРІ
         EventPlObjCreated(_PI3 == TECHCENTER || _PI3 == RESEARCH_LABORATORY || _PI3 == COMMAND_HUB)
         {
             ActSetName(RESEARCH_BLD_NAME, _PI5, _PI6, _PI7);
             actLockEvent();
         }
 
-        // для переименовывания исс. центров
+        // РґР»СЏ РїРµСЂРµРёРјРµРЅРѕРІС‹РІР°РЅРёСЏ РёСЃСЃ. С†РµРЅС‚СЂРѕРІ
         EventPlObjCreated(_PI3 == TECHCENTER || _PI3 == RESEARCH_LABORATORY || _PI3 == COMMAND_HUB)
         {
             //actStringMess("name: " + RESEARCH_BLD_NAME)
@@ -154,16 +174,16 @@ OpenArbiter("Last Submariner");
             _RT130 := 1;
             while(_RT130 <= GetPlObjN(_PI10, AIREL_MYSELF, RESEARCH_BLD_NAME))
             {
-                // тут получаем координаты тех центра
+                // С‚СѓС‚ РїРѕР»СѓС‡Р°РµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ С‚РµС… С†РµРЅС‚СЂР°
                 if(IsPlObjExist(_PI10, RESEARCH_BLD_NAME, 24, 25, 26) )
                 {
                     _RT131:= 0;
-                    // этот цикл для формирования имени тех. центра
+                    // СЌС‚РѕС‚ С†РёРєР» РґР»СЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РёРјРµРЅРё С‚РµС…. С†РµРЅС‚СЂР°
                     while(_RT131>=0)
                     {
                         _RT131+=1;
-                        // если у игрока нет тех. центра с именем RESEARCH_BLD_NAME, где N кол-во
-                        // то ставим это имя и выходим из цикла
+                        // РµСЃР»Рё Сѓ РёРіСЂРѕРєР° РЅРµС‚ С‚РµС…. С†РµРЅС‚СЂР° СЃ РёРјРµРЅРµРј RESEARCH_BLD_NAME(N), РіРґРµ N РєРѕР»-РІРѕ
+                        // С‚Рѕ СЃС‚Р°РІРёРј СЌС‚Рѕ РёРјСЏ Рё РІС‹С…РѕРґРёРј РёР· С†РёРєР»Р°
                         if(!IsPlObjExist(_PI10, RESEARCH_BLD_NAME + _inttostr(_RT131)))
                         {
                             ActSetName(RESEARCH_BLD_NAME + _inttostr(_RT131), _RT24, _RT25, _RT26);
@@ -210,12 +230,12 @@ OpenArbiter("Last Submariner");
             _RT135 := GetTechDevG(_PI10);
             if(_RT135==100)
             {
-                ActStringMess(_PI10, AIREL_MYSELF, "Все технологии уже исследованы!");
+                ActStringMess(_PI10, AIREL_MYSELF, "Р’СЃРµ С‚РµС…РЅРѕР»РѕРіРёРё СѓР¶Рµ РёР·СѓС‡РµРЅС‹!");
                 _RT134 := 1;
             }
             else
             {
-                // 1 сравнить координаты артефакта с координатами тех. центров игрока
+                // 1 СЃСЂР°РІРЅРёС‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹ Р°СЂС‚РµС„Р°РєС‚Р° СЃ РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё С‚РµС…. С†РµРЅС‚СЂРѕРІ РёРіСЂРѕРєР°
                 _RT130 := 1;
                 _RT132 := GetPlObjT(_PI10, AIREL_MYSELF, TECHCENTER) + GetPlObjT(_PI10, AIREL_MYSELF, RESEARCH_LABORATORY) + GetPlObjT(_PI10, AIREL_MYSELF, COMMAND_HUB);
                 //actStringMess("Research buildings to scan: " + _inttostr(_RT132));
@@ -226,9 +246,9 @@ OpenArbiter("Last Submariner");
                         _RT27 := _PI15 + _PI16 + _PI17 - _RT24 - _RT25 - _RT26;
                         if((_RT27 < 0 && _RT27 > -6) || (_RT27 > 0 && _RT27 < 6))
                         {
-                            actStringMess(GetPlName(_PI10) + " активировал артефакт");
+                            actStringMess(GetPlName(_PI10) + " Р°РєС‚РёРІРёСЂРѕРІР°Р» Р°СЂС‚РµС„Р°РєС‚");
 
-                            // считаем случайный грейд
+                            // СЃС‡РёС‚Р°РµРј СЃР»СѓС‡Р°Р№РЅС‹Р№ РіСЂРµР№Рґ
                             _RT133 := 0;
                             if(_PI11==CIV_WS){_RT133 := GetRnd(27,34);}
                             if(_PI11==CIV_BO){_RT133 := GetRnd(35,43);}
@@ -239,17 +259,17 @@ OpenArbiter("Last Submariner");
                             _RT136 := _strtoint(GetStrRes(_RT133));
                             //actStringMess("Tech number: "  + _inttostr(_RT136));
 
-                            // выдаём случайный грейд (или нет)
+                            // РІС‹РґР°С‘Рј СЃР»СѓС‡Р°Р№РЅС‹Р№ РіСЂРµР№Рґ (РёР»Рё РЅРµС‚)
                             //actStringMess("Tech id: " + _inttostr(_RT133));
                             if(!IsTechDev(_PI10, _RT136)){
                                 ActTechSet(_PI10, AIREL_MYSELF, _RT136);
-                                ActStringMess(_PI10, AIREL_MYSELF, "Активация технологии № "  + _inttostr(_RT136));
+                                ActStringMess(_PI10, AIREL_MYSELF, "РђРєС‚РёРІР°С†РёСЏ С‚РµС…РЅРѕР»РѕРіРёРё в„– "  + _inttostr(_RT136));
                             }
                             else{
-                                ActStringMess(_PI10, AIREL_MYSELF, "Найденная технология уже исследована...");
+                                ActStringMess(_PI10, AIREL_MYSELF, "РќР°Р№РґРµРЅРЅР°СЏ С‚РµС…РЅРѕР»РѕРіРёСЏ СѓР¶Рµ РёСЃСЃР»РµРґРѕРІР°РЅР°...");
                             }
                             _RT134 := 1;
-                            _RT130 := _RT132; // чтобы выйти из цикла
+                            _RT130 := _RT132; // С‡С‚РѕР±С‹ РІС‹Р№С‚Рё РёР· С†РёРєР»Р°
                         }
                     }
                     _RT130 += 1;
@@ -274,7 +294,7 @@ OpenArbiter("Last Submariner");
         Event(GetTime() - _RT50 > 1, 21)
         {
             ActDelArt(TART_UNDEFINED, "", _RT55, _RT56, _RT57, _RT55, _RT56, _RT57, VEFF_NONE);
-            actStringMess("Осталось артефактов: " + _inttostr(GetArt()-1));
+            actStringMess("РћСЃС‚Р°Р»РѕСЃСЊ Р°СЂС‚РµС„Р°РєС‚РѕРІ: " + _inttostr(GetArt()-1));
         }
 
         // Event for end game sessions
