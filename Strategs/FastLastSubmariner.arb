@@ -110,14 +110,14 @@ OpenArbiter("Fast Last Submariner");
                 if(IsPlObjExist(_pl_, BUILDER_NAME, 24, 25, 26, 27))
                 {
                     //_actStringMess(_inttostr(_RT24) + " " + _inttostr(_RT25))
-                    if(_pl_==PLAYER_0){_RT112:=_RT24; _RT113:=_RT25;}
-                    if(_pl_==PLAYER_1){_RT114:=_RT24; _RT115:=_RT25;}
-                    if(_pl_==PLAYER_2){_RT116:=_RT24; _RT117:=_RT25;}
-                    if(_pl_==PLAYER_3){_RT118:=_RT24; _RT119:=_RT25;}
-                    if(_pl_==PLAYER_4){_RT120:=_RT24; _RT121:=_RT25;}
-                    if(_pl_==PLAYER_5){_RT122:=_RT24; _RT123:=_RT25;}
-                    if(_pl_==PLAYER_6){_RT124:=_RT24; _RT125:=_RT25;}
-                    if(_pl_==PLAYER_7){_RT126:=_RT24; _RT127:=_RT25;}
+                    if(_pl_==PLAYER_0){_RT112:=_RT24; _RT113:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
+                    if(_pl_==PLAYER_1){_RT114:=_RT24; _RT115:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
+                    if(_pl_==PLAYER_2){_RT116:=_RT24; _RT117:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
+                    if(_pl_==PLAYER_3){_RT118:=_RT24; _RT119:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
+                    if(_pl_==PLAYER_4){_RT120:=_RT24; _RT121:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
+                    if(_pl_==PLAYER_5){_RT122:=_RT24; _RT123:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
+                    if(_pl_==PLAYER_6){_RT124:=_RT24; _RT125:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
+                    if(_pl_==PLAYER_7){_RT126:=_RT24; _RT127:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
                     //ActSetName("", _RT24, _RT25, _RT26);
                     //_actStringMess(_inttostr(_RT24) + " " + _inttostr(_RT25))
                 }
