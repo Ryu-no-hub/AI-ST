@@ -1,0 +1,1865 @@
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+/*
+
+Идеи длѝ ѝтратегов
+1. Парализующий луч. Еѝли попали ѝоздаем копию
+2. Модуль длѝ кибер дельфинов - ѝоздает ѝразу два.
+3. Создать 100 дельфинов. Надпиѝь - Бум!!! Девочки и мальчики
+4. Телепортациѝ невидимок и поѝле атаки на невидимку - телепорт в ѝту точку ѝѝминца ѝ грейдом
+Имѝ ѝтратега Dirty Octopo
+
+Грѝзнаѝ игра - ѝ проѝто ѝоздан длѝ нее. Н ха ха ха
+Dirty Octopo
+*/
+OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
+
+	MainEnemy(AICAN_MYSELF, PLAYER_ALL);
+	OffensiveStroke(AICAN_MYSELF, 20, 30, 300);
+
+	// отвечает за иѝѝледованиѝ в лабораториѝх
+	OpenTactic("tacticResLab", CIV_BO, 10);
+
+		OpenFleet("fleetResLab", CIV_BO, AIF_BASE, 19);
+
+			PutInStaff(RESEARCH_LABORATORY, UNDEFINED, UNDEFINED, 40);
+
+			Build(AICAN_MYSELF, AITRG_TLOPRODUCTIVE);
+			CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+	CloseTactic();
+
+	// отвечает за ѝтроительѝтво зданий
+	OpenTactic("tacticBaseB", CIV_BO, 10);
+
+		OpenFleet("fleetBaseB", CIV_BO, AIF_BASE, 19);
+
+			Build(AICAN_MYSELF, AITRG_ALL);
+			CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+	CloseTactic();
+
+	// дополнитеьный тактик длѝ ѝтроительѝтва
+	OpenTactic("tacticBaseB2", CIV_BO, 10);
+
+		OpenFleet("fleetBaseB2", CIV_BO, AIF_BASE, 19);
+
+			Build(AICAN_MYSELF, AITRG_ALL);
+			CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+	CloseTactic();
+
+	// тактик длѝ ѝтроительѝтва внешних реѝурѝов
+	OpenTactic("tacticBaseB3", CIV_BO, 10);
+
+		OpenFleet("fleetBaseB3", CIV_BO, AIF_BASE, 19);
+
+			Build(AICAN_MYSELF, AITRG_ALL);
+			CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+	CloseTactic();
+
+	// ѝтот тактик указывает какие лодки ѝтроить 
+	OpenTactic("tacticSubB", CIV_BO, 10);
+
+		OpenFleet("fleetSubB", CIV_BO, AIF_BASE, 19);
+
+			Build(AICAN_MYSELF, AITRG_ALL);
+			CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+
+		OpenFleet("fleetSubHeavy", CIV_BO, AIF_BASE, 19);
+
+			Build(AICAN_MYSELF, AITRG_ALL);
+			CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+
+		OpenFleet("fleetSubHeavy1", CIV_BO, AIF_BASE, 19);
+
+			Build(AICAN_MYSELF, AITRG_ALL);
+			CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+
+		OpenFleet("fleetSubHeavy2", CIV_BO, AIF_BASE, 19);
+
+			Build(AICAN_MYSELF, AITRG_ALL);
+			CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+
+		// длѝ того чтобы заказать кибер дельфинов
+		OpenFleet("fleetSubCyb", CIV_BO, AIF_BASE, 19);
+
+			Build(AICAN_MYSELF, AITRG_ALL);
+			CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+
+		OpenFleet("fleetBScout", CIV_BO, AIF_BASE, 19);
+
+			Build(AICAN_MYSELF, AITRG_ALL);
+			CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+
+		OpenFleet("fleetBAveng", CIV_BO, AIF_BASE, 19);
+
+			Build(AICAN_MYSELF, AITRG_ALL);
+			CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+	CloseTactic();
+
+	//  доп тактик длѝ ѝтроительѝтва лодок
+	OpenTactic("tacticSubB1", CIV_BO, 10);
+
+		OpenFleet("fleetSubB1", CIV_BO, AIF_BASE, 19);
+
+			Build(AICAN_MYSELF, AITRG_ALL);
+			CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+	CloseTactic();
+
+	// тактик длѝ управлениѝ ѝборщиками металла
+	OpenTactic("tacticGatherM", CIV_BO, 10);
+
+		OpenFleet("fleetGatherM", CIV_BO, AIF_RES, 19);
+			//PutInStaff(CARGO_SUB, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "CARGO_M");
+			//Build(AICAN_MYSELF, AITRG_ALL);
+            //GatherRC(AICAN_MYSELF, METAL);
+			//CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+	CloseTactic();
+
+	// тактик длѝ управлениѝ ѝборщиками кориума
+	OpenTactic("tacticGatherC", CIV_BO, 10);
+
+		OpenFleet("fleetGatherC", CIV_BO, AIF_RES, 19);
+
+		CloseFleet();
+	CloseTactic();
+
+	// тактик отвечает за защиту базы
+	OpenTactic("tacticGuardB", CIV_BO, 10);
+		OpenFleet("fleetGuardB",CIV_BO, AIF_MILITARY, 10);
+
+			CanChangeStaff(AICAN_MYSELF);
+			Patrol(AICAN_MYSELF, 0, 0);
+			GuardZones(AICAN_MYSELF, AITRG_ALL, 1, 0, 0);
+			//Offensive(AICAN_MYSELF, AITRG_TLORC, 8, 3, 0);
+
+			//Patrol(AICAN_MYSELF, 0, 260);
+			//GuardZones(AICAN_MYSELF, AITRG_ALL, 1, 0, 180);
+			RepairStaff(AICAN_MYSELF, 50, 4, AISF_HOMEPOSITION+AISF_PATROL+AISF_PAUSE, AITRG_ALL);
+			//Offensive(AICAN_MYSELF, AITRG_TLOHIGHTECH+AITRG_TLOINTELLIGENCE, 8, 3, 250);
+			Help(AICAN_MYSELF, AIF_BASE+AIF_RES+AIF_BUILD , 8, 3, AIATTACK_HUNT, 120);
+
+		CloseFleet();
+	CloseTactic();
+
+	// тактик длѝ защиты ѝтроителей
+	OpenTactic("tacticBGuard", CIV_BO);
+
+		OpenFleet("fleetBGuard1", CIV_BO, AIF_MILITARY, 9);
+
+			CanChangeStaff(AICAN_MYSELF);   
+			Raid(AICAN_BYORDER, AITRG_ALL , 1, 0, AIATTACK_GLADE, 0, 0);
+
+		CloseFleet();
+
+		OpenFleet("fleetBGuard2", CIV_BO, AIF_MILITARY, 9);
+
+			CanChangeStaff(AICAN_MYSELF);   
+			Raid(AICAN_BYORDER, AITRG_ALL , 1, 0, AIATTACK_GLADE, 0, 0);
+
+		CloseFleet();
+	CloseTactic();
+
+	// тактик длѝ управлениѝ дельфинами
+	OpenTactic("tacticCyber", CIV_BO);
+	
+	  OpenFleet("fleetCyber", CIV_BO, AIF_CYBER, 9);
+		  CanChangeStaff(AICAN_MYSELF);   
+		  //Raid(AICAN_MYSELF, AITRG_BOATRCEXTRACT, 1, 0, AIATTACK_HUNT, 0, 0);
+	  CloseFleet();
+	  
+	CloseTactic();
+
+	OpenTactic("tacticBoss", CIV_BO);
+
+		OpenFleet("fleetBoss", CIV_BO, AIF_MILITARY, 9);
+
+			CanChangeStaff(AICAN_MYSELF);   
+			Raid(AICAN_BYORDER, AITRG_ALL , 1, 0, AIATTACK_GLADE, 0, 0);
+
+		CloseFleet();
+
+	CloseTactic();
+
+	OpenTactic("tacticBossMinion", CIV_BO);
+
+		OpenFleet("fleetBossMinion", CIV_BO, AIF_MILITARY, 9);
+
+			CanChangeStaff(AICAN_MYSELF);   
+			Raid(AICAN_BYORDER, AITRG_ALL , 1, 0, AIATTACK_GLADE, 0, 0);
+
+		CloseFleet();
+
+		OpenFleet("fleetBossMC", CIV_BO, AIF_CYBER, 9);
+		  CanChangeStaff(AICAN_MYSELF);   
+		  //Raid(AICAN_MYSELF, AITRG_BOATRCEXTRACT, 1, 0, AIATTACK_HUNT, 0, 0);
+	  	CloseFleet();
+
+	CloseTactic();
+
+	// TACTICS FOR SUPER WEAPON
+	OpenTactic("BO tacticN1", AIF_BASE);
+		OpenFleet("BO N1", CIV_BO, AIF_BASE, 19);
+			PutInStaff(WEAPON_LASER_BOMB, UNDEFINED, UNDEFINED, 40);
+			Build(AICAN_MYSELF, AITRG_TLOHIGHTECH);
+			CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+	CloseTactic();
+
+	OpenTactic("BO tacticN2", AIF_BASE);
+		OpenFleet("BO N2", CIV_BO, AIF_BASE, 19);
+			PutInStaff(WEAPON_LASER_BOMB, UNDEFINED, UNDEFINED, 40);
+			Build(AICAN_MYSELF, AITRG_TLOHIGHTECH);
+			CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+	CloseTactic();
+
+	OpenTactic("BO tacticN3", AIF_BASE);
+		OpenFleet("BO N3", CIV_BO, AIF_BASE, 19);
+			PutInStaff(WEAPON_LASER_BOMB, UNDEFINED, UNDEFINED, 40);
+			Build(AICAN_MYSELF, AITRG_TLOHIGHTECH);
+			CanChangeStaff(AICAN_MYSELF);
+		CloseFleet();
+	CloseTactic();
+
+	// Events
+	OpenEvents()
+
+		INCOME_METAL_EXTRACTOR = 38;
+		INCOME_CORIUM_EXTRACTOR = 6;
+
+		// Event #0
+        Event(TRUE)
+        {
+            actExecTactic("tacticBaseB");
+            
+            actCreateFleet("fleetBaseB", CIV_BO, AIF_BASE);
+            actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), O2_SUBLIMATOR, UNDEFINED, UNDEFINED, 45); // [, tobj2, tobj3, prio, x, y, z, logo, name]
+            actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), DOCKYARD, UNDEFINED, UNDEFINED, 45, -1,-1,-1, LOGO_DEFAULT, "");
+
+            actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), SILO, UNDEFINED, UNDEFINED, 45);
+            actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), METAL_MINE, UNDEFINED, UNDEFINED, 45);
+
+            actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), SILO, UNDEFINED, UNDEFINED, 45);
+            actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), METAL_MINE, UNDEFINED, UNDEFINED, 45);
+
+            actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), GOLD_SUBLIMATOR, UNDEFINED, UNDEFINED, 45);
+            actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), GOLD_SUBLIMATOR, UNDEFINED, UNDEFINED, 45);
+
+            actFParBuild(getFleetNum("fleetBaseB", "tacticBaseB"), AICAN_MYSELF, AITRG_ALL);
+            actObjSelectN("Builder");
+            actAddFleet(getFleetNum("fleetBaseB", "tacticBaseB") );
+
+			actExecTactic("tacticGatherM");
+			actCreateFleet("fleetGatherM", CIV_BO, AIF_RES);
+
+			actExecTactic("tacticGatherC");
+			actCreateFleet("fleetGatherC", CIV_BO, AIF_RES);
+
+			actExecTactic("tacticBaseB2");
+			actCreateFleet("fleetBaseB2", CIV_BO, AIF_BASE);
+
+			actExecTactic("tacticBaseB3");
+			actCreateFleet("fleetBaseB3", CIV_BO, AIF_BASE);
+
+            actExecTactic("tacticSubB");
+            actCreateFleet("fleetSubB", CIV_BO, AIF_BASE);
+
+            actExecTactic("tacticSubB1");
+            actCreateFleet("fleetSubB1", CIV_BO, AIF_BASE);
+
+			actCreateFleet("fleetSubHeavy", CIV_BO, AIF_MILITARY);
+			actCreateFleet("fleetSubHeavy1", CIV_BO, AIF_MILITARY);
+			actCreateFleet("fleetSubHeavy2", CIV_BO, AIF_MILITARY);
+
+			actExecTactic("tacticGuardB");
+            actCreateFleet("fleetGuardB", CIV_BO, AIF_MILITARY);
+
+			actExecTactic("tacticResLab");
+			actTScenDevRun(TECH_SCENARIO_AGGRESSOR);
+			actCreateFleet("fleetResLab", CIV_BO, AIF_BASE);
+
+			actExecTactic("tacticBGuard");
+			actExecTactic("tacticCyber");
+			actCreateFleet("fleetCyber", CIV_BO, AIF_CYBER);
+
+			actExecTactic("tacticBoss");
+			actCreateFleet("fleetBoss", CIV_BO, AIF_MILITARY);
+
+			actExecTactic("tacticBossMinion");
+			actCreateFleet("fleetBossMinion", CIV_BO, AIF_MILITARY);
+			actCreateFleet("fleetBossMC", CIV_BO, AIF_CYBER);
+			
+			actExecTactic("BO tacticN1");
+			actCreateFleet("BO N1", CIV_BO, AIF_BASE);
+
+			actExecTactic("BO tacticN2");
+			actCreateFleet("BO N2", CIV_BO, AIF_BASE);
+
+			actExecTactic("BO tacticN3");
+			actCreateFleet("BO N3", CIV_BO, AIF_BASE);
+
+			actTechSet(TTECH_BO_MOBILE_REPAIR_PLATFORM);
+			actTechSet(TTECH_BO_UPGRADE_TO_MOBILITY);
+			actTechSet(TTECH_BO_MUNITIONS_FACTORY_UPGRADE);
+			actTechSet(TTECH_BO_IMPROVE_REPAIR_TECHNOLOGY);
+
+			_ploop_begin
+				if(isEnemy(_pl_)) {
+					_GL1:= _pl_;
+				}
+    		_ploop_end
+
+        }
+		// Event #1
+		// второй ѝтроитель
+		Event(getOwnTime()> 15)
+		{
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), RESEARCH_LABORATORY, UNDEFINED, UNDEFINED, 45);
+			//actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), DOCKYARD, UNDEFINED, UNDEFINED, 20);
+			actFParBuild(getFleetNum("fleetBaseB2", "tacticBaseB2"), AICAN_MYSELF, AITRG_ALL);
+            actObjSelectN("Build_Res");
+            actAddFleet(getFleetNum("fleetBaseB2", "tacticBaseB2"));
+		}
+		// Event #2
+		Event(getOwnTime()> 180)
+		{
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), CORIUM_MINE, UNDEFINED, UNDEFINED, 45);
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), CORIUM_MINE, UNDEFINED, UNDEFINED, 45);
+		}
+		// Добыча реѝурѝов
+		Event(/*getOwnTime()%25 == 0*/ TRUE)
+		{
+			actSetPlRC(METAL, 1, (INCOME_METAL_EXTRACTOR * getPlObjN("METAL1")) +
+								(INCOME_METAL_EXTRACTOR * getPlObjN("METAL2")) +
+								(INCOME_METAL_EXTRACTOR * getPlObjN("METAL3")) +
+								(INCOME_METAL_EXTRACTOR * getPlObjN("METAL4")) + 
+								(INCOME_METAL_EXTRACTOR * getPlObjN("METAL5")));
+
+			actSetPlRC(CORIUM, 1, (INCOME_CORIUM_EXTRACTOR * getPlObjN("CORIUM1") + (isTechDev(TTECH_BO_UPGRADE_MINE_PRODUCTIVITY) ? 3 : 0)) +
+								(INCOME_CORIUM_EXTRACTOR * getPlObjN("CORIUM2") + (isTechDev(TTECH_BO_UPGRADE_MINE_PRODUCTIVITY) ? 3 : 0)) +
+								(INCOME_CORIUM_EXTRACTOR * getPlObjN("CORIUM3") + (isTechDev(TTECH_BO_UPGRADE_MINE_PRODUCTIVITY) ? 3 : 0)) +
+								(INCOME_CORIUM_EXTRACTOR * getPlObjN("CORIUM4") + (isTechDev(TTECH_BO_UPGRADE_MINE_PRODUCTIVITY) ? 3 : 0)) +
+								(INCOME_CORIUM_EXTRACTOR * getPlObjN("CORIUM5") + (isTechDev(TTECH_BO_UPGRADE_MINE_PRODUCTIVITY) ? 3 : 0)));
+
+			if(isPlObjExist("METAL1",10,20,30)){
+				ActSetRCFieldVol(-1, INCOME_METAL_EXTRACTOR, METAL, _RT10, _RT20, _RT30,1,1,4);
+			}
+			if(isPlObjExist("METAL2",10,20,30)){
+				ActSetRCFieldVol(-1, INCOME_METAL_EXTRACTOR, METAL, _RT10, _RT20, _RT30,1,1,4);
+			}
+			if(isPlObjExist("METAL3",10,20,30)){
+				ActSetRCFieldVol(-1, INCOME_METAL_EXTRACTOR, METAL, _RT10, _RT20, _RT30,1,1,4);
+			}
+			if(isPlObjExist("METAL4",10,20,30)){
+				ActSetRCFieldVol(-1, INCOME_METAL_EXTRACTOR, METAL, _RT10, _RT20, _RT30,1,1,4);
+			}
+			if(isPlObjExist("METAL5",10,20,30)){
+				ActSetRCFieldVol(-1, INCOME_METAL_EXTRACTOR, METAL, _RT10, _RT20, _RT30,1,1,4);
+			}
+
+			if(isPlObjExist("CORIUM1",10,20,30)){
+				ActSetRCFieldVol(-1, INCOME_CORIUM_EXTRACTOR + (isTechDev(TTECH_BO_UPGRADE_MINE_PRODUCTIVITY) ? 3 : 0), CORIUM, _RT10, _RT20, _RT30,1,1,4);
+			}
+			if(isPlObjExist("CORIUM2",10,20,30)){
+				ActSetRCFieldVol(-1, INCOME_CORIUM_EXTRACTOR + (isTechDev(TTECH_BO_UPGRADE_MINE_PRODUCTIVITY) ? 3 : 0), CORIUM, _RT10, _RT20, _RT30,1,1,4);
+			}
+			if(isPlObjExist("CORIUM3",10,20,30)){
+				ActSetRCFieldVol(-1, INCOME_CORIUM_EXTRACTOR + (isTechDev(TTECH_BO_UPGRADE_MINE_PRODUCTIVITY) ? 3 : 0), CORIUM, _RT10, _RT20, _RT30,1,1,4);
+			}
+			if(isPlObjExist("CORIUM4",10,20,30)){
+				ActSetRCFieldVol(-1, INCOME_CORIUM_EXTRACTOR + (isTechDev(TTECH_BO_UPGRADE_MINE_PRODUCTIVITY) ? 3 : 0), CORIUM, _RT10, _RT20, _RT30,1,1,4);
+			}
+			if(isPlObjExist("CORIUM5",10,20,30)){
+				ActSetRCFieldVol(-1, INCOME_CORIUM_EXTRACTOR + (isTechDev(TTECH_BO_UPGRADE_MINE_PRODUCTIVITY) ? 3 : 0), CORIUM, _RT10, _RT20, _RT30,1,1,4);
+			}
+
+			actLockEvent();
+		}
+
+		// контроль воздуха
+		Event(getOwnTime()%10 == 0)
+		{
+			//actStringMess("AIR LEVEL = " + _inttostr(getPlRes(AIR)));
+			if(getPlRes(AIR) < 0)
+			{
+				//actFParCleanStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"));
+				//actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), O2_SUBLIMATOR, UNDEFINED, UNDEFINED, 35);
+			}
+			//actLockEvent();
+		}
+		Event(getOwnTime()%120 == 0)
+		{
+			actSetPlRC(AIR, 1, 10);
+			actLockEvent();
+		}
+
+		Event(getOwnTime()%120 == 0)
+		{
+			if(getPlObjT(RESEARCH_LABORATORY) < 6 && getPlRes(CORIUM) > 4000)
+			{
+				actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), RESEARCH_LABORATORY, UNDEFINED, UNDEFINED, 45);
+			}
+			actLockEvent();
+		}
+
+		Event(getOwnTime() > 60*4 && getOwnTime()%300 == 0 && (GetRCField(METAL)/2) < METAL_MINE)
+		{
+            actFParPutInStaff(getFleetNum("fleetBaseB3", "tacticBaseB3"), METAL_MINE, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "METAL3");
+
+            //actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), SILO, UNDEFINED, UNDEFINED, 45);
+            actFParPutInStaff(getFleetNum("fleetBaseB3", "tacticBaseB3"), METAL_MINE, UNDEFINED, UNDEFINED, 45);
+
+			actFParPutInStaff(getFleetNum("fleetBaseB3", "tacticBaseB3"), CORIUM_MINE, UNDEFINED, UNDEFINED, 45);
+			actFParPutInStaff(getFleetNum("fleetBaseB3", "tacticBaseB3"), CORIUM_MINE, UNDEFINED, UNDEFINED, 45);
+			actObjSelectN("Build_Dop");
+            actAddFleet(getFleetNum("fleetBaseB3", "tacticBaseB3"));
+			actLockEvent();
+		}
+
+		// ѝобытие длѝ дельфинов
+		Event(getOwnTime()%180 == 0 && getPlObjT(CYBER_LABORATORY) > 0)
+		{
+			if (getPlObjN("CYBERDOLPHIN1") < 10) {
+				//actStringMess("Build Dolphin");
+				actFParPutInStaff(getFleetNum("fleetSubCyb", "tacticSubB"), CYBERDOLPHIN, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "CYBERDOLPHIN1");
+				actFParPutInStaff(getFleetNum("fleetSubCyb", "tacticSubB"), CYBERDOLPHIN, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "CYBERDOLPHIN1");
+				actFParPutInStaff(getFleetNum("fleetSubCyb", "tacticSubB"), CYBERDOLPHIN, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "CYBERDOLPHIN2");
+				actFParPutInStaff(getFleetNum("fleetSubCyb", "tacticSubB"), CYBERDOLPHIN, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "CYBERDOLPHIN2");
+				actFParBuild(getFleetNum("fleetSubCyb", "tacticSubB"), AICAN_MYSELF, AITRG_ALL);
+				actObjSelectN("CyberLab1");
+				actAddFleet(getFleetNum("fleetSubCyb", "tacticSubB") );
+			}
+			else {
+				actFParCleanStaff(getFleetNum("fleetSubCyb", "tacticSubB"));
+			}
+			actLockEvent();
+		}
+
+		// Событие длѝ заказа лодок в заводах
+		Event(getOwnTime()%30 == 0)
+		{
+			if(isTechDev(TTECH_BO_PARALYZING_RAYS_TECHNOLOGY))
+			{
+				actObjSelectN("Doc6");
+				actFParPutInStaff(getFleetNum("fleetBAveng", "tacticSubB"), AVENGER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "Offen");
+				actFParPutInStaff(getFleetNum("fleetBAveng", "tacticSubB"), AVENGER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "Offen");
+				actFParPutInStaff(getFleetNum("fleetBAveng", "tacticSubB"), AVENGER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "Offen");
+				actAddFleet(getFleetNum("fleetBAveng", "tacticSubB") );				
+			}
+			if(isTechDev(TTECH_BO_STEALTH_SCOUT_TECHNOLOGY))
+			{
+				actObjSelectN("Doc5");
+				actFParPutInStaff(getFleetNum("fleetBScout", "tacticSubB"), STEALTH_SCOUT, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "SCOUT1");
+				actFParPutInStaff(getFleetNum("fleetBScout", "tacticSubB"), STEALTH_SCOUT, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "SCOUT2");
+				actFParPutInStaff(getFleetNum("fleetBScout", "tacticSubB"), STEALTH_SCOUT, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "SCOUT3");
+				actAddFleet(getFleetNum("fleetBScout", "tacticSubB") );
+			}
+			if(isTechDev(TTECH_BO_CASSETTE_SHELL_TECHNOLOGY))
+			{
+				actFParCleanStaff(getFleetNum("fleetSubHeavy", "tacticSubB"));
+				actFParCleanStaff(getFleetNum("fleetSubHeavy1", "tacticSubB"));
+				
+				actObjSelectN("Doc1");
+				actFParPutInStaff(getFleetNum("fleetSubHeavy", "tacticSubB"), INVADER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+				actFParPutInStaff(getFleetNum("fleetSubHeavy", "tacticSubB"), HEAVY_CRUISER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+				actFParPutInStaff(getFleetNum("fleetSubHeavy", "tacticSubB"), HEAVY_CRUISER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+				actAddFleet(getFleetNum("fleetSubHeavy", "tacticSubB") );
+
+				actObjSelectN("Doc2");
+				actFParPutInStaff(getFleetNum("fleetSubHeavy", "tacticSubB"), INVADER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+				actFParPutInStaff(getFleetNum("fleetSubHeavy", "tacticSubB"), INVADER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+				actAddFleet(getFleetNum("fleetSubHeavy", "tacticSubB") );
+
+				actObjSelectN("Doc3");
+				actFParPutInStaff(getFleetNum("fleetSubHeavy1", "tacticSubB"), INVADER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+				actFParPutInStaff(getFleetNum("fleetSubHeavy1", "tacticSubB"), HEAVY_CRUISER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+				actFParPutInStaff(getFleetNum("fleetSubHeavy1", "tacticSubB"), HEAVY_CRUISER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+				actAddFleet(getFleetNum("fleetSubHeavy1", "tacticSubB") );
+
+				actObjSelectN("Doc4");
+				actFParPutInStaff(getFleetNum("fleetSubHeavy2", "tacticSubB"), INVADER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+				actFParPutInStaff(getFleetNum("fleetSubHeavy2", "tacticSubB"), HEAVY_CRUISER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+				actFParPutInStaff(getFleetNum("fleetSubHeavy2", "tacticSubB"), HEAVY_CRUISER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+				actAddFleet(getFleetNum("fleetSubHeavy2", "tacticSubB") );
+			}
+			else {
+				if(isTechDev(TTECH_BO_RUBY_LASER_TECHNOLOGY))
+				{
+					actFParCleanStaff(getFleetNum("fleetSubB", "tacticSubB"));
+					actFParCleanStaff(getFleetNum("fleetSubB1", "tacticSubB1"));
+					actFParCleanStaff(getFleetNum("fleetSubHeavy", "tacticSubB"));
+					actFParCleanStaff(getFleetNum("fleetSubHeavy1", "tacticSubB"));
+					
+					actObjSelectN("Doc1");
+					actFParPutInStaff(getFleetNum("fleetSubHeavy", "tacticSubB"), HEAVY_CRUISER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+					actFParPutInStaff(getFleetNum("fleetSubHeavy", "tacticSubB"), HEAVY_CRUISER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+					actFParPutInStaff(getFleetNum("fleetSubHeavy", "tacticSubB"), HEAVY_CRUISER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+					actAddFleet(getFleetNum("fleetSubHeavy", "tacticSubB") );
+
+					actObjSelectN("Doc2");
+					actFParPutInStaff(getFleetNum("fleetSubHeavy", "tacticSubB"), HEAVY_CRUISER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+					actFParPutInStaff(getFleetNum("fleetSubHeavy", "tacticSubB"), HEAVY_CRUISER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+					actFParPutInStaff(getFleetNum("fleetSubHeavy", "tacticSubB"), HEAVY_CRUISER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+					actAddFleet(getFleetNum("fleetSubHeavy", "tacticSubB") );
+
+					actObjSelectN("Doc3");
+					actFParPutInStaff(getFleetNum("fleetSubHeavy1", "tacticSubB"), HEAVY_CRUISER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+					actFParPutInStaff(getFleetNum("fleetSubHeavy1", "tacticSubB"), HEAVY_CRUISER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+					actFParPutInStaff(getFleetNum("fleetSubHeavy1", "tacticSubB"), HEAVY_CRUISER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+					actAddFleet(getFleetNum("fleetSubHeavy1", "tacticSubB") );
+				} 
+				else {
+					if(isTechDev(TTECH_BO_SPLINTER_TORPEDO_TECHNOLOGY))
+					{
+						actObjSelectN("Doc1");
+						actFParPutInStaff(getFleetNum("fleetSubHeavy", "tacticSubB"), DESTROYER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+						actFParPutInStaff(getFleetNum("fleetSubHeavy", "tacticSubB"), DESTROYER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+						actAddFleet(getFleetNum("fleetSubHeavy", "tacticSubB") );
+
+						actObjSelectN("Doc2");
+						actFParPutInStaff(getFleetNum("fleetSubHeavy", "tacticSubB"), DESTROYER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+						actFParPutInStaff(getFleetNum("fleetSubHeavy", "tacticSubB"), DESTROYER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+						actAddFleet(getFleetNum("fleetSubHeavy", "tacticSubB") );
+
+						actObjSelectN("Doc3");
+						actFParPutInStaff(getFleetNum("fleetSubHeavy1", "tacticSubB"), DESTROYER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+						actFParPutInStaff(getFleetNum("fleetSubHeavy1", "tacticSubB"), DESTROYER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+						actAddFleet(getFleetNum("fleetSubHeavy1", "tacticSubB") );
+					}
+					else {
+						actObjSelectN("Doc1");
+						actFParPutInStaff(getFleetNum("fleetSubB", "tacticSubB"), FIGHTER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+						actFParPutInStaff(getFleetNum("fleetSubB", "tacticSubB"), FIGHTER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+						actAddFleet(getFleetNum("fleetSubB", "tacticSubB") );
+
+						actObjSelectN("Doc2");
+						actFParPutInStaff(getFleetNum("fleetSubB", "tacticSubB"), FIGHTER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+						actFParPutInStaff(getFleetNum("fleetSubB", "tacticSubB"), FIGHTER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+						//actFParBuild(getFleetNum("fleetSubB1", "tacticSubB1"), AICAN_MYSELF, AITRG_ALL);
+						actAddFleet(getFleetNum("fleetSubB", "tacticSubB1") );
+
+						actObjSelectN("Doc3");
+						actFParPutInStaff(getFleetNum("fleetSubB1", "tacticSubB1"), FIGHTER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+						actFParPutInStaff(getFleetNum("fleetSubB1", "tacticSubB1"), FIGHTER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+						//actFParBuild(getFleetNum("fleetSubB1", "tacticSubB1"), AICAN_MYSELF, AITRG_ALL);
+						actAddFleet(getFleetNum("fleetSubB1", "tacticSubB1") );
+					}
+				} 
+			}
+
+			actLockEvent();
+		}
+
+		Event(getOwnTime() > 360 && getOwnTime()%30 == 0)
+		{
+			if(getPlObjT(STEALTH_SCOUT) >= 10)
+			{
+				if(isPlObjExist("TELEPORTER1", 34,35,36))
+				{
+					if(IsPlObjExist(_GL1,"ITARGET1", 31, 32, 33))
+					{
+						actCreateFleet("fleetScout1", CIV_BO, AIF_SPEC);
+						actFCmdTeleport(getFleetNum("fleetScout1"), _RT31, _RT32, _RT33, _RT34, _RT35, _RT36);
+						actObjSelectN("SCOUT1");
+						actAddFleet( getFleetNum("fleetScout1"));
+					}
+				}
+
+				if(isPlObjExist("TELEPORTER2", 37,38,39))
+				{
+					if(IsPlObjExist(_GL1,"ITARGET2", 40, 41, 42))
+					{
+						actCreateFleet("fleetScout2", CIV_BO, AIF_SPEC);
+						actFCmdTeleport(getFleetNum("fleetScout2"), _RT40, _RT41, _RT42, _RT37, _RT38, _RT39);
+						actObjSelectN("SCOUT2");
+						actAddFleet( getFleetNum("fleetScout2"));
+					}
+				}
+
+				if(isPlObjExist("TELEPORTER3", 43,44,45))
+				{
+					if(IsPlObjExist(_GL1,"ITARGET3", 46, 47, 48))
+					{
+						actCreateFleet("fleetScout3", CIV_BO, AIF_SPEC);
+						actFCmdTeleport(getFleetNum("fleetScout3"), _RT46, _RT47, _RT48, _RT43, _RT44, _RT45);
+						actObjSelectN("SCOUT3");
+						actAddFleet( getFleetNum("fleetScout3"));
+					}
+				}
+
+			}
+			actLockEvent();
+		}
+
+// EventPlObjCreated --------------------------------------------------------------------------
+
+		/*
+		ITARGET1 - metall
+		ITARGET2 - corium
+		ITARGET3 - sklad
+		*/
+		// Событие длѝ нанеѝение меток на зданиѝ человека-игрока
+		EventPlObjCreated(_PI3 == METAL_EXTRACTOR || _PI3 == METAL_MINE || _PI3 == ENERGY_ACCUMULATOR)
+		{
+			if(GetPlName(_PI0) != "Dirty Octopo")
+			{
+				ActSetName("ITARGET1", _PI5, _PI6, _PI7);
+			}
+			actLockEvent();
+		}
+
+		EventPlObjCreated(_PI3 == CORIUM_EXTRACTOR || _PI3 == CORIUM_MINE || _PI3 == CORIUM_COLLECTOR)
+		{
+			if(GetPlName(_PI0) != "Dirty Octopo")
+			{
+				ActSetName("ITARGET2", _PI5, _PI6, _PI7);
+			}
+			actLockEvent();
+		}
+
+		EventPlObjCreated(_PI3 == DEPOT || _PI3 == SILO || _PI3 == CORIUM_SILO)
+		{
+			if(GetPlName(_PI0) != "Dirty Octopo")
+			{
+				ActSetName("ITARGET3", _PI5, _PI6, _PI7);
+			}
+			actLockEvent();
+		}
+
+		// Event #3
+		EventPlObjCreated(_PI3 == O2_SUBLIMATOR)
+		{
+			//actCreatePlObj(DOCKYARD, _PI5, _PI6 - 2, _PI7, LOGO_DEFAULT,"Doc",-1,100,1,1);
+			//actCreatePlObj(DOCKYARD, _PI5 - 2, _PI6, _PI7, LOGO_DEFAULT,"",-1,100,1,1);
+			//actCreatePlObj(DOCKYARD, _PI5, _PI6 + 2, _PI7, LOGO_DEFAULT,"",-1,100,1,1);
+
+			//actCreatePlObj(RESEARCH_LABORATORY, _PI5, _PI6 - 4, _PI7, LOGO_DEFAULT,"",-1,100,1,1);
+			//actCreatePlObj(RESEARCH_LABORATORY, _PI5 - 4, _PI6, _PI7, LOGO_DEFAULT,"",-1,100,1,1);
+		}
+
+		EventPlObjCreated(_PI3 == GOLD_SUBLIMATOR)
+		{
+			if(GetPlName(_PI0) == "Dirty Octopo")
+			{
+				actFParPatrol( getFleetNum("fleetGuardB", "tacticGuardB"), AICAN_BYORDER);
+				
+				if(!isPlObjExist("fGuardGold1")) {
+					ActSetName("fGuardGold1",_PI5, _PI6, _PI7);
+
+					actCreateFleet("fGuardGold1", CIV_BO, AIF_MILITARY);
+					actCreatePlObj(DEFENDER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold1", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(DEFENDER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold1", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(DEFENDER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold1", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(DEFENDER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold1", -1, 100, VEFF_TELEPORT);
+					
+					actFParGuardZones(getFleetNum("fGuardGold1"), AICAN_BYORDER, AITRG_ALL);
+					actObjSelectN("GuardGold1");
+					actAddFleet( getFleetNum("fGuardGold1"));
+
+					actFParSetPatrolPoint( getFleetNum("fleetGuardB", "tacticGuardB"), _PI5, _PI6, _PI7, 0, 15,FORMATION_WALL, FORMATION_MIN_SIZE);
+
+				} else {
+					if(!isPlObjExist("fGuardGold2")) {
+						ActSetName("fGuardGold2",_PI5, _PI6, _PI7);
+						actCreateFleet("fGuardGold2", CIV_BO, AIF_MILITARY);
+						actCreatePlObj(DEFENDER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold2", -1, 100, VEFF_TELEPORT);
+						actCreatePlObj(DEFENDER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold2", -1, 100, VEFF_TELEPORT);
+						actCreatePlObj(DEFENDER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold2", -1, 100, VEFF_TELEPORT);
+						actCreatePlObj(DEFENDER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold2", -1, 100, VEFF_TELEPORT);
+						
+						actFParGuardZones(getFleetNum("fGuardGold2"), AICAN_BYORDER, AITRG_ALL);
+						actObjSelectN("GuardGold2");
+						actAddFleet( getFleetNum("fGuardGold2"));
+
+						actFParSetPatrolPoint( getFleetNum("fleetGuardB", "tacticGuardB"), _PI5, _PI6, _PI7, 0, 15,FORMATION_WALL, FORMATION_MIN_SIZE);
+
+					} else {
+						if(!isPlObjExist("fGuardGold3")) {
+							ActSetName("fGuardGold3",_PI5, _PI6, _PI7);
+							actCreateFleet("fGuardGold3", CIV_BO, AIF_MILITARY);
+							actCreatePlObj(DEFENDER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold3", -1, 100, VEFF_TELEPORT);
+							actCreatePlObj(DEFENDER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold3", -1, 100, VEFF_TELEPORT);
+							actCreatePlObj(DEFENDER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold3", -1, 100, VEFF_TELEPORT);
+							actCreatePlObj(DEFENDER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold3", -1, 100, VEFF_TELEPORT);
+							
+							actFParGuardZones(getFleetNum("fGuardGold3"), AICAN_BYORDER, AITRG_ALL);
+							actObjSelectN("GuardGold3");
+							actAddFleet( getFleetNum("fGuardGold3"));
+
+							actFParSetPatrolPoint( getFleetNum("fleetGuardB", "tacticGuardB"), _PI5, _PI6, _PI7, 0, 15,FORMATION_WALL, FORMATION_MIN_SIZE);
+
+						} else {
+							if(!isPlObjExist("fGuardGold4")) {
+								ActSetName("fGuardGold4",_PI5, _PI6, _PI7);
+								actCreateFleet("fGuardGold4", CIV_BO, AIF_MILITARY);
+								actCreatePlObj(DEFENDER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold4", -1, 100, VEFF_TELEPORT);
+								actCreatePlObj(DEFENDER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold4", -1, 100, VEFF_TELEPORT);
+								actCreatePlObj(DEFENDER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold4", -1, 100, VEFF_TELEPORT);
+								actCreatePlObj(DEFENDER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"GuardGold4", -1, 100, VEFF_TELEPORT);
+								
+								actFParGuardZones(getFleetNum("fGuardGold4"), AICAN_BYORDER, AITRG_ALL);
+								actObjSelectN("GuardGold4");
+								actAddFleet( getFleetNum("fGuardGold4"));
+
+								actFParSetPatrolPoint( getFleetNum("fleetGuardB", "tacticGuardB"), _PI5, _PI6, _PI7, 0, 15,FORMATION_WALL, FORMATION_MIN_SIZE);
+							}
+						}
+					}
+				}
+
+			}
+
+			actLockEvent();
+		}
+
+		// Event #4
+        EventPlObjCreated(_PI3 == DOCKYARD)
+        {
+			//actStringMess("Player N = " + _inttostr(_PI0));
+			 if(GetPlName(_PI0) == "Dirty Octopo" /*|| GetPlName(_PI0) == "Dirty Octopo"*/)
+			 {
+				_GL2 += 1;
+				ActSetName("Doc" + _inttostr(_GL2), _PI5, _PI6, _PI7);
+			}
+
+			actLockEvent();
+        }
+
+		EventPlObjCreated(TRUE)
+		{
+			if(GetPlName(_PI0) == "Dirty Octopo" /*|| GetPlName(_PI0) == "Dirty Octopo"*/)
+			{
+				if(_PI3 == METAL_EXTRACTOR){
+					if(!IsPlObjExist(_PI0, "METAL1")) {
+						ActSetName("METAL1",_PI5, _PI6, _PI7);
+					}
+					else {
+						if(!IsPlObjExist(_PI0, "METAL2")) {
+							ActSetName("METAL2",_PI5, _PI6, _PI7);
+						}
+						else {
+							if(!IsPlObjExist(_PI0, "METAL3")) {
+								ActSetName("METAL3",_PI5, _PI6, _PI7);
+							}
+							else {
+								if(!IsPlObjExist(_PI0, "METAL4")) {
+									ActSetName("METAL4",_PI5, _PI6, _PI7);
+								}
+								else {
+									if(!IsPlObjExist(_PI0, "METAL5")) {
+										ActSetName("METAL5",_PI5, _PI6, _PI7);
+									}
+								}
+							}
+						}
+					}
+				}
+				if(_PI3 == CORIUM_EXTRACTOR){
+					if(!IsPlObjExist(_PI0, "CORIUM1")) {
+						ActSetName("CORIUM1",_PI5, _PI6, _PI7);
+					}
+					else {
+						if(!IsPlObjExist(_PI0, "CORIUM2")) {
+							ActSetName("CORIUM2",_PI5, _PI6, _PI7);
+						}
+						else {
+							if(!IsPlObjExist(_PI0, "CORIUM3")) {
+								ActSetName("CORIUM3",_PI5, _PI6, _PI7);
+							}
+							else {
+								if(!IsPlObjExist(_PI0, "CORIUM4")) {
+									ActSetName("CORIUM4",_PI5, _PI6, _PI7);
+								}							
+								else {
+									if(!IsPlObjExist(_PI0, "CORIUM5")) {
+										ActSetName("CORIUM5",_PI5, _PI6, _PI7);
+									}
+								}
+							}
+						}				
+					}
+				}
+
+			}
+
+			actLockEvent();
+		}
+
+		// Event #5
+        EventPlObjCreated(_PI3 == CARGO_SUB)
+        {
+			//actStringMess("NUM MM = " + _inttostr(getPlObjT(METAL_MINE))); 
+			if (getPlObjN("CARGO_M") <= getPlObjT(METAL_MINE) * 2)
+			{
+				actStringMess("Command: Gather Metall");
+
+				//actObjSelectN("CARGO_M");
+				//actObjSelectT(CARGO_SUB);
+				actFParGatherRC(getFleetNum("fleetGatherM", "tacticGatherM"), AICAN_MYSELF, METAL);
+				actAddFleet(getFleetNum("fleetGatherM", "tacticGatherM") );
+			} else 
+			{
+				if (getPlObjN("CARGO_Cor") <= getPlObjT(CORIUM_MINE)*2)
+				{
+					actStringMess("Command: Gather Corium");
+
+					//actObjSelectN("CARGO_Cor");
+					//actObjSelectT(CARGO_SUB);
+					actFParGatherRC(getFleetNum("fleetGatherC", "tacticGatherC"), AICAN_MYSELF, CORIUM);
+					actAddFleet(getFleetNum("fleetGatherC", "tacticGatherC") );
+				}
+			}
+			actLockEvent();
+        }
+
+		// Event #6
+		// Поѝтроили шахту кориума
+		EventPlObjCreated(_PI3 == CORIUM_MINE)
+		{
+			// надо заказать транѝпорт кориума
+            //actFParPutInStaff(getFleetNum("fleetSubB", "tacticSubB"), CARGO_SUB, UNDEFINED, UNDEFINED, 35, -1, -1, -1, LOGO_DEFAULT, "CARGO_Cor");
+			//actFParPutInStaff(getFleetNum("fleetSubB", "tacticSubB"), CARGO_SUB, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "CARGO_Cor");
+
+            //actFParPutInStaff(getFleetNum("fleetSubB", "tacticSubB"), CARGO_SUB, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "CARGO_Cor");
+			//actFParPutInStaff(getFleetNum("fleetSubB", "tacticSubB"), CARGO_SUB, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "CARGO_Cor");
+
+			//actLockEvent();
+		}
+
+		// Event #7
+		EventPlObjCreated(_PI3 == FIGHTER || _PI3 == DESTROYER || _PI3 == INVADER || _PI3 == HEAVY_CRUISER)
+		{
+			actStringMess("Guard On");
+
+            actObjSelectN("F_Guard");
+            actAddFleet(getFleetNum("fleetGuardB", "tacticGuardB") );
+			actLockEvent();
+		}
+		// Event #8
+		EventPlObjCreated(_PI3 == RESEARCH_LABORATORY)
+		{
+			if(GetPlName(_PI0) == "Dirty Octopo")
+			{
+				actObjSelectT(RESEARCH_LABORATORY);
+				actAddFleet(getFleetNum("fleetResLab", "tacticResLab") );
+			}
+			//actLockEvent();
+		}
+
+		// ѝоздаем боѝѝа
+		EventPlObjCreated(_PI3 == CENTCOMP)
+		{
+			if(GetPlName(_PI0) == "Dirty Octopo")
+			{
+				ActOutString(_GL1, AIREL_MYSELF, 20, "������: ������ ����� ������ ������� � ���������. �����");
+
+				actCreatePlObj(BO_FLAGSHIP, _PI5, _PI6, _PI7, LOGO_DEFAULT,"BOSS_OCTOPO",-1,100);
+
+				actFCmdAttackT( getFleetNum("fleetBoss", "tacticBoss"), _GL1, AITRG_ALL, UNDEFINED, LOGO_UNDEF, "", 0, AIATTACK_GLADE | AIADIR_LEFT | AIADIR_BACK | AIADIR_RIGHT, 0);
+				
+				//actFCmdAttackT( getFleetNum("fleetCyber", "tacticCyber"));
+				actObjSelectN("BOSS_OCTOPO");
+				actAddFleet( getFleetNum("fleetBoss", "tacticBoss"));
+			} else {
+				actLockEvent();
+			}
+		}
+
+		EventPlObjCreated(_PI3 == METAL_MINE && getOwnTime() > 360 /*_PS0 == "METAL3"*/)
+		{
+			actStringMess("Dop Metal Build");
+			if(GetPlName(_PI0) == "Dirty Octopo")
+			{
+				if(isTechDev(TTECH_BO_GAS_LASER_TECHNOLOGY))
+				{
+					actCreatePlObj(HEAVY_LASER, _PI5 - 2, _PI6 - 2, _PI7, LOGO_DEFAULT,"",-1,100,1,1);
+					actCreatePlObj(HEAVY_LASER, _PI5 + 2, _PI6 - 2, _PI7, LOGO_DEFAULT,"",-1,100,1,1);
+					actCreatePlObj(HEAVY_LASER, _PI5 + 2, _PI6 + 2, _PI7, LOGO_DEFAULT,"",-1,100,1,1);
+					actCreatePlObj(HEAVY_LASER, _PI5 - 2, _PI6 + 2, _PI7, LOGO_DEFAULT,"",-1,100,1,1);
+					actCreatePlObj(HEAVY_LASER, _PI5, _PI6 + 2, _PI7, LOGO_DEFAULT,"",-1,100,1,1);
+				} else {
+					actCreatePlObj(LIGHT_LASER, _PI5 - 2, _PI6 - 2, _PI7, LOGO_DEFAULT,"",-1,100,1,1);
+					actCreatePlObj(LIGHT_LASER, _PI5 + 2, _PI6 - 2, _PI7, LOGO_DEFAULT,"",-1,100,1,1);
+					actCreatePlObj(LIGHT_LASER, _PI5 + 2, _PI6 + 2, _PI7, LOGO_DEFAULT,"",-1,100,1,1);
+					actCreatePlObj(LIGHT_LASER, _PI5 - 2, _PI6 + 2, _PI7, LOGO_DEFAULT,"",-1,100,1,1);
+					actCreatePlObj(LIGHT_LASER, _PI5, _PI6 + 2, _PI7, LOGO_DEFAULT,"",-1,100,1,1);
+				}
+
+				actCreatePlObj(GOLD_SUBLIMATOR, _PI5, _PI6 + 2, _PI7, LOGO_DEFAULT,"",-1,100,1,1);
+
+				actFParGuardZones( getFleetNum("fleetGuardB", "tacticGuardB"), AICAN_BYORDER, AITRG_ALL);
+				actFParSetZone( getFleetNum("fleetGuardB", "tacticGuardB"), _PI5+1, _PI6+1, _PI7, 2,2,2);
+
+				actObjSelectN("F_Guard");
+				actAddFleet(getFleetNum("fleetGuardB", "tacticGuardB") );
+				actFParPutInStaff(getFleetNum("fleetBaseB3", "tacticBaseB3"), SILO, UNDEFINED, UNDEFINED, 45, _PI5, _PI6, _PI7);
+
+				actFParPutInStaff(getFleetNum("fleetBaseB3", "tacticBaseB3"), GOLD_SUBLIMATOR, UNDEFINED, UNDEFINED, 45, _PI5, _PI6, _PI7);
+				actFParPutInStaff(getFleetNum("fleetBaseB3", "tacticBaseB3"), GOLD_SUBLIMATOR, UNDEFINED, UNDEFINED, 45, _PI5, _PI6, _PI7);
+				actFParPutInStaff(getFleetNum("fleetBaseB3", "tacticBaseB3"), GOLD_SUBLIMATOR, UNDEFINED, UNDEFINED, 45, _PI5, _PI6, _PI7);
+			}
+			actLockEvent();
+		}
+		// заказываем дельфинов
+		EventPlObjCreated(_PI3 == CYBER_LABORATORY)
+		{
+			if(GetPlName(_PI0) == "Dirty Octopo")
+			{
+				//actFParCleanStaff(getFleetNum("fleetBaseB", "tacticBaseB"));
+				//actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), UNDEFINED);
+			}
+		}
+
+		EventPlObjCreated(_PI3 == CYBERDOLPHIN)
+		{
+			//actStringMess("CYBERDOL1 = " + _inttostr(getPlObjN("CYBERDOL1")));
+			if(getPlObjN("CYBERDOLPHIN1") > 1 && getPlObjN("CYBERDOLPHIN1") < 11)
+			{
+				actStringMess("Attack Dolphin");
+				if(_GL3 == 0)
+				{
+					ActOutString(_GL1, AIREL_MYSELF, 20, "������: �������� ������� ����. ��������. ���� ��������� ���� ������. �����");
+					_GL3 += 1;
+				}
+				
+				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
+				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
+				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
+				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
+				//actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
+				//actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
+				//actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
+				//actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
+				
+				//actCreateFleet("fleetCyber", CIV_BO, AIF_CYBER);
+				// возможно длѝ дельфинов не подходит, но подойдет длѝ других лодок !! AIATTACK_GLADE | AIADIR_LEFT | AIADIR_BACK
+				//actFCmdAttackT( getFleetNum("fleetCyber", "tacticCyber"), _GL1, AITRG_TLORCEXTRACT | AITRG_BOATRCEXTRACT, UNDEFINED, LOGO_UNDEF, "", 0, AIATTACK_HUNT, 0);
+				
+				//actFCmdAttackT( getFleetNum("fleetCyber", "tacticCyber"), _GL1);
+				//actObjSelectN("CYBERDOLPHIN1");
+				//actAddFleet( getFleetNum("fleetCyber", "tacticCyber"));
+
+				actCreateFleet("fleetCD1", CIV_BO, AIF_CYBER);
+				actFCmdAttackT( getFleetNum("fleetCD1"), _GL1, AITRG_TLORCEXTRACT | AITRG_BOATRCEXTRACT, UNDEFINED, _GL1, "", 0, AIATTACK_HUNT, 0);
+				actObjSelectN("CYBERDOLPHIN1");
+				actAddFleet( getFleetNum("fleetCD1"));
+
+			}
+
+			if(getPlObjN("CYBERDOLPHIN2") > 1 && getPlObjN("CYBERDOLPHIN2") < 11)
+			{
+				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
+				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
+				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
+				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
+				//actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
+				//actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
+				//actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
+				//actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
+
+				actCreateFleet("fleetCD2", CIV_BO, AIF_CYBER);
+				actFCmdAttackT( getFleetNum("fleetCD2"), _GL1, AITRG_TLODEFENSECOMMON, UNDEFINED, _GL1, "", 0, AIATTACK_HUNT, 0);
+				actObjSelectN("CD2");
+				actAddFleet( getFleetNum("fleetCD2"));
+			}
+			
+			actLockEvent();
+		}
+
+        EventPlObjCreated(_PI3 == LASER_BOMB_LAUNCHER)
+        {
+			if(GetPlName(_PI0) == "Dirty Octopo" && _PS0 == "LBL1")
+			{
+				//ActSetName("Doc" + _inttostr(_GL2), _PI5, _PI6, _PI7);
+
+				actObjSelectN("LBL1");
+				actFParPutInStaff(getFleetNum("BO N1", "BO tacticN1"), WEAPON_LASER_BOMB );
+
+				actAddFleet(getFleetNum("BO N1", "BO tacticN1") );
+				actFCmdProduction(getFleetNum("BO N1", "BO tacticN1") , WEAPON_LASER_BOMB);
+
+				actFParCleanStaff(getFleetNum("fleetBaseB", "tacticBaseB"));
+				actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), UNDEFINED);
+
+				actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), LASER_BOMB_LAUNCHER, UNDEFINED, UNDEFINED, 25, -1, -1, -1, LOGO_DEFAULT, "LBL2");
+
+			}
+
+			if(GetPlName(_PI0) == "Dirty Octopo" && _PS0 == "LBL2")
+			{
+				actObjSelectN("LBL2");
+				actFParPutInStaff(getFleetNum("BO N2", "BO tacticN2"), WEAPON_LASER_BOMB );
+
+				actAddFleet(getFleetNum("BO N2", "BO tacticN2") );
+				actFCmdProduction(getFleetNum("BO N2", "BO tacticN2") , WEAPON_LASER_BOMB);
+
+				actFParCleanStaff(getFleetNum("fleetBaseB", "tacticBaseB"));
+				actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), UNDEFINED);
+
+			}
+			/*
+			if(GetPlName(_PI0) == "Dirty Octopo" && _PS0 == "LBL3")
+			{
+				actObjSelectN("LBL3");
+				actFParPutInStaff(getFleetNum("BO N3", "BO tacticN3"), WEAPON_LASER_BOMB );
+
+				actAddFleet(getFleetNum("BO N3", "BO tacticN3") );
+				actFCmdProduction(getFleetNum("BO N3", "BO tacticN3") , WEAPON_LASER_BOMB);
+			}*/
+
+			actLockEvent();
+        }
+
+// EVENT TECH -----------------------------------------------------------------------------------------
+        EventTechDevStop(_PI5 == 1)
+        {
+			if(isTechCanDevG( TTECH_BO_LASER_BOMB_TECHNOLOGY) )
+			{
+				actTechDevRun( TTECH_BO_LASER_BOMB_TECHNOLOGY, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_CYBER_TECHNOLOGY ) )
+			{
+				actTechDevRun(  TTECH_BO_CYBER_TECHNOLOGY, TTECH_LEV1);
+			}
+
+			// engine BO
+			if(isTechCanDevG(TTECH_BO_ENGINE_UPGRADE,TTECH_LEV1))
+			{
+				actTechDevRun(TTECH_BO_ENGINE_UPGRADE, TTECH_LEV1);
+			}
+			if(isTechCanDevG( TTECH_BO_ENGINE_UPGRADE,TTECH_LEV2))
+			{
+				actTechDevRun(TTECH_BO_ENGINE_UPGRADE, TTECH_LEV2);
+			}
+			if(isTechCanDevG( TTECH_BO_ENGINE_UPGRADE,TTECH_LEV3))
+			{
+				actTechDevRun(  TTECH_BO_ENGINE_UPGRADE, TTECH_LEV3);
+			}
+			// Torped BO
+			if(isTechCanDevG( TTECH_BO_TORPEDO_UPGRADE,TTECH_LEV1))
+			{
+				actTechDevRun(  TTECH_BO_TORPEDO_UPGRADE, TTECH_LEV1);
+			}
+			if(isTechCanDevG( TTECH_BO_TORPEDO_UPGRADE,TTECH_LEV2))
+			{
+				actTechDevRun(  TTECH_BO_TORPEDO_UPGRADE, TTECH_LEV2);
+			}
+			if(isTechCanDevG( TTECH_BO_TORPEDO_UPGRADE,TTECH_LEV3))
+			{
+				actTechDevRun(  TTECH_BO_TORPEDO_UPGRADE, TTECH_LEV3);
+			}
+			if(isTechCanDevG( TTECH_BO_TORPEDO_UPGRADE,TTECH_LEV4))
+			{
+				actTechDevRun(  TTECH_BO_TORPEDO_UPGRADE, TTECH_LEV4);
+			}
+			// Armor BO
+			if(isTechCanDevG( TTECH_BO_ARMOR_UPGRADE,TTECH_LEV1))
+			{
+				actTechDevRun(  TTECH_BO_ARMOR_UPGRADE, TTECH_LEV1);
+			}
+			if(isTechCanDevG( TTECH_BO_ARMOR_UPGRADE,TTECH_LEV2))
+			{
+				actTechDevRun(  TTECH_BO_ARMOR_UPGRADE, TTECH_LEV2);
+			}
+			if(isTechCanDevG( TTECH_BO_ARMOR_UPGRADE,TTECH_LEV3))
+			{
+				actTechDevRun(  TTECH_BO_ARMOR_UPGRADE, TTECH_LEV3);
+			}
+
+			if(isTechCanDevG( TTECH_BO_SPLINTER_TORPEDO_TECHNOLOGY ))
+			{
+				actTechDevRun(  TTECH_BO_SPLINTER_TORPEDO_TECHNOLOGY, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_CASSETTE_SHELL_TECHNOLOGY       ))
+			{
+				actTechDevRun(  TTECH_BO_CASSETTE_SHELL_TECHNOLOGY, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_RUBY_LASER_TECHNOLOGY ))
+			{
+				actTechDevRun(  TTECH_BO_RUBY_LASER_TECHNOLOGY, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_PARALYZING_RAYS_TECHNOLOGY      ))
+			{
+				actTechDevRun(  TTECH_BO_PARALYZING_RAYS_TECHNOLOGY, TTECH_LEV1);
+			} 
+
+			if(isTechCanDevG( TTECH_BO_RADIO_CLUTTER_TECHNOLOGY ))
+			{
+				actTechDevRun(  TTECH_BO_RADIO_CLUTTER_TECHNOLOGY, TTECH_LEV1);
+			} 
+			if(isTechCanDevG( TTECH_BO_LASER_SNARE_TECHNOLOGY ))
+			{
+				actTechDevRun(  TTECH_BO_LASER_SNARE_TECHNOLOGY, TTECH_LEV1);
+			} 
+
+			if(isTechCanDevG( TTECH_BO_GAS_LASER_TECHNOLOGY )) 
+			{
+				actTechDevRun(  TTECH_BO_GAS_LASER_TECHNOLOGY, TTECH_LEV1);
+			}
+			if(isTechCanDevG( TTECH_BO_STEALTH_SCOUT_TECHNOLOGY   ))
+			{
+				actTechDevRun(  TTECH_BO_STEALTH_SCOUT_TECHNOLOGY, TTECH_LEV1);
+			} 
+
+			if(isTechCanDevG( TTECH_BO_MAGNETIC_MINE_TECHNOLOGY        ))
+			{
+				actTechDevRun(  TTECH_BO_MAGNETIC_MINE_TECHNOLOGY, TTECH_LEV1);
+			} 
+			if(isTechCanDevG( TTECH_BO_RESEARCH_ENERGY_SUPPLY ))
+			{
+				actTechDevRun(  TTECH_BO_RESEARCH_ENERGY_SUPPLY, TTECH_LEV1);
+			} 
+			if(isTechCanDevG( TTECH_BO_ELECTRO_MAGNETIC_TORPEDOES      ))
+			{
+				actTechDevRun(  TTECH_BO_ELECTRO_MAGNETIC_TORPEDOES, TTECH_LEV1);
+			} 
+			if(isTechCanDevG( TTECH_BO_PHANTOM_EQUIPMENT ))
+			{
+				actTechDevRun(  TTECH_BO_PHANTOM_EQUIPMENT, TTECH_LEV1);
+			}
+			if(isTechCanDevG( TTECH_BO_ANTI_ULTRASONIC_SCREEN          )) 
+			{
+				actTechDevRun(  TTECH_BO_ANTI_ULTRASONIC_SCREEN, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_UPGRADE_ENERGY_SUPPLY           ))
+			{
+				actTechDevRun(  TTECH_BO_UPGRADE_ENERGY_SUPPLY, TTECH_LEV1);
+			} 
+			if(isTechCanDevG( TTECH_BO_PROTECTIVE_SCREEN_TECHNOLOGY    ) )
+			{
+				actTechDevRun(  TTECH_BO_PROTECTIVE_SCREEN_TECHNOLOGY, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_ENERGY_SHIELD                   ) )
+			{
+				actTechDevRun(  TTECH_BO_ENERGY_SHIELD, TTECH_LEV1);
+			}
+			if(isTechCanDevG( TTECH_BO_LIGHT_LASER_TECHNOLOGY ) )
+			{
+				actTechDevRun(  TTECH_BO_LIGHT_LASER_TECHNOLOGY, TTECH_LEV1);
+			}
+			if(isTechCanDevG( TTECH_BO_RAIDER_EQUIPMENT  ) )
+			{
+				actTechDevRun(  TTECH_BO_RAIDER_EQUIPMENT, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_UPGRADE_LIGHT_LASER_RANGE ) )
+			{
+				actTechDevRun(  TTECH_BO_UPGRADE_LIGHT_LASER_RANGE, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_UPGRADE_HEAVY_LASER_RANGE ) )
+			{
+				actTechDevRun(  TTECH_BO_UPGRADE_HEAVY_LASER_RANGE, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_UPGRADE_LIGHT_LASER_RATE  ))
+			{
+				actTechDevRun(  TTECH_BO_UPGRADE_LIGHT_LASER_RATE, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_UPGRADE_HEAVY_LASER_RATE        ) )
+			{
+				actTechDevRun(  TTECH_BO_UPGRADE_HEAVY_LASER_RATE, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_UPGRADE_SUBS_LASER_RATE         ) )
+			{
+				actTechDevRun(  TTECH_BO_UPGRADE_SUBS_LASER_RATE, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_DEPTH_ACOUSTIC_MINE_DETECTION   ) )
+			{
+				actTechDevRun(  TTECH_BO_DEPTH_ACOUSTIC_MINE_DETECTION, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_ANTI_MASS_WEAPONS_DEFENSE_SYSTEM ) )
+			{
+				actTechDevRun(  TTECH_BO_ANTI_MASS_WEAPONS_DEFENSE_SYSTEM, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_LONG_RANGE_ASDIC   )  )
+			{
+				actTechDevRun(  TTECH_BO_LONG_RANGE_ASDIC, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_MOBILE_REPAIR_PLATFORM          )   ) 
+			{
+				actTechDevRun(  TTECH_BO_MOBILE_REPAIR_PLATFORM, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_RESEARCH_ENEMY_CIPHER_KEY       )  )
+			{
+				actTechDevRun(  TTECH_BO_RESEARCH_ENEMY_CIPHER_KEY, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_UPGRADE_TO_MOBILITY             )  )
+			{
+				actTechDevRun(  TTECH_BO_UPGRADE_TO_MOBILITY, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_DISPERSER_SCREEN_TECHNOLOGY     )  )
+			{
+				actTechDevRun(  TTECH_BO_DISPERSER_SCREEN_TECHNOLOGY, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_TELEPORTATION_TECHNOLOGY        )  )
+			{
+				actTechDevRun(  TTECH_BO_TELEPORTATION_TECHNOLOGY, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_MUNITIONS_FACTORY_UPGRADE ) )
+			{
+				actTechDevRun(  TTECH_BO_MUNITIONS_FACTORY_UPGRADE, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_ASDIC_UPGRADE                   )  )
+			{
+				actTechDevRun(  TTECH_BO_ASDIC_UPGRADE, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_UPGRADE_MINE_PRODUCTIVITY       )  )
+			{
+				actTechDevRun(  TTECH_BO_UPGRADE_MINE_PRODUCTIVITY, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_IMPROVE_REPAIR_TECHNOLOGY       )  )
+			{
+				actTechDevRun(  TTECH_BO_IMPROVE_REPAIR_TECHNOLOGY, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_INCREASE_TELEPORTER_RECHARGE    )  )
+			{
+				actTechDevRun(  TTECH_BO_INCREASE_TELEPORTER_RECHARGE, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_UPGRADE_HACK_ABILITY            )  )
+			{
+				actTechDevRun(  TTECH_BO_UPGRADE_HACK_ABILITY, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_INCREASE_INFORMATION_SECURITY   )  )
+			{
+				actTechDevRun(  TTECH_BO_INCREASE_INFORMATION_SECURITY, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_DETECT_TELEPORTATION            )  )
+			{
+				actTechDevRun(  TTECH_BO_DETECT_TELEPORTATION, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_LASER_SNARE_DETECTION           )  )
+			{
+				actTechDevRun(  TTECH_BO_LASER_SNARE_DETECTION, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_PHANTOM_RECHARGE_UPGRADE        )  )
+			{
+				actTechDevRun(  TTECH_BO_PHANTOM_RECHARGE_UPGRADE, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_EM_TORPEDO_UPGRADE        )  )
+			{
+				actTechDevRun(  TTECH_BO_EM_TORPEDO_UPGRADE, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_RAIDER_EQUIPMENT_UPGRADE  )  )
+			{
+				actTechDevRun(  TTECH_BO_RAIDER_EQUIPMENT_UPGRADE, TTECH_LEV1);
+			}
+
+			if(isTechCanDevG( TTECH_BO_SPLINTER_TORPEDO_UPGRADE  )  )
+			{
+				actTechDevRun(  TTECH_BO_SPLINTER_TORPEDO_UPGRADE);
+			}
+
+			if(isTechCanDevG( TTECH_BO_TORPEDO_SPEED_UPGRADE ))
+			{
+				actTechDevRun(  TTECH_BO_TORPEDO_SPEED_UPGRADE);
+			}
+
+            ActLockEvent();
+        }
+/**/
+		EventTechDevStop(_PI5 == 1 && _PI3 == TTECH_BO_LIGHT_LASER_TECHNOLOGY)
+		{
+			actStringMess("Build Laser");
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), LIGHT_LASER, UNDEFINED, UNDEFINED, 45);
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), LIGHT_LASER, UNDEFINED, UNDEFINED, 45);
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), LIGHT_LASER, UNDEFINED, UNDEFINED, 45);
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), LIGHT_LASER, UNDEFINED, UNDEFINED, 45);
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), LIGHT_LASER, UNDEFINED, UNDEFINED, 45);
+		}
+
+		EventTechDevStop(_PI5 == 1 && _PI3 == TTECH_BO_SPLINTER_TORPEDO_TECHNOLOGY)
+		{
+			/*
+			actFParCleanStaff(getFleetNum("fleetSubB", "tacticSubB"));
+			actFParCleanStaff(getFleetNum("fleetSubB1", "tacticSubB1"));
+
+			actFParPutInStaff(getFleetNum("fleetSubB", "tacticSubB"), DESTROYER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+			actFParPutInStaff(getFleetNum("fleetSubB", "tacticSubB"), DESTROYER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+
+			actFParPutInStaff(getFleetNum("fleetSubB1", "tacticSubB1"), DESTROYER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+			actFParPutInStaff(getFleetNum("fleetSubB1", "tacticSubB1"), DESTROYER, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "F_Guard");
+			*/
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), MUNITIONS_FACTORY, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "");
+		}
+
+		EventTechDevStop(_PI5 == 1 && _PI3 == TTECH_BO_CASSETTE_SHELL_TECHNOLOGY)
+		{
+
+		}
+
+		EventTechDevStop(_PI5 == 1 && _PI3 == TTECH_BO_RUBY_LASER_TECHNOLOGY)
+		{
+
+		}
+
+		EventTechDevStop(_PI5 == 1 && _PI3 == TTECH_BO_GAS_LASER_TECHNOLOGY)
+		{
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), O2_SUBLIMATOR, UNDEFINED, UNDEFINED, 25);
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), HEAVY_LASER, UNDEFINED, UNDEFINED, 45);
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), HEAVY_LASER, UNDEFINED, UNDEFINED, 45);
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), HEAVY_LASER, UNDEFINED, UNDEFINED, 45);
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), HEAVY_LASER, UNDEFINED, UNDEFINED, 45);
+
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), HEAVY_LASER, UNDEFINED, UNDEFINED, 45);
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), HEAVY_LASER, UNDEFINED, UNDEFINED, 45);
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), HEAVY_LASER, UNDEFINED, UNDEFINED, 45);
+			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), HEAVY_LASER, UNDEFINED, UNDEFINED, 45);
+			
+		}
+
+		EventTechDevStop(_PI5 == 1 && _PI3 == TTECH_BO_RESEARCH_ENEMY_CIPHER_KEY)
+		{
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), CENTCOMP, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "THRONE_OCTOPO");
+		}
+
+		EventTechDevStop(_PI5 == 1 && _PI3 == TTECH_BO_CYBER_TECHNOLOGY)
+		{
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), CYBER_LABORATORY, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "CyberLab1");
+			//actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), CYBER_LABORATORY, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "CyberLab2");
+		}
+
+		EventTechDevStop(_PI5 == 1 && _PI3 == TTECH_BO_RESEARCH_ENERGY_SUPPLY)
+		{
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), POWER_STATION, UNDEFINED, UNDEFINED, 25, -1, -1, -1, LOGO_DEFAULT, "");
+		}
+
+		EventTechDevStop(_PI5 == 1 && _PI3 == TTECH_BO_ENERGY_SHIELD)
+		{
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), POWER_PROTECTOR, UNDEFINED, UNDEFINED, 25, -1, -1, -1, LOGO_DEFAULT, "");
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), POWER_PROTECTOR, UNDEFINED, UNDEFINED, 25, -1, -1, -1, LOGO_DEFAULT, "");
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), POWER_PROTECTOR, UNDEFINED, UNDEFINED, 25, -1, -1, -1, LOGO_DEFAULT, "");
+		}
+
+		EventTechDevStop(_PI5 == 1 && _PI3 == TTECH_BO_TELEPORTATION_TECHNOLOGY)
+		{
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), TELEPORTER, UNDEFINED, UNDEFINED, 25, -1, -1, -1, LOGO_DEFAULT, "TELEPORTER1");
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), TELEPORTER, UNDEFINED, UNDEFINED, 25, -1, -1, -1, LOGO_DEFAULT, "TELEPORTER2");
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), TELEPORTER, UNDEFINED, UNDEFINED, 25, -1, -1, -1, LOGO_DEFAULT, "TELEPORTER3");
+		}
+
+		EventTechDevStop(_PI5 == 1 && _PI3 == TTECH_BO_STEALTH_SCOUT_TECHNOLOGY)
+		{
+			actCreateFleet("fleetBScout", CIV_BO, AIF_BASE);
+		}
+
+		EventTechDevStop(_PI5 == 1 && _PI3 == TTECH_BO_DISPERSER_SCREEN_TECHNOLOGY)
+		{
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), ANTI_SONAR_SHIELD, UNDEFINED, UNDEFINED, 25, -1, -1, -1, LOGO_DEFAULT, "");
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), ANTI_SONAR_SHIELD, UNDEFINED, UNDEFINED, 25, -1, -1, -1, LOGO_DEFAULT, "");
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), ANTI_SONAR_SHIELD, UNDEFINED, UNDEFINED, 25, -1, -1, -1, LOGO_DEFAULT, "");
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), ANTI_SONAR_SHIELD, UNDEFINED, UNDEFINED, 25, -1, -1, -1, LOGO_DEFAULT, "");
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), ANTI_SONAR_SHIELD, UNDEFINED, UNDEFINED, 25, -1, -1, -1, LOGO_DEFAULT, "");
+		}
+
+		EventTechDevStop(_PI5 == 1 && _PI3 == TTECH_BO_LASER_BOMB_TECHNOLOGY)
+		{
+			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), LASER_BOMB_LAUNCHER, UNDEFINED, UNDEFINED, 25, -1, -1, -1, LOGO_DEFAULT, "LBL1");
+			//actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), LASER_BOMB_LAUNCHER, UNDEFINED, UNDEFINED, 25, -1, -1, -1, LOGO_DEFAULT, "LBL3");
+
+		}
+
+// EventPlObjAttacked ------------------------------------------------------------------------------------------
+
+		// Защитники ѝтроителей
+		EventPlObjAttacked(TRUE)
+		{
+			if(/*_PI3 == CONSTRUCTOR*/ GetPlName(_PI0) == "Dirty Octopo" && _PS0 == "Builder"){
+				if(getPlObjN("BGuard1") < 1){
+					actCreateFleet("fleetBGuard1", CIV_BO, AIF_MILITARY);
+					actCreatePlObj(HEAVY_CRUISER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard1", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(HEAVY_CRUISER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard1", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(HEAVY_CRUISER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard1", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(HEAVY_CRUISER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard1", -1, 100, VEFF_TELEPORT);
+					
+					//actFCmdGuardF( getFleetNum("fleetBGuard1", "tacticBGuard"), getFleetNum("fleetBaseB", "tacticBaseB"));
+					
+					actFParGuardZones( getFleetNum("fleetBGuard1", "tacticBGuard"), AICAN_MYSELF, AITRG_ALL);
+					actFParSetZone( getFleetNum("fleetBGuard1", "tacticBGuard"), _PI15, _PI16, _PI17, 3, 3, 5);
+					
+					actObjSelectN("BGuard1");
+					actAddFleet( getFleetNum("fleetBGuard1", "tacticBGuard"));
+				}
+			}
+			if(/*_PI3 == CONSTRUCTOR*/ GetPlName(_PI0) == "Dirty Octopo" && _PS0 == "Build_Res"){
+				if(getPlObjN("BGuard2") < 1){
+					actCreateFleet("fleetBGuard2", CIV_BO, AIF_MILITARY);
+					actCreatePlObj(HEAVY_CRUISER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard2", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(HEAVY_CRUISER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard2", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(HEAVY_CRUISER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard2", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(HEAVY_CRUISER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard2", -1, 100, VEFF_TELEPORT);
+					
+					//actFCmdGuardF( getFleetNum("fleetBGuard2", "tacticBGuard"), getFleetNum("fleetBaseB2", "tacticBaseB2"));
+					
+					actFParGuardZones( getFleetNum("fleetBGuard2", "tacticBGuard"), AICAN_MYSELF, AITRG_ALL);
+					actFParSetZone( getFleetNum("fleetBGuard2", "tacticBGuard"), _PI15, _PI16, _PI17, 3, 3, 5);
+					
+					actObjSelectN("BGuard2");
+					actAddFleet( getFleetNum("fleetBGuard2", "tacticBGuard"));
+				}
+			}
+
+			if(/*_PI3 == CONSTRUCTOR*/ GetPlName(_PI0) == "Dirty Octopo" && _PS0 == "Build_Dop"){
+				if(getPlObjN("BGuard3") < 1){
+					actCreateFleet("fleetBGuard3", CIV_BO, AIF_MILITARY);
+					actCreatePlObj(HEAVY_CRUISER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard3", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(HEAVY_CRUISER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard3", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(HEAVY_CRUISER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard3", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(HEAVY_CRUISER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard3", -1, 100, VEFF_TELEPORT);
+					
+					//actFCmdGuardF( getFleetNum("fleetBGuard2", "tacticBGuard"), getFleetNum("fleetBaseB2", "tacticBaseB2"));
+					
+					actFParGuardZones( getFleetNum("fleetBGuard3", "tacticBGuard"), AICAN_MYSELF, AITRG_ALL);
+					actFParSetZone( getFleetNum("fleetBGuard3", "tacticBGuard"), _PI15, _PI16, _PI17, 3, 3, 5);
+					
+					actObjSelectN("BGuard3");
+					actAddFleet( getFleetNum("fleetBGuard3", "tacticBGuard"));
+				}
+			}
+
+			// Еѝли атаковали, то идем в координаты НТНКУЮЩЕГО _PI15, _PI16, _PI17 длѝ защиты
+			/*
+			if(getPlObjN("F_Guard") > 10 && _PI3 != CYBERDOLPHIN) {
+				actStringMess("GUARD ATTACK");
+				actFParGuardZones( getFleetNum("fleetGuardB", "tacticGuardB"), AICAN_MYSELF, AITRG_ALL);
+				actFParSetZone( getFleetNum("fleetGuardB", "tacticGuardB"), _PI15, _PI16, _PI17, 3, 3, 5);
+				
+				//ActStringMess(_plmyself, "Zone = " + _inttostr(_PI5) + " " +_inttostr(_PI6) + " " + _inttostr(_PI7));
+
+				actObjSelectN("F_Guard");
+				actAddFleet(getFleetNum("fleetGuardB", "tacticGuardB") );
+			}*/
+
+			actLockEvent();
+		}
+
+		EventPlObjAttacked(TRUE)
+		{
+			if(/*_PI3 == CONSTRUCTOR*/_PS0 == "BOSS_OCTOPO"){
+				if(getPlObjN("BossMinion") < 1)
+				{
+					actCreatePlObj(DEFENDER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(DEFENDER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(DEFENDER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(DEFENDER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+					if(isTechDev(TTECH_BO_CASSETTE_SHELL_TECHNOLOGY))
+					{
+						actCreatePlObj(INVADER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+						actCreatePlObj(INVADER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+						actCreatePlObj(INVADER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+						actCreatePlObj(INVADER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+					}
+
+					if(isTechDev(TTECH_BO_RUBY_LASER_TECHNOLOGY))
+					{
+						actCreatePlObj(HEAVY_CRUISER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+						actCreatePlObj(HEAVY_CRUISER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+						actCreatePlObj(HEAVY_CRUISER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+						actCreatePlObj(HEAVY_CRUISER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+					}
+
+					if(isTechDev(TTECH_BO_PARALYZING_RAYS_TECHNOLOGY))
+					{
+						actCreatePlObj(AVENGER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+						actCreatePlObj(AVENGER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+						actCreatePlObj(AVENGER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+						actCreatePlObj(AVENGER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+					}
+
+					if(isTechDev(TTECH_BO_STEALTH_SCOUT_TECHNOLOGY))
+					{
+						actCreatePlObj(STEALTH_SCOUT, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+						actCreatePlObj(STEALTH_SCOUT, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+						actCreatePlObj(STEALTH_SCOUT, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+						actCreatePlObj(STEALTH_SCOUT, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BossMinion", -1, 100, VEFF_TELEPORT);
+					}
+
+					actFParGuardZones( getFleetNum("fleetBossMinion", "tacticBossMinion"), AICAN_MYSELF, AITRG_ALL);
+					actFParSetZone( getFleetNum("fleetBossMinion", "tacticBossMinion"), _PI15, _PI16, _PI17, 3, 3, 5);
+					
+					actObjSelectN("BossMinion");
+					actAddFleet( getFleetNum("fleetBossMinion", "tacticBossMinion"));
+
+					actCreatePlObj(CYBERDOLPHIN, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BMCD", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(CYBERDOLPHIN, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BMCD", -1, 100, VEFF_TELEPORT);
+					actFCmdAttackT( getFleetNum("fleetBossMC", "tacticBossMinion"), _PI10, AITRG_ALL, _PI13, LOGO_UNDEF, "", 0, AIATTACK_HUNT, 0);
+					actObjSelectN("BMCD");
+					actAddFleet( getFleetNum("fleetBossMC", "tacticBossMinion"));
+				}
+			}
+			
+			actLockEvent();
+		}
+
+		EventFCmdDone(TRUE)
+		{
+			//actStringMess("EventFCmdDone");
+			//ActStringMess(_GL1, AIREL_MYSELF, "EventFCmdDone = " + _PS0 + " fleet num = " + _inttostr(_PI3));
+
+			if(_PS0 == "fleetCD1" && getPlObjN("CYBERDOLPHIN1") > 0)
+			{
+				actFCmdAttackT( getFleetNum("fleetCD1"), _GL1, AITRG_TLORCEXTRACT | AITRG_BOATRCEXTRACT, UNDEFINED, _GL1, "", 0, AIATTACK_HUNT, 0);
+				actObjSelectN("CYBERDOLPHIN1");
+				actAddFleet( getFleetNum("fleetCD1"));
+			}
+
+			if(_PS0 == "fleetCD2" && getPlObjN("CYBERDOLPHIN2") > 0)
+			{
+				actFCmdAttackT( getFleetNum("fleetCD2"), _GL1, AITRG_TLODEFENSECOMMON, UNDEFINED, _GL1, "", 0, AIATTACK_HUNT, 0);
+				actObjSelectN("CYBERDOLPHIN2");
+				actAddFleet( getFleetNum("fleetCD2"));
+			}
+
+			actLockEvent();
+		}
+
+// EventPlObjKilled ------------------------------------------------------------------------------------------
+		/*
+		EventPlObjKilled(_PS0=="CYBERDOLPHIN1")
+		{
+			actStringMess("DOLPHIN KILL");
+			//actFCmdAttackT( getFleetNum("fleetCyber", "tacticCyber"), _GL1, AITRG_TLORCEXTRACT | AITRG_BOATRCEXTRACT, UNDEFINED, _GL1, "", 0, AIATTACK_HUNT, 0);
+			//actFCmdAttackT( getFleetNum("fleetCyber", "tacticCyber"));
+			actFCmdAttackT( getFleetNum("fleetCyber", "tacticCyber"), _PI10, AITRG_ALL, _PI13, LOGO_UNDEF, "", 0, AIATTACK_HUNT, 0);
+			actObjSelectN("CYBERDOLPHIN1");
+			actAddFleet( getFleetNum("fleetCyber", "tacticCyber"));
+			actLockEvent();
+		}*/
+		EventPlObjKilled(_PS0=="CYBERDOLPHIN1")
+		{
+		}
+
+		EventPlObjKilled(_PS0=="BOSS_OCTOPO")
+		{
+
+		}
+
+		Event(getOwnTime()%300 == 0)
+		{
+			if(getPlRes(METAL) > 20000)
+			{
+				actSetPlRC(METAL, -1, 10000);
+				actSetPlRC(GOLD, 1, 5000);
+			}
+			if(getPlRes(GOLD) > 5000)
+			{
+				actSetPlRC(CORIUM, 1, 2500);
+				actSetPlRC(GOLD, -1, 2500);
+			}
+			actLockEvent();
+		}
+
+		Event(getOwnTime()%300 == 0)
+		{
+			if(getPlRes(CORIUM) > 0 && getPlRes(CORIUM) >= 4000)
+			{
+				actSetPlRC(CORIUM, -1, 4000);
+				// добавить вычет кориума
+				if(isPlObjExist("THRONE_OCTOPO", 20,21,22))
+				{
+					ActOutString(_GL1, AIREL_MYSELF, 20, "������: � ����� ���! ������� �� ������. �����");
+					actCreatePlObj(BO_FLAGSHIP, _RT20, _RT21, _RT22, LOGO_DEFAULT,"BOSS_OCTOPO",-1,100);
+				}
+			}
+			actLockEvent();
+		}
+
+		// Боѝѝ будет идти в атаку каждые 5 минут
+		Event(getOwnTime()%400 == 0)
+		{
+			if(isPlObjExist("BOSS_OCTOPO", 20,21,22))
+			{
+				actFCmdAttackT( getFleetNum("fleetBoss", "tacticBoss"), _GL1, AITRG_ALL, UNDEFINED, LOGO_UNDEF, "", 0, AIATTACK_GLADE | AIADIR_LEFT | AIADIR_BACK | AIADIR_RIGHT, 0);
+				//actFCmdAttackT( getFleetNum("fleetCyber", "tacticCyber"));
+				actObjSelectN("BOSS_OCTOPO");
+				actAddFleet( getFleetNum("fleetBoss", "tacticBoss"));
+				if(isPlObjExist("Offen"))
+				{
+					actFCmdAttackT(getFleetNum("fleetBAveng", "tacticSubB"));
+					actObjSelectN("Offen");
+					actAddFleet(getFleetNum("fleetBAveng", "tacticSubB"));
+				}
+			}
+			actLockEvent();
+		}
+
+		EventPlObjKilled(_PS0=="SCOUT1" || _PS0=="SCOUT2" || _PS0=="SCOUT2")
+		{
+			if(isTechDev(TTECH_BO_SPLINTER_TORPEDO_UPGRADE))
+			{
+				actCreatePlObj(DESTROYER, _PI5, _PI6, _PI7, LOGO_DEFAULT,"", -1, 100);
+			}
+			actLockEvent();
+		}
+
+		EventPlObjKilled(TRUE)
+		{
+			if(_PI13 == AVENGER)
+			{
+				actStringMess("AVENGER");
+				//actStringMess("AVENGER PARALIZE = " + _inttostr(_RT50) + "-" + _inttostr(_RT51) + "-" + _inttostr(_RT52));
+				if( _PI3 == SENTINEL || _PI3 == HUNTER || _PI3 == CRUISER || _PI3 == TERMINATOR || 
+				    _PI3 == FIGHTER || _PI3 == DESTROYER || _PI3 == HEAVY_CRUISER || _PI3 == INVADER ||
+				    _PI3 == SHS_SUB || _PI3 == DREADNOUGHT || _PI3 == ESCORT ||
+				    _PI3 == DC_BOMBER || _PI3 == MINE_LAYER || _PI3 == MARAUDER || 
+                    _PI3 == DEFENDER || _PI3 == RAIDER || 
+                    _PI3 == BIO_ACID_ASSAULTER || _PI3 == USURPER || _PI3 == EXPLORER ||
+	                _PI3 == LIBERATOR || _PI3 == PHANTOM || _PI3 == AVENGER ||
+                    _PI3 == PARALYSIS_PROBE || _PI3 == VERMIN ||
+	                _PI3 == WS_FLAGSHIP || _PI3 == BO_FLAGSHIP || _PI3 == SI_FLAGSHIP 
+				)
+				{
+					actCreatePlObj(_PI3, _PI5, _PI6, _PI7, LOGO_DEFAULT,"", -1, 100, VEFF_TELEPORT);
+				}
+			}
+			actLockEvent();
+		}
+
+		// еѝли убили ѝтроителѝ, то надо его вернуть
+		EventPlObjKilled(TRUE)
+		{
+			if(isPlObjExist("Doc1",23,24,25))
+			{
+				if(_PS0=="Builder" && GetPlName(_PI0) == "Dirty Octopo") 
+				{
+					actCreatePlObj(ASSEMBLER, _RT23, _RT24, _RT25, LOGO_DEFAULT,"Builder", -1, 100, VEFF_TELEPORT);
+					actFParBuild(getFleetNum("fleetBaseB", "tacticBaseB"), AICAN_MYSELF, AITRG_ALL);
+					actObjSelectN("Builder");
+					actAddFleet(getFleetNum("fleetBaseB", "tacticBaseB") );
+				}
+
+				if(_PS0=="Build_Res" && GetPlName(_PI0) == "Dirty Octopo") 
+				{
+					actCreatePlObj(ASSEMBLER, _RT23, _RT24, _RT25, LOGO_DEFAULT,"Build_Res", -1, 100, VEFF_TELEPORT);
+					actFParBuild(getFleetNum("fleetBaseB2", "tacticBaseB2"), AICAN_MYSELF, AITRG_ALL);
+					actObjSelectN("Build_Res");
+					actAddFleet(getFleetNum("fleetBaseB2", "tacticBaseB2") );
+				}
+
+				if(_PS0=="Build_Dop" && GetPlName(_PI0) == "Dirty Octopo") 
+				{
+					actCreatePlObj(ASSEMBLER, _RT23, _RT24, _RT25, LOGO_DEFAULT,"Build_Dop", -1, 100, VEFF_TELEPORT);
+					actFParBuild(getFleetNum("fleetBaseB3", "tacticBaseB3"), AICAN_MYSELF, AITRG_ALL);
+					actObjSelectN("Build_Dop");
+					actAddFleet(getFleetNum("fleetBaseB3", "tacticBaseB3") );
+				}
+			}
+
+			actLockEvent();
+		}
+
+// EventRCFieldExhausted ---------------------------------------------------------------------------------------------------------------
+        EventRCFieldExhausted(TRUE)
+        {
+			// && GetPlName(_GL1) == "Dirty Octopo"
+            ActSetName("NONE", _PI5, _PI6, _PI7);
+            actLockEvent();
+        }
+
+// РЕПЛИКИ ОКТОПО------------------------------------------------------------------------------------------------------------
+
+		Event(getOwnTime() > 9)
+		{
+			ActOutString(_GL1, AIREL_MYSELF, 20, "Октопо: Человек нам тут тесно вдвоем. Плыл бы ты с моей воды. Ахаха");
+		}
+
+		Event(getOwnTime() > 85)
+		{
+			ActOutString(_GL1, AIREL_MYSELF, 20, "Октопо: Человек прекрати эту бесполезную борьбу. Просто сдайся. Ахаха");
+		}
+
+		Event(getOwnTime()>1200 && getOwnTime() < 1201 && getPlObjM(AITRG_BOATALL) > (GetPlObjM(_GL1, AIREL_MYSELF, AITRG_BOATALL)*2) )
+		{
+			ActOutString(_GL1, AIREL_MYSELF, 20, "Октопо: Слышал шутку про 16 лодок? Это не ты тот герой? Ты не командир невидимых войск. Ахаха");
+			actLockEvent();
+		}
+
+		Event(getOwnTime() > 0 && getOwnTime()%120 == 0 && getPlObjM(AITRG_TLOPRODUCTIVE) < 5 && getPlObjM(AITRG_TLORCEXTRACT) < 5 && getPlObjM(AITRG_TLOSUPPLY) < 5)
+		{
+			ActOutString(_GL1, AIREL_MYSELF, 20, "Октопо: Радуйся своей жалкой, никчемной победе. Ахаха");
+			actLockEvent();
+		}
+
+
+
+
+// SUPER WEAPON ---------------------------------------------------------------------------------------------
+
+	Event(getOwnTime()%15==0)
+	{
+		if(isPlObjExist("LBL1", 50, 51, 52))
+		{
+			actObjSelectN("LBL1");
+			actAddFleet(getFleetNum("BO N1", "BO tacticN1") );
+
+			if(getFleetMassWeaponReady(getFleetNum("BO N1", "BO tacticN1"), WEAPON_LASER_BOMB, _RT50, _RT51, _RT52 )> 0 )
+			{
+				if(IsPlObjExist(_GL1, "ITARGET2", 53, 54, 55))
+				{
+					ActOutString(_GL1, AIREL_MYSELF, 20, "Октопо: Лови первый подарочек. Ахаха");
+					actFCmdMassWeaponHit(getFleetNum("BO N1", "BO tacticN1"), WEAPON_LASER_BOMB, _RT53, _RT54, _RT55 );
+				}
+
+			}
+		}
+		actLockEvent();
+	}
+
+	Event(getOwnTime()%30==0)
+	{
+		if(isPlObjExist("LBL2", 50, 51, 52))
+		{
+			actObjSelectN("LBL2");
+			actAddFleet(getFleetNum("BO N2", "BO tacticN2") );
+
+			if(getFleetMassWeaponReady(getFleetNum("BO N2", "BO tacticN2"), WEAPON_LASER_BOMB, _RT50, _RT51, _RT52 )> 0 )
+			{
+				if(IsPlObjExist(_GL1, "ITARGET3", 53, 54, 55))
+				{
+					ActOutString(_GL1, AIREL_MYSELF, 20, "Октопо: А вот и второй пирожок. Ахаха");
+					actFCmdMassWeaponHit(getFleetNum("BO N2", "BO tacticN2"), WEAPON_LASER_BOMB, _RT53, _RT54, _RT55 );
+				}
+			}
+		}
+		actLockEvent();
+	}
+
+/*
+	ActObjSelectN(PLAYER_1, AIREL_MYSELF, "LBL1");
+	ActAddFleet(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N1", "BO tacticN1") );
+
+
+
+Event(getOwnTime()> 120){
+
+	if( IsPlObjExist(PLAYER_1, "LBL1") && 
+	GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 50,6,2  ) == 0 &&
+	GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 51,6,2  ) == 0 &&
+	GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 52,6,2  ) == 0 &&
+	GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 50,7,2  ) == 0 &&
+	GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 51,7,2  ) == 0 &&
+	GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 52,7,2  ) == 0  ) {
+
+		while(_GL22 < 7){
+			//ActStringMess(PLAYER_1, AIREL_MYSELF,"DO BOMB!!!");
+			_GL22+=1;
+			ActObjSelectN(PLAYER_1, AIREL_MYSELF, "LBL"+ _inttostr(_GL22));
+			// �������, ��� ���� ����������� ������� ������. ��������� ����� ��� ���-�� ����� ����� �� ������ "��������� ������"
+			ActFParPutInStaff(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN"), WEAPON_LASER_BOMB );
+			// ��������� ���� ���������� ������� � ����� �������
+			ActAddFleet(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN") );
+			// ���� ������� ����� ����� �� ����� ����������� ������� ������
+			ActFCmdProduction(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN") , WEAPON_LASER_BOMB);
+		}
+		_GL22:= 0;
+	}
+
+	ActLockEvent();
+  }
+
+		ActObjSelectN(PLAYER_1, AIREL_MYSELF, "LBL1");
+
+		ActAddFleet(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN") );
+		if(GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 50,6,2  )> 0 
+		&& _GL25 == 1 && _GL26 == 0){
+			_GL26:= 20;
+
+			// ���������� ������ ������
+			ActFCmdMassWeaponHit(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN"), WEAPON_LASER_BOMB, _GL27,_GL28,2 );
+
+		} else 
+		{	
+			
+			//ActCreateFleet(PLAYER_1, AIREL_MYSELF, "BO N1", CIV_BO, AIF_BASE);
+			ActObjSelectN(PLAYER_1, AIREL_MYSELF, "LBL2");
+				// ��������� �� � �����
+			ActAddFleet(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN") );
+			if(GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 51,6,2  )> 0 
+			&& _GL25 == 1 && _GL26 == 0){
+				
+				_GL26:= 20;
+
+				// ���������� ������ ������
+				ActFCmdMassWeaponHit(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N1", "BO tacticN1"), WEAPON_LASER_BOMB,  _GL27,_GL28,2 );
+
+			}
+		} else {
+			//ActCreateFleet(PLAYER_1, AIREL_MYSELF, "BO N2", CIV_BO, AIF_BASE);
+			ActObjSelectN(PLAYER_1, AIREL_MYSELF, "LBL3");
+				// ��������� �� � �����
+			ActAddFleet(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN") );
+			if(GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 52,6,2  )> 0 
+			&& _GL25 == 1 && _GL26 == 0){
+				
+				_GL26:= 20;
+
+				// ���������� ������ ������
+				ActFCmdMassWeaponHit(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN"), WEAPON_LASER_BOMB,  _GL27,_GL28,2 );
+
+			}
+		}
+		else {
+			//ActCreateFleet(PLAYER_1, AIREL_MYSELF, "BO N3", CIV_BO, AIF_BASE);
+			ActObjSelectN(PLAYER_1, AIREL_MYSELF, "LBL4");
+				// ��������� �� � �����
+			ActAddFleet(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN") );
+			if(GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 50,7,2  )> 0 
+			&& _GL25 == 1 && _GL26 == 0){
+				
+				_GL26:= 25;
+
+				// ���������� ������ ������
+				ActFCmdMassWeaponHit(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN"), WEAPON_LASER_BOMB,  _GL27,_GL28,2 );
+
+			}
+		}
+*/
+
+	CloseEvents();
+
+CloseStrateg();
+
+
+
+
+
