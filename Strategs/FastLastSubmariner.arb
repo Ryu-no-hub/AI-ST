@@ -1,13 +1,12 @@
 include<[_inc_path]\AiScript.dfn>;
 include<[_inc_path]\AiScript.mcr>;
-include<[_inc_path]\Strategs\CONST_LastSubmariner.dfn>;
 /*
     _RT100-_RT107 - mission conditions
     _RT112-127 - x,y первого объекта каждого игрока
     _RT128 - кол-во игроков
     _RT129 - размер карты
 */
-OpenArbiter("Last Submariner");
+OpenArbiter("Fast Last Submariner");
     //include<[_inc_path]\Strategs\arbTEST.arb>
     OpenEvents();
 
@@ -22,15 +21,15 @@ OpenArbiter("Last Submariner");
 
         Event(TRUE) 
         {
-            actStringMess("Last Submariner" + "\n")
+            actStringMess("Fast Last Submariner" + "\n")
             _ploop_begin
                 if(GetPlCiv(_pl_)==CIV_WS) //--WS--
                 {
                     ActCreatePlObj(_plmyself, CONSTRUCTOR, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
-                    //ActTechSet(_plmyself, TTECH_WS_ENGINE_UPGRADE, 1);
-                    //ActTechSet(_plmyself, TTECH_WS_ENGINE_UPGRADE, 2);
-                    //ActTechSet(_plmyself, TTECH_WS_ENGINE_UPGRADE, 3);
-
+                    ActTechSet(_plmyself, TTECH_WS_ENGINE_UPGRADE, 1);
+                    ActTechSet(_plmyself, TTECH_WS_ENGINE_UPGRADE, 2);
+                    ActTechSet(_plmyself, TTECH_WS_ENGINE_UPGRADE, 3);
+                    
                     if(GetStartSetLevel()==LEVEL_MEDIUM) 
                     {
                         ActCreatePlObj(_plmyself, CONSTRUCTOR, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
@@ -41,17 +40,17 @@ OpenArbiter("Last Submariner");
                         ActCreatePlObj(_plmyself, CONSTRUCTOR, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
                         ActCreatePlObj(_plmyself, CONSTRUCTOR, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
                     }
-
+                    
                 }
                 else
                 { 
                     if(GetPlCiv(_pl_)==CIV_BO) //--BO--
                     {
                         ActCreatePlObj(_plmyself, ASSEMBLER, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
-                        //ActTechSet(_plmyself, TTECH_BO_ENGINE_UPGRADE, 1);
-                        //ActTechSet(_plmyself, TTECH_BO_ENGINE_UPGRADE, 2);
-                        //ActTechSet(_plmyself, TTECH_BO_ENGINE_UPGRADE, 3);
-                        /*
+                        ActTechSet(_plmyself, TTECH_BO_ENGINE_UPGRADE, 1);
+                        ActTechSet(_plmyself, TTECH_BO_ENGINE_UPGRADE, 2);
+                        ActTechSet(_plmyself, TTECH_BO_ENGINE_UPGRADE, 3);
+
                         if(GetPlName(_pl_) == "Dirty Octopo")
                         {
                             ActSetPlRC(_plmyself, METAL, 0, 20000 );
@@ -59,7 +58,6 @@ OpenArbiter("Last Submariner");
                             ActSetPlRC(_plmyself, GOLD, 0, 1000 );
                             ActCreatePlObj(_plmyself, ASSEMBLER, -1, -1, -1, LOGO_UNDEF, "Build_Res");
                         }
-                        */
 
                         if(GetStartSetLevel()==LEVEL_MEDIUM && GetPlName(_pl_) != "Dirty Octopo") 
                         {
@@ -81,10 +79,6 @@ OpenArbiter("Last Submariner");
                         ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
                         ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
 
-                        //ActTechSet(_plmyself, TTECH_SI_UPGRADE_MOVEMENT_LEVEL, 1);
-                        //ActTechSet(_plmyself, TTECH_SI_UPGRADE_MOVEMENT_LEVEL, 2);
-                        //ActTechSet(_plmyself, TTECH_SI_UPGRADE_MOVEMENT_LEVEL, 3);
-
                         if(GetStartSetLevel()==LEVEL_MEDIUM) 
                         {
                             ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
@@ -96,6 +90,9 @@ OpenArbiter("Last Submariner");
                             ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
                         }
 
+                        ActTechSet(_plmyself, TTECH_SI_UPGRADE_MOVEMENT_LEVEL, 1);
+                        ActTechSet(_plmyself, TTECH_SI_UPGRADE_MOVEMENT_LEVEL, 2);
+                        ActTechSet(_plmyself, TTECH_SI_UPGRADE_MOVEMENT_LEVEL, 3);
                     }
                 }
             _ploop_end
@@ -113,14 +110,14 @@ OpenArbiter("Last Submariner");
                 if(IsPlObjExist(_pl_, BUILDER_NAME, 24, 25, 26, 27))
                 {
                     //_actStringMess(_inttostr(_RT24) + " " + _inttostr(_RT25))
-                    if(_pl_==PLAYER_0){_RT112:=_RT24; _RT113:=_RT25;  ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
-                    if(_pl_==PLAYER_1){_RT114:=_RT24; _RT115:=_RT25;  ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
-                    if(_pl_==PLAYER_2){_RT116:=_RT24; _RT117:=_RT25;  ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
-                    if(_pl_==PLAYER_3){_RT118:=_RT24; _RT119:=_RT25;  ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
-                    if(_pl_==PLAYER_4){_RT120:=_RT24; _RT121:=_RT25;  ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
-                    if(_pl_==PLAYER_5){_RT122:=_RT24; _RT123:=_RT25;  ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
-                    if(_pl_==PLAYER_6){_RT124:=_RT24; _RT125:=_RT25;  ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
-                    if(_pl_==PLAYER_7){_RT126:=_RT24; _RT127:=_RT25;  ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
+                    if(_pl_==PLAYER_0){_RT112:=_RT24; _RT113:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
+                    if(_pl_==PLAYER_1){_RT114:=_RT24; _RT115:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
+                    if(_pl_==PLAYER_2){_RT116:=_RT24; _RT117:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
+                    if(_pl_==PLAYER_3){_RT118:=_RT24; _RT119:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
+                    if(_pl_==PLAYER_4){_RT120:=_RT24; _RT121:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
+                    if(_pl_==PLAYER_5){_RT122:=_RT24; _RT123:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
+                    if(_pl_==PLAYER_6){_RT124:=_RT24; _RT125:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
+                    if(_pl_==PLAYER_7){_RT126:=_RT24; _RT127:=_RT25; ActCreateDest(0, LOGO_1, _RT24, _RT25, 4, "", "");}
                     //ActSetName("", _RT24, _RT25, _RT26);
                     //_actStringMess(_inttostr(_RT24) + " " + _inttostr(_RT25))
                 }
@@ -333,6 +330,100 @@ OpenArbiter("Last Submariner");
             actStringMess("Осталось артефактов: " + _inttostr(GetArt()-1));
         }
 
+        EventPlObjKilled(TRUE)
+        {
+            if(_PI13 == WS_FLAGSHIP || _PI13 == BO_FLAGSHIP || _PI13 == SI_FLAGSHIP)
+            {
+                if(_PI10==0)
+                {
+                    _GL110 += 1;
+                }
+
+                if(_PI10==1)
+                {
+                    _GL111 += 1;
+                }
+
+                if(_PI10==2)
+                {
+                    _GL112 += 1;
+                }
+
+                if(_PI10==3)
+                {
+                    _GL113 += 1;
+                }
+
+                if(_PI10==4)
+                {
+                    _GL114 += 1;
+                }
+
+                if(_PI10==5)
+                {
+                    _GL115 += 1;
+                }
+
+                if(_PI10==6)
+                {
+                    _GL116 += 1;
+                }
+                if(_PI10==7)
+                {
+                    _GL117 += 1;
+                }
+            }
+
+            actLockEvent();
+        }
+
+        EventMineKilled(TRUE)
+        {
+            //ActStringMess(_PI0, AIREL_MYSELF, "MINE KILL = " + _inttostr(_PI3));
+            //ActStringMess(_PI0, AIREL_MYSELF, "TARGET = " + _inttostr(_PI10));
+
+            if(_PI0==0)
+            {
+                _GL118 += 1;
+            }
+
+            if(_PI0==1)
+            {
+                _GL119 += 1;
+            }
+
+            if(_PI0==2)
+            {
+                _GL120 += 1;
+            }
+
+            if(_PI0==3)
+            {
+                _GL121 += 1;
+            }
+
+            if(_PI0==4)
+            {
+                _GL122 += 1;
+            }
+
+            if(_PI0==5)
+            {
+                _GL123 += 1;
+            }
+
+            if(_PI0==6)
+            {
+                _GL124 += 1;
+            }
+            if(_PI0==7)
+            {
+                _GL125 += 1;
+            }
+            
+            actLockEvent();
+        }
+
         // Event for end game sessions
         // BEGIN
         Event(getOwnTime()>10)
@@ -366,6 +457,87 @@ OpenArbiter("Last Submariner");
                     ActOnTimer(_plmyself,10);
                     ActOffFOW(_plmyself);                                 
                     _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
+
+                    if(_GL110 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL110));
+                    }
+
+                    if(_GL111 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL111));
+                    }
+
+                    if(_GL112 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL112));
+                    }
+
+                    if(_GL113 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL113));
+                    }
+
+                    if(_GL114 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL114));
+                    }
+
+                    if(_GL115 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL115));
+                    }
+
+                    if(_GL116 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL116));
+                    }
+
+                    if(_GL117 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL117));
+                    }
+                    // mine
+                    if(_GL118 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL118));
+                    }
+
+                    if(_GL119 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL119));
+                    }
+
+                    if(_GL120 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL120));
+                    }
+
+                    if(_GL121 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL121));
+                    }
+
+                    if(_GL122 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL122));
+                    }
+
+                    if(_GL123 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL123));
+                    }
+
+                    if(_GL124 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL124));
+                    }
+
+                    if(_GL125 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL125));
+                    }
+
                 }
             _ploop_end
             actLockEvent();
@@ -380,6 +552,87 @@ OpenArbiter("Last Submariner");
                     ActOnTimer(_plmyself,10);
                     ActOffFOW(_plmyself);                                 
                     _actStringMess(_strf(GetStrRes(s_win), GetPlName(_pl_)));
+
+                    if(_GL110 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL110));
+                    }
+
+                    if(_GL111 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL111));
+                    }
+
+                    if(_GL112 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL112));
+                    }
+
+                    if(_GL113 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL113));
+                    }
+
+                    if(_GL114 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL114));
+                    }
+
+                    if(_GL115 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL115));
+                    }
+
+                    if(_GL116 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL116));
+                    }
+
+                    if(_GL117 > 0)
+                    {
+                        ActStringMess(_plmyself, "Ваши флагманы уничтожили = " + _inttostr(_GL117));
+                    }
+                   // mine
+                    if(_GL118 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL118));
+                    }
+
+                    if(_GL119 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL119));
+                    }
+
+                    if(_GL120 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL120));
+                    }
+
+                    if(_GL121 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL121));
+                    }
+
+                    if(_GL122 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL122));
+                    }
+
+                    if(_GL123 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL123));
+                    }
+
+                    if(_GL124 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL124));
+                    }
+
+                    if(_GL125 > 0)
+                    {
+                        ActStringMess(_plmyself, "Вашими минами уничтожено = " + _inttostr(_GL125));
+                    }
+
                 }
             _ploop_end
             actLockEvent();
