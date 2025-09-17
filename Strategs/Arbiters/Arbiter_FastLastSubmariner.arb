@@ -357,6 +357,8 @@ OpenArbiter("Fast Last Submariner");
 
         EventPlObjKilled(TRUE)
         {
+            // флаг, что убили, но не миной
+            _GL99:= 0;
             if(_PI13 == WS_FLAGSHIP || _PI13 == BO_FLAGSHIP || _PI13 == SI_FLAGSHIP)
             {
                 if(_PI10==0)
@@ -372,39 +374,89 @@ OpenArbiter("Fast Last Submariner");
                 if(_PI10==2)
                 {
                     _GL112 += 1;
-                    ActAddStrRes(_PI10, AIREL_MYSELF, 57, GetPlName(_PI10));
                 }
 
                 if(_PI10==3)
                 {
                     _GL113 += 1;
-                    ActAddStrRes(_PI10, AIREL_MYSELF, 58, GetPlName(_PI10));
                 }
 
                 if(_PI10==4)
                 {
                     _GL114 += 1;
-                    ActAddStrRes(_PI10, AIREL_MYSELF, 59, GetPlName(_PI10));
                 }
 
                 if(_PI10==5)
                 {
                     _GL115 += 1;
-                    ActAddStrRes(_PI10, AIREL_MYSELF, 60, GetPlName(_PI10));
                 }
 
                 if(_PI10==6)
                 {
                     _GL116 += 1;
-                    ActAddStrRes(_PI10, AIREL_MYSELF, 61, GetPlName(_PI10));
                 }
                 if(_PI10==7)
                 {
                     _GL117 += 1;
-                    ActAddStrRes(_PI10, AIREL_MYSELF, 62, GetPlName(_PI10));
+                }
+            } else {
+                // убийца неизвестный объект. Предпологаем, что это была мина
+                if(_PI13 == 0) {
+                    _GL99:= 1;
                 }
             }
+            actLockEvent();
+        }
 
+        EventMineKilled(TRUE)
+        {
+            if(_PI3 == WEAPON_DEPTH_MINE || _PI3 == WEAPON_LASER_SNARE || _PI3 == WEAPON_ACOUSTIC_MINE) 
+            { 
+                if(_PI0==0 && _GL99 == 1)
+                {
+                    _GL118 += 1;
+                }
+
+                if(_PI0==1 && _GL99 == 1)
+                {
+                    _GL119 += 1;
+                }
+
+                if(_PI10==2 && _GL99 == 1)
+                {
+                    _GL120 += 1;
+                }
+
+                if(_PI10==3 && _GL99 == 1)
+                {
+                    _GL121 += 1;
+                }
+
+                if(_PI10==4 && _GL99 == 1)
+                {
+                    _GL122 += 1;
+                }
+
+                if(_PI10==5 && _GL99 == 1)
+                {
+                    _GL123 += 1;
+                }
+
+                if(_PI10==6 && _GL99 == 1)
+                {
+                    _GL124 += 1;
+                }
+                if(_PI10==7 && _GL99 == 1)
+                {
+                    _GL125 += 1;
+                }
+                _GL99:= 0;
+            }
+            actLockEvent();
+        }
+
+        EventMineCreated(TRUE)
+        {
             actLockEvent();
         }
 
@@ -536,7 +588,6 @@ OpenArbiter("Fast Last Submariner");
                     ActOnTimer(_plmyself,10);
                     ActOffFOW(_plmyself);                                 
                     _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
-                    _GL118:= 1;
                     actOnEvent(200);
                 }
             _ploop_end
@@ -552,7 +603,6 @@ OpenArbiter("Fast Last Submariner");
                     ActOnTimer(_plmyself,10);
                     ActOffFOW(_plmyself);                                 
                     _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
-                    _GL118:= 1;
                     actOnEvent(200);
                 }
             _ploop_end
@@ -568,7 +618,6 @@ OpenArbiter("Fast Last Submariner");
                     ActOnTimer(_plmyself,10);
                     ActOffFOW(_plmyself);                                 
                     _actStringMess(_strf(GetStrRes(s_win), GetPlName(_pl_)));
-                    _GL118:= 1;
                     actOnEvent(200);
                 }
             _ploop_end
@@ -588,8 +637,8 @@ OpenArbiter("Fast Last Submariner");
             _ploop_end
             actLockEvent();
         }
-        // Print Flagmans Statistics
-        Event(_GL118 > 0, 200)
+        // Print Flagmans, Mines Statistics
+        Event(TRUE, 200)
         {
             if(_GL110 > 0)
             {
@@ -631,6 +680,46 @@ OpenArbiter("Fast Last Submariner");
             if(_GL117 > 0)
             {
                 actStringMess("Флагманы " + GetPlName(7) + " уничтожили = " + _inttostr(_GL117));
+            }
+            // mine stat
+            if(_GL118 > 0)
+            {
+                actStringMess("МИНАМИ " + GetPlName(0) + " УНИЧТОЖЕНО = " + _inttostr(_GL118));
+            }
+
+            if(_GL119 > 0)
+            {
+                actStringMess("МИНАМИ " + GetPlName(1) + " УНИЧТОЖЕНО = " + _inttostr(_GL119));
+            }
+
+            if(_GL120 > 0)
+            {
+                actStringMess("МИНАМИ " + GetPlName(2) + " УНИЧТОЖЕНО = " + _inttostr(_GL120));
+            }
+
+            if(_GL121 > 0)
+            {
+                actStringMess("МИНАМИ " + GetPlName(3) + " УНИЧТОЖЕНО = " + _inttostr(_GL121));
+            }
+
+            if(_GL122 > 0)
+            {
+                actStringMess("МИНАМИ " + GetPlName(4) + " УНИЧТОЖЕНО = " + _inttostr(_GL122));
+            }
+
+            if(_GL123 > 0)
+            {
+                actStringMess("МИНАМИ " + GetPlName(5) + " УНИЧТОЖЕНО = " + _inttostr(_GL123));
+            }
+
+            if(_GL124 > 0)
+            {
+                actStringMess("МИНАМИ " + GetPlName(6) + " УНИЧТОЖЕНО = " + _inttostr(_GL124));
+            }
+
+            if(_GL125 > 0)
+            {
+                actStringMess("МИНАМИ " + GetPlName(7) + " УНИЧТОЖЕНО = " + _inttostr(_GL125));
             }
         }
 
