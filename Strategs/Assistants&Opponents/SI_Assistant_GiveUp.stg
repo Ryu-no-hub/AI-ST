@@ -1,0 +1,24 @@
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#if(_env_var1==0)
+ _full_name = "СДАТЬСЯ";_short_name = "ASSISTANT 5";
+#endif
+
+OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
+  
+ // Events
+ OpenEvents();
+  // Execute Tactician
+  Event(getOwnTime()>1) 
+  { 
+    ActStringMess(PLAYER_ALL, AIREL_MYSELF, GetPlName(PLAYER_ME) + " сдался!");
+
+    actDelPlObjEx(AITRG_ALL, UNDEFINED, LOGO_UNDEF, "", 0, 0, 0, -1, -1, -1, VEFF_EXPLOSION);
+
+    // Убить строящиеся
+    actDelPlObjEx(AITRG_ALL);
+  };
+ CloseEvents();
+
+CloseStrateg();

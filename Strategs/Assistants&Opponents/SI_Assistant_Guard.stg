@@ -1,0 +1,29 @@
+//====================================================================
+//      ST AiScript: SI Computer Assistant Level 01
+//====================================================================
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#if(_env_var1==0)
+ _full_name = "SI Guard Assistant";_short_name = "ASSISTANT 2";
+#endif
+
+OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
+  
+ // Parameters
+ MainEnemy(AICAN_MYSELF, PLAYER_ALL);
+
+  // Tactics
+ include<[_curr_path]\Tacticians\SI_GuardBase.tct>;
+
+ // Events
+ OpenEvents();
+  // Execute Tactician
+  Event(getOwnTime()>1) 
+  { actObjSelectM(AITRG_ALL);
+    actExecTactic("SI Guard Base");
+    actTScenDevRun(TECH_SCENARIO_OPTIMAL);
+  };
+ CloseEvents();
+
+CloseStrateg();

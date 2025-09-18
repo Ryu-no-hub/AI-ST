@@ -1,0 +1,9 @@
+
+OpenTactic("SI Silicon tactitian", CIV_SI, 10);
+  // Parameters
+
+  // Fleets
+  include<[_curr_path]\Fleets\SI_BuildSiliconMines.flt>; 
+  include<[_curr_path]\Fleets\SI_Prototypes_For_Silicon.flt>; 
+CloseTactic();
+

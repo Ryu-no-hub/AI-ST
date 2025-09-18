@@ -1,0 +1,15 @@
+
+OpenTactic("BO Main Base", CIV_BO, 10);
+  // Parameters
+
+  // Fleets
+  include<[_curr_path]\Fleets\BO_Base.flt>; 
+  include<[_curr_path]\Fleets\BO_Builder.flt>; 
+  include<[_curr_path]\Fleets\BO_Transport_Metal.flt>;
+  include<[_curr_path]\Fleets\BO_Transport_Corium.flt>; 
+  include<[_curr_path]\Fleets\BO_Guard_00.flt>; 
+  include<[_curr_path]\Fleets\BO_Guard_01.flt>; 
+  include<[_curr_path]\Fleets\BO_Raider_00.flt>; 
+  include<[_curr_path]\Fleets\BO_Raider_01.flt>; 
+  include<[_curr_path]\Fleets\BO_Cyber.flt>; 
+CloseTactic();

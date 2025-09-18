@@ -1,0 +1,12 @@
+
+OpenTactic("BO Gold Base", CIV_BO, 10);
+  // Parameters
+
+  // Fleets
+  include<[_curr_path]\Fleets\BO_Gold.flt>;  
+  include<[_curr_path]\Fleets\BO_Gold_builder.flt>; 
+CloseTactic();
+
+
+
+

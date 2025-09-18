@@ -1,0 +1,8 @@
+
+OpenFleet("WS Gold Mines", CIV_WS, AIF_BASE, 15);
+  Build(AICAN_MYSELF);
+  CanChangeStaff(AICAN_MYSELF);
+  RepairStaff(AICAN_NOT);
+CloseFleet();
+
+

@@ -1,0 +1,554 @@
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+include<[_curr_path]\CONST_LastSubmariner.dfn>;
+
+/*
+    _RT100-_RT107 - mission conditions
+    _RT112-127 - x,y первого объекта каждого игрока
+    _RT128 - кол-во игроков
+    _RT129 - размер карты
+*/
+
+OpenArbiter("Last Submariner");
+    OpenEvents();
+
+        s_win    = 14;
+        s_defeat = 15;
+        ARTS_PER_PLAYER = 1;
+        NO_ART_ZONE_SIZE = 30;
+        BASIC_NAME = "The thing";
+        RESEARCH_BLD_NAME = "Research";
+        SILICON_MINE_NAME = "SM";
+        BUILDER_NAME = "Builder";
+        
+        Event(TRUE) // 0
+        {
+            actStringMess("Режим: Last Submariner" + "\n");
+            actStringMess("Будьте вежливы и уважайте других игроков." + "\n");
+            actStringMess("Хорошей игры! :)" + "\n");
+
+            _ploop_begin
+
+                if(GetPlCiv(_pl_)==CIV_WS) //--WS--
+                {
+                    ActCreatePlObj(_plmyself, CONSTRUCTOR, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
+                    
+                    if(GetStartSetLevel()==LEVEL_MEDIUM) 
+                    {
+                        ActCreatePlObj(_plmyself, CONSTRUCTOR, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
+                    }
+
+                    if(GetStartSetLevel()==LEVEL_HIGH) 
+                    {
+                        ActCreatePlObj(_plmyself, CONSTRUCTOR, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
+                        ActCreatePlObj(_plmyself, CONSTRUCTOR, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
+                    }
+                }
+                else
+                { 
+                    if(GetPlCiv(_pl_)==CIV_BO) //--BO--
+                    {
+                        ActCreatePlObj(_plmyself, ASSEMBLER, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
+
+                        if(GetPlName(_pl_) == "Dirty Octopo")
+                        {
+                            ActSetPlRC(_plmyself, METAL, 0, 20000 );
+                            ActSetPlRC(_plmyself, CORIUM, 0, 4000 );
+                            ActSetPlRC(_plmyself, GOLD, 0, 1000 );
+                            ActCreatePlObj(_plmyself, ASSEMBLER, -1, -1, -1, LOGO_UNDEF, "Build_Res");
+                        }
+                        else
+                        {
+                            if(GetStartSetLevel()==LEVEL_MEDIUM)
+                            {
+                                ActCreatePlObj(_plmyself, ASSEMBLER, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
+                            }
+
+                            if(GetStartSetLevel()==LEVEL_HIGH) 
+                            {
+                                ActCreatePlObj(_plmyself, ASSEMBLER, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
+                                ActCreatePlObj(_plmyself, ASSEMBLER, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
+                            }
+                        }
+                    }
+                    else // --SI--
+                    {
+                        ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME);
+
+                        if(IsPlObjExist(_pl_, BUILDER_NAME, 24, 25, 26))
+                        {
+                            ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, _RT24, _RT25+1, _RT26, LOGO_UNDEF, BUILDER_NAME); 
+                            ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE,  _RT24, _RT25-1, _RT26, LOGO_UNDEF, BUILDER_NAME); 
+                            ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE,  _RT24+1, _RT25, _RT26, LOGO_UNDEF, BUILDER_NAME); 
+                            ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE,  _RT24-1, _RT25, _RT26, LOGO_UNDEF, BUILDER_NAME);
+                        }
+
+
+                        if(GetStartSetLevel()!=LEVEL_LOW) 
+                        {
+                            ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
+                            if(IsPlObjExist(_pl_, BUILDER_NAME, 24, 25, 26))
+                            {
+                                ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, _RT24, _RT25+1, _RT26, LOGO_UNDEF, BUILDER_NAME); 
+                                ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE,  _RT24, _RT25-1, _RT26, LOGO_UNDEF, BUILDER_NAME); 
+                                ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE,  _RT24+1, _RT25, _RT26, LOGO_UNDEF, BUILDER_NAME); 
+                                ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE,  _RT24-1, _RT25, _RT26, LOGO_UNDEF, BUILDER_NAME);
+                            }
+
+                            if(GetStartSetLevel()!=LEVEL_MEDIUM) 
+                            {
+                                ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, -1, -1, -1, LOGO_UNDEF, BUILDER_NAME); 
+                                if(IsPlObjExist(_pl_, BUILDER_NAME, 24, 25, 26))
+                                {
+                                    ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE, _RT24, _RT25+1, _RT26, LOGO_UNDEF, BUILDER_NAME); 
+                                    ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE,  _RT24, _RT25-1, _RT26, LOGO_UNDEF, BUILDER_NAME); 
+                                    ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE,  _RT24+1, _RT25, _RT26, LOGO_UNDEF, BUILDER_NAME); 
+                                    ActCreatePlObj(_plmyself, CAPSULE_PROTOTYPE,  _RT24-1, _RT25, _RT26, LOGO_UNDEF, BUILDER_NAME);
+                                }
+                            }
+                        }
+                    }
+                }
+            _ploop_end
+            actOffEvent(10);
+            actOffEvent(20);
+            actOffEvent(21);
+            actOffEvent(30);
+            actOffEvent(100);
+            actOffEvent(200);
+        }
+
+        // создание артефактов
+        Event(TRUE) // 1
+        {
+            _ploop_begin
+                if(IsPlObjExist(_pl_, BUILDER_NAME, 24, 25, 26, 27))
+                {
+                    //_actStringMess(_inttostr(_RT24) + " " + _inttostr(_RT25))
+                    if(_pl_==PLAYER_0){_RT112:=_RT24; _RT113:=_RT25; /*ActCreateDest\(0, 0, _RT24-1, _RT25-1, 0, "", ""\);*/}
+                    if(_pl_==PLAYER_1){_RT114:=_RT24; _RT115:=_RT25; /*ActCreateDest\(0, 0, _RT24-1, _RT25-1, 0, "", ""\);*/}
+                    if(_pl_==PLAYER_2){_RT116:=_RT24; _RT117:=_RT25; /*ActCreateDest\(0, 0, _RT24-1, _RT25-1, 0, "", ""\);*/}
+                    if(_pl_==PLAYER_3){_RT118:=_RT24; _RT119:=_RT25; /*ActCreateDest\(0, 0, _RT24-1, _RT25-1, 0, "", ""\);*/}
+                    if(_pl_==PLAYER_4){_RT120:=_RT24; _RT121:=_RT25; /*ActCreateDest\(0, 0, _RT24-1, _RT25-1, 0, "", ""\);*/}
+                    if(_pl_==PLAYER_5){_RT122:=_RT24; _RT123:=_RT25; /*ActCreateDest\(0, 0, _RT24-1, _RT25-1, 0, "", ""\);*/}
+                    if(_pl_==PLAYER_6){_RT124:=_RT24; _RT125:=_RT25; /*ActCreateDest\(0, 0, _RT24-1, _RT25-1, 0, "", ""\);*/}
+                    if(_pl_==PLAYER_7){_RT126:=_RT24; _RT127:=_RT25; /*ActCreateDest\(0, 0, _RT24-1, _RT25-1, 0, "", ""\);*/}
+                    //ActSetName("", _RT24, _RT25, _RT26);
+                    //_actStringMess(_inttostr(_RT24) + " " + _inttostr(_RT25))
+                }
+                _RT128 += ARTS_PER_PLAYER;
+            _ploop_end
+
+            //_RT129 := GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80;
+            _GL0 := GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80;
+            _RT129 := _GL0;
+
+            while (_RT128 > 0)
+            {
+                _RT130 := GetRnd(0, _RT129);
+                _RT131 := GetRnd(0, _RT129);
+                if(
+                    (
+                        (_RT130 < _RT112 - NO_ART_ZONE_SIZE) || (_RT130 > _RT112 + NO_ART_ZONE_SIZE)    // x
+                        || (_RT131 < _RT113 - NO_ART_ZONE_SIZE) || (_RT131 > _RT113 + NO_ART_ZONE_SIZE) // y
+                    ) &&
+                    (
+                        (_RT130 < _RT114 - NO_ART_ZONE_SIZE) || (_RT130 > _RT114 + NO_ART_ZONE_SIZE)    // x
+                        || (_RT131 < _RT115 - NO_ART_ZONE_SIZE) || (_RT131 > _RT115 + NO_ART_ZONE_SIZE) // y
+                    ) &&(
+                        (_RT130 < _RT116 - NO_ART_ZONE_SIZE) || (_RT130 > _RT116 + NO_ART_ZONE_SIZE)    // x
+                        || (_RT131 < _RT117 - NO_ART_ZONE_SIZE) || (_RT131 > _RT117 + NO_ART_ZONE_SIZE) // y
+                    ) &&(
+                        (_RT130 < _RT118 - NO_ART_ZONE_SIZE) || (_RT130 > _RT118 + NO_ART_ZONE_SIZE)    // x
+                        || (_RT131 < _RT119 - NO_ART_ZONE_SIZE) || (_RT131 > _RT119 + NO_ART_ZONE_SIZE) // y
+                    ) &&(
+                        (_RT130 < _RT120 - NO_ART_ZONE_SIZE) || (_RT130 > _RT120 + NO_ART_ZONE_SIZE)    // x
+                        || (_RT131 < _RT121 - NO_ART_ZONE_SIZE) || (_RT131 > _RT121 + NO_ART_ZONE_SIZE) // y
+                    ) &&(
+                        (_RT130 < _RT122 - NO_ART_ZONE_SIZE) || (_RT130 > _RT122 + NO_ART_ZONE_SIZE)    // x
+                        || (_RT131 < _RT123 - NO_ART_ZONE_SIZE) || (_RT131 > _RT123 + NO_ART_ZONE_SIZE) // y
+                    ) &&(
+                        (_RT130 < _RT124 - NO_ART_ZONE_SIZE) || (_RT130 > _RT124 + NO_ART_ZONE_SIZE)    // x
+                        || (_RT131 < _RT125 - NO_ART_ZONE_SIZE) || (_RT131 > _RT125 + NO_ART_ZONE_SIZE) // y
+                    ) &&(
+                        (_RT130 < _RT126 - NO_ART_ZONE_SIZE) || (_RT130 > _RT126 + NO_ART_ZONE_SIZE)    // x
+                        || (_RT131 < _RT127 - NO_ART_ZONE_SIZE) || (_RT131 > _RT127 + NO_ART_ZONE_SIZE) // y
+                    )
+                  )
+                {
+                    ActCreateArt( TART_X_BOX, GetRnd(1,3), _RT130, _RT131,  GetRnd(0,4),
+                                  "", 
+                                  "Unknown technology", 
+                                  VEFF_NONE);
+                    _RT128 -= 1;
+                }
+            }
+
+            actStringMess("В секторе обнаружены артефакты: " + _inttostr(GetArt()))
+        }
+
+        // Произведено флагманов
+        EventPlObjCreated(_PI3 == WS_FLAGSHIP || _PI3 == BO_FLAGSHIP || _PI3 == SI_FLAGSHIP) // 2
+        {
+            // actStringMess("Построен объект: " + _inttostr(_PI13) + ", игрок: " + _inttostr(_PI0));
+            ActSetGlobVar(126+_PI0, GetGlobVar(126+_PI0) + 1);
+            ActLockEvent();
+        }
+
+        // Поставлено мин
+        EventMineCreated(_PI3 == WEAPON_DEPTH_MINE || _PI3 == WEAPON_LASER_SNARE || _PI3 == WEAPON_ACOUSTIC_MINE) // 3
+        {
+            ActSetGlobVar(134+_PI0, GetGlobVar(134+_PI0) + 1);
+            ActLockEvent();
+        }
+
+
+        EventPlObjCreated(_PI3 != SILICON_EXTRACTOR && _PI3 != CAPSULE_PROTOTYPE && _PI3 == ASSEMBLER && _PI3 == CONSTRUCTOR) // 4
+        {
+            ActSetName(BASIC_NAME, _PI5,_PI6,_PI7);
+            ActLockEvent();
+        }
+
+        EventPlObjCreated(_PI3 == SILICON_EXTRACTOR) // 5
+        {
+            ActSetName(SILICON_MINE_NAME, _PI5,_PI6,_PI7);
+            ActLockEvent();
+        }
+
+        EventPlObjCreated(_PI3 == CAPSULE_PROTOTYPE || _PI3 == ASSEMBLER || _PI3 == CONSTRUCTOR) // 6
+        {
+            ActSetName(BUILDER_NAME, _PI5,_PI6,_PI7);
+            ActLockEvent();
+        }
+
+
+        // Даем имя для иссл. центов
+        EventPlObjCreated(_PI3 == TECHCENTER || _PI3 == RESEARCH_LABORATORY || _PI3 == COMMAND_HUB) // 7
+        {
+            ActSetName(RESEARCH_BLD_NAME, _PI5, _PI6, _PI7);
+            actLockEvent();
+        }
+
+        // для переименовывания исс. центров
+        EventPlObjCreated(_PI3 == TECHCENTER || _PI3 == RESEARCH_LABORATORY || _PI3 == COMMAND_HUB) // 8
+        {
+            //actStringMess("name: " + RESEARCH_BLD_NAME)
+
+            _RT130 := 1;
+            while(_RT130 <= GetPlObjN(_PI10, AIREL_MYSELF, RESEARCH_BLD_NAME))
+            {
+                // тут получаем координаты тех центра
+                if(IsPlObjExist(_PI10, RESEARCH_BLD_NAME, 24, 25, 26) )
+                {
+                    _RT131:= 0;
+                    // этот цикл для формирования имени тех. центра
+                    while(_RT131>=0)
+                    {
+                        _RT131+=1;
+                        // если у игрока нет тех. центра с именем RESEARCH_BLD_NAME(N), где N кол-во
+                        // то ставим это имя и выходим из цикла
+                        if(!IsPlObjExist(_PI10, RESEARCH_BLD_NAME + _inttostr(_RT131)))
+                        {
+                            ActSetName(RESEARCH_BLD_NAME + _inttostr(_RT131), _RT24, _RT25, _RT26);
+                            //actStringMess("Renamed to: " + RESEARCH_BLD_NAME + _inttostr(_RT131))
+                            _RT131:=-1;
+                        }
+                    }
+                }
+                _RT130+=1;
+            }
+
+            actLockEvent();
+        }
+
+        // Loaded, automate delivery
+        EventArtLoaded(TRUE) // 9
+        {
+            if(_PI11==CIV_WS){_RT64 := TTECH_WS_IMPROVE_REPAIR_TECHNOLOGY;}
+            else{
+                if(_PI11==CIV_BO){_RT64 := TTECH_BO_IMPROVE_REPAIR_TECHNOLOGY;}
+                else{_RT64 := TTECH_SI_LOCAL_TELEPORTATION;}
+            }
+            // add teleportation for si
+            if(IsTechDev(_PI10, _RT64))
+            {
+                _RT68 := 1;
+                while (_RT68 < 20 && !IsPlObjExist(_PI10, RESEARCH_BLD_NAME + _inttostr(_RT68), 24, 25, 26, 27))
+                {
+                    //actStringMess("searching, " + RESEARCH_BLD_NAME + _inttostr(_RT68) + " doesn't exist");
+                    _RT68 += 1;
+                }
+                ActObjSelectM(_PI10, AIREL_MYSELF, AITRG_BOATSUPPLY, _PI14, _PI15, _PI16, _PI17, _PI15, _PI16, _PI17);
+                ActCreateFleet(_PI10, AIREL_MYSELF, "platform", _PI11, AISF_NONE);
+                ActFCmdUnLoad(_PI10, AIREL_MYSELF, GetFleetNum(_PI10, "platform"), _RT24, _RT25, _RT26 + 1);
+            }
+            actLockEvent();
+        }
+
+
+        // Disappear effect on unloaded artefact near RC
+        EventArtUnLoaded(TRUE) // 10
+        {
+            _RT134 := 0;// to delete flag
+            _RT135 := GetTechDevG(_PI10);
+            if(_RT135==100)
+            {
+                ActStringMess(_PI10, AIREL_MYSELF, "Все технологии уже изучены!");
+                _RT134 := 1;
+            }
+            else
+            {
+                // 1 сравнить координаты артефакта с координатами тех. центров игрока
+                _RT130 := 1;
+                _RT132 := GetPlObjT(_PI10, AIREL_MYSELF, TECHCENTER) + GetPlObjT(_PI10, AIREL_MYSELF, RESEARCH_LABORATORY) + GetPlObjT(_PI10, AIREL_MYSELF, COMMAND_HUB);
+                //actStringMess("Research buildings to scan: " + _inttostr(_RT132));
+                while(_RT130 <= _RT132)
+                {
+                    if(IsPlObjExist(_PI10, RESEARCH_BLD_NAME + _inttostr(_RT130), 24, 25, 26, 27))
+                    {
+                        _RT27 := _PI15 + _PI16 + _PI17 - _RT24 - _RT25 - _RT26;
+                        if((_RT27 < 0 && _RT27 > -6) || (_RT27 > 0 && _RT27 < 6))
+                        {
+                            actStringMess(GetPlName(_PI10) + " активировал артефакт");
+
+                            // считаем случайный грейд
+                            _RT133 := 0;
+                            if(_PI11==CIV_WS){_RT133 := GetRnd(27,34);}
+                            if(_PI11==CIV_BO){_RT133 := GetRnd(35,43);}
+                            if(_PI11==CIV_SI){_RT133 := GetRnd(44,51);
+                                //_RT67 := 1;
+                            }
+                            //actStringMess("String number: "  + _inttostr(_RT133));
+                            _RT136 := _strtoint(GetStrRes(_RT133));
+                            //actStringMess("Tech number: "  + _inttostr(_RT136));
+
+                            // выдаём случайный грейд (или нет)
+                            //actStringMess("Tech id: " + _inttostr(_RT133));
+                            if(!IsTechDev(_PI10, _RT136)){
+                                ActTechSet(_PI10, AIREL_MYSELF, _RT136);
+                                ActStringMess(_PI10, AIREL_MYSELF, "Активация технологии № "  + _inttostr(_RT136));
+                            }
+                            else{
+                                ActStringMess(_PI10, AIREL_MYSELF, "Найденная технология уже исследована...");
+                            }
+                            _RT134 := 1;
+                            _RT130 := _RT132; // чтобы выйти из цикла
+                        }
+                    }
+                    _RT130 += 1;
+                }
+            }
+
+            if(_RT134)
+            {
+                ActDelArt(TART_UNDEFINED, "", _PI5, _PI6, _PI7, _PI5, _PI6, _PI7, VEFF_DISSOLVE);
+                if(_PI1==CIV_SI){ActDelArt(TART_UNDEFINED, "", _PI5, _PI6, _PI7, _PI5, _PI6, _PI7, VEFF_TELEPORT);}
+                
+                _RT50 := GetTime();
+                _RT55 := _PI5;
+                _RT56 := _PI6;
+                _RT57 := _PI7;
+                actOnEvent(21);
+            }
+            actLockEvent();
+        }
+
+        // Delete artifact
+        Event(GetTime() - _RT50 > 1, 21) // 11
+        {
+            ActDelArt(TART_UNDEFINED, "", _RT55, _RT56, _RT57, _RT55, _RT56, _RT57, VEFF_NONE);
+            actStringMess("Осталось артефактов: " + _inttostr(GetArt()-1));
+        }
+
+        EventPlObjKilled(TRUE) // 12
+        {
+            if(_PI13 == WS_FLAGSHIP || _PI13 == BO_FLAGSHIP || _PI13 == SI_FLAGSHIP)
+            {
+                _ploop_begin
+                    if(_PI10==_pl_) {ActSetGlobVar(110+_pl_, GetGlobVar(110+_pl_) + 1);}
+                _ploop_end
+            }
+            else
+            {
+                // Убийца - неизвестный объект. Предполагаем, что это была мина.
+                if(_PI13 == 0) {_GL99 += 1; /* флаг смерти от мины */}
+            }
+            actLockEvent();
+        }
+
+        EventMineKilled(TRUE) // 13
+        {
+            if(_PI3 == WEAPON_DEPTH_MINE || _PI3 == WEAPON_LASER_SNARE || _PI3 == WEAPON_ACOUSTIC_MINE) 
+            { 
+                _ploop_begin
+                    if(_PI0==_pl_ && _GL99>0)
+                    {
+                        ActSetGlobVar(118+_pl_, GetGlobVar(118+_pl_) + _GL99);
+                    }
+                _ploop_end
+
+                _GL99 := 0;
+            }
+            actLockEvent();
+        }
+
+        // Event for end game sessions
+        // BEGIN
+        Event(getOwnTime()>10) // 14
+        { 
+            actOnEvent(IsTeamGame() ? 20 : 10);
+            actOnEvent(30);
+            actOnEvent(100);
+        }
+
+        // Player has been killed
+        Event(getOwnTime()%3==1, 10) // 15
+        { 
+            _ploop_begin
+                if(!getVar(100+_pl_) && GetPlObjM(_plmyself, AITRG_ALL)==0)
+                {
+                    actSetVar(100+_pl_, ENDMISS_FAILED);
+                    ActOnTimer(_plmyself,20);
+                    ActOffFOW(_plmyself);                                 
+                    _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
+                }
+            _ploop_end
+            actLockEvent();
+        }
+
+        // Player's team has been killed
+        Event(getOwnTime()%3==1, 20) // 16
+        { 
+            _ploop_begin
+                if(!getVar(100+_pl_) && GetPlObjM(_plunion, AITRG_ALL)==0)
+                { 
+                    actSetVar(100+_pl_, ENDMISS_FAILED);
+                    ActOnTimer(_plmyself,20);
+                    ActOffFOW(_plmyself);                                 
+                    _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
+                    actOnEvent(200);
+                }
+            _ploop_end
+            actLockEvent();
+        }
+
+        // Player's enemies have been killed
+        Event(getOwnTime()%3==1, 30) // 17
+        { 
+            _ploop_begin
+                if(!getVar(100+_pl_) && GetPlObjM(_plnotally, AITRG_ALL)==0)
+                {
+                    actSetVar(100+_pl_, ENDMISS_ACCOMPL);
+                    ActOnTimer(_plmyself,20);
+                    ActOffFOW(_plmyself);                                 
+                    _actStringMess(_strf(GetStrRes(s_win), GetPlName(_pl_)));
+                    actOnEvent(200);
+                }
+            _ploop_end
+            actLockEvent();
+        }
+
+        // Print statistics
+        Event(TRUE, 200) // 18
+        {
+            // Chat
+            actStringMess("");
+            actStringMess("---------------------Статистика-------------------------");
+            actStringMess("---- Флагманами: Уничтожено (Построено) ------");
+            actStringMess("---- Минами:       Уничтожено (Поставлено) ----");
+            actStringMess("------------------------------------------------------------");
+            _ploop_begin
+                if (IsPlPresent(_pl_)) 
+                {
+                    actStringMess(
+                        _strf("Флагманы: %u (%u), Мины: %u (%u) - %s", 
+                            GetGlobVar(110+_pl_), GetGlobVar(126+_pl_), GetGlobVar(118+_pl_), GetGlobVar(134+_pl_), GetPlName(_pl_)
+                        )
+                    );
+                }
+            _ploop_end
+            actStringMess("------------------------------------------------------------");
+
+            // Screen - bottom right - my stat
+            // if (IsPlPresent(PLAYER_0)) {ActOutString(PLAYER_0, AIREL_MYSELF, 30, _strf("Kills: Flagships - %u, Mines - %u", _GL110, _GL118) );}
+            // if (IsPlPresent(PLAYER_1)) {ActOutString(PLAYER_1, AIREL_MYSELF, 30, _strf("Kills: Flagships - %u, Mines - %u", _GL111, _GL119) );}
+            // if (IsPlPresent(PLAYER_2)) {ActOutString(PLAYER_2, AIREL_MYSELF, 30, _strf("Kills: Flagships - %u, Mines - %u", _GL112, _GL120) );}
+            // if (IsPlPresent(PLAYER_3)) {ActOutString(PLAYER_3, AIREL_MYSELF, 30, _strf("Kills: Flagships - %u, Mines - %u", _GL113, _GL121) );}
+            // if (IsPlPresent(PLAYER_4)) {ActOutString(PLAYER_4, AIREL_MYSELF, 30, _strf("Kills: Flagships - %u, Mines - %u", _GL114, _GL122) );}
+            // if (IsPlPresent(PLAYER_5)) {ActOutString(PLAYER_5, AIREL_MYSELF, 30, _strf("Kills: Flagships - %u, Mines - %u", _GL115, _GL123) );}
+            // if (IsPlPresent(PLAYER_6)) {ActOutString(PLAYER_6, AIREL_MYSELF, 30, _strf("Kills: Flagships - %u, Mines - %u", _GL116, _GL124) );}
+            // if (IsPlPresent(PLAYER_7)) {ActOutString(PLAYER_7, AIREL_MYSELF, 30, _strf("Kills: Flagships - %u, Mines - %u", _GL117, _GL125) );}
+            // -- работает
+
+
+            // Screen - bottom right - all stat
+            // --Попытка 1--
+            // actOutString(30,
+            //  _strf("Frag count:\n %s \n %s \n %s \n %s \n %s \n %s \n %s \n %s", 
+            //     IsPlPresent(PLAYER_0) ? _strf("Kills: Flagships: %u, Mines: %u - %s", _GL110, _GL118, GetPlName(PLAYER_0)) : " ",
+            //     IsPlPresent(PLAYER_1) ? _strf("Kills: Flagships: %u, Mines: %u - %s", _GL111, _GL119, GetPlName(PLAYER_1)) : " ",
+            //     IsPlPresent(PLAYER_2) ? _strf("Kills: Flagships: %u, Mines: %u - %s", _GL112, _GL120, GetPlName(PLAYER_2)) : " ",
+            //     IsPlPresent(PLAYER_3) ? _strf("Kills: Flagships: %u, Mines: %u - %s", _GL113, _GL121, GetPlName(PLAYER_3)) : " ",
+            //     IsPlPresent(PLAYER_4) ? _strf("Kills: Flagships: %u, Mines: %u - %s", _GL114, _GL122, GetPlName(PLAYER_4)) : " ",
+            //     IsPlPresent(PLAYER_5) ? _strf("Kills: Flagships: %u, Mines: %u - %s", _GL115, _GL123, GetPlName(PLAYER_5)) : " ",
+            //     IsPlPresent(PLAYER_6) ? _strf("Kills: Flagships: %u, Mines: %u - %s", _GL116, _GL124, GetPlName(PLAYER_6)) : " ",
+            //     IsPlPresent(PLAYER_7) ? _strf("Kills: Flagships: %u, Mines: %u - %s", _GL117, _GL125, GetPlName(PLAYER_7)) : " "
+            //     )
+            //  );
+            // -- не работает
+
+            // --Попытка 2--
+            // if (IsPlPresent(PLAYER_0)) {mess_0 = _strf("Kills: Flagships: %u, Mines: %u - %s", _GL110, _GL118, GetPlName(PLAYER_0));}
+            // if (IsPlPresent(PLAYER_1)) {mess_1 = _strf("Kills: Flagships: %u, Mines: %u - %s", _GL111, _GL119, GetPlName(PLAYER_1));}
+            // if (IsPlPresent(PLAYER_2)) {mess_2 = _strf("Kills: Flagships: %u, Mines: %u - %s", _GL112, _GL120, GetPlName(PLAYER_2));}
+            // if (IsPlPresent(PLAYER_3)) {mess_3 = _strf("Kills: Flagships: %u, Mines: %u - %s", _GL113, _GL121, GetPlName(PLAYER_3));}
+            // if (IsPlPresent(PLAYER_4)) {mess_4 = _strf("Kills: Flagships: %u, Mines: %u - %s", _GL114, _GL122, GetPlName(PLAYER_4));}
+            // if (IsPlPresent(PLAYER_5)) {mess_5 = _strf("Kills: Flagships: %u, Mines: %u - %s", _GL115, _GL123, GetPlName(PLAYER_5));}
+            // if (IsPlPresent(PLAYER_6)) {mess_6 = _strf("Kills: Flagships: %u, Mines: %u - %s", _GL116, _GL124, GetPlName(PLAYER_6));}
+            // if (IsPlPresent(PLAYER_7)) {mess_7 = _strf("Kills: Flagships: %u, Mines: %u - %s", _GL117, _GL125, GetPlName(PLAYER_7));}
+
+            // actOutString(30,
+            //  _strf("Frag count:\n %s \n %s \n %s \n %s \n %s \n %s \n %s \n %s", 
+            //     IsPlPresent(PLAYER_0) ? mess_0 : " ",
+            //     IsPlPresent(PLAYER_1) ? mess_1 : " ",
+            //     IsPlPresent(PLAYER_2) ? mess_2 : " ",
+            //     IsPlPresent(PLAYER_3) ? mess_3 : " ",
+            //     IsPlPresent(PLAYER_4) ? mess_4 : " ",
+            //     IsPlPresent(PLAYER_5) ? mess_5 : " ",
+            //     IsPlPresent(PLAYER_6) ? mess_6 : " ",
+            //     IsPlPresent(PLAYER_7) ? mess_7 : " "
+            //     )
+            //  );
+            // -- не работает
+
+
+            // Bottom left corner line
+            // if (IsPlPresent(PLAYER_0)) {ActStringInfo(PLAYER_0, AIREL_MYSELF, 30, ISTR_RED, _strf("Kills: Flagships - %u, Mines - %u", _GL110, _GL118) );}
+            // if (IsPlPresent(PLAYER_1)) {ActStringInfo(PLAYER_1, AIREL_MYSELF, 30, ISTR_RED, _strf("Kills: Flagships - %u, Mines - %u", _GL111, _GL119) );}
+            // if (IsPlPresent(PLAYER_2)) {ActStringInfo(PLAYER_2, AIREL_MYSELF, 30, ISTR_RED, _strf("Kills: Flagships - %u, Mines - %u", _GL112, _GL120) );}
+            // if (IsPlPresent(PLAYER_3)) {ActStringInfo(PLAYER_3, AIREL_MYSELF, 30, ISTR_RED, _strf("Kills: Flagships - %u, Mines - %u", _GL113, _GL121) );}
+            // if (IsPlPresent(PLAYER_4)) {ActStringInfo(PLAYER_4, AIREL_MYSELF, 30, ISTR_RED, _strf("Kills: Flagships - %u, Mines - %u", _GL114, _GL122) );}
+            // if (IsPlPresent(PLAYER_5)) {ActStringInfo(PLAYER_5, AIREL_MYSELF, 30, ISTR_RED, _strf("Kills: Flagships - %u, Mines - %u", _GL115, _GL123) );}
+            // if (IsPlPresent(PLAYER_6)) {ActStringInfo(PLAYER_6, AIREL_MYSELF, 30, ISTR_RED, _strf("Kills: Flagships - %u, Mines - %u", _GL116, _GL124) );}
+            // if (IsPlPresent(PLAYER_7)) {ActStringInfo(PLAYER_7, AIREL_MYSELF, 30, ISTR_RED, _strf("Kills: Flagships - %u, Mines - %u", _GL117, _GL125) );}
+
+            actLockEvent();
+        }
+
+        // The final phase 
+        Event(TRUE, 100) // 19
+        { 
+            _ploop_begin
+                if(getVar(100+_pl_)>0 && GetTimerTime(_pl_)==0)
+                { 
+                    ActOffTimer(_plmyself);
+                    ActTotalStatistics(_plmyself, 10);
+                    ActEndMiss(_plmyself, getVar(100+_pl_));
+                    actSetVar(100+_pl_, -1);
+                }
+            _ploop_end
+            actLockEvent();
+        }
+        // END
+    CloseEvents();
+CloseArbiter();
