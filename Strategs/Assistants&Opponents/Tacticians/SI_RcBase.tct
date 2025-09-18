@@ -1,0 +1,9 @@
+
+OpenTactic("SI Resource Base", CIV_SI, 10);
+  // Parameters
+
+  // Fleets
+  include<[_curr_path]\Fleets\SI_BaseRC.flt>; 
+  include<[_curr_path]\Fleets\SI_Builder.flt>; 
+  include<[_curr_path]\Fleets\SI_Transport_Corium.flt>; 
+CloseTactic();
