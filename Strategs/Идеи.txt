@@ -9,3 +9,27 @@
 2. actFParPutInStaff() - когда невозможно построить в указанных координатах, строит в точке, ближайшей к стартовой позиции, а не к ней
 3. Нельзя использовать IsPlObjExist 2 раза подряд с записью ей координат в те же _RT переменные - краш
 4. ActObjSelect с одинаковыми координатами начала и конца паралеллепипеда выберет объекты в области 3х3х3 вокруг неё
+
+
+Файлы с кириллицей:
+1. Strategs.aim
+2. Arbiters/Arbiter_LastSubmariner.arb
+3. Arbiters/Arbiter_FastLastSubmariner.arb
+4. Assistants&Opponents/BO_Opponent_Dirty_Octopo.stg
+5. Assistants&Opponents/BO_Assistant_GiveUp.stg
+6. Assistants&Opponents/SI_Assistant_GiveUp.stg
+7. Assistants&Opponents/WS_Assistant_GiveUp.stg
+8. Assistants&Opponents/BO_Assistant_Gold.stg
+9. Assistants&Opponents/WS_Assistant_Gold.stg
+10. Assistants&Opponents/SI_Assistant_Silicon.stg
+
+
+Порядок работы с этими файлами:
+	Редактирование:
+		1. Открыть файлы как Windows 1251 или UTF-8, чтобы появилась Кириллица.
+	Сборка:
+		2. После внесения изменений, перед финальной сборкой - сохранить как Windows 1251.
+		3. Собрать strategs.
+	Заливка в гит:
+		4. Сохранить файлы как UTF-8.
+		5. Залить на гит.

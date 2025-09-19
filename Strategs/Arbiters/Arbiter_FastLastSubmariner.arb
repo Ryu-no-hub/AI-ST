@@ -416,7 +416,7 @@ OpenArbiter("Fast Last Submariner");
                 if(!getVar(100+_pl_) && GetPlObjM(_plmyself, AITRG_ALL)==0)
                 {
                     actSetVar(100+_pl_, ENDMISS_FAILED);
-                    ActOnTimer(_plmyself,20);
+                    ActOnTimer(_plmyself,15);
                     ActOffFOW(_plmyself);                                 
                     _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
                 }
@@ -431,7 +431,7 @@ OpenArbiter("Fast Last Submariner");
                 if(!getVar(100+_pl_) && GetPlObjM(_plunion, AITRG_ALL)==0)
                 { 
                     actSetVar(100+_pl_, ENDMISS_FAILED);
-                    ActOnTimer(_plmyself,20);
+                    ActOnTimer(_plmyself,15);
                     ActOffFOW(_plmyself);                                 
                     _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
                     actOnEvent(200);
@@ -447,7 +447,7 @@ OpenArbiter("Fast Last Submariner");
                 if(!getVar(100+_pl_) && GetPlObjM(_plnotally, AITRG_ALL)==0)
                 {
                     actSetVar(100+_pl_, ENDMISS_ACCOMPL);
-                    ActOnTimer(_plmyself,20);
+                    ActOnTimer(_plmyself,15);
                     ActOffFOW(_plmyself);                                 
                     _actStringMess(_strf(GetStrRes(s_win), GetPlName(_pl_)));
                     actOnEvent(200);
@@ -540,7 +540,7 @@ OpenArbiter("Fast Last Submariner");
             // if (IsPlPresent(PLAYER_6)) {ActStringInfo(PLAYER_6, AIREL_MYSELF, 30, ISTR_RED, _strf("Kills: Flagships - %u, Mines - %u", _GL116, _GL124) );}
             // if (IsPlPresent(PLAYER_7)) {ActStringInfo(PLAYER_7, AIREL_MYSELF, 30, ISTR_RED, _strf("Kills: Flagships - %u, Mines - %u", _GL117, _GL125) );}
 
-            actLockEvent();
+            // actLockEvent();
         }
 
         // The final phase 
