@@ -6,7 +6,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 	MainEnemy(AICAN_MYSELF, PLAYER_ALL);
 	OffensiveStroke(AICAN_MYSELF, 20, 30, 300);
 
-	// РѕС‚РІРµС‡Р°РµС‚ Р·Р° РёСќСќР»РµРґРѕРІР°РЅРёСќ РІ Р»Р°Р±РѕСЂР°С‚РѕСЂРёСќС…
+	// отвечает за исследования в лабораториях
 	OpenTactic("tacticResLab", CIV_BO, 10);
 
 		OpenFleet("fleetResLab", CIV_BO, AIF_BASE, 19);
@@ -18,7 +18,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 		CloseFleet();
 	CloseTactic();
 
-	// РѕС‚РІРµС‡Р°РµС‚ Р·Р° СќС‚СЂРѕРёС‚РµР»СЊСќС‚РІРѕ Р·РґР°РЅРёР№
+	// отвечает за строительство зданий
 	OpenTactic("tacticBaseB", CIV_BO, 10);
 
 		OpenFleet("fleetBaseB", CIV_BO, AIF_BASE, 19);
@@ -28,7 +28,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 		CloseFleet();
 	CloseTactic();
 
-	// РґРѕРїРѕР»РЅРёС‚РµСЊРЅС‹Р№ С‚Р°РєС‚РёРє РґР»Сќ СќС‚СЂРѕРёС‚РµР»СЊСќС‚РІР°
+	// дополнительный тактик для строительства
 	OpenTactic("tacticBaseB2", CIV_BO, 10);
 
 		OpenFleet("fleetBaseB2", CIV_BO, AIF_BASE, 19);
@@ -38,7 +38,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 		CloseFleet();
 	CloseTactic();
 
-	// С‚Р°РєС‚РёРє РґР»Сќ СќС‚СЂРѕРёС‚РµР»СЊСќС‚РІР° РІРЅРµС€РЅРёС… СЂРµСќСѓСЂСќРѕРІ
+	// тактик для строительства внешних ресурсов
 	OpenTactic("tacticBaseB3", CIV_BO, 10);
 
 		OpenFleet("fleetBaseB3", CIV_BO, AIF_BASE, 19);
@@ -48,7 +48,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 		CloseFleet();
 	CloseTactic();
 
-	// СќС‚РѕС‚ С‚Р°РєС‚РёРє СѓРєР°Р·С‹РІР°РµС‚ РєР°РєРёРµ Р»РѕРґРєРё СќС‚СЂРѕРёС‚СЊ 
+	// этот тактик указывает какие лодки строить 
 	OpenTactic("tacticSubB", CIV_BO, 10);
 
 		OpenFleet("fleetSubB", CIV_BO, AIF_BASE, 19);
@@ -75,7 +75,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 			CanChangeStaff(AICAN_MYSELF);
 		CloseFleet();
 
-		// РґР»Сќ С‚РѕРіРѕ С‡С‚РѕР±С‹ Р·Р°РєР°Р·Р°С‚СЊ РєРёР±РµСЂ РґРµР»СЊС„РёРЅРѕРІ
+		// для того чтобы заказать кибердельфинов
 		OpenFleet("fleetSubCyb", CIV_BO, AIF_BASE, 19);
 
 			Build(AICAN_MYSELF, AITRG_ALL);
@@ -95,7 +95,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 		CloseFleet();
 	CloseTactic();
 
-	//  РґРѕРї С‚Р°РєС‚РёРє РґР»Сќ СќС‚СЂРѕРёС‚РµР»СЊСќС‚РІР° Р»РѕРґРѕРє
+	//  доп тактик для строительства лодок
 	OpenTactic("tacticSubB1", CIV_BO, 10);
 
 		OpenFleet("fleetSubB1", CIV_BO, AIF_BASE, 19);
@@ -105,7 +105,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 		CloseFleet();
 	CloseTactic();
 
-	// С‚Р°РєС‚РёРє РґР»Сќ СѓРїСЂР°РІР»РµРЅРёСќ СќР±РѕСЂС‰РёРєР°РјРё РјРµС‚Р°Р»Р»Р°
+	// тактик для управления сборщиками металла
 	OpenTactic("tacticGatherM", CIV_BO, 10);
 
 		OpenFleet("fleetGatherM", CIV_BO, AIF_RES, 19);
@@ -116,7 +116,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 		CloseFleet();
 	CloseTactic();
 
-	// С‚Р°РєС‚РёРє РґР»Сќ СѓРїСЂР°РІР»РµРЅРёСќ СќР±РѕСЂС‰РёРєР°РјРё РєРѕСЂРёСѓРјР°
+	// тактик для управления сборщиками кориума
 	OpenTactic("tacticGatherC", CIV_BO, 10);
 
 		OpenFleet("fleetGatherC", CIV_BO, AIF_RES, 19);
@@ -124,7 +124,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 		CloseFleet();
 	CloseTactic();
 
-	// С‚Р°РєС‚РёРє РѕС‚РІРµС‡Р°РµС‚ Р·Р° Р·Р°С‰РёС‚Сѓ Р±Р°Р·С‹
+	// тактик отвечает за защиту базы
 	OpenTactic("tacticGuardB", CIV_BO, 10);
 		OpenFleet("fleetGuardB",CIV_BO, AIF_MILITARY, 10);
 
@@ -142,7 +142,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 		CloseFleet();
 	CloseTactic();
 
-	// С‚Р°РєС‚РёРє РґР»Сќ Р·Р°С‰РёС‚С‹ СќС‚СЂРѕРёС‚РµР»РµР№
+	// тактик для защиты строителей
 	OpenTactic("tacticBGuard", CIV_BO);
 
 		OpenFleet("fleetBGuard1", CIV_BO, AIF_MILITARY, 9);
@@ -160,7 +160,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 		CloseFleet();
 	CloseTactic();
 
-	// С‚Р°РєС‚РёРє РґР»Сќ СѓРїСЂР°РІР»РµРЅРёСќ РґРµР»СЊС„РёРЅР°РјРё
+	// тактик для управления дельфинами
 	OpenTactic("tacticCyber", CIV_BO);
 	
 	  OpenFleet("fleetCyber", CIV_BO, AIF_CYBER, 9);
@@ -310,13 +310,15 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 
 			_ploop_begin
 				if(isEnemy(_pl_)) {
-					_GL1:= _pl_;
+					_GL1 := _pl_;
 				}
     		_ploop_end
+    		_GL4 := GetPlCiv(_GL1);
+    		notification_sound = _GL4 == CIV_WS ? "ws_msg03_00" : _GL4 == CIV_BO ? "bo_msg03_00" : "si_msg03_00";
 
         }
 		// Event #1
-		// РІС‚РѕСЂРѕР№ СќС‚СЂРѕРёС‚РµР»СЊ
+		// второй строитель
 		Event(getOwnTime()> 15)
 		{
 			actFParPutInStaff(getFleetNum("fleetBaseB2", "tacticBaseB2"), RESEARCH_LABORATORY, UNDEFINED, UNDEFINED, 45);
@@ -331,7 +333,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), CORIUM_MINE, UNDEFINED, UNDEFINED, 45);
 			actFParPutInStaff(getFleetNum("fleetBaseB", "tacticBaseB"), CORIUM_MINE, UNDEFINED, UNDEFINED, 45);
 		}
-		// Р”РѕР±С‹С‡Р° СЂРµСќСѓСЂСќРѕРІ
+		// Добыча ресурсов
 		Event(/*getOwnTime()%25 == 0*/ TRUE)
 		{
 			actSetPlRC(METAL, 1, (INCOME_METAL_EXTRACTOR * getPlObjN("METAL1")) +
@@ -381,7 +383,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 			actLockEvent();
 		}
 
-		// РєРѕРЅС‚СЂРѕР»СЊ РІРѕР·РґСѓС…Р°
+		// контроль воздуха
 		Event(getOwnTime()%10 == 0)
 		{
 			//actStringMess("AIR LEVEL = " + _inttostr(getPlRes(AIR)));
@@ -421,7 +423,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 			actLockEvent();
 		}
 
-		// СќРѕР±С‹С‚РёРµ РґР»Сќ РґРµР»СЊС„РёРЅРѕРІ
+		// событие для дельфинов
 		Event(getOwnTime()%180 == 0 && getPlObjT(CYBER_LABORATORY) > 0)
 		{
 			if (getPlObjN("CYBERDOLPHIN1") < 10) {
@@ -440,7 +442,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 			actLockEvent();
 		}
 
-		// РЎРѕР±С‹С‚РёРµ РґР»Сќ Р·Р°РєР°Р·Р° Р»РѕРґРѕРє РІ Р·Р°РІРѕРґР°С…
+		// Событие для заказа лодок в заводах
 		Event(getOwnTime()%30 == 0)
 		{
 			if(isTechDev(TTECH_BO_PARALYZING_RAYS_TECHNOLOGY))
@@ -603,7 +605,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 		ITARGET2 - corium
 		ITARGET3 - sklad
 		*/
-		// РЎРѕР±С‹С‚РёРµ РґР»Сќ РЅР°РЅРµСќРµРЅРёРµ РјРµС‚РѕРє РЅР° Р·РґР°РЅРёСќ С‡РµР»РѕРІРµРєР°-РёРіСЂРѕРєР°
+		// Событие для нанесения меток на здания человека-игрока
 		EventPlObjCreated(_PI3 == METAL_EXTRACTOR || _PI3 == METAL_MINE || _PI3 == ENERGY_ACCUMULATOR)
 		{
 			if(GetPlName(_PI0) != "Dirty Octopo")
@@ -818,10 +820,10 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
         }
 
 		// Event #6
-		// РџРѕСќС‚СЂРѕРёР»Рё С€Р°С…С‚Сѓ РєРѕСЂРёСѓРјР°
+		// Построили шахту кориума
 		EventPlObjCreated(_PI3 == CORIUM_MINE)
 		{
-			// РЅР°РґРѕ Р·Р°РєР°Р·Р°С‚СЊ С‚СЂР°РЅСќРїРѕСЂС‚ РєРѕСЂРёСѓРјР°
+			// надо заказать транспорт кориума
             //actFParPutInStaff(getFleetNum("fleetSubB", "tacticSubB"), CARGO_SUB, UNDEFINED, UNDEFINED, 35, -1, -1, -1, LOGO_DEFAULT, "CARGO_Cor");
 			//actFParPutInStaff(getFleetNum("fleetSubB", "tacticSubB"), CARGO_SUB, UNDEFINED, UNDEFINED, 45, -1, -1, -1, LOGO_DEFAULT, "CARGO_Cor");
 
@@ -851,12 +853,13 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 			//actLockEvent();
 		}
 
-		// СќРѕР·РґР°РµРј Р±РѕСќСќР°
+		// Создаём босса
 		EventPlObjCreated(_PI3 == CENTCOMP)
 		{
 			if(GetPlName(_PI0) == "Dirty Octopo")
 			{
-				ActOutString(_GL1, AIREL_MYSELF, 20, "Октопо: Пришло время личной встречи и обнимашек. Ахаха");
+				ActOutString(_GL1, AIREL_MYSELF, 20, "Пришло время личной встречи и обнимашек. Ахаха");
+				ActPlaySound(_GL1, AIREL_MYSELF, notification_sound);
 
 				actCreatePlObj(BO_FLAGSHIP, _PI5, _PI6, _PI7, LOGO_DEFAULT,"BOSS_OCTOPO",-1,100);
 
@@ -905,7 +908,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 			}
 			actLockEvent();
 		}
-		// Р·Р°РєР°Р·С‹РІР°РµРј РґРµР»СЊС„РёРЅРѕРІ
+		// заказываем дельфинов
 		EventPlObjCreated(_PI3 == CYBER_LABORATORY)
 		{
 			if(GetPlName(_PI0) == "Dirty Octopo")
@@ -923,7 +926,8 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 				actStringMess("Attack Dolphin");
 				if(_GL3 == 0)
 				{
-					ActOutString(_GL1, AIREL_MYSELF, 20, "Октопо: Отправил голубей мира. Принимай. Надо укреплять нашу дружбу. Ахаха");
+					ActOutString(_GL1, AIREL_MYSELF, 20, "Отправил голубей мира. Принимай. Надо укреплять нашу дружбу. Ахаха");
+					ActPlaySound(_GL1, AIREL_MYSELF, notification_sound);
 					_GL3 += 1;
 				}
 				
@@ -932,12 +936,12 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
 				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
 				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
-				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
-				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
-				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
+				// actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
+				// actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
+				// actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN1",-1,100);
 				
 				//actCreateFleet("fleetCyber", CIV_BO, AIF_CYBER);
-				// РІРѕР·РјРѕР¶РЅРѕ РґР»Сќ РґРµР»СЊС„РёРЅРѕРІ РЅРµ РїРѕРґС…РѕРґРёС‚, РЅРѕ РїРѕРґРѕР№РґРµС‚ РґР»Сќ РґСЂСѓРіРёС… Р»РѕРґРѕРє !! AIATTACK_GLADE | AIADIR_LEFT | AIADIR_BACK
+				// возможно для дельфинов не подходит, но подойдет для других лодок !! AIATTACK_GLADE | AIADIR_LEFT | AIADIR_BACK
 				//actFCmdAttackT( getFleetNum("fleetCyber", "tacticCyber"), _GL1, AITRG_TLORCEXTRACT | AITRG_BOATRCEXTRACT, UNDEFINED, LOGO_UNDEF, "", 0, AIATTACK_HUNT, 0);
 				
 				//actFCmdAttackT( getFleetNum("fleetCyber", "tacticCyber"), _GL1);
@@ -958,9 +962,9 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
 				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
 				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
-				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
-				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
-				actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
+				// actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
+				// actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
+				// actCreatePlObj(CYBERDOLPHIN, _PI5, _PI6, _PI7, LOGO_DEFAULT,"CYBERDOLPHIN2",-1,100);
 
 				actCreateFleet("fleetCD2", CIV_BO, AIF_CYBER);
 				actFCmdAttackT( getFleetNum("fleetCD2"), _GL1, AITRG_TLODEFENSECOMMON, UNDEFINED, _GL1, "", 0, AIATTACK_HUNT, 0);
@@ -1395,16 +1399,18 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 
 // EventPlObjAttacked ------------------------------------------------------------------------------------------
 
-		// Р—Р°С‰РёС‚РЅРёРєРё СќС‚СЂРѕРёС‚РµР»РµР№
+		// Защитники строителей
 		EventPlObjAttacked(TRUE)
 		{
 			if(/*_PI3 == CONSTRUCTOR*/ GetPlName(_PI0) == "Dirty Octopo" && _PS0 == "Builder"){
 				if(getPlObjN("BGuard1") < 1){
+					ActOutString(_GL1, AIREL_MYSELF, 20, "Не трогай, укусит!");
+					ActPlaySound(_GL1, AIREL_MYSELF, notification_sound);
 					actCreateFleet("fleetBGuard1", CIV_BO, AIF_MILITARY);
-					actCreatePlObj(BO_FLAGSHIP, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard1", -1, 100, VEFF_TELEPORT);
-					actCreatePlObj(BO_FLAGSHIP, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard1", -1, 100, VEFF_TELEPORT);
-					actCreatePlObj(BO_FLAGSHIP, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard1", -1, 100, VEFF_TELEPORT);
-					actCreatePlObj(BO_FLAGSHIP, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard1", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(HEAVY_CRUISER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard1", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(HEAVY_CRUISER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard1", -1, 100, VEFF_TELEPORT);
+					// actCreatePlObj(BO_FLAGSHIP, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard1", -1, 100, VEFF_TELEPORT);
+					// actCreatePlObj(BO_FLAGSHIP, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard1", -1, 100, VEFF_TELEPORT);
 					
 					//actFCmdGuardF( getFleetNum("fleetBGuard1", "tacticBGuard"), getFleetNum("fleetBaseB", "tacticBaseB"));
 					
@@ -1417,11 +1423,13 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 			}
 			if(/*_PI3 == CONSTRUCTOR*/ GetPlName(_PI0) == "Dirty Octopo" && _PS0 == "Build_Res"){
 				if(getPlObjN("BGuard2") < 1){
+					ActOutString(_GL1, AIREL_MYSELF, 20, "Не трогай, укусит!");
+					ActPlaySound(_GL1, AIREL_MYSELF, notification_sound);
 					actCreateFleet("fleetBGuard2", CIV_BO, AIF_MILITARY);
-					actCreatePlObj(BO_FLAGSHIP, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard2", -1, 100, VEFF_TELEPORT);
-					actCreatePlObj(BO_FLAGSHIP, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard2", -1, 100, VEFF_TELEPORT);
-					actCreatePlObj(BO_FLAGSHIP, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard2", -1, 100, VEFF_TELEPORT);
-					actCreatePlObj(BO_FLAGSHIP, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard2", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(HEAVY_CRUISER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard2", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(HEAVY_CRUISER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard2", -1, 100, VEFF_TELEPORT);
+					// actCreatePlObj(BO_FLAGSHIP, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard2", -1, 100, VEFF_TELEPORT);
+					// actCreatePlObj(BO_FLAGSHIP, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard2", -1, 100, VEFF_TELEPORT);
 					
 					//actFCmdGuardF( getFleetNum("fleetBGuard2", "tacticBGuard"), getFleetNum("fleetBaseB2", "tacticBaseB2"));
 					
@@ -1435,11 +1443,13 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 
 			if(/*_PI3 == CONSTRUCTOR*/ GetPlName(_PI0) == "Dirty Octopo" && _PS0 == "Build_Dop"){
 				if(getPlObjN("BGuard3") < 1){
+					ActOutString(_GL1, AIREL_MYSELF, 20, "Не трогай, укусит!");
+					ActPlaySound(_GL1, AIREL_MYSELF, notification_sound);
 					actCreateFleet("fleetBGuard3", CIV_BO, AIF_MILITARY);
-					actCreatePlObj(BO_FLAGSHIP, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard3", -1, 100, VEFF_TELEPORT);
-					actCreatePlObj(BO_FLAGSHIP, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard3", -1, 100, VEFF_TELEPORT);
-					actCreatePlObj(BO_FLAGSHIP, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard3", -1, 100, VEFF_TELEPORT);
-					actCreatePlObj(BO_FLAGSHIP, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard3", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(HEAVY_CRUISER, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard3", -1, 100, VEFF_TELEPORT);
+					actCreatePlObj(HEAVY_CRUISER, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard3", -1, 100, VEFF_TELEPORT);
+					// actCreatePlObj(BO_FLAGSHIP, _PI5+1, _PI6, _PI7, LOGO_DEFAULT,"BGuard3", -1, 100, VEFF_TELEPORT);
+					// actCreatePlObj(BO_FLAGSHIP, _PI5-1, _PI6, _PI7, LOGO_DEFAULT,"BGuard3", -1, 100, VEFF_TELEPORT);
 					
 					//actFCmdGuardF( getFleetNum("fleetBGuard2", "tacticBGuard"), getFleetNum("fleetBaseB2", "tacticBaseB2"));
 					
@@ -1451,7 +1461,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 				}
 			}
 
-			// Р•СќР»Рё Р°С‚Р°РєРѕРІР°Р»Рё, С‚Рѕ РёРґРµРј РІ РєРѕРѕСЂРґРёРЅР°С‚С‹ РќРўРќРљРЈР®Р©Р•Р“Рћ _PI15, _PI16, _PI17 РґР»Сќ Р·Р°С‰РёС‚С‹
+			// Если атаковали, то идем в координаты АТАКУЮЩЕГО _PI15, _PI16, _PI17 для защиты
 			/*
 			if(getPlObjN("F_Guard") > 10 && _PI3 != CYBERDOLPHIN) {
 				actStringMess("GUARD ATTACK");
@@ -1590,14 +1600,14 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 				actSetPlRC(CORIUM, -1, 1000);
 				if(isPlObjExist("THRONE_OCTOPO", 20,21,22))
 				{
-					//ActOutString(_GL1, AIREL_MYSELF, 20, "Октопо: Пришло время личной встречи и обнимашек. Ахаха");
+					//ActOutString(_GL1, AIREL_MYSELF, 20, "Пришло время личной встречи и обнимашек. Ахаха");
 					actCreatePlObj(BO_FLAGSHIP, _RT20, _RT21, _RT22, LOGO_DEFAULT,"BOSS_OCTOPO",-1,100);
 				}
 			}
 			actLockEvent();
 		}
 
-		// Р‘РѕСќСќ Р±СѓРґРµС‚ РёРґС‚Рё РІ Р°С‚Р°РєСѓ РєР°Р¶РґС‹Рµ 5 РјРёРЅСѓС‚
+		// Босс будет идти в атаку каждые 5 минут
 		Event(getOwnTime()%400 == 0)
 		{
 			if(isPlObjExist("BOSS_OCTOPO", 20,21,22))
@@ -1648,7 +1658,7 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 			actLockEvent();
 		}
 
-		// РµСќР»Рё СѓР±РёР»Рё СќС‚СЂРѕРёС‚РµР»Сќ, С‚Рѕ РЅР°РґРѕ РµРіРѕ РІРµСЂРЅСѓС‚СЊ
+		// если убили строителя, то надо его вернуть
 		EventPlObjKilled(TRUE)
 		{
 			if(isPlObjExist("Doc1",23,24,25))
@@ -1693,23 +1703,27 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 
 		Event(getOwnTime() > 9)
 		{
-			ActOutString(_GL1, AIREL_MYSELF, 20, "Октопо: Человек нам тут тесно вдвоем. Плыл бы ты с моей воды. Ахаха");
+			ActOutString(_GL1, AIREL_MYSELF, 20, "Человек нам тут тесно вдвоем. Плыл бы ты с моей воды. Ахаха");
+			ActPlaySound(_GL1, AIREL_MYSELF, notification_sound);
 		}
 
 		Event(getOwnTime() > 85)
 		{
-			ActOutString(_GL1, AIREL_MYSELF, 20, "Октопо: Человек прекрати эту бесполезную борьбу. Просто сдайся. Ахаха");
+			ActOutString(_GL1, AIREL_MYSELF, 20, "Человек прекрати эту бесполезную борьбу. Просто сдайся. Ахаха");
+			ActPlaySound(_GL1, AIREL_MYSELF, notification_sound);
 		}
 
-		Event(getOwnTime()>1200 && getOwnTime() < 1201 && getPlObjM(AITRG_BOATALL) > (GetPlObjM(_GL1, AIREL_MYSELF, AITRG_BOATALL)*2) )
+		Event(getOwnTime() > 1200 && getOwnTime() < 1201 && getPlObjM(AITRG_BOATALL) > (GetPlObjM(_GL1, AIREL_MYSELF, AITRG_BOATALL) * 2) )
 		{
-			ActOutString(_GL1, AIREL_MYSELF, 20, "Октопо: Слышал шутку про 16 лодок? Это не ты тот герой? Ты не командир невидимых войск. Ахаха");
+			ActOutString(_GL1, AIREL_MYSELF, 20, "Слышал шутку про 16 лодок? Это не ты тот герой? Ты не командир невидимых войск. Ахаха");
+			ActPlaySound(_GL1, AIREL_MYSELF, notification_sound);
 			actLockEvent();
 		}
 
-		Event(getOwnTime() > 0 && getOwnTime()%120 == 0 && getPlObjM(AITRG_TLOPRODUCTIVE) < 5 && getPlObjM(AITRG_TLORCEXTRACT) < 5 && getPlObjM(AITRG_TLOSUPPLY) < 5)
+		Event(getOwnTime() > 0 && getOwnTime() % 600 == 0 && getPlObjM(AITRG_TLOPRODUCTIVE) < 5 && getPlObjM(AITRG_TLORCEXTRACT) < 5 && getPlObjM(AITRG_TLOSUPPLY) < 5)
 		{
-			ActOutString(_GL1, AIREL_MYSELF, 20, "Октопо: Радуйся своей жалкой, никчемной победе. Ахаха");
+			ActOutString(_GL1, AIREL_MYSELF, 20, "Радуйся своей жалкой, никчемной победе. Ахаха");
+			ActPlaySound(_GL1, AIREL_MYSELF, notification_sound);
 			actLockEvent();
 		}
 
@@ -1726,7 +1740,8 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 			{
 				if(IsPlObjExist(_GL1, "ITARGET2", 53, 54, 55))
 				{
-					ActOutString(_GL1, AIREL_MYSELF, 20, "Октопо: Лови первый подарочек. Ахаха");
+					ActOutString(_GL1, AIREL_MYSELF, 20, "Лови первый подарочек. Ахаха");
+					ActPlaySound(_GL1, AIREL_MYSELF, notification_sound);
 					actFCmdMassWeaponHit(getFleetNum("BO N1", "BO tacticN1"), WEAPON_LASER_BOMB, _RT53, _RT54, _RT55 );
 				}
 
@@ -1746,7 +1761,8 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 			{
 				if(IsPlObjExist(_GL1, "ITARGET3", 53, 54, 55))
 				{
-					ActOutString(_GL1, AIREL_MYSELF, 20, "Октопо: А вот и второй пирожок. Ахаха");
+					ActOutString(_GL1, AIREL_MYSELF, 20, "А вот и второй пирожок. Ахаха");
+					ActPlaySound(_GL1, AIREL_MYSELF, notification_sound);
 					actFCmdMassWeaponHit(getFleetNum("BO N2", "BO tacticN2"), WEAPON_LASER_BOMB, _RT53, _RT54, _RT55 );
 				}
 			}
@@ -1754,102 +1770,6 @@ OpenStrateg("Dirty Octopo", CIV_BO, "Dirty Octopo");
 		actLockEvent();
 	}
 
-/*
-	ActObjSelectN(PLAYER_1, AIREL_MYSELF, "LBL1");
-	ActAddFleet(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N1", "BO tacticN1") );
-
-
-
-Event(getOwnTime()> 120){
-
-	if( IsPlObjExist(PLAYER_1, "LBL1") && 
-	GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 50,6,2  ) == 0 &&
-	GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 51,6,2  ) == 0 &&
-	GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 52,6,2  ) == 0 &&
-	GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 50,7,2  ) == 0 &&
-	GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 51,7,2  ) == 0 &&
-	GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 52,7,2  ) == 0  ) {
-
-		while(_GL22 < 7){
-			//ActStringMess(PLAYER_1, AIREL_MYSELF,"DO BOMB!!!");
-			_GL22+=1;
-			ActObjSelectN(PLAYER_1, AIREL_MYSELF, "LBL"+ _inttostr(_GL22));
-			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ"
-			ActFParPutInStaff(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN"), WEAPON_LASER_BOMB );
-			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-			ActAddFleet(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN") );
-			// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
-			ActFCmdProduction(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN") , WEAPON_LASER_BOMB);
-		}
-		_GL22:= 0;
-	}
-
-	ActLockEvent();
-  }
-
-		ActObjSelectN(PLAYER_1, AIREL_MYSELF, "LBL1");
-
-		ActAddFleet(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN") );
-		if(GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 50,6,2  )> 0 
-		&& _GL25 == 1 && _GL26 == 0){
-			_GL26:= 20;
-
-			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
-			ActFCmdMassWeaponHit(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN"), WEAPON_LASER_BOMB, _GL27,_GL28,2 );
-
-		} else 
-		{	
-			
-			//ActCreateFleet(PLAYER_1, AIREL_MYSELF, "BO N1", CIV_BO, AIF_BASE);
-			ActObjSelectN(PLAYER_1, AIREL_MYSELF, "LBL2");
-				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
-			ActAddFleet(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN") );
-			if(GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 51,6,2  )> 0 
-			&& _GL25 == 1 && _GL26 == 0){
-				
-				_GL26:= 20;
-
-				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
-				ActFCmdMassWeaponHit(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N1", "BO tacticN1"), WEAPON_LASER_BOMB,  _GL27,_GL28,2 );
-
-			}
-		} else {
-			//ActCreateFleet(PLAYER_1, AIREL_MYSELF, "BO N2", CIV_BO, AIF_BASE);
-			ActObjSelectN(PLAYER_1, AIREL_MYSELF, "LBL3");
-				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
-			ActAddFleet(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN") );
-			if(GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 52,6,2  )> 0 
-			&& _GL25 == 1 && _GL26 == 0){
-				
-				_GL26:= 20;
-
-				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
-				ActFCmdMassWeaponHit(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN"), WEAPON_LASER_BOMB,  _GL27,_GL28,2 );
-
-			}
-		}
-		else {
-			//ActCreateFleet(PLAYER_1, AIREL_MYSELF, "BO N3", CIV_BO, AIF_BASE);
-			ActObjSelectN(PLAYER_1, AIREL_MYSELF, "LBL4");
-				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
-			ActAddFleet(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN") );
-			if(GetFleetMassWeaponReady(PLAYER_1,GetFleetNum(PLAYER_1,"BO N", "BO tacticN"),WEAPON_LASER_BOMB, 50,7,2  )> 0 
-			&& _GL25 == 1 && _GL26 == 0){
-				
-				_GL26:= 25;
-
-				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
-				ActFCmdMassWeaponHit(PLAYER_1, AIREL_MYSELF, GetFleetNum(PLAYER_1,"BO N", "BO tacticN"), WEAPON_LASER_BOMB,  _GL27,_GL28,2 );
-
-			}
-		}
-*/
-
 	CloseEvents();
 
 CloseStrateg();
-
-
-
-
-
