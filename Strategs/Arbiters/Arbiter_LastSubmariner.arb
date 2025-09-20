@@ -237,11 +237,11 @@ OpenArbiter("Last Submariner");
             _RT130 := 1;
             while(_RT130 <= GetPlObjN(_PI10, AIREL_MYSELF, RESEARCH_BLD_NAME))
             {
-                // тут получаем координаты тех центра
+                // получаем координаты тех центра
                 if(IsPlObjExist(_PI10, RESEARCH_BLD_NAME, 24, 25, 26) )
                 {
                     _RT131:= 0;
-                    // этот цикл для формирования имени тех. центра
+                    // цикл для формирования имени тех. центра
                     while(_RT131>=0)
                     {
                         _RT131+=1;
@@ -250,7 +250,7 @@ OpenArbiter("Last Submariner");
                         if(!IsPlObjExist(_PI10, RESEARCH_BLD_NAME + _inttostr(_RT131)))
                         {
                             ActSetName(RESEARCH_BLD_NAME + _inttostr(_RT131), _RT24, _RT25, _RT26);
-                            //actStringMess("Renamed to: " + RESEARCH_BLD_NAME + _inttostr(_RT131))
+                            // actStringMess("Renamed to: " + RESEARCH_BLD_NAME + _inttostr(_RT131))
                             _RT131:=-1;
                         }
                     }
@@ -290,54 +290,59 @@ OpenArbiter("Last Submariner");
         EventArtUnLoaded(TRUE) // 10
         {
             _RT134 := 0;// to delete flag
-            _RT135 := GetTechDevG(_PI10);
-            if(_RT135==100)
-            {
-                ActStringMess(_PI10, AIREL_MYSELF, "Все технологии уже изучены!");
-                _RT134 := 1;
-            }
-            else
-            {
-                // 1 сравнить координаты артефакта с координатами тех. центров игрока
-                _RT130 := 1;
-                _RT132 := GetPlObjT(_PI10, AIREL_MYSELF, TECHCENTER) + GetPlObjT(_PI10, AIREL_MYSELF, RESEARCH_LABORATORY) + GetPlObjT(_PI10, AIREL_MYSELF, COMMAND_HUB);
-                //actStringMess("Research buildings to scan: " + _inttostr(_RT132));
-                while(_RT130 <= _RT132)
+
+            _ploop_begin
+                // actStringMess("Player: " + _inttostr(_pl_) + ", name: " + GetPlName(_pl_));
+                // actStringMess("UNLOAD GPS: " + _inttostr(_PI15) + ":" + _inttostr(_PI16) + ":" + _inttostr(_PI17));
+                if ((_pl_ == _PI10 || !IsEnemy(_PI10, _pl_)) && !_RT134)
                 {
-                    if(IsPlObjExist(_PI10, RESEARCH_BLD_NAME + _inttostr(_RT130), 24, 25, 26, 27))
+                    _RT140 := GetPlCiv(_pl_);
+
+                    // сравнить координаты артефакта с координатами тех. центров игрока
+                    _RT130 := 1;
+                    // _RT132 := GetPlObjT(_pl_, AIREL_MYSELF, TECHCENTER) + GetPlObjT(_pl_, AIREL_MYSELF, RESEARCH_LABORATORY) + GetPlObjT(_pl_, AIREL_MYSELF, COMMAND_HUB);
+                    _RT132 := _RT140 == CIV_WS ? GetPlObjT(_pl_, AIREL_MYSELF, TECHCENTER+AITAKE_NOEMBRYO) : _RT140 == CIV_BO ? GetPlObjT(_pl_, AIREL_MYSELF, RESEARCH_LABORATORY+AITAKE_NOEMBRYO) : GetPlObjT(_pl_, AIREL_MYSELF, COMMAND_HUB+AITAKE_NOEMBRYO);
+                    // actStringMess("Research buildings to scan: " + _inttostr(_RT132));
+                    while(_RT130 <= _RT132)
                     {
-                        _RT27 := _PI15 + _PI16 + _PI17 - _RT24 - _RT25 - _RT26;
-                        if((_RT27 < 0 && _RT27 > -6) || (_RT27 > 0 && _RT27 < 6))
+                        if(IsPlObjExist(_pl_, RESEARCH_BLD_NAME + _inttostr(_RT130), 24, 25, 26, 27))
                         {
-                            actStringMess(GetPlName(_PI10) + " активировал артефакт");
+                            // actStringMess("TECH GPS: " + _inttostr(_RT24) + ":" + _inttostr(_RT25) + ":" + _inttostr(_RT26));
 
-                            // считаем случайный грейд
-                            _RT133 := 0;
-                            if(_PI11==CIV_WS){_RT133 := GetRnd(27,34);}
-                            if(_PI11==CIV_BO){_RT133 := GetRnd(35,43);}
-                            if(_PI11==CIV_SI){_RT133 := GetRnd(44,51);
-                                //_RT67 := 1;
-                            }
-                            //actStringMess("String number: "  + _inttostr(_RT133));
-                            _RT136 := _strtoint(GetStrRes(_RT133));
-                            //actStringMess("Tech number: "  + _inttostr(_RT136));
+                            _RT27 := _PI15 - _RT24; // X diff
+                            _RT28 := _PI16 - _RT25; // Y diff
+                            // _RT29 := _PI17 - _RT26;
 
-                            // выдаём случайный грейд (или нет)
-                            //actStringMess("Tech id: " + _inttostr(_RT133));
-                            if(!IsTechDev(_PI10, _RT136)){
-                                ActTechSet(_PI10, AIREL_MYSELF, _RT136);
-                                ActStringMess(_PI10, AIREL_MYSELF, "Активация технологии № "  + _inttostr(_RT136));
+                            if(((_RT27 < 0 && _RT27 >= -4) || (_RT27 >= 0 && _RT27 <= 4))
+                                &&((_RT28 < 0 && _RT28 >= -4) || (_RT28 >= 0 && _RT28 <= 4)))
+                            {
+                                actStringMess(GetPlName(_pl_) + " активировал артефакт");
+
+                                // считаем случайный грейд
+                                _RT133 := _RT140 == CIV_WS ? GetRnd(27,34) : _RT140 == CIV_BO ? GetRnd(35,43) : GetRnd(44,51);
+                                //actStringMess("String number: "  + _inttostr(_RT133));
+
+                                _RT136 := _strtoint(GetStrRes(_RT133));
+                                // actStringMess("Tech number: "  + _inttostr(_RT136));
+
+                                // выдаём случайный грейд (или нет)
+                                if(!IsTechDev(_pl_, _RT136))
+                                {
+                                    ActStringMess(_pl_, AIREL_MYSELF, "Активация технологии № "  + _inttostr(_RT136));
+                                    ActTechSet(_pl_, AIREL_MYSELF, _RT136);
+                                }
+                                else{ActStringMess(_pl_, AIREL_MYSELF, "Найденная технология уже исследована");}
+
+                                _RT134 := 1;
+                                _RT130 := _RT132; // чтобы выйти из цикла
                             }
-                            else{
-                                ActStringMess(_PI10, AIREL_MYSELF, "Найденная технология уже исследована...");
-                            }
-                            _RT134 := 1;
-                            _RT130 := _RT132; // чтобы выйти из цикла
                         }
+
+                        _RT130 += 1;
                     }
-                    _RT130 += 1;
                 }
-            }
+            _ploop_end
+            
 
             if(_RT134)
             {
@@ -408,7 +413,7 @@ OpenArbiter("Last Submariner");
                 if(!getVar(100+_pl_) && GetPlObjM(_plmyself, AITRG_ALL)==0)
                 {
                     actSetVar(100+_pl_, ENDMISS_FAILED);
-                    ActOnTimer(_plmyself,20);
+                    ActOnTimer(_plmyself,15);
                     ActOffFOW(_plmyself);                                 
                     _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
                 }
@@ -423,7 +428,7 @@ OpenArbiter("Last Submariner");
                 if(!getVar(100+_pl_) && GetPlObjM(_plunion, AITRG_ALL)==0)
                 { 
                     actSetVar(100+_pl_, ENDMISS_FAILED);
-                    ActOnTimer(_plmyself,20);
+                    ActOnTimer(_plmyself,15);
                     ActOffFOW(_plmyself);                                 
                     _actStringMess(_strf(GetStrRes(s_defeat), GetPlName(_pl_)));
                     actOnEvent(200);
@@ -439,7 +444,7 @@ OpenArbiter("Last Submariner");
                 if(!getVar(100+_pl_) && GetPlObjM(_plnotally, AITRG_ALL)==0)
                 {
                     actSetVar(100+_pl_, ENDMISS_ACCOMPL);
-                    ActOnTimer(_plmyself,20);
+                    ActOnTimer(_plmyself,15);
                     ActOffFOW(_plmyself);                                 
                     _actStringMess(_strf(GetStrRes(s_win), GetPlName(_pl_)));
                     actOnEvent(200);
@@ -458,14 +463,11 @@ OpenArbiter("Last Submariner");
             actStringMess("---- Минами:       Уничтожено (Поставлено) ----");
             actStringMess("------------------------------------------------------------");
             _ploop_begin
-                if (IsPlPresent(_pl_)) 
-                {
-                    actStringMess(
-                        _strf("Флагманы: %u (%u), Мины: %u (%u) - %s", 
-                            GetGlobVar(110+_pl_), GetGlobVar(126+_pl_), GetGlobVar(118+_pl_), GetGlobVar(134+_pl_), GetPlName(_pl_)
-                        )
-                    );
-                }
+                actStringMess(
+                    _strf("Флагманы: %u (%u), Мины: %u (%u) - %s", 
+                        GetGlobVar(110+_pl_), GetGlobVar(126+_pl_), GetGlobVar(118+_pl_), GetGlobVar(134+_pl_), GetPlName(_pl_)
+                    )
+                );
             _ploop_end
             actStringMess("------------------------------------------------------------");
 
@@ -532,7 +534,7 @@ OpenArbiter("Last Submariner");
             // if (IsPlPresent(PLAYER_6)) {ActStringInfo(PLAYER_6, AIREL_MYSELF, 30, ISTR_RED, _strf("Kills: Flagships - %u, Mines - %u", _GL116, _GL124) );}
             // if (IsPlPresent(PLAYER_7)) {ActStringInfo(PLAYER_7, AIREL_MYSELF, 30, ISTR_RED, _strf("Kills: Flagships - %u, Mines - %u", _GL117, _GL125) );}
 
-            actLockEvent();
+            // actLockEvent();
         }
 
         // The final phase 
