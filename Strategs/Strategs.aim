@@ -74,6 +74,32 @@ OpenStringTable();
  /*050*/PutString("107");	// - Генератор ионного поля
  /*051*/PutString("108");	// - Молекулярный восстановитель
 
+/* Tech with pictures:
+WS:
+1. Liberator
+2. Nuke silo
+3. DC Bomber (plasmic turbo compressor)
+4. Terminator
+5. Dispersion screen
+6. Corium 296
+
+BO:
+1. Laser Bomb (non-linear photon concentrator)
+2. Protective field generator
+3. Teleport (thermo-nuclear energetic module)
+4. Force field generator (ion-plasmic accumulator)
+5. Phantom (stealth generator)
+6. Charge station (ion optical accumulator)
+
+SI:
+1. Double Plasma Turret (polarized high temperature emitter)
+2. Molecular repair facility (capsule with silicon gene prototype)
+3. ? (sample EPI 46)
+4. ? (sample SHT 17)
+
+*/
+
+
  /*052*/PutString("TECHCENTER");
  /*053*/PutString("LABORATORY");
  /*054*/PutString("COMMAND_HUB");
