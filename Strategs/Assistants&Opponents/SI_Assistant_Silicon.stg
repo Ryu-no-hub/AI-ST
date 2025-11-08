@@ -34,8 +34,8 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		// Get number of Silicon Mines (SM) and Builders
 		_RT22 := getFleetNum("SI Silicon mines", "SI Silicon tactitian");
 		_RT23 := getFleetNum("SI Builder", "SI Silicon tactitian");
-		_RT10 := _GL0; // ?
-		actStringMess("_GL0 = " + _inttostr(_GL0))
+		_RT10 := _GL0; // map side, defined in Arbiter
+		// actStringMess("_GL0 = " + _inttostr(_GL0))
 
 		// Get number of SI allies
 		_ploop_begin
