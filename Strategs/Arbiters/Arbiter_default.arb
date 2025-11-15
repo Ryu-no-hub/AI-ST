@@ -11,6 +11,7 @@ OpenArbiter("Arbiter for Script (Kill All)");
 
   Event(TRUE) 
   { // Off
+    _GL0 := GetRes(SILICON, 0, 0, 0, 1, 200, 0) / 80;
     actOffEvent(10, 39);
     actOffEvent(100, 109);
   }
