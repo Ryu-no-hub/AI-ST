@@ -23,6 +23,7 @@ OpenStrateg(_full_name, CIV_BO, _short_name, 0x00000003);
     STEP_SIZE = 13;
     GOLD_MINE_NAME = "GM";
 
+
   // Execute Tactician
   Event(getOwnTime()>1) 
   { 
@@ -59,8 +60,9 @@ OpenStrateg(_full_name, CIV_BO, _short_name, 0x00000003);
     if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
     {
       _RT71 := 1;
-      ActSelectFleet(PLAYER_ME, AIREL_MYSELF, _RT23)
-      ActDelPlObjS(PLAYER_ME, AIREL_MYSELF);
+      ActSelectFleet(PLAYER_ME, AIREL_MYSELF, _RT23) // exclude all objects from fleet
+      ActDelPlObjS(PLAYER_ME, AIREL_MYSELF); // nothing gets deleted
+      
       ActObjSelectN(PLAYER_ME, AIREL_MYSELF, BUILDER_NAME, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
       ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
       actLockFleet(_RT23, LOCKOBJ_INTERF);
@@ -83,7 +85,12 @@ OpenStrateg(_full_name, CIV_BO, _short_name, 0x00000003);
   {
     _RT14 -= 1;
     actStringMess("Шахт построено " + _inttostr(getPlObjT(GOLD_SUBLIMATOR+AITAKE_NOEMBRYO)) + ", осталось " + _inttostr(_RT14));
-    if(!_RT14) {actUnLockFleet(_RT23, LOCKOBJ_INTERF); actStringMess("Программа завершена. Строитель разблокирован");}
+
+    if(!_RT14) 
+    {
+      actUnLockFleet(_RT23, LOCKOBJ_INTERF);
+      actStringMess("Программа завершена. Строитель разблокирован");
+    }
 
     actLockEvent();
   }

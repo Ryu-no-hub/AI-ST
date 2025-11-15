@@ -27,7 +27,6 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 	// Execute Tactician
 	Event(getOwnTime()>1) 
 	{ 
-		// actObjSelectT(SILICON_EXTRACTOR);
 		actObjSelectT(AITRG_ALL);
 		actExecTactic("SI Silicon tactitian");
 
@@ -35,7 +34,6 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		_RT22 := getFleetNum("SI Silicon mines", "SI Silicon tactitian");
 		_RT23 := getFleetNum("SI Builder", "SI Silicon tactitian");
 		_RT10 := _GL0; // map side, defined in Arbiter
-		// actStringMess("_GL0 = " + _inttostr(_GL0))
 
 		// Get number of SI allies
 		_ploop_begin
@@ -51,6 +49,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 
 		_RT21 := getPlObjT(SILICON_EXTRACTOR); // SMs found
 		_RT13 := _RT13 - _RT21; // SMs to build 
+    	_RT14 := _RT13;
 
 		actStringMess("Сторона карты = " + _inttostr(_RT10))
 		actStringMess("Максимум шахт в линии = " + _inttostr(_RT12))
@@ -62,66 +61,66 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
 		{
 			_RT71 := 1;
-			// ActSelectFleet(PLAYER_ME, AIREL_MYSELF, _RT23)
-			// ActDelPlObjS(PLAYER_ME, AIREL_MYSELF);
-				// ActSetName(USED_BUILDER_NAME, _RT24, _RT25, _RT26);
-				// ActObjSelectN(PLAYER_ME, AIREL_MYSELF, USED_BUILDER_NAME, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
-			// ActObjSelectN(PLAYER_ME, AIREL_MYSELF, BUILDER_NAME, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
-			// ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
-      		actStringMess("Модуль-прототип найден. Инициализирую создание структур кремниевых шахт");
+		    ActSelectFleet(PLAYER_ME, AIREL_MYSELF, _RT23); // exclude all objects from fleet
+		    ActDelPlObjS(PLAYER_ME, AIREL_MYSELF); // nothing gets deleted
+
+			ActSetName("", _RT24, _RT25, _RT26);
+			ActSetName(USED_BUILDER_NAME, _RT24, _RT25, _RT26);
+			
+		    ActObjSelectN(PLAYER_ME, AIREL_MYSELF, USED_BUILDER_NAME, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
+		    ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
+		    actLockFleet(_RT23, LOCKOBJ_INTERF);
+      		actStringMess("Модуль-прототип найден. Инициализирую создание структур по добыче кремния...");
+
+			while(_RT13) // SMs to build
+			{
+	  			actFParPutInStaff(_RT22, SILICON_EXTRACTOR); _RT13 -= 1;
+				// _actStringMess("Adding mine " + _inttostr(_RT13));
+			}
 		}
 		else
 		{
 			_RT71 := 0;
 			actStringMess("Нет свободных прототипов для постройки шахты.");
 		}
-
-
-		_RT38 := 1; _RT39 := 1; _RT115 := 0;
-
-		// (SMs to build) && (builder found)
-		if(_RT13 > 0 && _RT71) 
-		{
-  			actFParPutInStaff(_RT22, SILICON_EXTRACTOR); _RT46 := 0; _RT13 -= 1;
-  			if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
-			{
-				ActDelPlObjS(PLAYER_ME, AIREL_MYSELF);
-				ActSetName(USED_BUILDER_NAME, _RT24, _RT25, _RT26);
-				ActObjSelectN(PLAYER_ME, AIREL_MYSELF, USED_BUILDER_NAME, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
-				ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
-		  		actLockFleet(_RT23, LOCKOBJ_INTERF);
-	  		}
-		}
 	};
 
 
-	EventPlObjCreated((_PI3 == SILICON_EXTRACTOR) & (_PI0 == GetCurrPl()) & (_RT13 > 0) & (getPlObjT(SILICON_EXTRACTOR+AITAKE_NOOBJ) <= 1) & (!IsPlObjExist(_PI10, USED_BUILDER_NAME)))
+	// EventPlObjCreated(_PI3 == SILICON_EXTRACTOR & (_PI0 == GetCurrPl())) // критическая ошибка: десинх
+	EventPlObjCreated(_PI3 == SILICON_EXTRACTOR)
 	{
-	    ActSetName(SILICON_MINE_NAME, _PI5, _PI6, _PI7);
-	    // _actStringMess("SI mine finished at: " + _inttostr(_PI5) + " " + _inttostr(_PI6) + " " + _inttostr(_PI7));
-	    //_actStringMess("IsPlObjExist(_PI10, USED_BUILDER_NAME): " + _inttostr(IsPlObjExist(_PI10, USED_BUILDER_NAME)));
-
-		if(IsPlObjExist(_PI10, BUILDER_NAME, 24, 25, 26, 27))
+		if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
 		{
 			_RT71 := 1;
 			// _actStringMess("Builder found at: " + _inttostr(_RT24) + " " + _inttostr(_RT25) + " " + _inttostr(_RT26));
-			ActSetName("", _RT24, _RT25, _RT26);
-			ActSetName(USED_BUILDER_NAME, _RT24, _RT25, _RT26);
-			ActObjSelectN(_PI10, AIREL_MYSELF, USED_BUILDER_NAME, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
-			ActAddFleet(_PI10, AIREL_MYSELF, _RT23);
 		}
 		else
 		{
 			_RT71 := 0;
-			ActStringMess(_PI10, AIREL_MYSELF, "Нет свободных строителей для постройки шахты.");
+			ActStringMess(PLAYER_ME, AIREL_MYSELF, "Нет свободных строителей для постройки шахты.");
 		}
 
 		if(_RT71)
 		{
-			ActStringMess(_PI10, AIREL_MYSELF, "Заказ шахты, осталось " + _inttostr(_RT13));
-			actFParPutInStaff(_RT22, SILICON_EXTRACTOR, UNDEFINED, UNDEFINED, 10); _RT13 -= 1;
+			ActSetName("", _RT24, _RT25, _RT26);
+			ActSetName(USED_BUILDER_NAME, _RT24, _RT25, _RT26);
+
+			// _RT23 := getFleetNum("SI Builder", "SI Silicon tactitian");
+			ActObjSelectN(PLAYER_ME, AIREL_MYSELF, USED_BUILDER_NAME, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
+			ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
+
+			_RT14 -= 1;
   			actLockFleet(_RT23, LOCKOBJ_INTERF);
-  			//ActCreateArt( TART_X_BOX, GetRnd(1,3), _RT30, _RT31,  4, "", "Unknown technology", VEFF_NONE);
+			if(!_RT14) 
+			    {
+			      actUnLockFleet(_RT23, LOCKOBJ_INTERF);
+			      actStringMess("Программа завершена. Строитель разблокирован");
+			    }
+			else
+			{
+				// ActStringMess(PLAYER_ME, AIREL_MYSELF, "Заказ шахты, осталось " + _inttostr(_RT14));
+				actStringMess("Заказ шахты, осталось " + _inttostr(_RT14));
+			}
 		}
 	    actLockEvent();
 	}
@@ -131,7 +130,7 @@ OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
 		//_actStringMess("Name: " + _PS0 + ", USED_BUILDER_NAME: " + USED_BUILDER_NAME + ", fleet number: " + _inttostr(_PI18));
 		if(_PS0 == USED_BUILDER_NAME)
 		{
-			ActStringMess(_PI0, AIREL_MYSELF, "Строитель уничтожен. Постройте шахту для продолжения работы.");
+			ActStringMess(_PI0, AIREL_MYSELF, "Строитель уничтожен. Постройте шахту для продолжения работы или перезапустите.");
 			//_RT13 += 1;
 		}
 		actLockEvent()
