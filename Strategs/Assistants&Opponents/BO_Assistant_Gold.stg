@@ -56,6 +56,24 @@ OpenStrateg(_full_name, CIV_BO, _short_name, 0x00000003);
     actStringMess("Шахт найдено = " + _inttostr(_RT21))
     actStringMess("Шахт к постройке = " + _inttostr(_RT13))
 
+    // Не работает, т.к. невозможно селектнуть выделенные юниты во флот
+    // ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
+    // actStringMess("Size = " + _inttostr(GetFleetObjEx(PLAYER_ME, _RT23)));
+
+    // _RT73 := GetFleetObjEx(PLAYER_ME, _RT23, AITRG_BOATCONSTRUCT);
+    // actStringMess("Builders = " + _inttostr(_RT73));
+
+    // if(_RT73 > 0)
+    // {
+    //   _RT71 := 1;
+    //   actLockFleet(_RT23, LOCKOBJ_INTERF);
+    //   actStringMess("Строитель найден. Начинаю возведение Шахт золота");
+    // }
+    // else
+    // {
+    //   _RT71 := 0;
+    //   actStringMess("Нет свободных строителей для постройки шахты.");
+    // }
 
     if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
     {
