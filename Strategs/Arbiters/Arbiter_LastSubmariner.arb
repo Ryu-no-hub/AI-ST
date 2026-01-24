@@ -113,6 +113,10 @@ OpenArbiter("Last Submariner");
             actOffEvent(10);
             actOffEvent(20);
             actOffEvent(21);
+            actOffEvent(22);
+            actOffEvent(23);
+            actOffEvent(24);
+            actOffEvent(25);
             actOffEvent(30);
             actOffEvent(100);
             actOffEvent(200);
@@ -177,7 +181,7 @@ OpenArbiter("Last Submariner");
                   )
                 {
                     ActCreateArt( TART_X_BOX, GetRnd(1,3), _RT130, _RT131,  GetRnd(0,4),
-                                  "", 
+                                  _inttostr(_RT128), 
                                   "Unknown technology", 
                                   VEFF_NONE);
                     _RT128 -= 1;
@@ -292,10 +296,11 @@ OpenArbiter("Last Submariner");
             _RT134 := 0;// to delete flag
 
             _ploop_begin
-                // actStringMess("Player: " + _inttostr(_pl_) + ", name: " + GetPlName(_pl_));
-                // actStringMess("UNLOAD GPS: " + _inttostr(_PI15) + ":" + _inttostr(_PI16) + ":" + _inttostr(_PI17));
+                // _actStringMess("Player pl_: " + _inttostr(_pl_) + ", name: " + GetPlName(_pl_));
+                // _actStringMess("Player _PI10: " + _inttostr(_PI10) + ", name: " + GetPlName(_PI10));
                 if ((_pl_ == _PI10 || !IsEnemy(_PI10, _pl_)) && !_RT134)
                 {
+                    // actStringMess("UNLOAD GPS: " + _inttostr(_PI15) + ":" + _inttostr(_PI16) + ":" + _inttostr(_PI17));
                     _RT140 := GetPlCiv(_pl_);
 
                     // сравнить координаты артефакта с координатами тех. центров игрока
@@ -325,7 +330,7 @@ OpenArbiter("Last Submariner");
                                 _RT136 := _strtoint(GetStrRes(_RT133));
                                 // actStringMess("Tech number: "  + _inttostr(_RT136));
 
-                                // выдаём случайный грейд (или нет)
+                                // выдаём (или нет) случайный грейд
                                 if(!IsTechDev(_pl_, _RT136))
                                 {
                                     ActStringMess(_pl_, AIREL_MYSELF, "Активация технологии № "  + _inttostr(_RT136));
@@ -346,26 +351,105 @@ OpenArbiter("Last Submariner");
 
             if(_RT134)
             {
-                ActDelArt(TART_UNDEFINED, "", _PI5, _PI6, _PI7, _PI5, _PI6, _PI7, VEFF_DISSOLVE);
-                if(_PI1==CIV_SI){ActDelArt(TART_UNDEFINED, "", _PI5, _PI6, _PI7, _PI5, _PI6, _PI7, VEFF_TELEPORT);}
+                ActDelArt(TART_UNDEFINED, _PS0, _PI5, _PI6, _PI7, _PI5, _PI6, _PI7, VEFF_DISSOLVE);
+                if(_PI1==CIV_SI){ActDelArt(TART_UNDEFINED, _PS0, _PI5, _PI6, _PI7, _PI5, _PI6, _PI7, VEFF_TELEPORT);}
+
+                // actStringMess("ARTEFACT GPS: " + _inttostr(_PI5) + ":" + _inttostr(_PI6) + ":" + _inttostr(_PI7));
                 
-                _RT50 := GetTime();
-                _RT55 := _PI5;
-                _RT56 := _PI6;
-                _RT57 := _PI7;
-                actOnEvent(21);
+                if(!isEventOn(21)){
+                    _RT50 := GetTime();
+                    _RT55 := _PI5;
+                    _RT56 := _PI6;
+                    _RT57 := _PI7;
+                    _RT58 := _strtoint(_PS0);
+                    actOnEvent(21);
+                }
+                else{
+                    if(!isEventOn(22)){
+                        _RT60 := GetTime();
+                        _RT65 := _PI5;
+                        _RT66 := _PI6;
+                        _RT67 := _PI7;
+                        _RT68 := _strtoint(_PS0);
+                        actOnEvent(22);
+                    }
+                    else{
+                        if(!isEventOn(23)){
+                            _RT70 := GetTime();
+                            _RT75 := _PI5;
+                            _RT76 := _PI6;
+                            _RT77 := _PI7;
+                            _RT78 := _strtoint(_PS0);
+                            actOnEvent(23);
+                        }
+                        else{
+                            if(!isEventOn(24)){
+                                _RT80 := GetTime();
+                                _RT85 := _PI5;
+                                _RT86 := _PI6;
+                                _RT87 := _PI7;
+                                _RT88 := _strtoint(_PS0);
+                                actOnEvent(24);
+                            }
+                            else{
+                                if(!isEventOn(25)){
+                                    _RT90 := GetTime();
+                                    _RT95 := _PI5;
+                                    _RT96 := _PI6;
+                                    _RT97 := _PI7;
+                                    _RT98 := _strtoint(_PS0);
+                                    actOnEvent(25);
+                                }
+                            }
+                        }
+                    }
+                }
             }
             actLockEvent();
         }
 
-        // Delete artifact
+        // Delete artifact 1
         Event(GetTime() - _RT50 > 1, 21) // 11
         {
-            ActDelArt(TART_UNDEFINED, "", _RT55, _RT56, _RT57, _RT55, _RT56, _RT57, VEFF_NONE);
+            ActDelArt(TART_UNDEFINED, _inttostr(_RT58), _RT55, _RT56, _RT57, _RT55, _RT56, _RT57, VEFF_NONE);
+            // actStringMess("1 DELETE GPS: " + _inttostr(_RT55) + ":" + _inttostr(_RT56) + ":" + _inttostr(_RT57) + " - " + _inttostr(_RT58));
             actStringMess("Осталось артефактов: " + _inttostr(GetArt()-1));
         }
 
-        EventPlObjKilled(TRUE) // 12
+        // Delete artifact 2
+        Event(GetTime() - _RT60 > 1, 22) // 12
+        {
+            ActDelArt(TART_UNDEFINED, _inttostr(_RT68), _RT65, _RT66, _RT67, _RT65, _RT66, _RT67, VEFF_NONE);
+            // actStringMess("2 DELETE GPS: " + _inttostr(_RT65) + ":" + _inttostr(_RT66) + ":" + _inttostr(_RT67) + " - " + _inttostr(_RT68));
+            actStringMess("Осталось артефактов: " + _inttostr(GetArt()-2));
+        }
+
+        // Delete artifact 3
+        Event(GetTime() - _RT70 > 1, 23) // 13
+        {
+            ActDelArt(TART_UNDEFINED, _inttostr(_RT78), _RT75, _RT76, _RT77, _RT75, _RT76, _RT77, VEFF_NONE);
+            // actStringMess("3 DELETE GPS: " + _inttostr(_RT75) + ":" + _inttostr(_RT76) + ":" + _inttostr(_RT77) + " - " + _inttostr(_RT78));
+            actStringMess("Осталось артефактов: " + _inttostr(GetArt()-3));
+        }
+
+        // Delete artifact 4
+        Event(GetTime() - _RT80 > 1, 24) // 14
+        {
+            ActDelArt(TART_UNDEFINED, _inttostr(_RT88), _RT85, _RT86, _RT87, _RT85, _RT86, _RT87, VEFF_NONE);
+            // actStringMess("4 DELETE GPS: " + _inttostr(_RT85) + ":" + _inttostr(_RT86) + ":" + _inttostr(_RT87) + " - " + _inttostr(_RT88));
+            actStringMess("Осталось артефактов: " + _inttostr(GetArt()-4));
+        }
+
+        // Delete artifact 5
+        Event(GetTime() - _RT90 > 1, 25) // 15
+        {
+            ActDelArt(TART_UNDEFINED, _inttostr(_RT98), _RT95, _RT96, _RT97, _RT95, _RT96, _RT97, VEFF_NONE);
+            // actStringMess("5 DELETE GPS: " + _inttostr(_RT95) + ":" + _inttostr(_RT96) + ":" + _inttostr(_RT97) + " - " + _inttostr(_RT98));
+            actStringMess("Осталось артефактов: " + _inttostr(GetArt()-5));
+        }
+
+
+        EventPlObjKilled(TRUE) // 16
         {
             if(_PI13 == WS_FLAGSHIP || _PI13 == BO_FLAGSHIP || _PI13 == SI_FLAGSHIP)
             {
@@ -381,7 +465,7 @@ OpenArbiter("Last Submariner");
             actLockEvent();
         }
 
-        EventMineKilled(TRUE) // 13
+        EventMineKilled(TRUE) // 17
         {
             if(_PI3 == WEAPON_DEPTH_MINE || _PI3 == WEAPON_LASER_SNARE || _PI3 == WEAPON_ACOUSTIC_MINE) 
             { 
@@ -399,7 +483,7 @@ OpenArbiter("Last Submariner");
 
         // Event for end game sessions
         // BEGIN
-        Event(getOwnTime()>10) // 14
+        Event(getOwnTime()>10) // 18
         { 
             actOnEvent(IsTeamGame() ? 20 : 10);
             actOnEvent(30);
@@ -407,7 +491,7 @@ OpenArbiter("Last Submariner");
         }
 
         // Player has been killed
-        Event(getOwnTime()%3==1, 10) // 15
+        Event(getOwnTime()%3==1, 10) // 19
         { 
             _ploop_begin
                 if(!getVar(100+_pl_) && GetPlObjM(_plmyself, AITRG_ALL)==0)
@@ -422,7 +506,7 @@ OpenArbiter("Last Submariner");
         }
 
         // Player's team has been killed
-        Event(getOwnTime()%3==1, 20) // 16
+        Event(getOwnTime()%3==1, 20) // 20
         { 
             _ploop_begin
                 if(!getVar(100+_pl_) && GetPlObjM(_plunion, AITRG_ALL)==0)
@@ -438,7 +522,7 @@ OpenArbiter("Last Submariner");
         }
 
         // Player's enemies have been killed
-        Event(getOwnTime()%3==1, 30) // 17
+        Event(getOwnTime()%3==1, 30) // 21
         { 
             _ploop_begin
                 if(!getVar(100+_pl_) && GetPlObjM(_plnotally, AITRG_ALL)==0)
@@ -454,7 +538,7 @@ OpenArbiter("Last Submariner");
         }
 
         // Print statistics
-        Event(TRUE, 200) // 18
+        Event(TRUE, 200) // 22
         {
             // Chat
             actStringMess("");
@@ -538,7 +622,7 @@ OpenArbiter("Last Submariner");
         }
 
         // The final phase 
-        Event(TRUE, 100) // 19
+        Event(TRUE, 100) // 23
         { 
             _ploop_begin
                 if(getVar(100+_pl_)>0 && GetTimerTime(_pl_)==0)
