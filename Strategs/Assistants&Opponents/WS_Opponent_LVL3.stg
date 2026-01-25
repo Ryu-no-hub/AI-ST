@@ -1,0 +1,89 @@
+//====================================================================
+//      ST AiScript: WS Computer Opponent Level 02
+//====================================================================
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#if(_env_var1==0)
+ _full_name = "WS Opponent Level 02";_short_name = "AI STRONG";
+#endif
+
+OpenStrateg(_full_name, CIV_WS, _short_name, 0x00000003);
+
+ // Parameters
+ MainEnemy(AICAN_MYSELF, PLAYER_ALL);
+ OffensiveStroke(AICAN_MYSELF, 20, 30, 120);
+
+ // Tactics
+ include<[_curr_path]\Tacticians\WS_MainBase.tct>;
+
+ // Events
+ OpenEvents();
+  Event(TRUE)
+  { // Off
+    actOffEvent(20);
+  }
+  // Execute Tactician  & Technologies
+  Event(getOwnTime()>1, 1) 
+  { actObjSelectM(AITRG_ALL);
+    actExecTactic("WS Main Base");
+    actTScenDevRun(TECH_SCENARIO_OPTIMAL);
+    // Store fleets numbers
+    _RT20:=getFleetNum("WS Guard 00", "WS Main Base");
+    _RT21:=getFleetNum("WS Guard 01", "WS Main Base");
+    _RT22:=getFleetNum("WS Raider 00", "WS Main Base");
+    _RT23:=getFleetNum("WS Raider 01", "WS Main Base");
+    _RT30:=getFleetNum("WS Base", "WS Main Base");
+  };
+/*
+  Event(TRUE, 0)// 0
+  { actOffEvent(3);
+    actOffEvent(5);
+  }
+  // 2
+  Event(_RT20>0 && _RT22>0 && getFleetObjM(_RT20)>0 && getFleetObjM(_RT22)>0, 2) 
+  { actFCmdGuardF(_RT20, _RT22);
+    actOnEvent(3);
+  }
+  // 3
+  Event(getFleetObjM(_RT20)==0 || getFleetObjM(_RT22)==0, 3)
+  { actOnEvent(2);
+  }
+
+  // 4
+  Event(_RT21>0 && _RT23>0 && getFleetObjM(_RT21)>0 && getFleetObjM(_RT23)>0, 4) 
+  { actFCmdGuardF(_RT21, _RT23);
+    actOnEvent(5);
+  }
+  // 5
+  Event(getFleetObjM(_RT21)==0 || getFleetObjM(_RT23)==0, 5)
+  { actOnEvent(4);
+  }
+*/
+  Event(_RT10<2 && getPlRes(GOLD)<1000)
+  { _RT10+=1;
+    actSetPlRC(GOLD, 1, 1000);
+    actLockEvent();
+  }
+  Event(_RT11<3 && getPlRes(CORIUM)<2000)
+  { _RT11+=1;
+    actSetPlRC(CORIUM, 1, 2000);
+    actLockEvent();
+  }
+  Event(_RT12<5 && getPlRes(METAL)<2000)
+  { _RT12+=1;
+    actSetPlRC(METAL, 1, 2000);
+    actLockEvent();
+  }
+  // 
+  Event(getOwnTime()>300 && _RT30>0 && isTechDev(TTECH_WS_LARGE_TORPEDO_TECHNOLOGY, TTECH_LEV1))
+  { actFParPutInStaff(_RT30, SUBCENTER, UNDEFINED, UNDEFINED, 25);
+    actOnEvent(20);
+  }
+  Event(isTechDev(TTECH_WS_MARAUDER_EQUIPMENT, TTECH_LEV1), 20)
+  { actFParPutInStaff(_RT30, SUBCENTER, UNDEFINED, UNDEFINED, 25);
+  }
+
+ CloseEvents();
+
+CloseStrateg();

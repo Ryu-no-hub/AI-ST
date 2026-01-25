@@ -43,34 +43,62 @@ OpenStringTable();
  /*025*/PutString("You've got %d units of %s"); 
  /*026*/PutString("The thing"); 
 
- // WS technology
- /*027*/PutString("9");
- /*028*/PutString("13");
- /*029*/PutString("17");
- /*030*/PutString("20");
- /*031*/PutString("21");
- /*032*/PutString("22");
- /*033*/PutString("29");
- /*034*/PutString("30");
- // BO technology
- /*035*/PutString("37");
- /*036*/PutString("39");
- /*037*/PutString("48");
- /*038*/PutString("53");
- /*039*/PutString("132");
- /*040*/PutString("134");
- /*041*/PutString("135");
- /*042*/PutString("137");
- /*043*/PutString("138");
- // SI technology
- /*044*/PutString("70");
- /*045*/PutString("72");
- /*046*/PutString("84");
- /*047*/PutString("88");
- /*048*/PutString("96");
- /*049*/PutString("102");
- /*050*/PutString("107");
- /*051*/PutString("108");
+ // WS technology			Технологии акул:
+ /*027*/PutString("9");		// - Глубинные мины
+ /*028*/PutString("13");	// - Ключ к шифру систем противника (Инфоцентр)
+ /*029*/PutString("17");	// - Рассеивающий экран
+ /*030*/PutString("20");	// - Глубинные бомбы
+ /*031*/PutString("21");	// - Пси-генератор (Дезориентатор)
+ /*032*/PutString("22");	// - Кибер-технология (Киберчервь)
+ /*033*/PutString("29");	// - Увеличение дистанции обзора (радара)
+ /*034*/PutString("30");	// - Увеличение добычи шахт
+
+ // BO technology			Осьминогов:
+ /*035*/PutString("37");	// - Лазерная ловушка
+ /*036*/PutString("39");	// - Невидимка
+ /*037*/PutString("48");	// - Генератор защитного поля
+ /*038*/PutString("53");	// - Кибертехнология (Кибердельфин)
+ /*039*/PutString("132");	// - Ключ к шифру систем противника (Разведцентр)
+ /*040*/PutString("134");	// - Локационный щит
+ /*041*/PutString("135");	// - Телепортация
+ /*042*/PutString("137");	// - Усиление мощности радара
+ /*043*/PutString("138");	// - Увеличение добычи шахт
+
+ // SI technology			Силикоидов:
+ /*044*/PutString("70");	// - Модификация Биосонара (Открытие области)
+ /*045*/PutString("72");	// - Антилокационный рассеиватель
+ /*046*/PutString("84");	// - Ускоренная погрузка кориума
+ /*047*/PutString("88");	// - Биоминомёт
+ /*048*/PutString("96");	// - Портал
+ /*049*/PutString("102");	// - Увеличение скорости регенерации
+ /*050*/PutString("107");	// - Генератор ионного поля
+ /*051*/PutString("108");	// - Молекулярный восстановитель
+
+/* Tech with pictures:
+WS:
+1. Liberator
+2. Nuke silo
+3. DC Bomber (plasmic turbo compressor)
+4. Terminator
+5. Dispersion screen
+6. Corium 296
+
+BO:
+1. Laser Bomb (non-linear photon concentrator)
+2. Protective field generator
+3. Teleport (thermo-nuclear energetic module)
+4. Force field generator (ion-plasmic accumulator)
+5. Phantom (stealth generator)
+6. Charge station (ion optical accumulator)
+
+SI:
+1. Double Plasma Turret (polarized high temperature emitter)
+2. Molecular repair facility (capsule with silicon gene prototype)
+3. ? (sample EPI 46)
+4. ? (sample SHT 17)
+
+*/
+
 
  /*052*/PutString("TECHCENTER");
  /*053*/PutString("LABORATORY");
@@ -79,27 +107,41 @@ OpenStringTable();
 CloseStringTable();
 
 
+//== Last Submariner
 name("AIBOSS");            
  _full_name = "Last Submariner";
- include<[_curr_path]\Arbiter_LastSubmariner.arb>;
+ include<[_curr_path]\Arbiters\Arbiter_LastSubmariner.arb>;
 
 name("OBJECTIVES");
 OpenStringTable();
- /*000*/PutString("� ������� ���������� ���������\n"); 
- /*001*/PutString("��� ��������� ������� ����� ����������, ��� �������� � ������� �������"); 
- ///*001*/PutString("��������� ������� "); 
+ PutString("В секторе обнаружены артефакты\n"); 
+ PutString("Они позволяют открыть новые технологии, при доставке к научным центрам"); 
 CloseStringTable();
 
-//== Kill All
-name("AIBOSS001");            
- _full_name = "Kill All";
- include<[_inc_path]\Strategs\Arbiter_killall.arb>;
- //include<[_curr_path]\Arbiter_killall.arb>;
 
-name("OBJECTIVES001");        
+//== Fast Last Submariner
+name("AIBOSS001");
+ _full_name = "Fast Last Submariner";
+ include<[_curr_path]\Arbiters\Arbiter_FastLastSubmariner.arb>;
+
+name("OBJECTIVES001");
+OpenStringTable();
+ PutString("В секторе обнаружены артефакты\n"); 
+ PutString("Они позволяют открыть новые технологии, при доставке к научным центрам"); 
+ PutString("Скорость исследована на максимум.");
+CloseStringTable();
+
+
+//== Kill All
+name("AIBOSS002");            
+ _full_name = "Kill All";
+ include<[_curr_path]\Arbiters\Arbiter_killall.arb>;
+
+name("OBJECTIVES002");        
 OpenStringTable();
  /*000*/PutString("Kill all enemies"); 
 CloseStringTable();
+
 
 #if(!__DEMO)
 
@@ -125,68 +167,43 @@ CloseStringTable();
 // CloseStringTable();
 #endif //__DEMO
 
+
 //=== Assistants
 name("ASSISTANT",3,-1,0);
 
- _full_name = "WS Resource Assistant";_short_name = "ASSISTANT 1";
- include<[_curr_path]\WS_Assistant_00.stg>;
- _full_name = "WS Guard Assistant";_short_name = "ASSISTANT 2";
- include<[_curr_path]\WS_Assistant_01.stg>;
- _full_name = "WS Full Game Assistant";_short_name = "ASSISTANT 3";
- include<[_curr_path]\WS_Assistant_02.stg>;
- _full_name = "WS Gold Assistant";_short_name = "ASSISTANT 4";
- include<[_curr_path]\WS_Gold_strateg.stg>;
- _full_name = "WS Full Game Assistant";_short_name = "ASSISTANT 5";
- include<[_curr_path]\WS_Assistant_03.stg>;
+ _full_name = "WS Resource Assistant";	 _short_name = "ASSISTANT 1"; include<[_curr_path]\Assistants&Opponents\WS_Assistant_Resources.stg>;
+ _full_name = "WS Guard Assistant";		 _short_name = "ASSISTANT 2"; include<[_curr_path]\Assistants&Opponents\WS_Assistant_Guard.stg>;
+ _full_name = "WS Full Game Assistant";	 _short_name = "ASSISTANT 3"; include<[_curr_path]\Assistants&Opponents\WS_Assistant_FullGame.stg>;
+ _full_name = "WS Gold Assistant";		 _short_name = "ASSISTANT 4"; include<[_curr_path]\Assistants&Opponents\WS_Assistant_Gold.stg>;
+ _full_name = "WS Self Destruct";		 _short_name = "ASSISTANT 5"; include<[_curr_path]\Assistants&Opponents\WS_Assistant_GiveUp.stg>;
 
- _full_name = "BO Resource Assistant";_short_name = "ASSISTANT 1";
- include<[_curr_path]\BO_Assistant_00.stg>;
- _full_name = "BO Guard Assistant";_short_name = "ASSISTANT 2";
- include<[_curr_path]\BO_Assistant_01.stg>;
- _full_name = "BO Full Game Assistant";_short_name = "ASSISTANT 3";
- include<[_curr_path]\BO_Assistant_02.stg>;
- _full_name = "BO Gold Assistant";_short_name = "ASSISTANT 4";
- include<[_curr_path]\BO_Gold_strateg.stg>;
- _full_name = "BO Full Game Assistant";_short_name = "ASSISTANT 5";
- include<[_curr_path]\BO_Assistant_03.stg>;
+ _full_name = "BO Resource Assistant";	 _short_name = "ASSISTANT 1"; include<[_curr_path]\Assistants&Opponents\BO_Assistant_Resources.stg>;
+ _full_name = "BO Guard Assistant";		 _short_name = "ASSISTANT 2"; include<[_curr_path]\Assistants&Opponents\BO_Assistant_Guard.stg>;
+ _full_name = "BO Full Game Assistant";	 _short_name = "ASSISTANT 3"; include<[_curr_path]\Assistants&Opponents\BO_Assistant_FullGame.stg>;
+ _full_name = "BO Gold Assistant";		 _short_name = "ASSISTANT 4"; include<[_curr_path]\Assistants&Opponents\BO_Assistant_Gold.stg>;
+ _full_name = "BO Self Destruct";		 _short_name = "ASSISTANT 5"; include<[_curr_path]\Assistants&Opponents\BO_Assistant_GiveUp.stg>;
 
- _full_name = "SI Resource Assistant";_short_name = "ASSISTANT 1";
- include<[_curr_path]\SI_Assistant_00.stg>;
- _full_name = "SI Guard Assistant";_short_name = "ASSISTANT 2";
- include<[_curr_path]\SI_Assistant_01.stg>;
- _full_name = "SI Full Game Assistant";_short_name = "ASSISTANT 3";
- include<[_curr_path]\SI_Assistant_02.stg>;
- _full_name = "SI Silicon Assistant";_short_name = "ASSISTANT 4";
- include<[_curr_path]\SI_Silicon_Strateg.stg>;
- _full_name = "SI Full Game Assistant";_short_name = "ASSISTANT 5";
- include<[_curr_path]\SI_Assistant_03.stg>;
+ _full_name = "SI Resource Assistant";	 _short_name = "ASSISTANT 1"; include<[_curr_path]\Assistants&Opponents\SI_Assistant_Resources.stg>;
+ _full_name = "SI Guard Assistant";		 _short_name = "ASSISTANT 2"; include<[_curr_path]\Assistants&Opponents\SI_Assistant_Guard.stg>;
+ _full_name = "SI Full Game Assistant";	 _short_name = "ASSISTANT 3"; include<[_curr_path]\Assistants&Opponents\SI_Assistant_FullGame.stg>;
+ _full_name = "SI Silicon Assistant";	 _short_name = "ASSISTANT 4"; include<[_curr_path]\Assistants&Opponents\SI_Assistant_Silicon.stg>;
+ _full_name = "SI Self Destruct";		 _short_name = "ASSISTANT 5"; include<[_curr_path]\Assistants&Opponents\SI_Assistant_GiveUp.stg>;
+
 
 //=== Opponents
 name("OPPONENT",3,-1,0);
 
- _full_name = "WS Opponent Level 00";_short_name = "AI WEAK";
- include<[_curr_path]\WS_Opponent_00.stg>;
- _full_name = "WS Opponent Level 01";_short_name = "AI MEDIUM";
- include<[_curr_path]\WS_Opponent_01.stg>;
- _full_name = "WS Opponent Level 02";_short_name = "AI STRONG";
- include<[_curr_path]\WS_Opponent_02.stg>;
+ _full_name = "WS Opponent Level 01";	_short_name = "AI WEAK";	  include<[_curr_path]\Assistants&Opponents\WS_Opponent_LVL1.stg>;
+ _full_name = "WS Opponent Level 02";	_short_name = "AI MEDIUM";	  include<[_curr_path]\Assistants&Opponents\WS_Opponent_LVL2.stg>;
+ _full_name = "WS Opponent Level 03";	_short_name = "AI STRONG";	  include<[_curr_path]\Assistants&Opponents\WS_Opponent_LVL3.stg>;
 
- _full_name = "BO Opponent Level 00";_short_name = "AI WEAK";
- include<[_curr_path]\BO_Opponent_00.stg>;
- _full_name = "BO Opponent Level 01";_short_name = "AI MEDIUM";
- include<[_curr_path]\BO_Opponent_01.stg>;
- _full_name = "BO Opponent Level 02";_short_name = "AI STRONG";
- include<[_curr_path]\BO_Opponent_02.stg>;
+ _full_name = "BO Opponent Level 00";	_short_name = "AI WEAK";	  include<[_curr_path]\Assistants&Opponents\BO_Opponent_LVL1.stg>;
+ _full_name = "BO Opponent Level 01";	_short_name = "AI MEDIUM";	  include<[_curr_path]\Assistants&Opponents\BO_Opponent_LVL2.stg>;
+ _full_name = "BO Opponent Level 02";	_short_name = "AI STRONG";	  include<[_curr_path]\Assistants&Opponents\BO_Opponent_LVL3.stg>;
+ _full_name = "Dirty Octopo";			_short_name = "Dirty Octopo"; include<[_curr_path]\Assistants&Opponents\BO_Opponent_Dirty_Octopo.stg>;
 
- _full_name = "SI Opponent Level 00";_short_name = "AI WEAK";
- include<[_curr_path]\SI_Opponent_00.stg>;
- _full_name = "SI Opponent Level 01";_short_name = "AI MEDIUM";
- include<[_curr_path]\SI_Opponent_01.stg>;
- _full_name = "SI Opponent Level 02";_short_name = "AI STRONG";
- include<[_curr_path]\SI_Opponent_02.stg>;
-
- _full_name = "AI NEUTRAL";_short_name = "AI NEUTRAL";
- include<[_curr_path]\AI_NEUTRAL.stg>;
+ _full_name = "SI Opponent Level 00";	_short_name = "AI WEAK";	  include<[_curr_path]\Assistants&Opponents\SI_Opponent_LVL1.stg>;
+ _full_name = "SI Opponent Level 01";	_short_name = "AI MEDIUM";	  include<[_curr_path]\Assistants&Opponents\SI_Opponent_LVL2.stg>;
+ _full_name = "SI Opponent Level 02";	_short_name = "AI STRONG";	  include<[_curr_path]\Assistants&Opponents\SI_Opponent_LVL3.stg>;
 
 close();
-

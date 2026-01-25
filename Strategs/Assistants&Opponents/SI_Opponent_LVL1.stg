@@ -1,0 +1,29 @@
+//====================================================================
+//      ST AiScript: SI Computer Opponent Level 00
+//====================================================================
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#if(_env_var1==0)
+ _full_name = "SI Opponent Level 00";_short_name = "AI WEAK";
+#endif
+
+OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
+  
+ // Parameters
+ MainEnemy(AICAN_MYSELF, PLAYER_ALL);
+
+ // Tactics
+ include<[_curr_path]\Tacticians\SI_GuardBase.tct>;
+
+ // Events
+ OpenEvents();
+  // Execute Tactician & Technologies
+  Event(getOwnTime()>1) 
+  { actObjSelectM(AITRG_ALL);
+    actExecTactic("SI Guard Base");
+    actTScenDevRun(TECH_SCENARIO_OPTIMAL);
+  };
+ CloseEvents();
+
+CloseStrateg();

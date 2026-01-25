@@ -617,9 +617,9 @@ TTECH_SI_UPGRADE_PARALYTIC_WEAPONS       = 125;
 TTECH_SI_ENERGY_SHIELD_NEUTRALIZATION    = 126; 
 TTECH_SI_ENEMY_CAPTURE_UPGRADE           = 144; 
 //---
-////////  onstants for calculations ////////
+////////  Constants for calculations ////////
 AIRPRODUCT_PER_STATION = 40; 
-ENERGY_PER_POD = 2000; 
+ENERGY_PER_POD = 4000; 
 ENERGY_MIN = 1000; 
 METAL_TO_ENERGY = 1; 
 

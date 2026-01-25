@@ -1,0 +1,141 @@
+//====================================================================
+//      ST AiScript: SI Computer Assistant Level 00
+//====================================================================
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+#if(_env_var1==0)
+ _full_name = "SI Silicon Assistant";_short_name = "ASSISTANT 4";
+#endif
+
+OpenStrateg(_full_name, CIV_SI, _short_name, 0x00000003);
+ 
+ // Parameters
+ MainEnemy(AICAN_MYSELF, PLAYER_ALL);
+
+ // Tactics
+ include<[_curr_path]\Tacticians\SI_Silicon_Tactitian.tct>;
+
+ // Events
+ OpenEvents();
+
+	BUILDER_NAME = "Builder";
+	USED_BUILDER_NAME = "Auto-builder";
+	STEP_SIZE = 16;
+  	SILICON_MINE_NAME = "SM";
+
+	// Execute Tactician
+	Event(getOwnTime()>1) 
+	{ 
+		actObjSelectT(AITRG_ALL);
+		actExecTactic("SI Silicon tactitian");
+
+		// Get number of Silicon Mines (SM) and Builders
+		_RT22 := getFleetNum("SI Silicon mines", "SI Silicon tactitian");
+		_RT23 := getFleetNum("SI Builder", "SI Silicon tactitian");
+		_RT10 := _GL0; // map side, defined in Arbiter
+
+		// Get number of SI allies
+		_ploop_begin
+			if(GetPlCiv(_pl_) == CIV_SI && (GetTeam(_pl_) == GetTeam(PLAYER_ME)) )
+			{
+				_RT11 += 1;
+			}
+		_ploop_end
+
+
+		_RT12 := _RT10 / STEP_SIZE + 1; // max SMs possible in line to build
+		_RT13 := (_RT12 * _RT12) / 2 / _RT11; // SMs possible to build
+
+		_RT21 := getPlObjT(SILICON_EXTRACTOR); // SMs found
+		_RT13 := _RT13 - _RT21; // SMs to build 
+    	_RT14 := _RT13;
+
+		actStringMess("Сторона карты = " + _inttostr(_RT10))
+		actStringMess("Максимум шахт в линии = " + _inttostr(_RT12))
+		actStringMess("Поместится на 1/2 карты = " + _inttostr((_RT12 * _RT12 / 2)))
+		actStringMess("Силикоидов в команде = " + _inttostr(_RT11))
+		actStringMess("Шахт найдено = " + _inttostr(_RT21))
+		actStringMess("Шахт к постройке = " + _inttostr(_RT13))
+
+		if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
+		{
+			_RT71 := 1;
+		    ActSelectFleet(PLAYER_ME, AIREL_MYSELF, _RT23); // exclude all objects from fleet
+		    ActDelPlObjS(PLAYER_ME, AIREL_MYSELF); // nothing gets deleted
+
+			ActSetName("", _RT24, _RT25, _RT26);
+			ActSetName(USED_BUILDER_NAME, _RT24, _RT25, _RT26);
+			
+		    ActObjSelectN(PLAYER_ME, AIREL_MYSELF, USED_BUILDER_NAME, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
+		    ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
+		    actLockFleet(_RT23, LOCKOBJ_INTERF);
+      		actStringMess("Модуль-прототип найден. Инициализирую создание структур по добыче кремния...");
+
+			while(_RT13) // SMs to build
+			{
+	  			actFParPutInStaff(_RT22, SILICON_EXTRACTOR); _RT13 -= 1;
+				// _actStringMess("Adding mine " + _inttostr(_RT13));
+			}
+		}
+		else
+		{
+			_RT71 := 0;
+			actStringMess("Нет свободных прототипов для постройки шахты.");
+		}
+	};
+
+
+	// EventPlObjCreated(_PI3 == SILICON_EXTRACTOR & (_PI0 == GetCurrPl())) // критическая ошибка: десинх
+	EventPlObjCreated(_PI3 == SILICON_EXTRACTOR)
+	{
+		if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
+		{
+			_RT71 := 1;
+			// _actStringMess("Builder found at: " + _inttostr(_RT24) + " " + _inttostr(_RT25) + " " + _inttostr(_RT26));
+		}
+		else
+		{
+			_RT71 := 0;
+			ActStringMess(PLAYER_ME, AIREL_MYSELF, "Нет свободных строителей для постройки шахты.");
+		}
+
+		if(_RT71)
+		{
+			ActSetName("", _RT24, _RT25, _RT26);
+			ActSetName(USED_BUILDER_NAME, _RT24, _RT25, _RT26);
+
+			// _RT23 := getFleetNum("SI Builder", "SI Silicon tactitian");
+			ActObjSelectN(PLAYER_ME, AIREL_MYSELF, USED_BUILDER_NAME, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
+			ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
+
+			_RT14 -= 1;
+  			actLockFleet(_RT23, LOCKOBJ_INTERF);
+			if(!_RT14) 
+			    {
+			      actUnLockFleet(_RT23, LOCKOBJ_INTERF);
+			      actStringMess("Программа завершена. Строитель разблокирован");
+			    }
+			else
+			{
+				// ActStringMess(PLAYER_ME, AIREL_MYSELF, "Заказ шахты, осталось " + _inttostr(_RT14));
+				actStringMess("Заказ шахты, осталось " + _inttostr(_RT14));
+			}
+		}
+	    actLockEvent();
+	}
+
+	EventPlObjKilled(_PI3 == CAPSULE_PROTOTYPE & (_PI0 == GetCurrPl()))
+	{
+		//_actStringMess("Name: " + _PS0 + ", USED_BUILDER_NAME: " + USED_BUILDER_NAME + ", fleet number: " + _inttostr(_PI18));
+		if(_PS0 == USED_BUILDER_NAME)
+		{
+			ActStringMess(_PI0, AIREL_MYSELF, "Строитель уничтожен. Постройте шахту для продолжения работы или перезапустите.");
+			//_RT13 += 1;
+		}
+		actLockEvent()
+	}
+
+	CloseEvents();
+
+CloseStrateg();

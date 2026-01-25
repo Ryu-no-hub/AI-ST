@@ -1,0 +1,33 @@
+Идеи для lastsubmariner:
+	1. Артефакты своей рассы при загрузке на платформу исчезают, телепортируя к ней пару/несколько юнитов.
+	2. Спавн контейнеров дополнительно к артефактам? Большие - с охраной
+	3. Проработать другие типы артефактов? Отключить исследования - эксклюзивы для артефактов
+	4. Switch ally visibility on/off: ActSetShareVis(on); Специальный артефакт, "нарушающий связь" между врагами на время.
+	5. Специальный артефакт для разведки карты
+
+
+
+Заметки:
+1. isPlObjExist() - не работает, только IsPlObjExist() (точно?)
+2. actFParPutInStaff() - когда невозможно построить в указанных координатах, строит в точке, ближайшей к стартовой позиции, а не к ней
+3. Нельзя использовать IsPlObjExist 2 раза подряд с записью ей координат в те же _RT переменные - краш
+4. ActObjSelect с одинаковыми координатами начала и конца паралеллепипеда выберет объекты в области 3х3х3 вокруг неё
+
+
+Файлы с кириллицей:
+1. Strategs.aim
+2. Arbiters/Arbiter_LastSubmariner.arb
+3. Arbiters/Arbiter_FastLastSubmariner.arb
+4. Assistants&Opponents/BO_Opponent_Dirty_Octopo.stg
+5. Assistants&Opponents/BO_Assistant_GiveUp.stg
+6. Assistants&Opponents/SI_Assistant_GiveUp.stg
+7. Assistants&Opponents/WS_Assistant_GiveUp.stg
+8. Assistants&Opponents/BO_Assistant_Gold.stg
+9. Assistants&Opponents/WS_Assistant_Gold.stg
+10. Assistants&Opponents/SI_Assistant_Silicon.stg
+
+
+Порядок работы с этими файлами, чтобы видеть кириллицу в игре:
+	Для редактирования: открыть файлы как Windows 1251 или UTF-8, чтобы появилась Кириллица.
+	Перед сборкой: после внесения изменений - сохранять как Windows 1251.
+	Перед заливкой в гит: сохранять как UTF-8.

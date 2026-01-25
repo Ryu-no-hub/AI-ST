@@ -1,0 +1,15 @@
+
+OpenTactic("WS Main Base", CIV_WS, 10);
+  // Parameters
+
+  // Fleets
+  include<[_curr_path]\Fleets\WS_Base.flt>; 
+  include<[_curr_path]\Fleets\WS_Builder.flt>; 
+  include<[_curr_path]\Fleets\WS_Transport_Metal.flt>;
+  include<[_curr_path]\Fleets\WS_Transport_Corium.flt>; 
+  include<[_curr_path]\Fleets\WS_Guard_00.flt>; 
+  include<[_curr_path]\Fleets\WS_Guard_01.flt>; 
+  include<[_curr_path]\Fleets\WS_Raider_00.flt>; 
+  include<[_curr_path]\Fleets\WS_Raider_01.flt>; 
+  include<[_curr_path]\Fleets\WS_Cyber.flt>; 
+CloseTactic();
