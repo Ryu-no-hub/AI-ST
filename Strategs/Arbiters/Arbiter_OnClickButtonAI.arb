@@ -1,0 +1,95 @@
+include<[_inc_path]\AiScript.dfn>;
+include<[_inc_path]\AiScript.mcr>;
+
+
+OpenEvents();
+    /*
+    * Показывает кол-во объектов у каждого игрока при нажатии на кнопку из конфига игры.
+    * В конфиге кнопка указывается по пути "Управление" -> "Искусственный интелект"
+    * По умолчанию Shift-Ctrl-Alt-F1
+    */
+    EventInput(_PI0==0) {
+        _ploop_begin
+            actStringMess("Player " + GetPlName(_pl_) + " current unit: " + _inttostr(GetPlObjT(_plmyself, AIREL_MYSELF, AITRG_ALL)));
+        _ploop_end
+        actLockEvent();
+    }
+    // Эксперементальная кнопка
+    // Идея. Союзника атакуют. Игрок жмет кнопку Shift-Ctrl-Alt-F10. На карте отображается метка
+    EventInput(_PI0==9) {
+        ActStringMess(GetCurrPl(), AIREL_FRIENDS, GetPlName(GetCurrPl()) + " Attacked by assholes, support needed!!!" /*" Атакуют засранцы, требуется поддержка!!!"*/);
+        //ActStringMess(GetCurrPl(), AIREL_MYSELF, GetPlName(GetCurrPl()) + " Attacked by assholes, support needed" /*" Атакуют засранцы, требуется поддержка!!!"*/);
+        if(GetCurrPl()==PLAYER_0){ actStringMess("Pl press help = " + GetPlName(GetCurrPl())); actOnEvent(1001); }
+        if(GetCurrPl()==PLAYER_1){ actStringMess("Pl press help = " + GetPlName(GetCurrPl())); actOnEvent(1002); }
+        if(GetCurrPl()==PLAYER_2){ actStringMess("Pl press help = " + GetPlName(GetCurrPl())); actOnEvent(1003); }
+        if(GetCurrPl()==PLAYER_3){ actStringMess("Pl press help = " + GetPlName(GetCurrPl())); actOnEvent(1004); }
+        if(GetCurrPl()==PLAYER_4){ actStringMess("Pl press help = " + GetPlName(GetCurrPl())); actOnEvent(1005); }
+        if(GetCurrPl()==PLAYER_5){ actStringMess("Pl press help = " + GetPlName(GetCurrPl())); actOnEvent(1006); }
+        if(GetCurrPl()==PLAYER_6){ actStringMess("Pl press help = " + GetPlName(GetCurrPl())); actOnEvent(1007); }
+        if(GetCurrPl()==PLAYER_7){ actStringMess("Pl press help = " + GetPlName(GetCurrPl())); actOnEvent(1008); }
+        actLockEvent();
+    }
+
+    EventPlObjAttacked(TRUE, 1001) {
+        ActShowMapAction(0, AIREL_FRIENDS, RMAP_RED, _PI5, _PI6);
+        ActPlaySound(0, AIREL_FRIENDS, "bors_003");
+        actOffEvent(1001);
+        actLockEvent();
+    }
+    EventPlObjAttacked(TRUE, 1002) {
+        ActShowMapAction(1, AIREL_FRIENDS, RMAP_RED, _PI5, _PI6);
+        ActPlaySound(1, AIREL_FRIENDS, "bors_003");
+        actOffEvent(1002);
+        actLockEvent();
+    }
+    EventPlObjAttacked(TRUE, 1003) {
+        actStringMess("Event On");
+        ActShowMapAction(2, AIREL_FRIENDS, RMAP_RED, _PI5, _PI6);
+        ActPlaySound(2, AIREL_FRIENDS, "bors_003");
+        actOffEvent(1003);
+        actLockEvent();
+    }
+    EventPlObjAttacked(TRUE, 1004) {
+        ActShowMapAction(3, AIREL_FRIENDS, RMAP_RED, _PI5, _PI6);
+        ActPlaySound(3, AIREL_FRIENDS, "bors_003");
+        actOffEvent(1004);
+        actLockEvent();
+    }
+    EventPlObjAttacked(TRUE, 1005) {
+        ActShowMapAction(4, AIREL_FRIENDS, RMAP_RED, _PI5, _PI6);
+        ActPlaySound(4, AIREL_FRIENDS, "bors_003");
+        actOffEvent(1005);
+        actLockEvent();
+    }
+    EventPlObjAttacked(TRUE, 1006) {
+        ActShowMapAction(5, AIREL_FRIENDS, RMAP_RED, _PI5, _PI6);
+        ActPlaySound(5, AIREL_FRIENDS, "bors_003");
+        actOffEvent(1006);
+        actLockEvent();
+    }
+    EventPlObjAttacked(TRUE, 1007) {
+        ActShowMapAction(6, AIREL_FRIENDS, RMAP_RED, _PI5, _PI6);
+        ActPlaySound(6, AIREL_FRIENDS, "bors_003");
+        actOffEvent(1007);
+        actLockEvent();
+    }
+    EventPlObjAttacked(TRUE, 1008) {
+        ActShowMapAction(7, AIREL_FRIENDS, RMAP_RED, _PI5, _PI6);
+        ActPlaySound(7, AIREL_FRIENDS, "bors_003");
+        actOffEvent(1008);
+        actLockEvent();
+    }
+
+    Event(getOwnTime()%5==0) {
+        actOffEvent(1001);
+        actOffEvent(1002);
+        actOffEvent(1003);
+        actOffEvent(1004);
+        actOffEvent(1005);
+        actOffEvent(1006);
+        actOffEvent(1007);
+        actOffEvent(1008);
+        actLockEvent();
+    }
+
+CloseEvents();

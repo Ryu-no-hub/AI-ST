@@ -10,6 +10,7 @@ include<[_curr_path]\CONST_LastSubmariner.dfn>;
 */
 
 OpenArbiter("Last Submariner");
+    include<[_curr_path]\Arbiter_OnClickButtonAI.arb>;
     OpenEvents();
 
         s_win    = 14;
@@ -120,6 +121,16 @@ OpenArbiter("Last Submariner");
             actOffEvent(30);
             actOffEvent(100);
             actOffEvent(200);
+
+            actOffEvent(1001);
+            actOffEvent(1002);
+            actOffEvent(1003);
+            actOffEvent(1004);
+            actOffEvent(1005);
+            actOffEvent(1006);
+            actOffEvent(1007);
+            actOffEvent(1008);
+
         }
 
         // создание артефактов
