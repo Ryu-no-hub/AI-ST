@@ -1,6 +1,6 @@
 include<[_inc_path]\AiScript.dfn>;
 include<[_inc_path]\AiScript.mcr>;
-include<[_curr_path]\CONST_LastSubmariner.dfn>;
+// include<[_curr_path]\CONST_LastSubmariner.dfn>;
 
 /*
     _RT100-_RT107 - mission conditions
