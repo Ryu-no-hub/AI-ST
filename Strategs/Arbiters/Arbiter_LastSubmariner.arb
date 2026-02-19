@@ -1,6 +1,6 @@
 include<[_inc_path]\AiScript.dfn>;
 include<[_inc_path]\AiScript.mcr>;
-include<[_curr_path]\CONST_LastSubmariner.dfn>;
+// include<[_curr_path]\CONST_LastSubmariner.dfn>;
 
 /*
     _RT100-_RT107 - mission conditions
@@ -9,8 +9,7 @@ include<[_curr_path]\CONST_LastSubmariner.dfn>;
     _RT129 - размер карты
 */
 
-OpenArbiter("Last Submariner");
-    include<[_curr_path]\Arbiter_OnClickButtonAI.arb>;
+OpenArbiter("Last Submariner", 0x00000001);
     OpenEvents();
 
         s_win    = 14;

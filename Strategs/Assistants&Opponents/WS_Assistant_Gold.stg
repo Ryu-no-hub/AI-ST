@@ -56,10 +56,12 @@ OpenStrateg(_full_name, CIV_WS, _short_name, 0x00000003);
     if(IsPlObjExist(PLAYER_ME, BUILDER_NAME, 24, 25, 26, 27))
     {
       _RT71 := 1;
-      ActDelPlObjS(PLAYER_ME, AIREL_MYSELF);
-      ActObjSelectN(PLAYER_ME, AIREL_MYSELF, BUILDER_NAME, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26);
-      ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23);
-      actLockFleet(_RT23, LOCKOBJ_INTERF);
+      ActSelectFleet(PLAYER_ME, AIREL_MYSELF, _RT23); // Exclude all objects from Fleet
+      ActDelPlObjS(PLAYER_ME, AIREL_MYSELF); // Delete all SELECTED player objects
+
+      ActObjSelectN(PLAYER_ME, AIREL_MYSELF, BUILDER_NAME, LOGO_UNDEF, _RT24, _RT25, _RT26, _RT24, _RT25, _RT26); // Select player objects by name
+      ActAddFleet(PLAYER_ME, AIREL_MYSELF, _RT23); // Add selected objects to Fleet
+      actLockFleet(_RT23, LOCKOBJ_INTERF); // Lock interface
       actStringMess("Строитель найден. Раскидываю шахты золота");
     }
     else

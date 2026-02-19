@@ -8,7 +8,8 @@ include<[_inc_path]\AiScript.mcr>;
  _full_name = "The Flagship Hunt";
 #endif
 
-OpenArbiter(_full_name, 0x00000004);
+// OpenArbiter(_full_name, 0x00000004);
+OpenArbiter(_full_name, 0x00000005);
  
   // Events 
  OpenEvents();
