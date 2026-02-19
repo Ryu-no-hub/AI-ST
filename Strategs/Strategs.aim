@@ -119,26 +119,27 @@ OpenStringTable();
 CloseStringTable();
 
 
-// //== Fast Last Submariner
-// name("AIBOSS001");
-//  _full_name = "Fast Last Submariner";
-//  include<[_curr_path]\Arbiters\Arbiter_FastLastSubmariner.arb>;
+//== Fast Last Submariner
+name("AIBOSS001");
+ _full_name = "Fast Last Submariner";
+ include<[_curr_path]\Arbiters\Arbiter_FastLastSubmariner.arb>;
 
-// name("OBJECTIVES001");
-// OpenStringTable();
-//  PutString("В секторе обнаружены артефакты\n"); 
-//  PutString("Они позволяют открыть новые технологии, при доставке к научным центрам"); 
-//  PutString("Скорость исследована на максимум.");
-// CloseStringTable();
+name("OBJECTIVES001");
+OpenStringTable();
+ PutString("В секторе обнаружены артефакты\n"); 
+ PutString("Они позволяют открыть новые технологии, при доставке к научным центрам"); 
+ PutString("Скорость исследована на максимум.");
+CloseStringTable();
 
 
 //== Kill All
-// name("AIBOSS002");
-name("AIBOSS001");
+name("AIBOSS002");
+// name("AIBOSS001");
  _full_name = "Kill All";
  include<[_curr_path]\Arbiters\Arbiter_killall.arb>;
 
 name("OBJECTIVES002");
+// name("OBJECTIVES001");
 OpenStringTable();
  /*000*/PutString("Kill all enemies");
 CloseStringTable();

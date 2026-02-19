@@ -9,7 +9,7 @@ include<[_inc_path]\AiScript.mcr>;
     _RT129 - размер карты
 */
 
-OpenArbiter("Last Submariner");
+OpenArbiter("Last Submariner", 0x00000001);
     OpenEvents();
 
         s_win    = 14;
